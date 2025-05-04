@@ -10,7 +10,6 @@
     "build": "turbo run build"
   },
   "workspaces": [
-    "backend",
-    "frontend"
+    "apps/*"
   ]
 }
