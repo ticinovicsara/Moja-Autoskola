@@ -1,0 +1,16 @@
+{
+  "packageManager": "npm@20.18.3",
+  "name": "rikverc",
+  "version": "0.0.1",
+  "devDependencies": {
+    "turbo": "^2.5.2"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ]
+}
