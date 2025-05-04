@@ -9,6 +9,8 @@
 *.user
 *.userosscache
 *.sln.docstates
+.turbo
+.env
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -286,6 +288,7 @@ FakesAssemblies/
 # Node.js Tools for Visual Studio
 .ntvs_analysis.dat
 node_modules/
+dist/
 
 # Visual Studio 6 build log
 *.plg
@@ -358,7 +361,7 @@ ASALocalRun/
 *.nvuser
 
 # MFractors (Xamarin productivity tool) working folder
-.mfractor/
+.mfrator/
 
 # Local History for Visual Studio
 .localhistory/
