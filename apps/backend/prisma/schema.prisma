@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  Guest
+  Candidate
+  Instructor
+  SchoolAdmin
+  Admin
+}
+
+enum SessionType {
+  Theory
+  FirstAid
+  Driving
+}
+
+enum SessionFormat {
+  Lesson
+  Test
+}
+
+enum Day {
+  Monday
+  Tuesday
+  Wednesday
+  Thursday
+  Friday
+  Saturday
+  Sunday
+}
+
+enum EnrollmentStatus {
+  Approved
+  Pending
+  Denied
+}
+
+model School {
+  id                 String              @id @default(uuid())
+  name               String
+  city               String
+  address            String
+  contactNumber      String
+  email              String              @unique
+  enrollmentFee      Decimal
+  info               String?
+  users              SchoolUser[]
+  sessions           Session[]
+  enrollmentRequests EnrollmentRequest[]
+  websiteUrl         String?
+  imageUrl           String?
+}
+
+model User {
+  id                 String              @id @default(uuid())
+  firstName          String
+  lastName           String
+  email              String              @unique
+  password           String
+  role               UserRole
+  schoolUser       SchoolUser?
+  sessions           Session[]
+  sessionCandidates  SessionCandidate[]
+  testResults        TestResult[]
+  enrollmentRequests EnrollmentRequest[]
+  instructorSlots     InstructorSlot[]
+
+  candidateInstructor CandidateInstructor[] @relation("instructor")
+  instructorCandidate CandidateInstructor[] @relation("candidate")
+}
+
+model SchoolUser {
+  id       String @id @default(uuid())
+  schoolId String
+  userId   String @unique
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([schoolId, userId])
+}
+
+model Session {
+  id           String             @id @default(uuid())
+  schoolId     String
+  instructorId String?
+  type         SessionType
+  format       SessionFormat
+  startTime    DateTime
+  endTime      DateTime
+  school       School             @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  instructor   User?              @relation(fields: [instructorId], references: [id], onDelete: Cascade)
+  candidates   SessionCandidate[]
+}
+
+model SessionCandidate {
+  id          String  @id @default(uuid())
+  sessionId   String
+  candidateId String
+  session     Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  candidate   User    @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, candidateId])
+}
+
+model CandidateInstructor {
+  id           String @id @default(uuid())
+  instructorId String
+  candidateId  String
+  instructor   User   @relation("instructor", fields: [instructorId], references: [id], onDelete: Cascade)
+  candidate    User   @relation("candidate", fields: [candidateId], references: [id], onDelete: Cascade)
+
+  @@unique([instructorId, candidateId])
+}
+
+model InstructorSlot {
+  id           String @id @default(uuid())
+  instructorId String
+  day          Day
+  startTime    String
+  endTime      String
+  instructor   User   @relation(fields: [instructorId], references: [id], onDelete: Cascade)
+}
+
+model TestResult {
+  id          String      @id @default(uuid())
+  candidateId String
+  date        DateTime
+  type        SessionType
+  points      Decimal?
+  passed      Boolean
+  candidate   User        @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+}
+
+model EnrollmentRequest {
+  id          String           @id @default(uuid())
+  candidateId String
+  schoolId    String
+  status      EnrollmentStatus
+  candidate   User             @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  school      School           @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@unique([candidateId, schoolId])
+}
