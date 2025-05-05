@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "./generated/prisma"
 }
 
 datasource db {
@@ -44,104 +43,108 @@ enum EnrollmentStatus {
 }
 
 model School {
-  id              Int             @id @default(autoincrement())
-  name            String
-  city            String
-  address         String
-  contactNumber   String
-  email           String          @unique
-  enrollmentFee   Decimal
-  info            String?         
-  users           SchoolUser[]
-  sessions        Session[]
+  id                 String              @id @default(uuid())
+  name               String
+  city               String
+  address            String
+  contactNumber      String
+  email              String              @unique
+  enrollmentFee      Decimal
+  info               String?
+  users              SchoolUser[]
+  sessions           Session[]
   enrollmentRequests EnrollmentRequest[]
+  websiteUrl         String?
+  imageUrl           String?
 }
 
 model User {
-  id            Int             @id @default(autoincrement())
-  firstName     String
-  lastName      String
-  email         String          @unique
-  password      String
-  role          UserRole
-  schoolUsers   SchoolUser[]
-  sessions      Session[]
-  sessionCandidates SessionCandidate[]
-  testResults   TestResult[]
+  id                 String              @id @default(uuid())
+  firstName          String
+  lastName           String
+  email              String              @unique
+  password           String
+  role               UserRole
+  schoolUsers        SchoolUser?
+  sessions           Session[]
+  sessionCandidates  SessionCandidate[]
+  testResults        TestResult[]
   enrollmentRequests EnrollmentRequest[]
+  instructorSlot     InstructorSlot[]
 
-  instructorCandidates    CandidateInstructor[]   @relation("InstructorRelation")
-  candidateInstructors    CandidateInstructor[]   @relation("CandidateRelation")
-  InstructorSlot InstructorSlot[] @relation("InstructorRelationSlot")
+  candidateInstructor CandidateInstructor[] @relation("instructor")
+  instructorCandidate CandidateInstructor[] @relation("candidate")
 }
 
 model SchoolUser {
-  id        Int    @id @default(autoincrement())
-  schoolId  Int
-  userId    Int
-  school    School @relation(fields: [schoolId], references: [id])
-  user      User   @relation(fields: [userId], references: [id])
-  
+  id       String @id @default(uuid())
+  schoolId String
+  userId   String @unique
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@unique([schoolId, userId])
 }
 
 model Session {
-  id            Int             @id @default(autoincrement())
-  schoolId      Int
-  instructorId  Int?
-  type          SessionType
-  format        SessionFormat
-  startTime     DateTime
-  endTime       DateTime
-  school        School          @relation(fields: [schoolId], references: [id])
-  instructor    User?           @relation(fields: [instructorId], references: [id])
-  candidates    SessionCandidate[]
+  id           String             @id @default(uuid())
+  schoolId     String
+  instructorId String?
+  type         SessionType
+  format       SessionFormat
+  startTime    DateTime
+  endTime      DateTime
+  school       School             @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  instructor   User?              @relation(fields: [instructorId], references: [id], onDelete: Cascade)
+  candidates   SessionCandidate[]
 }
 
 model SessionCandidate {
-  id          Int      @id @default(autoincrement())
-  sessionId   Int
-  candidateId Int
-  session     Session  @relation(fields: [sessionId], references: [id])
-  candidate   User     @relation(fields: [candidateId], references: [id])
-  
+  id          String  @id @default(uuid())
+  sessionId   String
+  candidateId String
+  session     Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  candidate   User    @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+
   @@unique([sessionId, candidateId])
 }
 
 model CandidateInstructor {
-  id          Int      @id @default(autoincrement())
-  instructorId Int
-  candidateId  Int
- instructor   User   @relation("InstructorRelation", fields: [instructorId], references: [id])
-  candidate    User   @relation("CandidateRelation", fields: [candidateId], references: [id])
+  id           String @id @default(uuid())
+  instructorId String
+  candidateId  String
+  instructor   User   @relation("instructor", fields: [instructorId], references: [id], onDelete: Cascade)
+  candidate    User   @relation("candidate", fields: [candidateId], references: [id], onDelete: Cascade)
 
   @@unique([instructorId, candidateId])
 }
 
 model InstructorSlot {
-  id            Int       @id @default(autoincrement())
-  instructorId  Int
-  day           Day
-  startTime     DateTime
-  instructor    User      @relation("InstructorRelationSlot", fields: [instructorId], references: [id])
+  id           String @id @default(uuid())
+  instructorId String
+  day          Day
+  startTime    String
+  endTime      String
+  instructor   User   @relation(fields: [instructorId], references: [id], onDelete: Cascade)
 }
 
 model TestResult {
-  id           Int          @id @default(autoincrement())
-  candidateId  Int
-  date         DateTime
-  type         SessionType
-  points       Decimal?     
-  passed       Boolean
-  candidate    User         @relation(fields: [candidateId], references: [id])
+  id          String      @id @default(uuid())
+  candidateId String
+  date        DateTime
+  type        SessionType
+  points      Decimal?
+  passed      Boolean
+  candidate   User        @relation(fields: [candidateId], references: [id], onDelete: Cascade)
 }
 
 model EnrollmentRequest {
-  id           Int              @id @default(autoincrement())
-  candidateId  Int
-  schoolId     Int
-  status       EnrollmentStatus
-  candidate    User             @relation(fields: [candidateId], references: [id])
-  school       School           @relation(fields: [schoolId], references: [id])
+  id          String           @id @default(uuid())
+  candidateId String
+  schoolId    String
+  status      EnrollmentStatus
+  candidate   User             @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  school      School           @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
   @@unique([candidateId, schoolId])
 }

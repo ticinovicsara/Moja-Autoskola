@@ -4,6 +4,7 @@ import {
   SessionFormat,
   PrismaClient,
   EnrollmentStatus,
+  Day,
 } from '@prisma/client';
 import bcrypt from 'bcrypt';
 
@@ -141,18 +142,21 @@ async function main() {
     data: [
       {
         instructorId: instructor1.id,
-        day: 'Monday',
-        startTime: new Date('2025-05-12T10:00:00Z'),
+        day: Day.Monday,
+        startTime: '10:00',
+        endTime: '12:00',
       },
       {
         instructorId: instructor1.id,
-        day: 'Wednesday',
-        startTime: new Date('2025-05-14T12:00:00Z'),
+        day: Day.Wednesday,
+        startTime: '12:00',
+        endTime: '14:00',
       },
       {
         instructorId: instructor2.id,
-        day: 'Tuesday',
-        startTime: new Date('2025-05-13T14:00:00Z'),
+        day: Day.Tuesday,
+        startTime: '14:00',
+        endTime: '16:00',
       },
     ],
   });
