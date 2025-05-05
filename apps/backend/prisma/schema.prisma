@@ -65,12 +65,12 @@ model User {
   email              String              @unique
   password           String
   role               UserRole
-  schoolUsers        SchoolUser?
+  schoolUser       SchoolUser?
   sessions           Session[]
   sessionCandidates  SessionCandidate[]
   testResults        TestResult[]
   enrollmentRequests EnrollmentRequest[]
-  instructorSlot     InstructorSlot[]
+  instructorSlots     InstructorSlot[]
 
   candidateInstructor CandidateInstructor[] @relation("instructor")
   instructorCandidate CandidateInstructor[] @relation("candidate")
