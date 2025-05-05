@@ -1,0 +1,147 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  Guest
+  Candidate
+  Instructor
+  SchoolAdmin
+  Admin
+}
+
+enum SessionType {
+  Theory
+  FirstAid
+  Driving
+}
+
+enum SessionFormat {
+  Lesson
+  Test
+}
+
+enum Day {
+  Monday
+  Tuesday
+  Wednesday
+  Thursday
+  Friday
+  Saturday
+  Sunday
+}
+
+enum EnrollmentStatus {
+  Approved
+  Pending
+  Denied
+}
+
+model School {
+  id              Int             @id @default(autoincrement())
+  name            String
+  city            String
+  address         String
+  contactNumber   String
+  email           String          @unique
+  enrollmentFee   Decimal
+  info            String?         
+  users           SchoolUser[]
+  sessions        Session[]
+  enrollmentRequests EnrollmentRequest[]
+}
+
+model User {
+  id            Int             @id @default(autoincrement())
+  firstName     String
+  lastName      String
+  email         String          @unique
+  password      String
+  role          UserRole
+  schoolUsers   SchoolUser[]
+  sessions      Session[]
+  sessionCandidates SessionCandidate[]
+  testResults   TestResult[]
+  enrollmentRequests EnrollmentRequest[]
+
+  instructorCandidates    CandidateInstructor[]   @relation("InstructorRelation")
+  candidateInstructors    CandidateInstructor[]   @relation("CandidateRelation")
+  InstructorSlot InstructorSlot[] @relation("InstructorRelationSlot")
+}
+
+model SchoolUser {
+  id        Int    @id @default(autoincrement())
+  schoolId  Int
+  userId    Int
+  school    School @relation(fields: [schoolId], references: [id])
+  user      User   @relation(fields: [userId], references: [id])
+  
+  @@unique([schoolId, userId])
+}
+
+model Session {
+  id            Int             @id @default(autoincrement())
+  schoolId      Int
+  instructorId  Int?
+  type          SessionType
+  format        SessionFormat
+  startTime     DateTime
+  endTime       DateTime
+  school        School          @relation(fields: [schoolId], references: [id])
+  instructor    User?           @relation(fields: [instructorId], references: [id])
+  candidates    SessionCandidate[]
+}
+
+model SessionCandidate {
+  id          Int      @id @default(autoincrement())
+  sessionId   Int
+  candidateId Int
+  session     Session  @relation(fields: [sessionId], references: [id])
+  candidate   User     @relation(fields: [candidateId], references: [id])
+  
+  @@unique([sessionId, candidateId])
+}
+
+model CandidateInstructor {
+  id          Int      @id @default(autoincrement())
+  instructorId Int
+  candidateId  Int
+ instructor   User   @relation("InstructorRelation", fields: [instructorId], references: [id])
+  candidate    User   @relation("CandidateRelation", fields: [candidateId], references: [id])
+
+  @@unique([instructorId, candidateId])
+}
+
+model InstructorSlot {
+  id            Int       @id @default(autoincrement())
+  instructorId  Int
+  day           Day
+  startTime     DateTime
+  instructor    User      @relation("InstructorRelationSlot", fields: [instructorId], references: [id])
+}
+
+model TestResult {
+  id           Int          @id @default(autoincrement())
+  candidateId  Int
+  date         DateTime
+  type         SessionType
+  points       Decimal?     
+  passed       Boolean
+  candidate    User         @relation(fields: [candidateId], references: [id])
+}
+
+model EnrollmentRequest {
+  id           Int              @id @default(autoincrement())
+  candidateId  Int
+  schoolId     Int
+  status       EnrollmentStatus
+  candidate    User             @relation(fields: [candidateId], references: [id])
+  school       School           @relation(fields: [schoolId], references: [id])
+  @@unique([candidateId, schoolId])
+}
