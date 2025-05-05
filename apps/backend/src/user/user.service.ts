@@ -6,8 +6,8 @@ import {
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from '@/prisma/prisma.service';
-import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
+import { UserResponseDto } from './dto/user-response.dto';
 
 @Injectable()
 export class UserService {
@@ -36,12 +36,12 @@ export class UserService {
       },
     });
 
-    return newUser;
+    return UserResponseDto.fromPrisma(newUser);
   }
 
   async getAll() {
     const users = await this.prisma.user.findMany();
-    return users.map((u) => User.fromPrisma(u));
+    return users.map((u) => UserResponseDto.fromPrisma(u));
   }
 
   async getById(id: string) {
@@ -49,14 +49,14 @@ export class UserService {
       where: { id },
     });
     if (!user) throw new NotFoundException("The user doesn't exist");
-    return User.fromPrisma(user);
+    return UserResponseDto.fromPrisma(user);
   }
 
   async getByEmail(email: string) {
     const user = await this.prisma.user.findUnique({
       where: { email },
     });
-    return User.fromPrisma(user);
+    return UserResponseDto.fromPrisma(user);
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
@@ -68,7 +68,7 @@ export class UserService {
       if (email) throw new BadRequestException('The email already exists');
     }
 
-    return this.prisma.user.update({
+    const updatedUser = await this.prisma.user.update({
       where: { id },
       data: {
         email: updateUserDto.email,
@@ -80,11 +80,14 @@ export class UserService {
         role: updateUserDto.role,
       },
     });
+
+    return UserResponseDto.fromPrisma(updatedUser);
   }
 
   async remove(id: string) {
     const user = await this.getById(id);
     if (!user) throw new NotFoundException("The user doesn't exist");
-    return this.prisma.user.delete({ where: { id } });
+    const deletedUser = await this.prisma.user.delete({ where: { id } });
+    return UserResponseDto.fromPrisma(deletedUser);
   }
 }
