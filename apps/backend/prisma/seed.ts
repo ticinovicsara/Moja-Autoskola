@@ -6,7 +6,7 @@ import {
   EnrollmentStatus,
   Day,
 } from '@prisma/client';
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 
 async function hashPassword(password: string): Promise<string> {
   const saltRounds = 10;
@@ -16,7 +16,7 @@ async function hashPassword(password: string): Promise<string> {
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('Početak seeda...');
+  console.log('Pocetak seeda...');
 
   const admin = await prisma.user.create({
     data: {
