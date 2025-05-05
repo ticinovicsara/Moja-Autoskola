@@ -1,5 +1,5 @@
 import {
-  BadRequestException,
+  ConflictException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -14,17 +14,8 @@ export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createUserDto: CreateUserDto) {
-    if (
-      !createUserDto.email ||
-      !createUserDto.firstName ||
-      !createUserDto.lastName ||
-      !createUserDto.password ||
-      !createUserDto.role
-    )
-      throw new BadRequestException('The user object is invalid');
-
     const user = await this.getByEmail(createUserDto.email);
-    if (user) throw new BadRequestException('The email already exists');
+    if (user) throw new ConflictException('The email already exists');
 
     const newUser = await this.prisma.user.create({
       data: {
@@ -65,7 +56,7 @@ export class UserService {
 
     if (updateUserDto.email) {
       const email = await this.getByEmail(updateUserDto.email);
-      if (email) throw new BadRequestException('The email already exists');
+      if (email) throw new ConflictException('The email already exists');
     }
 
     const updatedUser = await this.prisma.user.update({
