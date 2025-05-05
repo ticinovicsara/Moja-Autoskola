@@ -16,8 +16,6 @@ async function hashPassword(password: string): Promise<string> {
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('Pocetak seeda...');
-
   const admin = await prisma.user.create({
     data: {
       firstName: 'Admin',
@@ -185,8 +183,6 @@ async function main() {
       status: EnrollmentStatus.Pending,
     },
   });
-
-  console.log('Seed uspjesno zavrsen.');
 }
 
 main()
