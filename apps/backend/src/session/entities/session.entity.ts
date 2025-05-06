@@ -3,28 +3,14 @@ import {
   SessionFormat,
   SessionType,
 } from '@prisma/client';
-import { IsDate, IsEnum, IsUUID } from 'class-validator';
 
 export class Session {
-  @IsUUID()
   id: string;
-
-  @IsUUID()
   schoolId: string;
-
-  @IsUUID()
   instructorId: string | null;
-
-  @IsEnum(SessionType)
   type: SessionType;
-
-  @IsEnum(SessionFormat)
   format: SessionFormat;
-
-  @IsDate()
   startTime: Date;
-
-  @IsDate()
   endTime: Date;
 
   constructor(
