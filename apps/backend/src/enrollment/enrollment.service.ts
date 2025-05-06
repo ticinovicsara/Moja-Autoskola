@@ -6,6 +6,7 @@ import {
 import { PrismaService } from '@/prisma/prisma.service';
 import { EnrollmentStatus, UserRole } from '@prisma/client';
 import { RequestEnrollmentDto } from './dto/request-enrollment.dto';
+import { ApproveEnrollmentRequest } from './dto/approve-enrollment.dto';
 
 @Injectable()
 export class EnrollmentService {
@@ -115,7 +116,9 @@ export class EnrollmentService {
     });
   }
 
-  async approveEnrollmentRequest(id: string) {
+  async approveEnrollmentRequest(body: ApproveEnrollmentRequest) {
+    const { id, instructorId } = body;
+
     const request = await this.prisma.enrollmentRequest.findUnique({
       where: { id },
     });
@@ -124,10 +127,25 @@ export class EnrollmentService {
       throw new NotFoundException('Enrollment request not found.');
     }
 
+    const instructor = await this.prisma.user.findUnique({
+      where: { id: instructorId },
+    });
+
+    if (!instructor || instructor.role !== UserRole.Instructor) {
+      throw new NotFoundException('Instructor not found or invalid role.');
+    }
+
     await this.prisma.enrollmentRequest.update({
       where: { id },
       data: {
         status: EnrollmentStatus.Approved,
+      },
+    });
+
+    await this.prisma.candidateInstructor.create({
+      data: {
+        instructorId,
+        candidateId: request.candidateId,
       },
     });
 
@@ -138,7 +156,10 @@ export class EnrollmentService {
       },
     });
 
-    return { message: 'Enrollment approved and user role updated.' };
+    return {
+      message:
+        'Enrollment approved, candidate assigned to instructor and user role updated.',
+    };
   }
 
   async denyEnrollmentRequest(id: string) {
