@@ -1,11 +1,15 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
-export class ApproveEnrollmentRequest {
+export class ApproveEnrollmentRequestDto {
   @IsString()
   @IsNotEmpty()
   id: string;
 
   @IsString()
-  @IsNotEmpty()
-  instructorId: string;
+  @IsOptional()
+  instructorId?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  paymentConfirmed?: boolean;
 }

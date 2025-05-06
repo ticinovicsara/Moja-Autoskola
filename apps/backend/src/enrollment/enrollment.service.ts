@@ -6,11 +6,16 @@ import {
 import { PrismaService } from '@/prisma/prisma.service';
 import { EnrollmentStatus, UserRole } from '@prisma/client';
 import { RequestEnrollmentDto } from './dto/request-enrollment.dto';
-import { ApproveEnrollmentRequest } from './dto/approve-enrollment.dto';
+import { ApproveEnrollmentRequestDto } from './dto/approve-enrollment.dto';
+import { EnrollmentHelperService } from './helpers/enrollment.helper';
+import { EnrollmentRequestEntity } from './entities/enrollement-request.entity';
 
 @Injectable()
 export class EnrollmentService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private enrollmentHelper: EnrollmentHelperService,
+  ) {}
 
   async getPendingEnrollmentRequests() {
     const pendingRequests = await this.prisma.enrollmentRequest.findMany({
@@ -21,12 +26,9 @@ export class EnrollmentService {
       },
     });
 
-    return pendingRequests.map((request) => ({
-      requestId: request.id,
-      candidateName: `${request.candidate.firstName} ${request.candidate.lastName}`,
-      schoolName: request.school.name,
-      status: request.status,
-    }));
+    return pendingRequests.map((request) =>
+      EnrollmentRequestEntity.fromPrisma(request),
+    );
   }
 
   async getCandidateEnrollmentRequests(candidateId: string) {
@@ -44,12 +46,9 @@ export class EnrollmentService {
       );
     }
 
-    return requests.map((request) => ({
-      candidateName: `${request.candidate.firstName} ${request.candidate.lastName}`,
-      role: request.candidate.role,
-      schoolName: request.school.name,
-      status: request.status,
-    }));
+    return requests.map((request) =>
+      EnrollmentRequestEntity.fromPrisma(request),
+    );
   }
 
   async getSchoolEnrollmentRequests(schoolId: string) {
@@ -67,12 +66,9 @@ export class EnrollmentService {
       );
     }
 
-    return requests.map((request) => ({
-      schoolName: request.school.name,
-      candidateName: `${request.candidate.firstName} ${request.candidate.lastName}`,
-      role: request.candidate.role,
-      status: request.status,
-    }));
+    return requests.map((request) =>
+      EnrollmentRequestEntity.fromPrisma(request),
+    );
   }
 
   async requestEnrollment(body: RequestEnrollmentDto) {
@@ -107,59 +103,44 @@ export class EnrollmentService {
       throw new NotFoundException('School not found.');
     }
 
-    return this.prisma.enrollmentRequest.create({
+    const enrollmentRequest = await this.prisma.enrollmentRequest.create({
       data: {
         candidateId,
         schoolId,
         status: EnrollmentStatus.Pending,
       },
     });
+
+    return EnrollmentRequestEntity.fromPrisma(enrollmentRequest);
   }
 
-  async approveEnrollmentRequest(body: ApproveEnrollmentRequest) {
-    const { id, instructorId } = body;
+  private async processEnrollmentRequest(body: ApproveEnrollmentRequestDto) {
+    const { id: requestId, instructorId, paymentConfirmed } = body;
 
-    const request = await this.prisma.enrollmentRequest.findUnique({
-      where: { id },
-    });
+    const request =
+      await this.enrollmentHelper.getEnrollmentRequestOrThrow(requestId);
 
-    if (!request) {
-      throw new NotFoundException('Enrollment request not found.');
+    if (request.status === EnrollmentStatus.Pending) {
+      return this.enrollmentHelper.markAsWaitingForPayment(requestId);
     }
 
-    const instructor = await this.prisma.user.findUnique({
-      where: { id: instructorId },
-    });
+    if (request.status === EnrollmentStatus.WaitingForPayment) {
+      if (!paymentConfirmed) {
+        return { message: 'Waiting for payment confirmation.' };
+      }
 
-    if (!instructor || instructor.role !== UserRole.Instructor) {
-      throw new NotFoundException('Instructor not found or invalid role.');
+      return this.enrollmentHelper.finalizeEnrollment(body);
     }
 
-    await this.prisma.enrollmentRequest.update({
-      where: { id },
-      data: {
-        status: EnrollmentStatus.Approved,
-      },
-    });
+    return { message: 'No action taken. Invalid status transition.' };
+  }
 
-    await this.prisma.candidateInstructor.create({
-      data: {
-        instructorId,
-        candidateId: request.candidateId,
-      },
-    });
+  async approveEnrollmentRequest(body: ApproveEnrollmentRequestDto) {
+    return this.processEnrollmentRequest(body);
+  }
 
-    await this.prisma.user.update({
-      where: { id: request.candidateId },
-      data: {
-        role: UserRole.Candidate,
-      },
-    });
-
-    return {
-      message:
-        'Enrollment approved, candidate assigned to instructor and user role updated.',
-    };
+  async confirmPayment(id: ApproveEnrollmentRequestDto) {
+    return this.processEnrollmentRequest(id);
   }
 
   async denyEnrollmentRequest(id: string) {

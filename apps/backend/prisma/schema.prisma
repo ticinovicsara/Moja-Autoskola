@@ -40,6 +40,8 @@ enum EnrollmentStatus {
   Approved
   Pending
   Denied
+  WaitingForPayment
+  PaymentReceived
 }
 
 model School {
