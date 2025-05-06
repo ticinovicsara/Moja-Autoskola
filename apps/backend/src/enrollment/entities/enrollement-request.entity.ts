@@ -19,7 +19,6 @@ export class EnrollmentRequestEntity {
     entity.role = data.candidate.role;
     entity.schoolName = data.school.name;
     entity.status = data.status;
-    entity.denialReason = data.denialReason ?? null;
 
     return entity;
   }

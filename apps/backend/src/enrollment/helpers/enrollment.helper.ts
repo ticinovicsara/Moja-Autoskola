@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '@/prisma/prisma.service';
 import { EnrollmentStatus, UserRole } from '@prisma/client';
-import { ApproveEnrollmentRequestDto } from '../dto/approve-enrollment.dto';
+import { ConfirmEnrollmentDto } from '../dto/confirm-enrollment';
 
 @Injectable()
 export class EnrollmentHelperService {
@@ -40,20 +40,7 @@ export class EnrollmentHelperService {
     }
   }
 
-  async assignCandidateToInstructor(
-    candidateId: string,
-    instructorId?: string,
-  ) {
-    if (!instructorId) return;
-
-    await this.prisma.candidateInstructor.create({
-      data: { candidateId, instructorId },
-    });
-  }
-
-  async finalizeEnrollment(body: ApproveEnrollmentRequestDto) {
-    const { id: requestId, instructorId } = body;
-
+  async finalizeEnrollment(requestId: string) {
     const request = await this.prisma.enrollmentRequest.findUnique({
       where: { id: requestId },
       include: {
@@ -69,15 +56,6 @@ export class EnrollmentHelperService {
     const { candidate, school } = request;
 
     await this.addCandidateToSchool(candidate.id, school.id);
-
-    if (instructorId) {
-      await this.assignCandidateToInstructor(candidate.id, instructorId);
-    }
-
-    await this.prisma.enrollmentRequest.update({
-      where: { id: request.id },
-      data: { status: EnrollmentStatus.Approved },
-    });
 
     await this.prisma.enrollmentRequest.update({
       where: { id: request.id },

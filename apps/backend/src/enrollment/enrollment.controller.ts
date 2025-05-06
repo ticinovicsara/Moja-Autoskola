@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { EnrollmentService } from './enrollment.service';
 import { RequestEnrollmentDto } from './dto/request-enrollment.dto';
-import { ApproveEnrollmentRequestDto } from './dto/approve-enrollment.dto';
+import { ConfirmEnrollmentDto } from './dto/confirm-enrollment';
 
 @Controller('enrollment')
 export class EnrollmentController {
@@ -30,8 +30,18 @@ export class EnrollmentController {
   }
 
   @Patch('approve')
-  async approveEnrollment(@Body() body: ApproveEnrollmentRequestDto) {
-    return this.enrollmentService.approveEnrollmentRequest(body);
+  approveRequest(@Param('id') id: string) {
+    return this.enrollmentService.approveEnrollmentRequest(id);
+  }
+
+  @Patch('confirm-payment')
+  async confirmPayment(@Param('id') id: string) {
+    return this.enrollmentService.confirmPayment(id);
+  }
+
+  @Patch('assign-instructor')
+  async assignInstructor(@Body() body: ConfirmEnrollmentDto) {
+    return this.enrollmentService.assignInstructor(body);
   }
 
   @Patch('deny/:id')
