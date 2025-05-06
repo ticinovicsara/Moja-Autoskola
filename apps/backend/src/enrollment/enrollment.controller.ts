@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common';
 import { EnrollmentService } from './enrollment.service';
 import { RequestEnrollmentDto } from './dto/request-enrollment.dto';
-import { ConfirmEnrollmentDto } from './dto/confirm-enrollment';
 import { AssignInstructorDto } from './dto/assign-instructor.dto';
 
 @Controller('enrollment')

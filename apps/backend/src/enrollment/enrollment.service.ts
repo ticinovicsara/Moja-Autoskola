@@ -5,11 +5,10 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { PrismaService } from '@/prisma/prisma.service';
-import { EnrollmentStatus, UserRole } from '@prisma/client';
+import { EnrollmentStatus } from '@prisma/client';
 import { RequestEnrollmentDto } from './dto/request-enrollment.dto';
 import { EnrollmentHelperService } from './helpers/enrollment.helper';
 import { EnrollmentRequestEntity } from './entities/enrollement-request.entity';
-import { ConfirmEnrollmentDto } from './dto/confirm-enrollment';
 import { AssignInstructorDto } from './dto/assign-instructor.dto';
 
 @Injectable()

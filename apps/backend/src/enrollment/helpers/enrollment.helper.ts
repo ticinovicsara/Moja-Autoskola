@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '@/prisma/prisma.service';
 import { EnrollmentStatus, UserRole } from '@prisma/client';
-import { ConfirmEnrollmentDto } from '../dto/confirm-enrollment';
 
 @Injectable()
 export class EnrollmentHelperService {
