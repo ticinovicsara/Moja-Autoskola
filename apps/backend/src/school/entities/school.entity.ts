@@ -1,41 +1,15 @@
 import { School as PrismaSchool } from '@prisma/client';
-import {
-  IsDecimal,
-  IsEmail,
-  IsNumber,
-  IsString,
-  IsUUID,
-} from 'class-validator';
 
 export class School {
-  @IsUUID()
   id: string;
-
-  @IsString()
   name: string;
-
-  @IsString()
   city: string;
-
-  @IsString()
   address: string;
-
-  @IsString()
   contactNumber: string;
-
-  @IsEmail()
   email: string;
-
-  @IsNumber()
   enrollmentFee: number;
-
-  @IsString()
   info: string | null;
-
-  @IsString()
   websiteUrl: string | null;
-
-  @IsString()
   imageUrl: string | null;
 
   constructor(
