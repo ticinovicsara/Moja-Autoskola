@@ -48,7 +48,7 @@ async function main() {
       email: 'admin@autoskola.hr',
       password: await hashPassword('adminskole123'),
       role: UserRole.SchoolAdmin,
-      schoolUsers: {
+      schoolUser: {
         create: {
           schoolId: school.id,
         },
@@ -63,7 +63,7 @@ async function main() {
       email: 'ivan@autoskola.hr',
       password: await hashPassword('ivan123'),
       role: UserRole.Instructor,
-      schoolUsers: {
+      schoolUser: {
         create: {
           schoolId: school.id,
         },
@@ -78,7 +78,7 @@ async function main() {
       email: 'marko@autoskola.hr',
       password: await hashPassword('marko123'),
       role: UserRole.Instructor,
-      schoolUsers: {
+      schoolUser: {
         create: {
           schoolId: school.id,
         },
@@ -93,7 +93,7 @@ async function main() {
       email: 'ana@kandidat.hr',
       password: await hashPassword('ana123'),
       role: UserRole.Candidate,
-      schoolUsers: {
+      schoolUser: {
         create: {
           schoolId: school.id,
         },
@@ -108,7 +108,7 @@ async function main() {
       email: 'luka@kandidat.hr',
       password: await hashPassword('luka123'),
       role: UserRole.Candidate,
-      schoolUsers: {
+      schoolUser: {
         create: {
           schoolId: school.id,
         },
@@ -123,7 +123,7 @@ async function main() {
       email: 'iva@kandidat.hr',
       password: await hashPassword('iva123'),
       role: UserRole.Candidate,
-      schoolUsers: {
+      schoolUser: {
         create: {
           schoolId: school.id,
         },
