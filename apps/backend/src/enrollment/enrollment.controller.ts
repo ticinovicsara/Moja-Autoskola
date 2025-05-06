@@ -1,7 +1,16 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { EnrollmentService } from './enrollment.service';
 import { RequestEnrollmentDto } from './dto/request-enrollment.dto';
 import { ConfirmEnrollmentDto } from './dto/confirm-enrollment';
+import { AssignInstructorDto } from './dto/assign-instructor.dto';
 
 @Controller('enrollment')
 export class EnrollmentController {
@@ -30,22 +39,27 @@ export class EnrollmentController {
   }
 
   @Patch('approve')
-  approveRequest(@Param('id') id: string) {
-    return this.enrollmentService.approveEnrollmentRequest(id);
+  approveRequest(@Body() body: { id: string }) {
+    return this.enrollmentService.approveEnrollmentRequest(body.id);
   }
 
   @Patch('confirm-payment')
-  async confirmPayment(@Param('id') id: string) {
-    return this.enrollmentService.confirmPayment(id);
+  async confirmPayment(@Body() body: { id: string }) {
+    return this.enrollmentService.confirmPayment(body.id);
   }
 
   @Patch('assign-instructor')
-  async assignInstructor(@Body() body: ConfirmEnrollmentDto) {
+  async assignInstructor(@Body() body: AssignInstructorDto) {
     return this.enrollmentService.assignInstructor(body);
   }
 
   @Patch('deny/:id')
   async denyEnrollment(@Param('id') id: string) {
     return this.enrollmentService.denyEnrollmentRequest(id);
+  }
+
+  @Delete(':id')
+  async deleteEnrollmentRequest(@Param('id') id: string) {
+    return this.enrollmentService.deleteEnrollmentRequest(id);
   }
 }

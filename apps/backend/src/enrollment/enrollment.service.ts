@@ -2,6 +2,7 @@ import {
   Injectable,
   NotFoundException,
   ConflictException,
+  BadRequestException,
 } from '@nestjs/common';
 import { PrismaService } from '@/prisma/prisma.service';
 import { EnrollmentStatus, UserRole } from '@prisma/client';
@@ -9,6 +10,7 @@ import { RequestEnrollmentDto } from './dto/request-enrollment.dto';
 import { EnrollmentHelperService } from './helpers/enrollment.helper';
 import { EnrollmentRequestEntity } from './entities/enrollement-request.entity';
 import { ConfirmEnrollmentDto } from './dto/confirm-enrollment';
+import { AssignInstructorDto } from './dto/assign-instructor.dto';
 
 @Injectable()
 export class EnrollmentService {
@@ -114,15 +116,18 @@ export class EnrollmentService {
     return EnrollmentRequestEntity.fromPrisma(enrollmentRequest);
   }
 
-  async approveEnrollmentRequest(requestId: string) {
-    const request =
-      await this.enrollmentHelper.getEnrollmentRequestOrThrow(requestId);
+  async approveEnrollmentRequest(id: string) {
+    if (!id) {
+      throw new BadRequestException('Request ID is required.');
+    }
+
+    const request = await this.enrollmentHelper.getEnrollmentRequestOrThrow(id);
 
     if (request.status !== EnrollmentStatus.Pending) {
       return { message: 'Enrollment is not in Pending status.' };
     }
 
-    return this.enrollmentHelper.markAsWaitingForPayment(requestId);
+    return this.enrollmentHelper.markAsWaitingForPayment(id);
   }
 
   async confirmPayment(id: string) {
@@ -148,37 +153,37 @@ export class EnrollmentService {
     return { message: 'Enrollment request denied.' };
   }
 
-  async assignInstructor(body: ConfirmEnrollmentDto) {
-    const { id: requestId, instructorId } = body;
+  async assignInstructor(body: AssignInstructorDto) {
+    const { id: requestId, candidateId, instructorId } = body;
 
+    const response =
+      await this.enrollmentHelper.assignInstructorToApprovedCandidate(
+        requestId,
+        candidateId,
+        instructorId,
+      );
+
+    if (response) {
+      return {
+        message: 'Instructor assigned to the candidate successfully.',
+      };
+    }
+    throw new NotFoundException('Enrollment request not found.');
+  }
+
+  async deleteEnrollmentRequest(id: string) {
     const request = await this.prisma.enrollmentRequest.findUnique({
-      where: { id: requestId },
-      include: {
-        candidate: true,
-        school: true,
-      },
+      where: { id },
     });
 
     if (!request) {
       throw new NotFoundException('Enrollment request not found.');
     }
 
-    const { candidate } = request;
-    if (!candidate) {
-      throw new NotFoundException('Candidate not found.');
-    }
-
-    await this.prisma.candidateInstructor.create({
-      data: {
-        candidate: {
-          connect: { id: candidate.id },
-        },
-        instructor: {
-          connect: { id: instructorId },
-        },
-      },
+    await this.prisma.enrollmentRequest.delete({
+      where: { id },
     });
 
-    return { message: 'Instructor assigned to the candidate successfully.' };
+    return { message: 'Enrollment request successfully deleted.' };
   }
 }
