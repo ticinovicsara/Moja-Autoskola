@@ -9,7 +9,7 @@ import { EnrollmentStatus } from '@prisma/client';
 import { RequestEnrollmentDto } from './dto/request-enrollment.dto';
 import { EnrollmentHelperService } from './helpers/enrollment.helper';
 import { EnrollmentRequestEntity } from './entities/enrollement-request.entity';
-import { AssignInstructorDto } from './dto/assign-instructor.dto';
+import { ConfirmPaymentDto } from './dto/confirm-payment.dto';
 
 @Injectable()
 export class EnrollmentService {
@@ -122,8 +122,8 @@ export class EnrollmentService {
     return this.enrollmentHelper.markAsWaitingForPayment(id);
   }
 
-  async confirmPayment(id: string) {
-    return this.enrollmentHelper.finalizeEnrollment(id);
+  async confirmPayment(body: ConfirmPaymentDto) {
+    return this.enrollmentHelper.finalizeEnrollment(body);
   }
 
   async denyEnrollmentRequest(id: string) {

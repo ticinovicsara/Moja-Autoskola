@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '@/prisma/prisma.service';
 import { EnrollmentStatus, UserRole } from '@prisma/client';
+import { ConfirmPaymentDto } from '../dto/confirm-payment.dto';
 
 @Injectable()
 export class EnrollmentHelperService {
@@ -66,7 +67,9 @@ export class EnrollmentHelperService {
     }
   }
 
-  async finalizeEnrollment(requestId: string) {
+  async finalizeEnrollment(body: ConfirmPaymentDto) {
+    const { id: requestId, oib } = body;
+
     const request = await this.getEnrollmentRequestOrThrow(requestId);
 
     await this.prisma.enrollmentRequest.update({
@@ -76,7 +79,7 @@ export class EnrollmentHelperService {
 
     await this.prisma.user.update({
       where: { id: request.candidateId },
-      data: { role: UserRole.Candidate },
+      data: { role: UserRole.Candidate, oib: oib },
     });
 
     return { message: 'Enrollment approved and processed.' };

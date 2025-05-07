@@ -10,8 +10,8 @@ import {
 } from '@nestjs/common';
 import { EnrollmentService } from './enrollment.service';
 import { RequestEnrollmentDto } from './dto/request-enrollment.dto';
-import { AssignInstructorDto } from './dto/assign-instructor.dto';
 import { EnrollmentStatus } from '@prisma/client';
+import { ConfirmPaymentDto } from './dto/confirm-payment.dto';
 
 @Controller('enrollment')
 export class EnrollmentController {
@@ -43,8 +43,8 @@ export class EnrollmentController {
   }
 
   @Patch('confirm-payment')
-  async confirmPayment(@Body() body: { id: string }) {
-    return this.enrollmentService.confirmPayment(body.id);
+  async confirmPayment(@Body() body: ConfirmPaymentDto) {
+    return this.enrollmentService.confirmPayment(body);
   }
 
   @Patch('deny/:id')
