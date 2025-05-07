@@ -40,6 +40,7 @@ enum EnrollmentStatus {
   Approved
   Pending
   Denied
+  WaitingForPayment
 }
 
 model School {
@@ -64,7 +65,9 @@ model User {
   lastName           String
   email              String              @unique
   password           String
-  role               UserRole
+  role               UserRole            @default(Guest) 
+  oib                String?             @db.VarChar(11)
+
   schoolUser         SchoolUser?
   sessions           Session[]
   sessionCandidates  SessionCandidate[]
