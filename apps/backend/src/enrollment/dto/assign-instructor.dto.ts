@@ -6,10 +6,10 @@ export class AssignInstructorDto {
   id: string;
 
   @IsString()
-  @IsString()
+  @IsNotEmpty()
   instructorId: string;
 
   @IsString()
-  @IsString()
+  @IsNotEmpty()
   candidateId: string;
 }

@@ -41,7 +41,6 @@ enum EnrollmentStatus {
   Pending
   Denied
   WaitingForPayment
-  PaymentReceived
 }
 
 model School {

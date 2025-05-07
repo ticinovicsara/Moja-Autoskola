@@ -6,29 +6,29 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { EnrollmentService } from './enrollment.service';
 import { RequestEnrollmentDto } from './dto/request-enrollment.dto';
 import { AssignInstructorDto } from './dto/assign-instructor.dto';
+import { EnrollmentStatus } from '@prisma/client';
 
 @Controller('enrollment')
 export class EnrollmentController {
   constructor(private readonly enrollmentService: EnrollmentService) {}
 
-  @Get('pending')
-  async getPendingRequests() {
-    return this.enrollmentService.getPendingEnrollmentRequests();
+  @Get()
+  async getEnrollmentRequests(@Query('status') status?: EnrollmentStatus) {
+    return this.enrollmentService.getEnrollmentRequests(status);
   }
 
-  @Get('candidate/:candidateId')
-  async getCandidateEnrollmentRequests(
-    @Param('candidateId') candidateId: string,
-  ) {
+  @Get('candidate/:id')
+  async getCandidateEnrollmentRequests(@Param('id') candidateId: string) {
     return this.enrollmentService.getCandidateEnrollmentRequests(candidateId);
   }
 
-  @Get('school/:schoolId')
-  async getSchoolEnrollmentRequests(@Param('schoolId') schoolId: string) {
+  @Get('school/:id')
+  async getSchoolEnrollmentRequests(@Param('id') schoolId: string) {
     return this.enrollmentService.getSchoolEnrollmentRequests(schoolId);
   }
 
@@ -47,10 +47,10 @@ export class EnrollmentController {
     return this.enrollmentService.confirmPayment(body.id);
   }
 
-  @Patch('assign-instructor')
-  async assignInstructor(@Body() body: AssignInstructorDto) {
-    return this.enrollmentService.assignInstructor(body);
-  }
+  // @Patch('assign-instructor')
+  // async assignInstructor(@Body() body: AssignInstructorDto) {
+  //   return this.enrollmentService.assignInstructor(body);
+  // }
 
   @Patch('deny/:id')
   async denyEnrollment(@Param('id') id: string) {

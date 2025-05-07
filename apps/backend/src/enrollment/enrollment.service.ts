@@ -18,21 +18,25 @@ export class EnrollmentService {
     private enrollmentHelper: EnrollmentHelperService,
   ) {}
 
-  async getPendingEnrollmentRequests() {
-    const pendingRequests = await this.prisma.enrollmentRequest.findMany({
-      where: { status: EnrollmentStatus.Pending },
+  async getEnrollmentRequests(status?: EnrollmentStatus) {
+    const statusFilter = status ? { status } : {};
+
+    const requests = await this.prisma.enrollmentRequest.findMany({
+      where: statusFilter,
       include: {
         school: true,
         candidate: true,
       },
     });
 
-    return pendingRequests.map((request) =>
+    return requests.map((request) =>
       EnrollmentRequestEntity.fromPrisma(request),
     );
   }
 
   async getCandidateEnrollmentRequests(candidateId: string) {
+    await this.enrollmentHelper.getUserOrThrow(candidateId);
+
     const requests = await this.prisma.enrollmentRequest.findMany({
       where: { candidateId },
       include: {
@@ -53,6 +57,8 @@ export class EnrollmentService {
   }
 
   async getSchoolEnrollmentRequests(schoolId: string) {
+    await this.enrollmentHelper.getSchoolOrThrow(schoolId);
+
     const requests = await this.prisma.enrollmentRequest.findMany({
       where: { schoolId },
       include: {
@@ -75,13 +81,8 @@ export class EnrollmentService {
   async requestEnrollment(body: RequestEnrollmentDto) {
     const { candidateId, schoolId } = body;
 
-    const candidate = await this.prisma.user.findUnique({
-      where: { id: candidateId },
-    });
-
-    if (!candidate) {
-      throw new NotFoundException('User is not found.');
-    }
+    await this.enrollmentHelper.getUserOrThrow(candidateId);
+    await this.enrollmentHelper.getSchoolOrThrow(schoolId);
 
     const existing = await this.prisma.enrollmentRequest.findUnique({
       where: {
@@ -94,14 +95,6 @@ export class EnrollmentService {
 
     if (existing) {
       throw new ConflictException('Enrollment request already exists.');
-    }
-
-    const school = await this.prisma.school.findUnique({
-      where: { id: schoolId },
-    });
-
-    if (!school) {
-      throw new NotFoundException('School not found.');
     }
 
     const enrollmentRequest = await this.prisma.enrollmentRequest.create({
@@ -123,7 +116,7 @@ export class EnrollmentService {
     const request = await this.enrollmentHelper.getEnrollmentRequestOrThrow(id);
 
     if (request.status !== EnrollmentStatus.Pending) {
-      return { message: 'Enrollment is not in Pending status.' };
+      throw new BadRequestException('Enrollment is not in Pending status.');
     }
 
     return this.enrollmentHelper.markAsWaitingForPayment(id);
@@ -134,13 +127,7 @@ export class EnrollmentService {
   }
 
   async denyEnrollmentRequest(id: string) {
-    const request = await this.prisma.enrollmentRequest.findUnique({
-      where: { id },
-    });
-
-    if (!request) {
-      throw new NotFoundException('Enrollment request not found.');
-    }
+    await this.enrollmentHelper.getEnrollmentRequestOrThrow(id);
 
     await this.prisma.enrollmentRequest.update({
       where: { id },
@@ -152,32 +139,8 @@ export class EnrollmentService {
     return { message: 'Enrollment request denied.' };
   }
 
-  async assignInstructor(body: AssignInstructorDto) {
-    const { id: requestId, candidateId, instructorId } = body;
-
-    const response =
-      await this.enrollmentHelper.assignInstructorToApprovedCandidate(
-        requestId,
-        candidateId,
-        instructorId,
-      );
-
-    if (response) {
-      return {
-        message: 'Instructor assigned to the candidate successfully.',
-      };
-    }
-    throw new NotFoundException('Enrollment request not found.');
-  }
-
   async deleteEnrollmentRequest(id: string) {
-    const request = await this.prisma.enrollmentRequest.findUnique({
-      where: { id },
-    });
-
-    if (!request) {
-      throw new NotFoundException('Enrollment request not found.');
-    }
+    await this.enrollmentHelper.getEnrollmentRequestOrThrow(id);
 
     await this.prisma.enrollmentRequest.delete({
       where: { id },
@@ -185,4 +148,21 @@ export class EnrollmentService {
 
     return { message: 'Enrollment request successfully deleted.' };
   }
+
+  //async assignInstructor(body: AssignInstructorDto) {
+  //   const { id: requestId, candidateId, instructorId } = body;
+
+  //   const response = await this.enrollmentHelper.assignInstructorToCandidate(
+  //     requestId,
+  //     candidateId,
+  //     instructorId,
+  //   );
+
+  //   if (response) {
+  //     return {
+  //       message: 'Instructor assigned to the candidate successfully.',
+  //     };
+  //   }
+  //   throw new NotFoundException('Enrollment request not found.');
+  // }
 }

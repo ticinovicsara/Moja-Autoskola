@@ -10,6 +10,29 @@ import { EnrollmentStatus, UserRole } from '@prisma/client';
 export class EnrollmentHelperService {
   constructor(private prisma: PrismaService) {}
 
+  async getUserOrThrow(id: string) {
+    const user = await this.prisma.user.findUnique({ where: { id } });
+
+    if (!user) {
+      throw new NotFoundException('User not found.');
+    }
+
+    switch (user.role) {
+      case UserRole.Candidate:
+        return user;
+      case UserRole.Instructor:
+        return user;
+      default:
+        throw new NotFoundException(`${user.role} not found.`);
+    }
+  }
+
+  async getSchoolOrThrow(id: string) {
+    const school = await this.prisma.school.findUnique({ where: { id } });
+    if (!school) throw new NotFoundException('School not found.');
+    return school;
+  }
+
   async getEnrollmentRequestOrThrow(requestId: string) {
     const request = await this.prisma.enrollmentRequest.findUnique({
       where: { id: requestId },
@@ -44,22 +67,10 @@ export class EnrollmentHelperService {
   }
 
   async finalizeEnrollment(requestId: string) {
-    const request = await this.prisma.enrollmentRequest.findUnique({
-      where: { id: requestId },
-      include: {
-        candidate: true,
-        school: true,
-      },
-    });
-
-    if (!request) {
-      throw new NotFoundException('Enrollment request not found.');
-    }
-
-    const { candidate, school } = request;
+    const request = await this.getEnrollmentRequestOrThrow(requestId);
 
     await this.prisma.enrollmentRequest.update({
-      where: { id: request.id },
+      where: { id: requestId },
       data: { status: EnrollmentStatus.Approved },
     });
 
@@ -71,46 +82,27 @@ export class EnrollmentHelperService {
     return { message: 'Enrollment approved and processed.' };
   }
 
-  async assignInstructorToApprovedCandidate(
-    requestId: string,
-    candidateId: string,
-    instructorId: string,
-  ) {
-    const request = await this.prisma.enrollmentRequest.findUnique({
-      where: { id: requestId },
-    });
+  // async assignInstructorToCandidate(
+  //   requestId: string,
+  //   candidateId: string,
+  //   instructorId: string,
+  // ) {
+  //   const request = await this.getEnrollmentRequestOrThrow(requestId);
 
-    if (!request) {
-      throw new NotFoundException('Enrollment request not found.');
-    }
+  //   if (request.status !== EnrollmentStatus.Approved) {
+  //     throw new ConflictException(
+  //       'Candidate must be approved before assigning an instructor.',
+  //     );
+  //   }
 
-    if (request.status !== EnrollmentStatus.Approved) {
-      throw new ConflictException(
-        'Candidate must be approved before assigning an instructor.',
-      );
-    }
+  //   await this.getUserOrThrow(candidateId);
+  //   await this.getUserOrThrow(instructorId);
 
-    const candidate = await this.prisma.user.findUnique({
-      where: { id: candidateId },
-    });
-
-    if (!candidate) {
-      throw new NotFoundException('Candidate not found.');
-    }
-
-    const instructor = await this.prisma.user.findUnique({
-      where: { id: instructorId },
-    });
-
-    if (!instructor) {
-      throw new NotFoundException('Instructor not found.');
-    }
-
-    return await this.prisma.candidateInstructor.create({
-      data: {
-        candidate: { connect: { id: candidateId } },
-        instructor: { connect: { id: instructorId } },
-      },
-    });
-  }
+  //   return await this.prisma.candidateInstructor.create({
+  //     data: {
+  //       candidate: { connect: { id: candidateId } },
+  //       instructor: { connect: { id: instructorId } },
+  //     },
+  //   });
+  // }
 }
