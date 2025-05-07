@@ -27,6 +27,7 @@ export class UserService {
         firstName: createUserDto.firstName,
         lastName: createUserDto.lastName,
         password: await bcrypt.hash(createUserDto.password, 10),
+        dateOfBirth: createUserDto.dateOfBirth,
         oib: createUserDto.oib,
         role: createUserDto.role,
       },

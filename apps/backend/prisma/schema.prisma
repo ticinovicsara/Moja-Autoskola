@@ -60,14 +60,14 @@ model School {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  firstName String
-  lastName  String
-  email     String   @unique
-  password  String
-  role      UserRole @default(Guest)
-  oib       String   @unique @db.VarChar(11)
-
+  id                 String              @id @default(uuid())
+  firstName          String
+  lastName           String
+  email              String              @unique
+  password           String
+  role               UserRole            @default(Guest)
+  oib                String              @unique @db.VarChar(11)
+  dateOfBirth        DateTime
   schoolUser         SchoolUser?
   sessions           Session[]
   sessionCandidates  SessionCandidate[]

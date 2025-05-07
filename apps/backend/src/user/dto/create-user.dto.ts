@@ -1,5 +1,7 @@
 import { UserRole } from '@prisma/client';
+import { Type } from 'class-transformer';
 import {
+  IsDate,
   IsEmail,
   IsEnum,
   IsNotEmpty,
@@ -29,6 +31,10 @@ export class CreateUserDto {
       'Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character',
   })
   password: string;
+
+  @IsDate()
+  @Type(() => Date)
+  dateOfBirth: Date;
 
   @MinLength(11)
   @IsString()

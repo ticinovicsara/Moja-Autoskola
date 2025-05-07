@@ -1,5 +1,8 @@
 import { UserRole } from '@prisma/client';
+import { Type } from 'class-transformer';
 import {
+  IsDataURI,
+  IsDate,
   IsEmail,
   IsEnum,
   IsNotEmpty,
@@ -24,6 +27,10 @@ export class RegisterDto {
   @MinLength(5)
   @IsString()
   password: string;
+
+  @IsDate()
+  @Type(() => Date)
+  dateOfBirth: Date;
 
   @IsString()
   @Length(11, 11, {

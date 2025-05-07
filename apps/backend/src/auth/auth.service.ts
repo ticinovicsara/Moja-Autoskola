@@ -49,11 +49,21 @@ export class AuthService {
   }
 
   async register(body: RegisterDto) {
+    const min = new Date('1900-01-01');
+    const max = new Date();
+
+    if (body.dateOfBirth < min || body.dateOfBirth > max) {
+      throw new BadRequestException(
+        'Date of birth must be between 1900 and 2025.',
+      );
+    }
+
     const user = {
       email: body.email,
       firstName: body.firstName,
       lastName: body.lastName,
       password: body.password,
+      dateOfBirth: body.dateOfBirth,
       oib: body.oib,
       role: UserRole.Guest,
     };
