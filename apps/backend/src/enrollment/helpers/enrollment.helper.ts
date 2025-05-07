@@ -81,28 +81,4 @@ export class EnrollmentHelperService {
 
     return { message: 'Enrollment approved and processed.' };
   }
-
-  // async assignInstructorToCandidate(
-  //   requestId: string,
-  //   candidateId: string,
-  //   instructorId: string,
-  // ) {
-  //   const request = await this.getEnrollmentRequestOrThrow(requestId);
-
-  //   if (request.status !== EnrollmentStatus.Approved) {
-  //     throw new ConflictException(
-  //       'Candidate must be approved before assigning an instructor.',
-  //     );
-  //   }
-
-  //   await this.getUserOrThrow(candidateId);
-  //   await this.getUserOrThrow(instructorId);
-
-  //   return await this.prisma.candidateInstructor.create({
-  //     data: {
-  //       candidate: { connect: { id: candidateId } },
-  //       instructor: { connect: { id: instructorId } },
-  //     },
-  //   });
-  // }
 }

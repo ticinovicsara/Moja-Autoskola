@@ -47,11 +47,6 @@ export class EnrollmentController {
     return this.enrollmentService.confirmPayment(body.id);
   }
 
-  // @Patch('assign-instructor')
-  // async assignInstructor(@Body() body: AssignInstructorDto) {
-  //   return this.enrollmentService.assignInstructor(body);
-  // }
-
   @Patch('deny/:id')
   async denyEnrollment(@Param('id') id: string) {
     return this.enrollmentService.denyEnrollmentRequest(id);

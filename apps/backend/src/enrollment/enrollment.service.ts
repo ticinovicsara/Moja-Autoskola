@@ -148,21 +148,4 @@ export class EnrollmentService {
 
     return { message: 'Enrollment request successfully deleted.' };
   }
-
-  //async assignInstructor(body: AssignInstructorDto) {
-  //   const { id: requestId, candidateId, instructorId } = body;
-
-  //   const response = await this.enrollmentHelper.assignInstructorToCandidate(
-  //     requestId,
-  //     candidateId,
-  //     instructorId,
-  //   );
-
-  //   if (response) {
-  //     return {
-  //       message: 'Instructor assigned to the candidate successfully.',
-  //     };
-  //   }
-  //   throw new NotFoundException('Enrollment request not found.');
-  // }
 }
