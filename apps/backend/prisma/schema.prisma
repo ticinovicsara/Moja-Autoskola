@@ -52,11 +52,11 @@ model School {
   email              String              @unique
   enrollmentFee      Decimal
   info               String?
+  websiteUrl         String?
+  imageUrl           String?
   users              SchoolUser[]
   sessions           Session[]
   enrollmentRequests EnrollmentRequest[]
-  websiteUrl         String?
-  imageUrl           String?
 }
 
 model User {
@@ -68,12 +68,12 @@ model User {
   role               UserRole            @default(Guest) 
   oib                String?             @db.VarChar(11)
 
-  schoolUser       SchoolUser?
+  schoolUser         SchoolUser?
   sessions           Session[]
   sessionCandidates  SessionCandidate[]
   testResults        TestResult[]
   enrollmentRequests EnrollmentRequest[]
-  instructorSlots     InstructorSlot[]
+  instructorSlots    InstructorSlot[]
 
   candidateInstructor CandidateInstructor[] @relation("instructor")
   instructorCandidate CandidateInstructor[] @relation("candidate")
