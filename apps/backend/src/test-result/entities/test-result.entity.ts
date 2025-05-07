@@ -24,9 +24,7 @@ export class TestResult {
     this.passed = passed;
   }
 
-  static fromPrisma(prismaTestResult: PrismaTestResult | null) {
-    if (prismaTestResult === null) return null;
-
+  static fromPrisma(prismaTestResult: PrismaTestResult) {
     return new TestResult(
       prismaTestResult.id,
       prismaTestResult.candidateId,
