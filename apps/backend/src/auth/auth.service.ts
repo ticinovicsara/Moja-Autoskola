@@ -1,8 +1,15 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { LogInDto } from './dto/login.dto';
 import { UserService } from '@/user/user.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { RegisterDto } from './dto/register.dto';
+import { first } from 'rxjs';
+import { UserRole } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -38,6 +45,35 @@ export class AuthService {
 
     return {
       access_token: this.jwtService.sign(payload),
+    };
+  }
+
+  async register(body: RegisterDto) {
+    const user = {
+      email: body.email,
+      firstName: body.firstName,
+      lastName: body.lastName,
+      password: body.password,
+      role: UserRole.Guest,
+    };
+
+    const createdUser = await this.userService.create(user);
+
+    if (!createdUser) {
+      throw new BadRequestException('Something went wrong!');
+    }
+
+    const payload = {
+      id: createdUser.id,
+      email: createdUser.email,
+      role: createdUser.role,
+      firstName: createdUser.firstName,
+      lastName: createdUser.lastName,
+    };
+
+    return {
+      access_token: this.jwtService.sign(payload),
+      createdUser,
     };
   }
 }
