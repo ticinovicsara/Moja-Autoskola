@@ -1,7 +1,11 @@
 import { User, UserRole } from '@prisma/client';
-import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsEnum, IsNotEmpty, IsString, IsUUID } from 'class-validator';
 
 export class UserResponseDto {
+  @IsUUID()
+  @IsNotEmpty()
+  id: string;
+
   @IsString()
   @IsNotEmpty()
   firstName: string;
@@ -14,18 +18,26 @@ export class UserResponseDto {
   @IsNotEmpty()
   email: string;
 
+  @IsNotEmpty()
+  @IsString()
+  password: string;
+
   @IsEnum(UserRole)
   role: UserRole;
 
   constructor(
+    id: string,
     firstName: string,
     lastName: string,
     email: string,
+    password: string,
     role: UserRole,
   ) {
+    this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
+    this.password = password;
     this.role = role;
   }
 
@@ -33,9 +45,11 @@ export class UserResponseDto {
     if (prismaUser === null) return null;
 
     return new UserResponseDto(
+      prismaUser.id,
       prismaUser.firstName,
       prismaUser.lastName,
       prismaUser.email,
+      prismaUser.password,
       prismaUser.role,
     );
   }
