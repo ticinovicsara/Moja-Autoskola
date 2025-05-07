@@ -6,6 +6,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { PrismaService } from './prisma/prisma.service';
 import { SessionModule } from './session/session.module';
 import { InstructorCandidateModule } from './instructor-candidate/instructor-candidate.module';
+import { SchoolModule } from './school/school.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { InstructorCandidateModule } from './instructor-candidate/instructor-can
     UserModule,
     SessionModule,
     InstructorCandidateModule,
+    SchoolModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
