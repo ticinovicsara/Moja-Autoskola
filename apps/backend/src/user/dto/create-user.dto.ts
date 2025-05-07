@@ -30,6 +30,10 @@ export class CreateUserDto {
   })
   password: string;
 
+  @MinLength(11)
+  @IsString()
+  oib: string;
+
   @IsEnum(UserRole)
   role: UserRole;
 }

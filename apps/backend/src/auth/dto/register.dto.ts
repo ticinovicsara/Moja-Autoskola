@@ -5,6 +5,7 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  Length,
   MinLength,
 } from 'class-validator';
 
@@ -24,9 +25,11 @@ export class RegisterDto {
   @IsString()
   password: string;
 
-  //   @IsString()
-  //   @MinLength(11)
-  //   oib: string;
+  @IsString()
+  @Length(11, 11, {
+    message: 'OIB mora imati točno 11 znamenaka.',
+  })
+  oib: string;
 
   @IsOptional()
   @IsEnum(UserRole)

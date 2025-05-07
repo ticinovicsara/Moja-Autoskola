@@ -54,6 +54,7 @@ export class AuthService {
       firstName: body.firstName,
       lastName: body.lastName,
       password: body.password,
+      oib: body.oib,
       role: UserRole.Guest,
     };
 

@@ -14,8 +14,12 @@ export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createUserDto: CreateUserDto) {
-    const user = await this.getByEmail(createUserDto.email);
-    if (user) throw new ConflictException('The email already exists');
+    const userByEmail = await this.getByEmail(createUserDto.email);
+    if (userByEmail) throw new ConflictException('The email already exists');
+
+    const userByOib = await this.getByOIB(createUserDto.oib);
+
+    if (userByOib) throw new ConflictException('OIB already exists');
 
     const newUser = await this.prisma.user.create({
       data: {
@@ -23,6 +27,7 @@ export class UserService {
         firstName: createUserDto.firstName,
         lastName: createUserDto.lastName,
         password: await bcrypt.hash(createUserDto.password, 10),
+        oib: createUserDto.oib,
         role: createUserDto.role,
       },
     });
@@ -48,6 +53,14 @@ export class UserService {
       where: { email },
     });
     return UserResponseDto.fromPrisma(user);
+  }
+
+  async getByOIB(oib: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { oib },
+    });
+
+    return user;
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
