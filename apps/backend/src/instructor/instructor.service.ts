@@ -1,7 +1,12 @@
 import { PrismaService } from '@/prisma/prisma.service';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { UserRole } from '@prisma/client';
 import { AddInstructorSlotDto } from './dto/add-instructor-slot.dto';
+import { InstructorResponseDto } from './dto/instructor-response';
 
 @Injectable()
 export class InstructorService {
@@ -17,16 +22,7 @@ export class InstructorService {
       },
     });
 
-    if (!pairs.length) {
-      throw new NotFoundException('No candidates assigned to this instructor.');
-    }
-
-    return pairs.map((pair) => ({
-      id: pair.candidate.id,
-      name: `${pair.candidate.firstName} ${pair.candidate.lastName}`,
-      email: pair.candidate.email,
-      role: pair.candidate.role,
-    }));
+    return pairs as InstructorResponseDto;
   }
 
   async getInstructorSlots(instructorId: string) {
@@ -56,8 +52,12 @@ export class InstructorService {
       where: { id: instructorId },
     });
 
-    if (!instructor || instructor.role !== UserRole.Instructor) {
-      throw new NotFoundException('Instructor not found or invalid role.');
+    if (!instructor) {
+      throw new NotFoundException('Instructor not found.');
+    }
+
+    if (instructor.role !== UserRole.Instructor) {
+      throw new BadRequestException('User does not have the instructor role.');
     }
 
     return instructor;
