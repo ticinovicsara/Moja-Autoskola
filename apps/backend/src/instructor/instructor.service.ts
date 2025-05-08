@@ -1,7 +1,6 @@
 import { PrismaService } from '@/prisma/prisma.service';
-import { User } from '@/user/entities/user.entity';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Day, UserRole } from '@prisma/client';
+import { UserRole } from '@prisma/client';
 import { AddInstructorSlotDto } from './dto/add-instructor-slot.dto';
 
 @Injectable()
@@ -9,13 +8,7 @@ export class InstructorService {
   constructor(private readonly prisma: PrismaService) {}
 
   async getCandidatesForInstructor(instructorId: string) {
-    const instructor = await this.prisma.user.findUnique({
-      where: { id: instructorId },
-    });
-
-    if (!instructor || instructor.role !== 'Instructor') {
-      throw new NotFoundException('Instructor not found.');
-    }
+    await this.getById(instructorId);
 
     const pairs = await this.prisma.candidateInstructor.findMany({
       where: { instructorId },
@@ -37,6 +30,28 @@ export class InstructorService {
   }
 
   async getInstructorSlots(instructorId: string) {
+    await this.getById(instructorId);
+
+    return this.prisma.instructorSlot.findMany({
+      where: { instructorId },
+    });
+  }
+
+  async addInstructorSlot(body: AddInstructorSlotDto) {
+    const { instructorId, day, startTime, endTime } = body;
+    await this.getById(instructorId);
+
+    return this.prisma.instructorSlot.create({
+      data: {
+        instructorId: instructorId,
+        day: day,
+        startTime: startTime,
+        endTime: endTime,
+      },
+    });
+  }
+
+  private async getById(instructorId: string) {
     const instructor = await this.prisma.user.findUnique({
       where: { id: instructorId },
     });
@@ -45,27 +60,6 @@ export class InstructorService {
       throw new NotFoundException('Instructor not found or invalid role.');
     }
 
-    return this.prisma.instructorSlot.findMany({
-      where: { instructorId },
-    });
-  }
-
-  async addInstructorSlot(body: AddInstructorSlotDto) {
-    const instructor = await this.prisma.user.findUnique({
-      where: { id: body.instructorId },
-    });
-
-    if (!instructor || instructor.role !== UserRole.Instructor) {
-      throw new NotFoundException('Instructor not found or invalid role.');
-    }
-
-    return this.prisma.instructorSlot.create({
-      data: {
-        instructorId: body.instructorId,
-        day: body.day,
-        startTime: body.startTime,
-        endTime: body.endTime,
-      },
-    });
+    return instructor;
   }
 }

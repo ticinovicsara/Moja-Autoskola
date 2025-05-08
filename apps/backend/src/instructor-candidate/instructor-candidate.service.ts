@@ -11,18 +11,6 @@ import { InstructorCandidate } from './entities/instructor-candidate.entity';
 export class InstructorCandidateService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getAllInstructorCandidates() {
-    const allInstructorCandidates =
-      await this.prisma.candidateInstructor.findMany({
-        include: {
-          instructor: true,
-          candidate: true,
-        },
-      });
-
-    return allInstructorCandidates.map(InstructorCandidate.fromPrisma);
-  }
-
   async assignInstructorToCandidate(body: AssignInstructorDto) {
     const { candidateId, instructorId } = body;
 

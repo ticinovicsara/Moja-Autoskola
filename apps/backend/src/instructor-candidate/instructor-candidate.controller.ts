@@ -1,6 +1,6 @@
-import { Controller, Post, Body, Delete, Param, Get } from '@nestjs/common';
+import { Controller, Post, Body, Delete } from '@nestjs/common';
 import { InstructorCandidateService } from './instructor-candidate.service';
-import { AssignInstructorDto } from './dto/assign-instructor.dto';
+import { AssignInstructorCandidateDto } from './dto/assign-instructor.dto';
 import { RemoveInstructorCandidateDto } from './dto/remove-instructor-candidate.dto';
 
 @Controller('instructor-candidate')
@@ -9,13 +9,8 @@ export class InstructorCandidateController {
     private readonly instructorCandidateService: InstructorCandidateService,
   ) {}
 
-  @Get()
-  async getAllInstructorCandidates() {
-    return this.instructorCandidateService.getAllInstructorCandidates();
-  }
-
   @Post()
-  async assignInstructor(@Body() body: AssignInstructorDto) {
+  async assignInstructor(@Body() body: AssignInstructorCandidateDto) {
     return this.instructorCandidateService.assignInstructorToCandidate(body);
   }
 

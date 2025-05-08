@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsUUID } from 'class-validator';
 
-export class AssignInstructorDto {
+export class AssignInstructorCandidateDto {
   @IsUUID()
   @IsNotEmpty()
   candidateId: string;
