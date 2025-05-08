@@ -64,4 +64,10 @@ export class SchoolService {
     const deletedSchool = await this.prisma.school.delete({ where: { id } });
     return School.fromPrisma(deletedSchool);
   }
+
+  async getSchoolOrThrow(id: string) {
+    const school = await this.prisma.school.findUnique({ where: { id } });
+    if (!school) throw new NotFoundException('School not found.');
+    return school;
+  }
 }

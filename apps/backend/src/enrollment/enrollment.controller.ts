@@ -11,7 +11,6 @@ import {
 import { EnrollmentService } from './enrollment.service';
 import { RequestEnrollmentDto } from './dto/request-enrollment.dto';
 import { EnrollmentStatus } from '@prisma/client';
-import { ConfirmPaymentDto } from './dto/confirm-payment.dto';
 
 @Controller('enrollment')
 export class EnrollmentController {
@@ -37,19 +36,12 @@ export class EnrollmentController {
     return this.enrollmentService.requestEnrollment(body);
   }
 
-  @Patch('approve')
-  approveRequest(@Body() body: { id: string }) {
-    return this.enrollmentService.approveEnrollmentRequest(body.id);
-  }
-
-  @Patch('confirm-payment')
-  async confirmPayment(@Body() body: ConfirmPaymentDto) {
-    return this.enrollmentService.confirmPayment(body);
-  }
-
-  @Patch('deny/:id')
-  async denyEnrollment(@Param('id') id: string) {
-    return this.enrollmentService.denyEnrollmentRequest(id);
+  @Patch(':id/status')
+  async updateEnrollmentStatus(
+    @Param('id') id: string,
+    @Query('newStatus') newStatus: EnrollmentStatus,
+  ) {
+    return this.enrollmentService.updateEnrollmentStatus(id, newStatus);
   }
 
   @Delete(':id')

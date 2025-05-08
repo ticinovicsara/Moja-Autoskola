@@ -5,34 +5,10 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '@/prisma/prisma.service';
 import { EnrollmentStatus, UserRole } from '@prisma/client';
-import { ConfirmPaymentDto } from '../dto/confirm-payment.dto';
 
 @Injectable()
 export class EnrollmentHelperService {
   constructor(private prisma: PrismaService) {}
-
-  async getUserOrThrow(id: string) {
-    const user = await this.prisma.user.findUnique({ where: { id } });
-
-    if (!user) {
-      throw new NotFoundException('User not found.');
-    }
-
-    switch (user.role) {
-      case UserRole.Candidate:
-        return user;
-      case UserRole.Instructor:
-        return user;
-      default:
-        throw new NotFoundException(`${user.role} not found.`);
-    }
-  }
-
-  async getSchoolOrThrow(id: string) {
-    const school = await this.prisma.school.findUnique({ where: { id } });
-    if (!school) throw new NotFoundException('School not found.');
-    return school;
-  }
 
   async getEnrollmentRequestOrThrow(requestId: string) {
     const request = await this.prisma.enrollmentRequest.findUnique({
@@ -67,9 +43,7 @@ export class EnrollmentHelperService {
     }
   }
 
-  async finalizeEnrollment(body: ConfirmPaymentDto) {
-    const { id: requestId, oib } = body;
-
+  async finalizeEnrollment(requestId: string) {
     const request = await this.getEnrollmentRequestOrThrow(requestId);
 
     await this.prisma.enrollmentRequest.update({
@@ -79,7 +53,7 @@ export class EnrollmentHelperService {
 
     await this.prisma.user.update({
       where: { id: request.candidateId },
-      data: { role: UserRole.Candidate, oib: oib },
+      data: { role: UserRole.Candidate },
     });
 
     return { message: 'Enrollment approved and processed.' };

@@ -9,13 +9,16 @@ import { EnrollmentStatus } from '@prisma/client';
 import { RequestEnrollmentDto } from './dto/request-enrollment.dto';
 import { EnrollmentHelperService } from './helpers/enrollment.helper';
 import { EnrollmentRequestEntity } from './entities/enrollement-request.entity';
-import { ConfirmPaymentDto } from './dto/confirm-payment.dto';
+import { UserService } from '@/user/user.service';
+import { SchoolService } from '@/school/school.service';
 
 @Injectable()
 export class EnrollmentService {
   constructor(
     private prisma: PrismaService,
     private enrollmentHelper: EnrollmentHelperService,
+    private userService: UserService,
+    private schoolService: SchoolService,
   ) {}
 
   async getEnrollmentRequests(status?: EnrollmentStatus) {
@@ -35,7 +38,7 @@ export class EnrollmentService {
   }
 
   async getCandidateEnrollmentRequests(candidateId: string) {
-    await this.enrollmentHelper.getUserOrThrow(candidateId);
+    await this.userService.getUserOrThrow(candidateId);
 
     const requests = await this.prisma.enrollmentRequest.findMany({
       where: { candidateId },
@@ -57,7 +60,7 @@ export class EnrollmentService {
   }
 
   async getSchoolEnrollmentRequests(schoolId: string) {
-    await this.enrollmentHelper.getSchoolOrThrow(schoolId);
+    await this.schoolService.getSchoolOrThrow(schoolId);
 
     const requests = await this.prisma.enrollmentRequest.findMany({
       where: { schoolId },
@@ -81,8 +84,8 @@ export class EnrollmentService {
   async requestEnrollment(body: RequestEnrollmentDto) {
     const { candidateId, schoolId } = body;
 
-    await this.enrollmentHelper.getUserOrThrow(candidateId);
-    await this.enrollmentHelper.getSchoolOrThrow(schoolId);
+    await this.userService.getUserOrThrow(candidateId);
+    await this.schoolService.getSchoolOrThrow(schoolId);
 
     const existing = await this.prisma.enrollmentRequest.findUnique({
       where: {
@@ -108,7 +111,28 @@ export class EnrollmentService {
     return EnrollmentRequestEntity.fromPrisma(enrollmentRequest);
   }
 
-  async approveEnrollmentRequest(id: string) {
+  async updateEnrollmentStatus(id: string, newStatus: EnrollmentStatus) {
+    const enrollment = await this.prisma.enrollmentRequest.findUnique({
+      where: { id },
+    });
+    if (!enrollment) throw new NotFoundException('Enrollment not found');
+
+    switch (newStatus) {
+      case EnrollmentStatus.WaitingForPayment:
+        return this.approveEnrollmentRequest(id);
+
+      case EnrollmentStatus.Denied:
+        return this.denyEnrollmentRequest(id);
+
+      case EnrollmentStatus.Approved:
+        return this.enrollmentHelper.finalizeEnrollment(id);
+
+      default:
+        throw new BadRequestException('Invalid status');
+    }
+  }
+
+  private async approveEnrollmentRequest(id: string) {
     if (!id) {
       throw new BadRequestException('Request ID is required.');
     }
@@ -122,11 +146,7 @@ export class EnrollmentService {
     return this.enrollmentHelper.markAsWaitingForPayment(id);
   }
 
-  async confirmPayment(body: ConfirmPaymentDto) {
-    return this.enrollmentHelper.finalizeEnrollment(body);
-  }
-
-  async denyEnrollmentRequest(id: string) {
+  private async denyEnrollmentRequest(id: string) {
     await this.enrollmentHelper.getEnrollmentRequestOrThrow(id);
 
     await this.prisma.enrollmentRequest.update({

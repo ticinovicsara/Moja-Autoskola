@@ -66,7 +66,7 @@ model User {
   email              String              @unique
   password           String
   role               UserRole            @default(Guest) 
-  oib                String?             @db.VarChar(11)
+  oib                String             @db.VarChar(11)
 
   schoolUser         SchoolUser?
   sessions           Session[]
