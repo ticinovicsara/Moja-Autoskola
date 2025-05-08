@@ -11,8 +11,8 @@ export class InstructorController {
     return this.instructorService.getCandidatesForInstructor(instructorId);
   }
 
-  @Get('slots/:instructorId')
-  async getInstructorSlots(@Param('instructorId') instructorId: string) {
+  @Get('slots/:id')
+  async getInstructorSlots(@Param('id') instructorId: string) {
     return this.instructorService.getInstructorSlots(instructorId);
   }
 
