@@ -4,7 +4,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from '@/prisma/prisma.service';
-import { EnrollmentStatus } from '@prisma/client';
 import { AssignInstructorDto } from './dto/assign-instructor.dto';
 import { InstructorCandidate } from './entities/instructor-candidate.entity';
 
