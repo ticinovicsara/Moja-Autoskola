@@ -22,15 +22,6 @@ export class EnrollmentHelperService {
     return request;
   }
 
-  async markAsWaitingForPayment(requestId: string) {
-    await this.prisma.enrollmentRequest.update({
-      where: { id: requestId },
-      data: { status: EnrollmentStatus.WaitingForPayment },
-    });
-
-    return { message: 'Request verified. Now waiting for payment.' };
-  }
-
   async addCandidateToSchool(candidateId: string, schoolId: string) {
     const alreadyInSchool = await this.prisma.schoolUser.findFirst({
       where: { userId: candidateId, schoolId },
@@ -46,6 +37,12 @@ export class EnrollmentHelperService {
   async finalizeEnrollment(requestId: string) {
     const request = await this.getEnrollmentRequestOrThrow(requestId);
 
+    if (request.status === EnrollmentStatus.Approved) {
+      throw new ConflictException(
+        'Enrollment request is already approved and processed.',
+      );
+    }
+
     await this.prisma.enrollmentRequest.update({
       where: { id: requestId },
       data: { status: EnrollmentStatus.Approved },
@@ -57,5 +54,23 @@ export class EnrollmentHelperService {
     });
 
     return { message: 'Enrollment approved and processed.' };
+  }
+
+  async updateStatusIfNeeded(
+    id: string,
+    newStatus: EnrollmentStatus,
+  ): Promise<{ message: string }> {
+    const enrollment = await this.getEnrollmentRequestOrThrow(id);
+
+    if (enrollment.status === newStatus) {
+      return { message: `Enrollment already has status '${newStatus}'.` };
+    }
+
+    await this.prisma.enrollmentRequest.update({
+      where: { id },
+      data: { status: newStatus },
+    });
+
+    return { message: `Enrollment status updated to '${newStatus}'.` };
   }
 }

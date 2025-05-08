@@ -11,6 +11,7 @@ import { EnrollmentHelperService } from './helpers/enrollment.helper';
 import { EnrollmentRequestEntity } from './entities/enrollement-request.entity';
 import { UserService } from '@/user/user.service';
 import { SchoolService } from '@/school/school.service';
+import { UpdateRequestDto } from './dto/update-request.dto';
 
 @Injectable()
 export class EnrollmentService {
@@ -111,52 +112,20 @@ export class EnrollmentService {
     return EnrollmentRequestEntity.fromPrisma(enrollmentRequest);
   }
 
-  async updateEnrollmentStatus(id: string, newStatus: EnrollmentStatus) {
-    const enrollment = await this.prisma.enrollmentRequest.findUnique({
-      where: { id },
-    });
-    if (!enrollment) throw new NotFoundException('Enrollment not found');
+  async updateEnrollmentStatus(body: UpdateRequestDto) {
+    const { id, status: newStatus } = body;
 
     switch (newStatus) {
-      case EnrollmentStatus.WaitingForPayment:
-        return this.approveEnrollmentRequest(id);
-
-      case EnrollmentStatus.Denied:
-        return this.denyEnrollmentRequest(id);
-
       case EnrollmentStatus.Approved:
         return this.enrollmentHelper.finalizeEnrollment(id);
+
+      case EnrollmentStatus.Denied:
+      case EnrollmentStatus.WaitingForPayment:
+        return this.enrollmentHelper.updateStatusIfNeeded(id, newStatus);
 
       default:
         throw new BadRequestException('Invalid status');
     }
-  }
-
-  private async approveEnrollmentRequest(id: string) {
-    if (!id) {
-      throw new BadRequestException('Request ID is required.');
-    }
-
-    const request = await this.enrollmentHelper.getEnrollmentRequestOrThrow(id);
-
-    if (request.status !== EnrollmentStatus.Pending) {
-      throw new BadRequestException('Enrollment is not in Pending status.');
-    }
-
-    return this.enrollmentHelper.markAsWaitingForPayment(id);
-  }
-
-  private async denyEnrollmentRequest(id: string) {
-    await this.enrollmentHelper.getEnrollmentRequestOrThrow(id);
-
-    await this.prisma.enrollmentRequest.update({
-      where: { id },
-      data: {
-        status: EnrollmentStatus.Denied,
-      },
-    });
-
-    return { message: 'Enrollment request denied.' };
   }
 
   async deleteEnrollmentRequest(id: string) {

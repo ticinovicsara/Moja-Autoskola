@@ -11,6 +11,7 @@ import {
 import { EnrollmentService } from './enrollment.service';
 import { RequestEnrollmentDto } from './dto/request-enrollment.dto';
 import { EnrollmentStatus } from '@prisma/client';
+import { UpdateRequestDto } from './dto/update-request.dto';
 
 @Controller('enrollment')
 export class EnrollmentController {
@@ -36,12 +37,9 @@ export class EnrollmentController {
     return this.enrollmentService.requestEnrollment(body);
   }
 
-  @Patch(':id/status')
-  async updateEnrollmentStatus(
-    @Param('id') id: string,
-    @Query('newStatus') newStatus: EnrollmentStatus,
-  ) {
-    return this.enrollmentService.updateEnrollmentStatus(id, newStatus);
+  @Patch()
+  async updateEnrollmentStatus(@Body() body: UpdateRequestDto) {
+    return this.enrollmentService.updateEnrollmentStatus(body);
   }
 
   @Delete(':id')
