@@ -36,9 +36,7 @@ export class School {
     this.imageUrl = imageUrl;
   }
 
-  static fromPrisma(prismaSchool: PrismaSchool | null) {
-    if (prismaSchool === null) return null;
-
+  static fromPrisma(prismaSchool: PrismaSchool) {
     return new School(
       prismaSchool.id,
       prismaSchool.name,

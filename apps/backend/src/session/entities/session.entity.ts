@@ -31,9 +31,7 @@ export class Session {
     this.endTime = endTime;
   }
 
-  static fromPrisma(prismaSession: PrismaSession | null) {
-    if (prismaSession === null) return null;
-
+  static fromPrisma(prismaSession: PrismaSession) {
     return new Session(
       prismaSession.id,
       prismaSession.schoolId,

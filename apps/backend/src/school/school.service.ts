@@ -26,6 +26,18 @@ export class SchoolService {
     return School.fromPrisma(newSchool);
   }
 
+  async addCandidateToSchool(candidateId: string, schoolId: string) {
+    const alreadyInSchool = await this.prisma.schoolUser.findFirst({
+      where: { userId: candidateId, schoolId },
+    });
+
+    if (!alreadyInSchool) {
+      await this.prisma.schoolUser.create({
+        data: { userId: candidateId, schoolId },
+      });
+    }
+  }
+
   async getAll() {
     const schools = await this.prisma.school.findMany();
     return schools.map((s) => School.fromPrisma(s));
