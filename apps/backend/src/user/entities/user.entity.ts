@@ -1,27 +1,11 @@
 import { User as PrismaUser, UserRole } from '@prisma/client';
-import { IsEmail, IsEnum, IsNotEmpty, IsString, IsUUID } from 'class-validator';
 
 export class User {
-  @IsUUID()
   id: string;
-
-  @IsString()
-  @IsNotEmpty()
   firstName: string;
-
-  @IsString()
-  @IsNotEmpty()
   lastName: string;
-
-  @IsEmail()
-  @IsNotEmpty()
   email: string;
-
-  @IsString()
-  @IsNotEmpty()
   password: string;
-
-  @IsEnum(UserRole)
   role: UserRole;
 
   constructor(
@@ -40,9 +24,7 @@ export class User {
     this.role = role;
   }
 
-  static fromPrisma(prismaUser: PrismaUser | null) {
-    if (prismaUser === null) return null;
-
+  static fromPrisma(prismaUser: PrismaUser) {
     return new User(
       prismaUser.id,
       prismaUser.firstName,
