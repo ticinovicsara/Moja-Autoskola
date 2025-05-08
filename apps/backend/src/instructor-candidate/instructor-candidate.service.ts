@@ -25,20 +25,7 @@ export class InstructorCandidateService {
   }
 
   async assignInstructorToCandidate(body: AssignInstructorDto) {
-    const { requestId, candidateId, instructorId } = body;
-
-    const request = await this.prisma.enrollmentRequest.findFirst({
-      where: { id: requestId },
-    });
-    if (!request) {
-      throw new NotFoundException('Enrollment request not found.');
-    }
-
-    if (request.status !== EnrollmentStatus.Approved) {
-      throw new ConflictException(
-        'Candidate must be approved before assigning an instructor.',
-      );
-    }
+    const { candidateId, instructorId } = body;
 
     const candidate = await this.prisma.user.findUnique({
       where: { id: candidateId },
