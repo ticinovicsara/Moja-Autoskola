@@ -12,7 +12,6 @@ import {
 
 export class UserResponseDto {
   @IsUUID()
-  @IsNotEmpty()
   id: string;
 
   @IsString()
@@ -27,10 +26,6 @@ export class UserResponseDto {
   @IsNotEmpty()
   email: string;
 
-  @IsNotEmpty()
-  @IsString()
-  password: string;
-
   @IsDate()
   @Type(() => Date)
   dateOfBirth: Date;
@@ -43,21 +38,18 @@ export class UserResponseDto {
   role: UserRole;
 
   constructor(
-    id: string,
     firstName: string,
     lastName: string,
     email: string,
-    password: string,
     dateOfBirth: Date,
     oib: string,
     role: UserRole,
   ) {
-    this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
-    this.password = password;
-    (this.dateOfBirth = dateOfBirth), (this.oib = oib);
+    this.dateOfBirth = dateOfBirth;
+    this.oib = oib;
     this.role = role;
   }
 
@@ -65,11 +57,9 @@ export class UserResponseDto {
     if (prismaUser === null) return null;
 
     return new UserResponseDto(
-      prismaUser.id,
       prismaUser.firstName,
       prismaUser.lastName,
       prismaUser.email,
-      prismaUser.password,
       prismaUser.dateOfBirth,
       prismaUser.oib,
       prismaUser.role,

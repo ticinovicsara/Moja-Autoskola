@@ -5,7 +5,9 @@ import {
   IsEmail,
   IsEnum,
   IsNotEmpty,
+  IsOptional,
   IsString,
+  Length,
   Matches,
   MinLength,
 } from 'class-validator';
@@ -36,10 +38,11 @@ export class CreateUserDto {
   @Type(() => Date)
   dateOfBirth: Date;
 
-  @MinLength(11)
+  @Length(11, 11)
   @IsString()
   oib: string;
 
+  @IsOptional()
   @IsEnum(UserRole)
-  role: UserRole;
+  role?: UserRole;
 }
