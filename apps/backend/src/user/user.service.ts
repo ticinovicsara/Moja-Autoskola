@@ -8,14 +8,19 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from '@/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { UserResponseDto } from './dto/user-response.dto';
-import { UserRole } from '@prisma/client';
+import { CandidateProgressDto } from './dto/candidate-progress.dto';
+import { SessionFormat, UserRole } from '@prisma/client';
+import { Session } from '../session/entities/session.entity';
+import { TestResult } from '../test-result/entities/test-result.entity';
 
 @Injectable()
 export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createUserDto: CreateUserDto) {
-    const user = await this.getByEmail(createUserDto.email);
+    const user = await this.prisma.user.findUnique({
+      where: { email: createUserDto.email },
+    });
     if (user) throw new ConflictException('The email already exists');
 
     const newUser = await this.prisma.user.create({
@@ -48,7 +53,37 @@ export class UserService {
     const user = await this.prisma.user.findUnique({
       where: { email },
     });
+    if (!user) throw new NotFoundException("The user doesn't exist");
     return UserResponseDto.fromPrisma(user);
+  }
+
+  async getCandidateProgress(id: string) {
+    const user = await this.getById(id);
+    if (!user) throw new NotFoundException("The user doesn't exist");
+    if (user.role !== UserRole.Candidate)
+      throw new ConflictException('The user is not a candidate');
+
+    const prismaTestResults = await this.prisma.testResult.findMany({
+      where: { candidateId: id, passed: true },
+    });
+
+    const prismaPassedLessons = await this.prisma.sessionCandidate.findMany({
+      where: {
+        candidateId: id,
+        session: { format: SessionFormat.Lesson, endTime: { lt: new Date() } },
+      },
+      include: { session: true },
+    });
+
+    const testResults = prismaTestResults
+      .map((result) => TestResult.fromPrisma(result))
+      .filter((result): result is TestResult => result !== null);
+
+    const passedLessons = prismaPassedLessons
+      .map((lesson) => Session.fromPrisma(lesson.session))
+      .filter((session): session is Session => session !== null);
+
+    return new CandidateProgressDto(testResults, passedLessons);
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {

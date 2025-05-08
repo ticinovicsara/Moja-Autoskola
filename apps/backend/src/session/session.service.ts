@@ -7,10 +7,16 @@ import { CreateSessionDto } from './dto/create-session.dto';
 import { UpdateSessionDto } from './dto/update-session.dto';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Session } from './entities/session.entity';
+import { UserRole } from '@prisma/client';
+import { User } from '@/user/entities/user.entity';
+import { UserService } from '@/user/user.service';
 
 @Injectable()
 export class SessionService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly userService: UserService,
+  ) {}
 
   async create(createSessionDto: CreateSessionDto) {
     if (createSessionDto.startTime >= createSessionDto.endTime)
@@ -39,6 +45,31 @@ export class SessionService {
     const session = await this.prisma.session.findUnique({ where: { id } });
     if (!session) throw new BadRequestException("The session doesn't exist");
     return Session.fromPrisma(session);
+  }
+
+  async getCandidateSessions(id: string) {
+    const user = await this.userService.getById(id);
+    if (!user) throw new NotFoundException("The user doesn't exist");
+    if (user.role !== UserRole.Candidate)
+      throw new BadRequestException('The user is not a candidate');
+
+    const sessionCandidates = await this.prisma.sessionCandidate.findMany({
+      where: { candidateId: id },
+      include: { session: true },
+    });
+    return sessionCandidates.map((c) => Session.fromPrisma(c.session));
+  }
+
+  async getInstructorSessions(id: string) {
+    const user = await this.userService.getById(id);
+    if (!user) throw new NotFoundException("The user doesn't exist");
+    if (user.role !== UserRole.Instructor)
+      throw new BadRequestException('The user is not a instructor');
+
+    const sessions = await this.prisma.session.findMany({
+      where: { instructorId: id },
+    });
+    return sessions.map((s) => Session.fromPrisma(s));
   }
 
   async update(id: string, updateSessionDto: UpdateSessionDto) {

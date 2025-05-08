@@ -30,6 +30,11 @@ export class UserController {
     return this.userService.getByEmail(email);
   }
 
+  @Get('progress/:id')
+  findCandidateProgress(@Param('id') id: string) {
+    return this.userService.getCandidateProgress(id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(id, updateUserDto);

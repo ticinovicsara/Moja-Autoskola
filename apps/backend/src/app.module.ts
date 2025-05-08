@@ -5,8 +5,10 @@ import { PrismaService } from './prisma/prisma.service';
 import { UserModule } from './user/user.module';
 import { SessionModule } from './session/session.module';
 import { SchoolModule } from './school/school.module';
+import { TestResultModule } from './test-result/test-result.module';
 import { EnrollmentModule } from './enrollment/enrollment.module';
 import { PrismaModule } from './prisma/prisma.module';
+import test from 'node:test';
 
 @Module({
   imports: [
@@ -15,6 +17,7 @@ import { PrismaModule } from './prisma/prisma.module';
     UserModule,
     SessionModule,
     SchoolModule,
+    TestResultModule,
     EnrollmentModule,
   ],
   controllers: [AppController],

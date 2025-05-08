@@ -24,9 +24,7 @@ export class User {
     this.role = role;
   }
 
-  static fromPrisma(prismaUser: PrismaUser | null) {
-    if (prismaUser === null) return null;
-
+  static fromPrisma(prismaUser: PrismaUser) {
     return new User(
       prismaUser.id,
       prismaUser.firstName,

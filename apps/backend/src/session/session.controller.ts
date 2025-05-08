@@ -30,6 +30,16 @@ export class SessionController {
     return this.sessionService.getById(id);
   }
 
+  @Get('candidate/:id')
+  findCandidateSessions(@Param('id') id: string) {
+    return this.sessionService.getCandidateSessions(id);
+  }
+
+  @Get('instructor/:id')
+  findInstructorSessions(@Param('id') id: string) {
+    return this.sessionService.getInstructorSessions(id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateSessionDto: UpdateSessionDto) {
     return this.sessionService.update(id, updateSessionDto);

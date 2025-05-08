@@ -29,9 +29,7 @@ export class UserResponseDto {
     this.role = role;
   }
 
-  static fromPrisma(prismaUser: User | null) {
-    if (prismaUser === null) return null;
-
+  static fromPrisma(prismaUser: User) {
     return new UserResponseDto(
       prismaUser.firstName,
       prismaUser.lastName,
