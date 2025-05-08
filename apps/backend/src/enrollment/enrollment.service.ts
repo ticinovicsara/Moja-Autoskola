@@ -5,7 +5,7 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { PrismaService } from '@/prisma/prisma.service';
-import { EnrollmentStatus } from '@prisma/client';
+import { EnrollmentStatus, UserRole } from '@prisma/client';
 import { RequestEnrollmentDto } from './dto/request-enrollment.dto';
 import { EnrollmentHelperService } from './helpers/enrollment.helper';
 import { EnrollmentRequestEntity } from './entities/enrollement-request.entity';
@@ -39,7 +39,7 @@ export class EnrollmentService {
   }
 
   async getCandidateEnrollmentRequests(candidateId: string) {
-    await this.userService.getUserOrThrow(candidateId);
+    await this.userService.getById(candidateId);
 
     const requests = await this.prisma.enrollmentRequest.findMany({
       where: { candidateId },
@@ -61,7 +61,7 @@ export class EnrollmentService {
   }
 
   async getSchoolEnrollmentRequests(schoolId: string) {
-    await this.schoolService.getSchoolOrThrow(schoolId);
+    await this.schoolService.getById(schoolId);
 
     const requests = await this.prisma.enrollmentRequest.findMany({
       where: { schoolId },
@@ -85,8 +85,8 @@ export class EnrollmentService {
   async requestEnrollment(body: RequestEnrollmentDto) {
     const { candidateId, schoolId } = body;
 
-    await this.userService.getUserOrThrow(candidateId);
-    await this.schoolService.getSchoolOrThrow(schoolId);
+    await this.userService.getById(candidateId);
+    await this.schoolService.getById(schoolId);
 
     const existing = await this.prisma.enrollmentRequest.findUnique({
       where: {
@@ -114,18 +114,22 @@ export class EnrollmentService {
 
   async updateEnrollmentStatus(body: UpdateRequestDto) {
     const { id, status: newStatus } = body;
+    const request = await this.enrollmentHelper.getEnrollmentRequestOrThrow(id);
 
-    switch (newStatus) {
-      case EnrollmentStatus.Approved:
-        return this.enrollmentHelper.finalizeEnrollment(id);
-
-      case EnrollmentStatus.Denied:
-      case EnrollmentStatus.WaitingForPayment:
-        return this.enrollmentHelper.updateStatusIfNeeded(id, newStatus);
-
-      default:
-        throw new BadRequestException('Invalid status');
+    if (newStatus === EnrollmentStatus.Approved) {
+      await this.schoolService.addCandidateToSchool(
+        request.candidateId,
+        request.schoolId,
+      );
+      await this.userService.update(request.candidateId, {
+        role: UserRole.Candidate,
+      });
     }
+
+    await this.prisma.enrollmentRequest.update({
+      where: { id },
+      data: { status: newStatus },
+    });
   }
 
   async deleteEnrollmentRequest(id: string) {

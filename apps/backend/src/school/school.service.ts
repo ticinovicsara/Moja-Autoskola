@@ -26,6 +26,18 @@ export class SchoolService {
     return School.fromPrisma(newSchool);
   }
 
+  async addCandidateToSchool(candidateId: string, schoolId: string) {
+    const alreadyInSchool = await this.prisma.schoolUser.findFirst({
+      where: { userId: candidateId, schoolId },
+    });
+
+    if (!alreadyInSchool) {
+      await this.prisma.schoolUser.create({
+        data: { userId: candidateId, schoolId },
+      });
+    }
+  }
+
   async getAll() {
     const schools = await this.prisma.school.findMany();
     return schools.map((s) => School.fromPrisma(s));
@@ -63,11 +75,5 @@ export class SchoolService {
     if (!school) throw new NotFoundException("The school doesn't exist");
     const deletedSchool = await this.prisma.school.delete({ where: { id } });
     return School.fromPrisma(deletedSchool);
-  }
-
-  async getSchoolOrThrow(id: string) {
-    const school = await this.prisma.school.findUnique({ where: { id } });
-    if (!school) throw new NotFoundException('School not found.');
-    return school;
   }
 }

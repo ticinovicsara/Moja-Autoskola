@@ -117,21 +117,4 @@ export class UserService {
     const deletedUser = await this.prisma.user.delete({ where: { id } });
     return UserResponseDto.fromPrisma(deletedUser);
   }
-
-  async getUserOrThrow(id: string) {
-    const user = await this.prisma.user.findUnique({ where: { id } });
-
-    if (!user) {
-      throw new NotFoundException('User not found.');
-    }
-
-    switch (user.role) {
-      case UserRole.Candidate:
-        return user;
-      case UserRole.Instructor:
-        return user;
-      default:
-        throw new NotFoundException(`${user.role} not found.`);
-    }
-  }
 }
