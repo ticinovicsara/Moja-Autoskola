@@ -1,6 +1,6 @@
 const routes = {
     HOME: "/",
-    DASHBOARD: "/dashboard",
+    CANDIDATE_DASHBOARD: "/candidate-dashboard",
 };
 
 export { routes };

@@ -1,0 +1,15 @@
+.navbar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 20px;
+    padding: 1rem;
+    height: 102px;
+    border: var(--font-color) 1px solid;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.profile {
+    margin-left: auto;
+}

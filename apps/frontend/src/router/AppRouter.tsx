@@ -1,6 +1,6 @@
 import { routes } from "@/constants";
 import { CandidateLayout, PublicLayout } from "@/layouts";
-import { HomePage, DashboardPage } from "@/pages";
+import { HomePage, CandidateDashboardPage } from "@/pages";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const AppRouter = () => {
@@ -13,8 +13,8 @@ const AppRouter = () => {
 
                 <Route element={<CandidateLayout />}>
                     <Route
-                        path={routes.DASHBOARD}
-                        element={<DashboardPage />}
+                        path={routes.CANDIDATE_DASHBOARD}
+                        element={<CandidateDashboardPage />}
                     />
                 </Route>
             </Routes>
