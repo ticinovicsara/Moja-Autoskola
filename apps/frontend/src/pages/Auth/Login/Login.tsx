@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@/constants";
 import { loginService } from "@/services/authService";
+import { isValidEmail } from "@/utils/validateEmail";
 
 export const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -17,7 +18,7 @@ export const Login = () => {
   const { login } = useAuth();
 
   const validateInfo = () => {
-    if (email.length < 5) {
+    if (!isValidEmail(email)) {
       setError("Neispravan format email-a");
       return false;
     }
