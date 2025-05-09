@@ -6,17 +6,17 @@ import { AddInstructorSlotDto } from './dto/add-instructor-slot.dto';
 export class InstructorController {
   constructor(private readonly instructorService: InstructorService) {}
 
-  @Get(':id/candidates')
+  @Get('candidates/:id')
   async getCandidates(@Param('id') instructorId: string) {
     return this.instructorService.getCandidatesForInstructor(instructorId);
   }
 
-  @Get('slots/:id')
+  @Get('slot/:id')
   async getInstructorSlots(@Param('id') instructorId: string) {
     return this.instructorService.getInstructorSlots(instructorId);
   }
 
-  @Post('add-slot')
+  @Post('slot')
   async addSlot(@Body() body: AddInstructorSlotDto) {
     return this.instructorService.addInstructorSlot(body);
   }

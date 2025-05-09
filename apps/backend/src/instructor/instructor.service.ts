@@ -1,19 +1,18 @@
 import { PrismaService } from '@/prisma/prisma.service';
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
-import { UserRole } from '@prisma/client';
+import { Injectable } from '@nestjs/common';
 import { AddInstructorSlotDto } from './dto/add-instructor-slot.dto';
-import { InstructorResponseDto } from './dto/instructor-response';
+import { UserResponseDto } from '@/user/dto/user-response.dto';
+import { UserService } from '@/user/user.service';
 
 @Injectable()
 export class InstructorService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly userService: UserService,
+  ) {}
 
   async getCandidatesForInstructor(instructorId: string) {
-    await this.getById(instructorId);
+    await this.userService.getById(instructorId);
 
     const pairs = await this.prisma.candidateInstructor.findMany({
       where: { instructorId },
@@ -22,11 +21,11 @@ export class InstructorService {
       },
     });
 
-    return pairs as InstructorResponseDto;
+    return pairs.map((p) => UserResponseDto.fromPrisma(p.candidate));
   }
 
   async getInstructorSlots(instructorId: string) {
-    await this.getById(instructorId);
+    await this.userService.getById(instructorId);
 
     return this.prisma.instructorSlot.findMany({
       where: { instructorId },
@@ -35,7 +34,7 @@ export class InstructorService {
 
   async addInstructorSlot(body: AddInstructorSlotDto) {
     const { instructorId, day, startTime, endTime } = body;
-    await this.getById(instructorId);
+    await this.userService.getById(instructorId);
 
     return this.prisma.instructorSlot.create({
       data: {
@@ -45,21 +44,5 @@ export class InstructorService {
         endTime: endTime,
       },
     });
-  }
-
-  private async getById(instructorId: string) {
-    const instructor = await this.prisma.user.findUnique({
-      where: { id: instructorId },
-    });
-
-    if (!instructor) {
-      throw new NotFoundException('Instructor not found.');
-    }
-
-    if (instructor.role !== UserRole.Instructor) {
-      throw new BadRequestException('User does not have the instructor role.');
-    }
-
-    return instructor;
   }
 }
