@@ -4,19 +4,22 @@ import { AppService } from '@/app.service';
 import { PrismaService } from './prisma/prisma.service';
 import { UserModule } from './user/user.module';
 import { SessionModule } from './session/session.module';
+import { InstructorCandidateModule } from './instructor-candidate/instructor-candidate.module';
 import { SchoolModule } from './school/school.module';
 import { AuthModule } from './auth/auth.module';
+import { TestResultModule } from './test-result/test-result.module';
 import { EnrollmentModule } from './enrollment/enrollment.module';
 import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
-    UserModule,
     PrismaModule,
     UserModule,
     SessionModule,
+    InstructorCandidateModule,
     SchoolModule,
     AuthModule,
+    TestResultModule,
     EnrollmentModule,
   ],
   controllers: [AppController],
