@@ -6,10 +6,14 @@ import {
 import { PrismaService } from '@/prisma/prisma.service';
 import { AssignInstructorDto } from './dto/assign-instructor.dto';
 import { InstructorCandidate } from './entities/instructor-candidate.entity';
+import { UserService } from '@/user/user.service';
 
 @Injectable()
 export class InstructorCandidateService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly userService: UserService,
+  ) {}
 
   async getAllInstructorCandidates() {
     const allInstructorCandidates =
@@ -26,21 +30,9 @@ export class InstructorCandidateService {
   async assignInstructorToCandidate(body: AssignInstructorDto) {
     const { candidateId, instructorId } = body;
 
-    const candidate = await this.prisma.user.findUnique({
-      where: { id: candidateId },
-    });
+    await this.userService.getById(candidateId);
 
-    if (!candidate) {
-      throw new NotFoundException('Candidate not found.');
-    }
-
-    const instructor = await this.prisma.user.findUnique({
-      where: { id: instructorId },
-    });
-
-    if (!instructor) {
-      throw new NotFoundException('Instructor not found.');
-    }
+    await this.userService.getById(instructorId);
 
     const existingRelation = await this.prisma.candidateInstructor.findUnique({
       where: {

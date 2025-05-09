@@ -18,10 +18,11 @@ export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createUserDto: CreateUserDto) {
-    const user = await this.prisma.user.findUnique({
-      where: { email: createUserDto.email },
-    });
-    if (user) throw new ConflictException('The email already exists');
+    const userByEmail = await this.getByEmail(createUserDto.email);
+    if (userByEmail) throw new ConflictException('The email already exists');
+
+    const userByOib = await this.getByOIB(createUserDto.oib);
+    if (userByOib) throw new ConflictException('OIB already exists');
 
     const newUser = await this.prisma.user.create({
       data: {
@@ -29,6 +30,8 @@ export class UserService {
         firstName: createUserDto.firstName,
         lastName: createUserDto.lastName,
         password: await bcrypt.hash(createUserDto.password, 10),
+        dateOfBirth: createUserDto.dateOfBirth,
+        oib: createUserDto.oib,
         role: createUserDto.role,
       },
     });
@@ -57,9 +60,17 @@ export class UserService {
     return UserResponseDto.fromPrisma(user);
   }
 
+  async getByOIB(oib: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { oib },
+    });
+
+    return user;
+  }
+
   async getCandidateProgress(id: string) {
     const user = await this.getById(id);
-    if (!user) throw new NotFoundException("The user doesn't exist");
+
     if (user.role !== UserRole.Candidate)
       throw new ConflictException('The user is not a candidate');
 
@@ -87,8 +98,7 @@ export class UserService {
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
-    const user = await this.getById(id);
-    if (!user) throw new NotFoundException("The user doesn't exist");
+    await this.getById(id);
 
     if (updateUserDto.email) {
       const email = await this.getByEmail(updateUserDto.email);
@@ -112,8 +122,8 @@ export class UserService {
   }
 
   async remove(id: string) {
-    const user = await this.getById(id);
-    if (!user) throw new NotFoundException("The user doesn't exist");
+    await this.getById(id);
+
     const deletedUser = await this.prisma.user.delete({ where: { id } });
     return UserResponseDto.fromPrisma(deletedUser);
   }

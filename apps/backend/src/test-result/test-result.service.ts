@@ -13,10 +13,7 @@ export class TestResultService {
   ) {}
 
   async create(createTestResultDto: CreateTestResultDto) {
-    const candidate = await this.userService.getById(
-      createTestResultDto.candidateId,
-    );
-    if (!candidate) throw new NotFoundException("The candidate doesn't exist");
+    await this.userService.getById(createTestResultDto.candidateId);
 
     const newTestResult = await this.prisma.testResult.create({
       data: {
@@ -53,15 +50,10 @@ export class TestResultService {
   }
 
   async update(id: string, updateTestResultDto: UpdateTestResultDto) {
-    const testResult = await this.getById(id);
-    if (!testResult) throw new NotFoundException("The user doesn't exist");
+    await this.getById(id);
 
     if (updateTestResultDto.candidateId) {
-      const candidate = await this.userService.getById(
-        updateTestResultDto.candidateId,
-      );
-      if (!candidate)
-        throw new NotFoundException("The candidate doesn't exist");
+      await this.userService.getById(updateTestResultDto.candidateId);
     }
 
     const updatedTestResult = await this.prisma.testResult.update({
@@ -79,9 +71,8 @@ export class TestResultService {
   }
 
   async remove(id: string) {
-    const testResult = await this.getById(id);
-    if (!testResult)
-      throw new NotFoundException("The test result doesn't exist");
+    await this.getById(id);
+
     const deletedTestResult = await this.prisma.testResult.delete({
       where: { id },
     });
