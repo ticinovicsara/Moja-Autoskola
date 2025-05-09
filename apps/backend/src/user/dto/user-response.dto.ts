@@ -38,6 +38,7 @@ export class UserResponseDto {
   role: UserRole;
 
   constructor(
+    id: string,
     firstName: string,
     lastName: string,
     email: string,
@@ -45,6 +46,7 @@ export class UserResponseDto {
     oib: string,
     role: UserRole,
   ) {
+    this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
@@ -55,6 +57,7 @@ export class UserResponseDto {
 
   static fromPrisma(prismaUser: User) {
     return new UserResponseDto(
+      prismaUser.id,
       prismaUser.firstName,
       prismaUser.lastName,
       prismaUser.email,
