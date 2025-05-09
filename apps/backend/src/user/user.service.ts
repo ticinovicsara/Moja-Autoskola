@@ -21,8 +21,10 @@ export class UserService {
     const userByEmail = await this.getByEmail(createUserDto.email);
     if (userByEmail) throw new ConflictException('The email already exists');
 
-    const userByOib = await this.getByOIB(createUserDto.oib);
-    if (userByOib) throw new ConflictException('OIB already exists');
+    if (createUserDto.oib) {
+      const userByOib = await this.getByOIB(createUserDto.oib);
+      if (userByOib) throw new ConflictException('OIB already exists');
+    }
 
     const newUser = await this.prisma.user.create({
       data: {
@@ -64,7 +66,7 @@ export class UserService {
     const user = await this.prisma.user.findUnique({
       where: { oib },
     });
-
+    if (!user) throw new NotFoundException("The user doesn't exist");
     return user;
   }
 

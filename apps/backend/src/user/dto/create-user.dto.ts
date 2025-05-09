@@ -37,10 +37,10 @@ export class CreateUserDto {
   @IsDate()
   @Type(() => Date)
   dateOfBirth: Date;
-
   @Length(11, 11)
   @IsString()
-  oib: string;
+  @IsOptional()
+  oib?: string;
 
   @IsOptional()
   @IsEnum(UserRole)
