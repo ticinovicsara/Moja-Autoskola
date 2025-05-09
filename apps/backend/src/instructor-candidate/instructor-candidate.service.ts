@@ -4,14 +4,13 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from '@/prisma/prisma.service';
-import { AssignInstructorDto } from './dto/assign-instructor.dto';
-import { InstructorCandidate } from './entities/instructor-candidate.entity';
+import { AssignInstructorCandidateDto } from './dto/assign-instructor.dto';
 
 @Injectable()
 export class InstructorCandidateService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async assignInstructorToCandidate(body: AssignInstructorDto) {
+  async assignInstructorToCandidate(body: AssignInstructorCandidateDto) {
     const { candidateId, instructorId } = body;
 
     const candidate = await this.prisma.user.findUnique({
