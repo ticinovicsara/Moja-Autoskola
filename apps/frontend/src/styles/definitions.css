@@ -13,7 +13,32 @@ body {
 /* ovo je za svaki layout ovako za mobile verziju  */
 .container {
   width: 100%;
-  margin-inline: 24px;
+  padding-inline: 24px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Chillax", sans-serif;
+}
+
+.authBtn {
+  margin-top: 32px;
+  font-family: "Chillax", sans-serif;
+  text-transform: uppercase;
+  font-weight: 600;
+  width: 100%;
+  border-radius: 20px;
+  font-size: 24px;
+  background-color: var(--green);
+  padding: 9px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.18);
 }
 
 @font-face {
