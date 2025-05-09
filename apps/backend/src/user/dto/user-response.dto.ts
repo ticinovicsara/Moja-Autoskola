@@ -5,7 +5,6 @@ import {
   IsEmail,
   IsEnum,
   IsNotEmpty,
-  IsOptional,
   IsString,
   IsUUID,
   Length,
@@ -31,10 +30,9 @@ export class UserResponseDto {
   @Type(() => Date)
   dateOfBirth: Date;
 
-  @IsOptional()
   @IsString()
   @Length(11, 11)
-  oib: string | null;
+  oib: string;
 
   @IsEnum(UserRole)
   role: UserRole;
@@ -45,7 +43,7 @@ export class UserResponseDto {
     lastName: string,
     email: string,
     dateOfBirth: Date,
-    oib: string | null,
+    oib: string,
     role: UserRole,
   ) {
     this.id = id;
