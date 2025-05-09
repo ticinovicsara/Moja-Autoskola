@@ -1,0 +1,7 @@
+.input {
+  border: 1px solid var(--asphalt-border);
+  color: var(--text-color);
+  border-radius: 20px;
+  padding-inline: 20px;
+  padding-block: 17px;
+}

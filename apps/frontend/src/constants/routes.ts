@@ -1,5 +1,7 @@
 const routes = {
-    HOME: "/",
+  HOME: "/",
+  LOGIN: "/login",
+  REGISTER: "/register",
 };
 
 export { routes };
