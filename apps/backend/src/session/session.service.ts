@@ -49,7 +49,6 @@ export class SessionService {
 
   async getCandidateSessions(id: string) {
     const user = await this.userService.getById(id);
-    if (!user) throw new NotFoundException("The user doesn't exist");
     if (user.role !== UserRole.Candidate)
       throw new BadRequestException('The user is not a candidate');
 
@@ -62,7 +61,7 @@ export class SessionService {
 
   async getInstructorSessions(id: string) {
     const user = await this.userService.getById(id);
-    if (!user) throw new NotFoundException("The user doesn't exist");
+
     if (user.role !== UserRole.Instructor)
       throw new BadRequestException('The user is not a instructor');
 
@@ -73,8 +72,7 @@ export class SessionService {
   }
 
   async update(id: string, updateSessionDto: UpdateSessionDto) {
-    const session = await this.getById(id);
-    if (!session) throw new NotFoundException("The session doesn't exist");
+    await this.getById(id);
 
     const updatedSession = await this.prisma.session.update({
       where: { id },
@@ -92,8 +90,8 @@ export class SessionService {
   }
 
   async remove(id: string) {
-    const session = await this.getById(id);
-    if (!session) throw new NotFoundException("The session doesn't exist");
+    await this.getById(id);
+
     const deletedSession = await this.prisma.session.delete({ where: { id } });
     return Session.fromPrisma(deletedSession);
   }

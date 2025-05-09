@@ -50,8 +50,7 @@ export class SchoolService {
   }
 
   async update(id: string, updateSchoolDto: UpdateSchoolDto) {
-    const school = await this.getById(id);
-    if (!school) throw new NotFoundException("The school doesn't exist");
+    await this.getById(id);
 
     const updatedSchool = await this.prisma.school.update({
       where: { id },
@@ -71,8 +70,8 @@ export class SchoolService {
   }
 
   async remove(id: string) {
-    const school = await this.getById(id);
-    if (!school) throw new NotFoundException("The school doesn't exist");
+    await this.getById(id);
+
     const deletedSchool = await this.prisma.school.delete({ where: { id } });
     return School.fromPrisma(deletedSchool);
   }

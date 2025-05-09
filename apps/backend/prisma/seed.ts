@@ -22,7 +22,9 @@ async function main() {
       lastName: 'System',
       email: 'admin@admin.hr',
       password: await hashPassword('admin123'),
+      dateOfBirth: new Date('2000-02-02'),
       role: UserRole.Admin,
+      oib: '12345543219',
     },
   });
 
@@ -48,6 +50,8 @@ async function main() {
       email: 'admin@autoskola.hr',
       password: await hashPassword('adminskole123'),
       role: UserRole.SchoolAdmin,
+      dateOfBirth: new Date('1998-07-21'),
+      oib: '12345543210',
       schoolUser: {
         create: {
           schoolId: school.id,
@@ -63,6 +67,8 @@ async function main() {
       email: 'ivan@autoskola.hr',
       password: await hashPassword('ivan123'),
       role: UserRole.Instructor,
+      dateOfBirth: new Date('2003-10-20'),
+      oib: '12445543219',
       schoolUser: {
         create: {
           schoolId: school.id,
@@ -78,6 +84,8 @@ async function main() {
       email: 'marko@autoskola.hr',
       password: await hashPassword('marko123'),
       role: UserRole.Instructor,
+      dateOfBirth: new Date('2007-02-11'),
+      oib: '92445543219',
       schoolUser: {
         create: {
           schoolId: school.id,
@@ -93,7 +101,8 @@ async function main() {
       email: 'ana@kandidat.hr',
       password: await hashPassword('ana123'),
       role: UserRole.Candidate,
-      oib: '12345678901',
+      dateOfBirth: new Date('2004-02-15'),
+      oib: '88445543219',
       schoolUser: {
         create: {
           schoolId: school.id,
@@ -109,7 +118,8 @@ async function main() {
       email: 'luka@kandidat.hr',
       password: await hashPassword('luka123'),
       role: UserRole.Candidate,
-      oib: '12345678911',
+      dateOfBirth: new Date('2006-07-25'),
+      oib: '12445543201',
       schoolUser: {
         create: {
           schoolId: school.id,
@@ -125,7 +135,8 @@ async function main() {
       email: 'iva@kandidat.hr',
       password: await hashPassword('iva123'),
       role: UserRole.Candidate,
-      oib: '12345678912',
+      dateOfBirth: new Date('1988-07-21'),
+      oib: '12445543989',
       schoolUser: {
         create: {
           schoolId: school.id,

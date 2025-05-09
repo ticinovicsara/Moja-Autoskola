@@ -1,7 +1,19 @@
 import { User, UserRole } from '@prisma/client';
-import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import {
+  IsDate,
+  IsEmail,
+  IsEnum,
+  IsNotEmpty,
+  IsString,
+  IsUUID,
+  Length,
+} from 'class-validator';
 
 export class UserResponseDto {
+  @IsUUID()
+  id: string;
+
   @IsString()
   @IsNotEmpty()
   firstName: string;
@@ -14,26 +26,43 @@ export class UserResponseDto {
   @IsNotEmpty()
   email: string;
 
+  @IsDate()
+  @Type(() => Date)
+  dateOfBirth: Date;
+
+  @IsString()
+  @Length(11, 11)
+  oib: string;
+
   @IsEnum(UserRole)
   role: UserRole;
 
   constructor(
+    id: string,
     firstName: string,
     lastName: string,
     email: string,
+    dateOfBirth: Date,
+    oib: string,
     role: UserRole,
   ) {
+    this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
+    this.dateOfBirth = dateOfBirth;
+    this.oib = oib;
     this.role = role;
   }
 
   static fromPrisma(prismaUser: User) {
     return new UserResponseDto(
+      prismaUser.id,
       prismaUser.firstName,
       prismaUser.lastName,
       prismaUser.email,
+      prismaUser.dateOfBirth,
+      prismaUser.oib,
       prismaUser.role,
     );
   }

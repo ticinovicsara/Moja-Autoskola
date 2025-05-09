@@ -6,10 +6,13 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { AdminGuard } from '@/auth/guards/admin.guard';
+import { SchoolAdminGuard } from '@/auth/guards/schoolAdmin.guard';
 
 @Controller('user')
 export class UserController {
