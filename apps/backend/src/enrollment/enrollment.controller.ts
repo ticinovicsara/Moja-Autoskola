@@ -7,53 +7,49 @@ import {
   Patch,
   Post,
   Query,
-  UseGuards,
 } from '@nestjs/common';
 import { EnrollmentService } from './enrollment.service';
 import { RequestEnrollmentDto } from './dto/request-enrollment.dto';
-import { EnrollmentStatus } from '@prisma/client';
+import { EnrollmentStatus, UserRole } from '@prisma/client';
 import { UpdateRequestDto } from './dto/update-request.dto';
-import { AdminGuard } from '@/auth/guards/admin.guard';
-import { CandidateGuard } from '@/auth/guards/candidate.guard';
-import { SchoolAdminGuard } from '@/auth/guards/schoolAdmin.guard';
-import { GuestGuard } from '@/auth/guards/guest.guard';
+import { Auth } from '@/auth/guards/auth-roles.decorator';
 
 @Controller('enrollment')
 export class EnrollmentController {
   constructor(private readonly enrollmentService: EnrollmentService) {}
 
+  @Auth(UserRole.Admin)
   @Get()
-  @UseGuards(AdminGuard)
   async getEnrollmentRequests(@Query('status') status?: EnrollmentStatus) {
     return this.enrollmentService.getEnrollmentRequests(status);
   }
 
+  @Auth(UserRole.Candidate)
   @Get('candidate/:id')
-  @UseGuards(CandidateGuard)
   async getCandidateEnrollmentRequests(@Param('id') candidateId: string) {
     return this.enrollmentService.getCandidateEnrollmentRequests(candidateId);
   }
 
+  @Auth(UserRole.SchoolAdmin)
   @Get('school/:id')
-  @UseGuards(SchoolAdminGuard)
   async getSchoolEnrollmentRequests(@Param('id') schoolId: string) {
     return this.enrollmentService.getSchoolEnrollmentRequests(schoolId);
   }
 
+  @Auth(UserRole.SchoolAdmin)
   @Post()
-  @UseGuards(GuestGuard)
   async requestEnrollment(@Body() body: RequestEnrollmentDto) {
     return this.enrollmentService.requestEnrollment(body);
   }
 
+  @Auth(UserRole.SchoolAdmin)
   @Patch()
-  @UseGuards(SchoolAdminGuard)
   async updateEnrollmentStatus(@Body() body: UpdateRequestDto) {
     return this.enrollmentService.updateEnrollmentStatus(body);
   }
 
+  @Auth(UserRole.SchoolAdmin)
   @Delete(':id')
-  @UseGuards(SchoolAdminGuard)
   async deleteEnrollmentRequest(@Param('id') id: string) {
     return this.enrollmentService.deleteEnrollmentRequest(id);
   }

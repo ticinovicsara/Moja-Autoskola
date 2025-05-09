@@ -6,44 +6,43 @@ import {
   Patch,
   Param,
   Delete,
-  UseGuards,
 } from '@nestjs/common';
 import { SchoolService } from './school.service';
 import { CreateSchoolDto } from './dto/create-school.dto';
 import { UpdateSchoolDto } from './dto/update-school.dto';
-import { AdminGuard } from '@/auth/guards/admin.guard';
-import { SchoolAdminGuard } from '@/auth/guards/schoolAdmin.guard';
+import { Auth } from '@/auth/guards/auth-roles.decorator';
+import { UserRole } from '@prisma/client';
 
 @Controller('school')
 export class SchoolController {
   constructor(private readonly schoolService: SchoolService) {}
 
+  @Auth(UserRole.Admin)
   @Post()
-  @UseGuards(AdminGuard)
   create(@Body() createSchoolDto: CreateSchoolDto) {
     return this.schoolService.create(createSchoolDto);
   }
 
+  @Auth(UserRole.Admin)
   @Get()
-  @UseGuards(AdminGuard)
   findAll() {
     return this.schoolService.getAll();
   }
 
+  @Auth(UserRole.Admin)
   @Get(':id')
-  @UseGuards(AdminGuard)
   findOne(@Param('id') id: string) {
     return this.schoolService.getById(id);
   }
 
+  @Auth(UserRole.SchoolAdmin)
   @Patch(':id')
-  @UseGuards(SchoolAdminGuard)
   update(@Param('id') id: string, @Body() updateSchoolDto: UpdateSchoolDto) {
     return this.schoolService.update(id, updateSchoolDto);
   }
 
+  @Auth(UserRole.Admin)
   @Delete(':id')
-  @UseGuards(AdminGuard)
   remove(@Param('id') id: string) {
     return this.schoolService.remove(id);
   }

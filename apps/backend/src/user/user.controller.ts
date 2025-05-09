@@ -11,46 +11,45 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { AdminGuard } from '@/auth/guards/admin.guard';
-import { SchoolAdminGuard } from '@/auth/guards/schoolAdmin.guard';
-import { CandidateGuard } from '@/auth/guards/candidate.guard';
+import { Auth } from '@/auth/guards/auth-roles.decorator';
+import { UserRole } from '@prisma/client';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @Auth(UserRole.SchoolAdmin)
   @Post()
-  @UseGuards(SchoolAdminGuard)
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
 
+  @Auth(UserRole.Admin)
   @Get()
-  @UseGuards(AdminGuard)
   findAll() {
     return this.userService.getAll();
   }
 
+  @Auth(UserRole.SchoolAdmin)
   @Get(':email')
-  @UseGuards(SchoolAdminGuard)
   findOne(@Param('email') email: string) {
     return this.userService.getByEmail(email);
   }
 
+  @Auth(UserRole.Candidate)
   @Get('progress/:id')
-  @UseGuards(CandidateGuard)
   findCandidateProgress(@Param('id') id: string) {
     return this.userService.getCandidateProgress(id);
   }
 
+  @Auth(UserRole.Candidate)
   @Patch(':id')
-  @UseGuards(CandidateGuard)
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(id, updateUserDto);
   }
 
+  @Auth(UserRole.SchoolAdmin)
   @Delete(':id')
-  @UseGuards(SchoolAdminGuard)
   remove(@Param('id') id: string) {
     return this.userService.remove(id);
   }
