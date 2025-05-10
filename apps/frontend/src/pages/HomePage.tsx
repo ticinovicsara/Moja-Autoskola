@@ -1,43 +1,18 @@
-import { DashboardHeader } from "@/components/DashboardHeader";
-import { UserRole } from "@/enums/UserRole";
-import { Navbar } from "@/components/NavBar";
-import { SessionCard } from "@/components/SessionCard";
-import { Sidebar } from "@/components/Sidebar";
-import { CandidateListCard } from "@/components/CandidateListCard";
-
-const user = {
-  name: "John Doe",
-  role: UserRole.Admin,
-};
+import { ProgressCard } from "@/components/Cards/ProgressCard/ProgressCard";
+import { ScheduleCard } from "@/components/Cards/ScheduleCard/ScheduleCard";
+import { StatusCard } from "@/components/Cards/StatusCard/StatusCard";
 
 const HomePage = () => {
   return (
-    <>
-      <DashboardHeader
-        user={user}
-        onMenuToggle={function (): void {
-          throw new Error("Function not implemented.");
-        }}
-      />
+    <div>
+      <section className="cards-container">
+        <ProgressCard title="Ukupno odradjeno" progress={55} />
 
-      <Navbar />
+        <StatusCard title="REZERVIRAJ TERMIN VOŽNJE" />
 
-      <SessionCard session={{ activity: "Sample Session", date: new Date() }} />
-
-      <Sidebar
-        items={[]}
-        open={false}
-        onClose={function (): void {
-          throw new Error("Function not implemented.");
-        }}
-      />
-
-      <CandidateListCard
-        onClick={function (): void {
-          throw new Error("Function not implemented.");
-        }}
-      />
-    </>
+        <ScheduleCard activity="Predavanje" time="Četvrtak, 16:00" />
+      </section>
+    </div>
   );
 };
 
