@@ -1,4 +1,4 @@
-import { ArrowBack } from "@/components";
+import { ArrowBack, Calendar } from "@/components";
 import styles from "./CandidateCalendarPage.module.css";
 
 const CandidateCalendarPage = () => {
@@ -8,6 +8,7 @@ const CandidateCalendarPage = () => {
                 <ArrowBack />
                 <h2>KALENDAR</h2>
             </div>
+            <Calendar />
         </div>
     );
 };
