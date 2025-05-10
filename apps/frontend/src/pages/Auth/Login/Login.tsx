@@ -3,10 +3,10 @@ import c from "./login.module.css";
 import { InputField } from "@/components";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@/constants";
-import { loginService } from "@/services/authService";
 import { isValidEmail } from "@/utils/validateEmail";
 import { useAuth } from "@/hooks";
 import toast from "react-hot-toast";
+import { loginService } from "@/api/auth";
 
 export const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -34,8 +34,8 @@ export const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const errorMessage = validateInfo();
-    if (!errorMessage) return;
+    const isValid = validateInfo();
+    if (!isValid) return;
 
     setError("");
 
