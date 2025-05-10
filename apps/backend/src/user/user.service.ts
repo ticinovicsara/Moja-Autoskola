@@ -64,7 +64,7 @@ export class UserService {
     const user = await this.prisma.user.findUnique({
       where: { oib },
     });
-
+    if (!user) throw new NotFoundException("The user doesn't exist");
     return user;
   }
 
