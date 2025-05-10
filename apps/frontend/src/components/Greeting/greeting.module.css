@@ -1,0 +1,19 @@
+.wrapper {
+  margin: 0.5em;
+  margin-top: 2em;
+  padding: 5%;
+  color: #3d3d3d;
+  font-family: "Chillax", sans-serif;
+}
+
+.greetingText {
+  margin: 0;
+  font-weight: 500;
+  font-size: large;
+}
+
+.name {
+  margin: 0;
+  font-weight: 700;
+  font-size: xx-large;
+}

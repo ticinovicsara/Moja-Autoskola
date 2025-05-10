@@ -20,7 +20,9 @@ export const ScheduleCard: React.FC<ScheduleCardProps> = ({
       width="100%"
     >
       <div>
-        <div>{activity}</div>
+        <div style={{ fontWeight: "bold", marginBottom: "0.5em" }}>
+          {activity}
+        </div>
         <div>
           <span style={{ marginRight: "8px" }}>🕒</span>
           <span>{time}</span>

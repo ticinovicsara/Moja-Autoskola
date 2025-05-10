@@ -2,3 +2,7 @@ export * from "./InputField/InputField";
 export * from "./ArrowBack/ArrowBack";
 export { default as Navbar } from "./Navbar/Navbar";
 export * from "./Cards/CardComponent/CardComponent";
+export * from "./Greeting/Greeting";
+export * from "./Dashboards/CandidateDashboard";
+export * from "./Dashboards/DashboardLayuot";
+export * from "./Dashboards/InstructorDashboard";

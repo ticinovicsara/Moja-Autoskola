@@ -1,8 +1,10 @@
-import { CandidateDashboard } from "@/components/Dashboards/CandidateDashboard";
+import { GreetingComponent } from "@/components";
+import { CandidateDashboard } from "@/components";
 
 const CandidateDashboardPage = () => {
   return (
     <>
+      <GreetingComponent />
       <CandidateDashboard />
     </>
   );

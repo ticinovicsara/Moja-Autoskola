@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./dashboard.module.css";
 
 interface DashboardLayoutProps {
-  top: React.ReactNode;
+  top?: React.ReactNode;
   left: React.ReactNode;
   right: React.ReactNode;
   bottom: React.ReactNode;
