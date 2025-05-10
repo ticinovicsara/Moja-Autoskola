@@ -9,8 +9,10 @@ import {
   HomePage,
   CandidateDashboardPage,
   InstructorDashboardPage,
+  InstructorCandidateListPage,
+  Login,
+  Register,
 } from "@/pages";
-import { Login, Register } from "@/pages/Auth";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const AppRouter = () => {
@@ -37,6 +39,10 @@ const AppRouter = () => {
           <Route
             path={routes.INTRUCTOR_DASHBOARD}
             element={<InstructorDashboardPage />}
+          />
+          <Route
+            path={routes.INSTRUCTOR_CANDIDATE_LIST}
+            element={<InstructorCandidateListPage />}
           />
         </Route>
       </Routes>

@@ -19,15 +19,17 @@ export const ProgressCard: React.FC<ProgressCardProps> = ({
       width="100%"
       bodyPadding="10px 0 0 0"
     >
-      <div className={c["card-title"]}>{title}</div>
+      <div style={{ padding: "0.5em" }} className={c["card-title"]}>
+        {title}
+      </div>
       <div className={styles["progress-container"]}>
         <div className={styles["progress-bar"]}>
           <div
             className={styles["progress-fill"]}
             style={{ width: `${progress}%` }}
           ></div>
+          <div className={styles["progress-percentage"]}>{progress}%</div>
         </div>
-        <div className={styles["progress-percentage"]}>{progress}%</div>
       </div>
     </CardComponent>
   );
