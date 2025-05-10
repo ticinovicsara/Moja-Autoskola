@@ -1,12 +1,12 @@
 import { useState } from "react";
 import c from "./login.module.css";
-import { useAuth } from "@/contexts/AuthContext/useAuth";
 import { InputField } from "@/components";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@/constants";
 import { loginService } from "@/services/authService";
 import { isValidEmail } from "@/utils/validateEmail";
+import { useAuth } from "@/hooks";
+import toast from "react-hot-toast";
 
 export const Login = () => {
   const [email, setEmail] = useState<string>("");
