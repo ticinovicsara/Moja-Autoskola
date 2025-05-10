@@ -6,3 +6,4 @@ export * from "./Greeting/Greeting";
 export * from "./Dashboards/CandidateDashboard";
 export * from "./Dashboards/DashboardLayuot";
 export * from "./Dashboards/InstructorDashboard";
+export * from "./Footer/FooterComponent";

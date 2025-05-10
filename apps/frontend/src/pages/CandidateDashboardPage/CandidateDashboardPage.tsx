@@ -1,11 +1,12 @@
-import { GreetingComponent } from "@/components";
-import { CandidateDashboard } from "@/components";
+import { GreetingComponent, CandidateDashboard } from "@/components";
+import FooterComponent from "@/components/Footer/FooterComponent";
 
 const CandidateDashboardPage = () => {
   return (
     <>
       <GreetingComponent />
       <CandidateDashboard />
+      <FooterComponent />
     </>
   );
 };

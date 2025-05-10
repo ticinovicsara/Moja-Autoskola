@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./cardComponent.module.css";
 import { CustomCardProps } from "./CustomCardProps";
 
@@ -12,6 +13,7 @@ export default function CardComponent({
   children,
   className,
   bodyPadding,
+  linkTo,
 }: CustomCardProps) {
   const headerStyle = {
     backgroundColor: headerBgColor,
@@ -30,22 +32,24 @@ export default function CardComponent({
   };
 
   return (
-    <div className={`${styles["card-container"]} ${className}`}>
-      <div className={styles["custom-card"]} style={cardStyle}>
-        {headerTitle && (
-          <div className={styles["card-header"]} style={headerStyle}>
-            <div className={styles["card-title"]}>{headerTitle}</div>
+    <Link to={linkTo ?? "#"} style={{ textDecoration: "none" }}>
+      <div className={`${styles["card-container"]} ${className}`}>
+        <div className={styles["custom-card"]} style={cardStyle}>
+          {headerTitle && (
+            <div className={styles["card-header"]} style={headerStyle}>
+              <div className={styles["card-title"]}>{headerTitle}</div>
+            </div>
+          )}
+          <div
+            className={
+              headerTitle ? styles["card-body"] : styles["card-body-noHeader"]
+            }
+            style={bodyStyle}
+          >
+            {children}
           </div>
-        )}
-        <div
-          className={
-            headerTitle ? styles["card-body"] : styles["card-body-noHeader"]
-          }
-          style={bodyStyle}
-        >
-          {children}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

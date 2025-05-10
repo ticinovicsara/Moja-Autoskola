@@ -4,11 +4,11 @@
   display: flex;
   font-family: "Satoshi", sans-serif;
   font-size: large;
-  color: #3d3d3d;
+  color: var(--asphalt-border);
 }
 
 .card-header {
-  border: 1px solid #3d3d3d;
+  border: 1px solid var(--asphalt-border);
   padding: 3%;
   border-radius: 1em;
   z-index: 10;
@@ -18,7 +18,7 @@
 .card-body {
   z-index: 1;
   position: relative;
-  border: 1px solid #3d3d3d;
+  border: 1px solid var(--asphalt-border);
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-bottom-left-radius: 1em;
@@ -29,7 +29,7 @@
 }
 
 .card-body-noHeader {
-  border: 1px solid #3d3d3d;
+  border: 1px solid var(--asphalt-border);
   border-radius: 1em;
   padding: 1em;
 }

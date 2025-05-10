@@ -10,4 +10,5 @@ export interface CustomCardProps {
   borderColor?: string;
   className?: string;
   bodyPadding?: string;
+  linkTo?: string;
 }
