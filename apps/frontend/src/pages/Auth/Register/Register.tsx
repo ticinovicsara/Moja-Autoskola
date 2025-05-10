@@ -41,10 +41,11 @@ export const Register = () => {
 
     switch (stepNumber) {
       case 1:
-        if (!formData.firstName.trim())
-          stepErrors.firstName = "Ime je obavezno";
-        if (!formData.lastName.trim())
-          stepErrors.lastName = "Prezime je obavezno";
+        if (formData.firstName.trim().length < 2)
+          stepErrors.firstName = "Ime je obavezno i mora imati barem 2 slova";
+        if (formData.lastName.trim().length < 2)
+          stepErrors.lastName =
+            "Prezime je obavezno i mora imati barem 2 slova";
         break;
       case 2:
         if (!isValidEmail(formData.email))

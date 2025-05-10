@@ -1,15 +1,14 @@
 import { UserRole } from '@prisma/client';
 import { Type } from 'class-transformer';
 import {
-  IsDataURI,
   IsDate,
   IsEmail,
   IsEnum,
-  IsNotEmpty,
   IsOptional,
   IsPhoneNumber,
   IsString,
   Length,
+  Matches,
   MinLength,
 } from 'class-validator';
 
@@ -28,8 +27,12 @@ export class RegisterDto {
   @IsPhoneNumber()
   phoneNumber: string;
 
-  @MinLength(5)
   @IsString()
+  @MinLength(5)
+  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/, {
+    message:
+      'Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character',
+  })
   password: string;
 
   @IsDate()

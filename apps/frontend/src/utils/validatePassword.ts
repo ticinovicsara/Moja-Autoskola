@@ -3,7 +3,7 @@ export const validatePassword = (password: string): string | null => {
     return "Lozinka je obavezna";
   }
 
-  if (password.length < 8) {
+  if (password.length < 5) {
     return "Lozinka mora imati najmanje 8 znakova";
   }
 
