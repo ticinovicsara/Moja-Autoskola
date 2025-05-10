@@ -1,0 +1,10 @@
+.page {
+    margin-top: 8px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 24px;
+}
