@@ -7,6 +7,7 @@ import {
   IsEnum,
   IsNotEmpty,
   IsOptional,
+  IsPhoneNumber,
   IsString,
   Length,
   MinLength,
@@ -23,6 +24,9 @@ export class RegisterDto {
 
   @IsEmail()
   email: string;
+
+  @IsPhoneNumber()
+  phoneNumber: string;
 
   @MinLength(5)
   @IsString()

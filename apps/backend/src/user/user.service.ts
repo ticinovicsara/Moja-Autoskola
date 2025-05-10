@@ -33,6 +33,7 @@ export class UserService {
         dateOfBirth: createUserDto.dateOfBirth,
         oib: createUserDto.oib,
         role: createUserDto.role,
+        phoneNumber: createUserDto.phoneNumber,
       },
     });
 

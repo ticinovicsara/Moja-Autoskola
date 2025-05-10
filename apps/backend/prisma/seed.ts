@@ -24,6 +24,7 @@ async function main() {
       password: await hashPassword('admin123'),
       dateOfBirth: new Date('2000-02-02'),
       role: UserRole.Admin,
+      phoneNumber: '+385 95 533 9200',
       oib: '12345543219',
     },
   });
@@ -52,6 +53,7 @@ async function main() {
       role: UserRole.SchoolAdmin,
       dateOfBirth: new Date('1998-07-21'),
       oib: '12345543210',
+      phoneNumber: '+385 95 533 9210',
       schoolUser: {
         create: {
           schoolId: school.id,
@@ -69,6 +71,7 @@ async function main() {
       role: UserRole.Instructor,
       dateOfBirth: new Date('2003-10-20'),
       oib: '12445543219',
+      phoneNumber: '+385 95 312 3124',
       schoolUser: {
         create: {
           schoolId: school.id,
@@ -86,6 +89,7 @@ async function main() {
       role: UserRole.Instructor,
       dateOfBirth: new Date('2007-02-11'),
       oib: '92445543219',
+      phoneNumber: '+385 95 312 1111',
       schoolUser: {
         create: {
           schoolId: school.id,
@@ -103,6 +107,7 @@ async function main() {
       role: UserRole.Candidate,
       dateOfBirth: new Date('2004-02-15'),
       oib: '88445543219',
+      phoneNumber: '+385 95 312 3555',
       schoolUser: {
         create: {
           schoolId: school.id,
@@ -120,6 +125,7 @@ async function main() {
       role: UserRole.Candidate,
       dateOfBirth: new Date('2006-07-25'),
       oib: '12445543201',
+      phoneNumber: '+385 95 312 9563',
       schoolUser: {
         create: {
           schoolId: school.id,
@@ -137,6 +143,7 @@ async function main() {
       role: UserRole.Candidate,
       dateOfBirth: new Date('1988-07-21'),
       oib: '12445543989',
+      phoneNumber: '+385 95 788 4521',
       schoolUser: {
         create: {
           schoolId: school.id,

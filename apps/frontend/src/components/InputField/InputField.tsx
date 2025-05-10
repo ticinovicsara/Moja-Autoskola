@@ -6,6 +6,7 @@ type InputFieldType = {
   onChange: (value: string) => void;
   value: string;
   required?: boolean;
+  error?: string;
 };
 
 export const InputField = ({
@@ -14,15 +15,19 @@ export const InputField = ({
   onChange,
   value,
   required = true,
+  error,
 }: InputFieldType) => {
   return (
-    <input
-      type={type}
-      className={c.input}
-      placeholder={placeholder}
-      onChange={(e) => onChange(e.target.value)}
-      value={value}
-      required={required}
-    />
+    <>
+      <input
+        type={type}
+        className={c.input}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+        value={value}
+        required={required}
+      />
+      {error && <p className={c.error}>{error}</p>}
+    </>
   );
 };
