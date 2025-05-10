@@ -13,6 +13,7 @@ import {
   Login,
   Register,
   ProfilePage,
+  InstructorCalendarPage,
 } from "@/pages";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -39,13 +40,17 @@ const AppRouter = () => {
 
         <Route element={<InstructorLayout />}>
           <Route
-            path={routes.INTRUCTOR_DASHBOARD}
+            path={routes.INSTRUCTOR_DASHBOARD}
             element={<InstructorDashboardPage />}
           />{" "}
           <Route path={routes.INSTRUCTOR_PROFILE} element={<ProfilePage />} />
           <Route
             path={routes.INSTRUCTOR_CANDIDATE_LIST}
             element={<InstructorCandidateListPage />}
+          />
+          <Route
+            path={routes.INSTRUCTOR_CALENDAR}
+            element={<InstructorCalendarPage />}
           />
         </Route>
       </Routes>

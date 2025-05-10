@@ -1,11 +1,7 @@
 import React from "react";
 import "./scheduleCard.module.css";
 import CardComponent from "../CardComponent/CardComponent";
-
-interface ScheduleCardProps {
-  activity: string;
-  time: string;
-}
+import { ScheduleCardProps } from "./ScheduleCardProps";
 
 export const ScheduleCard: React.FC<ScheduleCardProps> = ({
   activity,

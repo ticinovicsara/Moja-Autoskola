@@ -1,9 +1,10 @@
-import { GreetingComponent, InstructorDashboard } from "@/components";
+import { GreetingComponent, InstructorDashboard, Navbar } from "@/components";
 import FooterComponent from "@/components/Footer/FooterComponent";
 
 const InstructorDashboardPage = () => {
   return (
     <>
+      <Navbar />
       <GreetingComponent />
       <InstructorDashboard />
       <FooterComponent />

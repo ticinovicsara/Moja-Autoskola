@@ -3,7 +3,11 @@ import CardComponent from "../CardComponent/CardComponent";
 
 import { StatusCardProps } from "./StatusCardProps";
 
-export const StatusCard: React.FC<StatusCardProps> = ({ title, color }) => {
+export const StatusCard: React.FC<StatusCardProps> = ({
+  title,
+  color,
+  onClick,
+}) => {
   return (
     <CardComponent
       bodyBgColor={color}
@@ -12,6 +16,7 @@ export const StatusCard: React.FC<StatusCardProps> = ({ title, color }) => {
       bodyPadding="1.5em"
     >
       <div
+        onClick={onClick}
         style={{
           textAlign: "center",
           fontWeight: "bold",
