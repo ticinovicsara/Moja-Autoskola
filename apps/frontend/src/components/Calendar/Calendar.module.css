@@ -1,0 +1,79 @@
+.calendar {
+    width: 100%;
+    border: none !important;
+}
+
+.sundayTile {
+    color: #888888 !important;
+}
+
+.calendar
+    :global(
+        .react-calendar__month-view__days__day--weekend:not(
+                .react-calendar__month-view__days__day--neighboringMonth
+            )
+    ) {
+    color: inherit;
+}
+
+.calendar
+    :global(
+        .react-calendar__month-view__days__day--weekend:nth-child(7n + 1):not(
+                .react-calendar__month-view__days__day--neighboringMonth
+            )
+    ) {
+    color: #888888;
+}
+
+.calendar :global(.react-calendar__month-view__weekdays__weekday) {
+    border-bottom: none !important;
+    text-decoration: none !important;
+}
+
+.calendar :global(.react-calendar__month-view__weekdays__weekday abbr) {
+    text-decoration: none !important;
+    border-bottom: none !important;
+}
+
+.calendar :global(.react-calendar__navigation) {
+    border: none !important;
+}
+
+.calendar :global(.react-calendar__tile) {
+    border: none !important;
+}
+
+.calendar :global(.react-calendar__month-view) {
+    border: none !important;
+}
+
+.calendar :global(.react-calendar__viewContainer) {
+    border: none !important;
+}
+
+.calendar :global(*) {
+    border-color: transparent !important;
+}
+
+.calendar :global(.react-calendar__tile--now) {
+    background: transparent !important;
+    position: relative;
+}
+
+.calendar :global(.react-calendar__tile--now abbr) {
+    position: relative;
+    z-index: 1;
+}
+
+.calendar :global(.react-calendar__tile--now::before) {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid var(--text-color, #000000);
+    border-radius: 50%;
+    z-index: 0;
+}
