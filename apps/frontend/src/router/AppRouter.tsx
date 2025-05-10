@@ -12,6 +12,7 @@ import {
   InstructorCandidateListPage,
   Login,
   Register,
+  ProfilePage,
 } from "@/pages";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -33,13 +34,15 @@ const AppRouter = () => {
             path={routes.CANDIDATE_DASHBOARD}
             element={<CandidateDashboardPage />}
           />
+          <Route path={routes.CANDIDATE_PROFILE} element={<ProfilePage />} />
         </Route>
 
         <Route element={<InstructorLayout />}>
           <Route
             path={routes.INTRUCTOR_DASHBOARD}
             element={<InstructorDashboardPage />}
-          />
+          />{" "}
+          <Route path={routes.INSTRUCTOR_PROFILE} element={<ProfilePage />} />
           <Route
             path={routes.INSTRUCTOR_CANDIDATE_LIST}
             element={<InstructorCandidateListPage />}

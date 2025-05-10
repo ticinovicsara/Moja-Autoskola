@@ -4,3 +4,4 @@ export * from "./Auth/Register/Register";
 export { default as CandidateDashboardPage } from "./Candidate/CandidateDashboardPage";
 export { default as InstructorDashboardPage } from "./Instructor/InstructorDashboardPage";
 export { default as InstructorCandidateListPage } from "./Instructor/InstructorCandidateListPage";
+export { default as ProfilePage } from "./ProfilePage/ProfilePage";
