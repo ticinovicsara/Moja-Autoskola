@@ -7,6 +7,7 @@ export default function CardComponent({
   headerTextColor,
   bodyTextColor,
   width,
+  height,
   headerTitle,
   children,
   className,
@@ -25,6 +26,7 @@ export default function CardComponent({
 
   const cardStyle = {
     width: width,
+    height: height,
   };
 
   return (

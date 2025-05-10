@@ -11,7 +11,7 @@ export const CandidateInstructorCard: React.FC<
       headerBgColor="#6C8C3E"
       bodyBgColor="#B1CF86"
       borderColor="#eab308"
-      width="250px"
+      width="100%"
     >
       <div>
         <div>{instructor}</div>

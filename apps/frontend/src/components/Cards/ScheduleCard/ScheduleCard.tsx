@@ -14,10 +14,10 @@ export const ScheduleCard: React.FC<ScheduleCardProps> = ({
   return (
     <CardComponent
       headerTitle="Sljedeće na redu u kalendaru"
-      headerBgColor="#FFB855A3"
       bodyBgColor="#FFF192"
+      headerBgColor="#FFB855A3"
       borderColor="#eab308"
-      width="250px"
+      width="100%"
     >
       <div>
         <div>{activity}</div>

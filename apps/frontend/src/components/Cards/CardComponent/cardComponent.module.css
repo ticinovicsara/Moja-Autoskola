@@ -3,7 +3,7 @@
   overflow: hidden;
   display: flex;
   font-family: "Satoshi", sans-serif;
-  font-size: small;
+  font-size: medium;
   color: #3d3d3d;
 }
 
@@ -38,8 +38,4 @@
   font-size: 1em;
   font-weight: 700;
   text-align: center;
-}
-
-.card-body-with-border {
-  border: 1px solid #3d3d3d;
 }

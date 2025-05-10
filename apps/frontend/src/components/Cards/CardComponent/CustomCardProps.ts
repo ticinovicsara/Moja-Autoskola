@@ -4,6 +4,7 @@ export interface CustomCardProps {
   headerTextColor?: string;
   bodyTextColor?: string;
   width?: string;
+  height?: string;
   headerTitle?: string;
   children?: React.ReactNode;
   borderColor?: string;

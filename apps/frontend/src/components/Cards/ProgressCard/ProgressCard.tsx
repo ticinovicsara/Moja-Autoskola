@@ -17,7 +17,7 @@ export const ProgressCard: React.FC<ProgressCardProps> = ({
       headerBgColor="#84CDEE"
       bodyBgColor="#84CDEE"
       borderColor="#3D3D3D"
-      width="250px"
+      width="100%"
       bodyPadding="10px 0 0 0"
     >
       <div className={c["card-title"]}>{title}</div>

@@ -1,5 +1,11 @@
+import { CandidateDashboard } from "@/components/Dashboards/CandidateDashboard";
+
 const CandidateDashboardPage = () => {
-    return <>Candidate Dashboard</>;
+  return (
+    <>
+      <CandidateDashboard />
+    </>
+  );
 };
 
 export default CandidateDashboardPage;
