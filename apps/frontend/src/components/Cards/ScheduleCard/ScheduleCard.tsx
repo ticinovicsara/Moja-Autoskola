@@ -15,7 +15,7 @@ export const ScheduleCard: React.FC<ScheduleCardProps> = ({
     <CardComponent
       headerTitle="Sljedeće na redu u kalendaru"
       bodyBgColor="#FFF192"
-      headerBgColor="#FFB855A3"
+      headerBgColor="#FFB855"
       borderColor="#eab308"
       width="100%"
     >

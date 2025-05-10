@@ -3,10 +3,10 @@ import CardComponent from "../CardComponent/CardComponent";
 
 import { StatusCardProps } from "./StatusCardProps";
 
-export const StatusCard: React.FC<StatusCardProps> = ({ title }) => {
+export const StatusCard: React.FC<StatusCardProps> = ({ title, color }) => {
   return (
     <CardComponent
-      bodyBgColor="#F97C7C"
+      bodyBgColor={color}
       width="100%"
       height="100%"
       bodyPadding="1.5em"

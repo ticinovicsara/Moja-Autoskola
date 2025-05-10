@@ -1,5 +1,11 @@
+import { InstructorDashboard } from "@/components/Dashboards/InstructorDashboard";
 import { routes } from "@/constants";
-import { AuthLayout, CandidateLayout, PublicLayout } from "@/layouts";
+import {
+  AuthLayout,
+  CandidateLayout,
+  InstructorLayout,
+  PublicLayout,
+} from "@/layouts";
 import { HomePage, CandidateDashboardPage } from "@/pages";
 import { Login, Register } from "@/pages/Auth";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -21,6 +27,13 @@ const AppRouter = () => {
           <Route
             path={routes.CANDIDATE_DASHBOARD}
             element={<CandidateDashboardPage />}
+          />
+        </Route>
+
+        <Route element={<InstructorLayout />}>
+          <Route
+            path={routes.INTRUCTOR_DASHBOARD}
+            element={<InstructorDashboard />}
           />
         </Route>
       </Routes>
