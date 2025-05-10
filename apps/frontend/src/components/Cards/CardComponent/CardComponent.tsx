@@ -35,7 +35,12 @@ export default function CardComponent({
             <div className={styles["card-title"]}>{headerTitle}</div>
           </div>
         )}
-        <div className={styles["card-body"]} style={bodyStyle}>
+        <div
+          className={
+            headerTitle ? styles["card-body"] : styles["card-body-noHeader"]
+          }
+          style={bodyStyle}
+        >
           {children}
         </div>
       </div>

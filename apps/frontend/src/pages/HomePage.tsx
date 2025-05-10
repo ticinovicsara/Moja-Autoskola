@@ -1,3 +1,4 @@
+import { CandidateInstructorCard } from "@/components/Cards/CandidateInstructorCard/CandidateInstructorCard";
 import { ProgressCard } from "@/components/Cards/ProgressCard/ProgressCard";
 import { ScheduleCard } from "@/components/Cards/ScheduleCard/ScheduleCard";
 import { StatusCard } from "@/components/Cards/StatusCard/StatusCard";
@@ -11,6 +12,8 @@ const HomePage = () => {
         <StatusCard title="REZERVIRAJ TERMIN VOŽNJE" />
 
         <ScheduleCard activity="Predavanje" time="Četvrtak, 16:00" />
+
+        <CandidateInstructorCard instructor="Marko Marković" phone="123" />
       </section>
     </div>
   );

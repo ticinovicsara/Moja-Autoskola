@@ -1,36 +1,20 @@
-.status-card {
-  color: white;
-}
-
-.status-title {
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: 16px;
-  margin-bottom: 12px;
-}
-
-.status-items {
+.status-container {
+  border-radius: 1em;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  font-family: "Satoshi", sans-serif;
+  font-size: small;
+  background-color: #f97c7c;
 }
 
-.status-item {
-  background-color: #8dc978;
-  border-radius: 8px;
-  padding: 12px;
-  display: flex;
-  align-items: center;
-}
-
-.status-item-indicator {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  margin-right: 8px;
-}
-
-.status-item-title {
-  font-size: 14px;
-  color: #333;
+.status-body {
+  z-index: 1;
+  position: relative;
+  border-radius: 1em;
+  border: 1px solid #3d3d3d;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  padding: 1em;
+  padding-top: 30px;
+  margin-top: -20px;
 }
