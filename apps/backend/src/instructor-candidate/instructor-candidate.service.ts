@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from '@/prisma/prisma.service';
-import { AssignInstructorDto } from './dto/assign-instructor.dto';
+import { AssignInstructorCandidateDto } from './dto/assign-instructor.dto';
 import { InstructorCandidate } from './entities/instructor-candidate.entity';
 import { UserService } from '@/user/user.service';
 
@@ -27,7 +27,7 @@ export class InstructorCandidateService {
     return allInstructorCandidates.map(InstructorCandidate.fromPrisma);
   }
 
-  async assignInstructorToCandidate(body: AssignInstructorDto) {
+  async assignInstructorToCandidate(body: AssignInstructorCandidateDto) {
     const { candidateId, instructorId } = body;
 
     await this.userService.getById(candidateId);

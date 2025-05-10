@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { TestResultModule } from './test-result/test-result.module';
 import { EnrollmentModule } from './enrollment/enrollment.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { InstructorModule } from './instructor/instructor.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { PrismaModule } from './prisma/prisma.module';
     AuthModule,
     TestResultModule,
     EnrollmentModule,
+    InstructorModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],

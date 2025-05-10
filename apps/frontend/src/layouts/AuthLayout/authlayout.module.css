@@ -1,0 +1,13 @@
+.authWrapper {
+  padding-top: 50px;
+  padding-bottom: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.title {
+  margin-bottom: 56px;
+  font-size: 32px;
+}

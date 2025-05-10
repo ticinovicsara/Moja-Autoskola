@@ -77,6 +77,8 @@ export class AuthService {
       role: createdUser.role,
       firstName: createdUser.firstName,
       lastName: createdUser.lastName,
+      dateOfBirth: createdUser.dateOfBirth,
+      oib: createdUser.oib,
     };
 
     return {
