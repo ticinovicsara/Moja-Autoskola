@@ -1,6 +1,7 @@
 .calendar {
     width: 100%;
     border: none !important;
+    height: 352px !important;
 }
 
 .sundayTile > abbr {
@@ -67,10 +68,19 @@
 
 .calendar :global(.react-calendar__month-view__days__day) {
     font-weight: 400 !important;
+    max-height: 36px !important;
+}
+
+.calendar :global(.react-calendar__tile.markedDateTile > abbr) {
+    opacity: 1 !important;
 }
 
 .calendar :global(.react-calendar__month-view) {
     border: none !important;
+}
+
+.calendar :global(.react-calendar__month-view__days) {
+    gap: 8px 0 !important;
 }
 
 .calendar :global(.react-calendar__viewContainer) {
@@ -111,4 +121,39 @@
 .calendar :global(.sundayTile.react-calendar__tile--now::before) {
     opacity: 1 !important;
     border: 1px solid black !important;
+}
+
+.calendar :global(.markedDateTile) {
+    border: 1px solid #afafaf !important;
+    border-radius: 4px !important;
+    position: relative;
+}
+
+.calendar :global(.markedDateTile > abbr) {
+    opacity: 1 !important;
+}
+
+.calendar :global(.markedType-Theory) {
+    background-color: var(--blue) !important;
+}
+
+.calendar :global(.markedType-FirstAid) {
+    background-color: var(--green) !important;
+}
+
+.calendar :global(.markedType-Driving) {
+    background-color: var(--red) !important;
+}
+
+.markerContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 2px;
+}
+
+.marker {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--asphalt-border);
 }
