@@ -21,18 +21,20 @@ const HamburgerMenu: FC<HamburgerMenuProps> = ({ toggleMenu }) => {
     }
 
     return (
-        <div className={styles.menu}>
+        <div className={`${styles.menu} container`}>
             <div className={styles.header}>
                 <h1>MENU</h1>
                 <img src={Cross} alt="cross" onClick={() => toggleMenu()} />
             </div>
-            <div className={styles.userInfo}>
+            <div className={styles.user}>
                 <img src={Profile} alt="profile" />
-                <p>
-                    {user?.firstName} {user?.lastName}
-                </p>
-                <p>{user?.email}</p>
-                <p>098 903 2571</p>
+                <div className={styles.userInfo}>
+                    <p>
+                        {user?.firstName} {user?.lastName}
+                    </p>
+                    <p>{user?.email}</p>
+                    <p>098 903 2571</p>
+                </div>
             </div>
             <div className={styles.links}>
                 <Link to={routes.HOME} onClick={() => toggleMenu()}>

@@ -7,9 +7,56 @@
     background-color: var(--background-color);
     opacity: 1;
     z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 32px;
+    padding-bottom: 32px;
 }
 
 .menu a {
     text-decoration: none;
     color: var(--asphalt-border);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    color: var(--asphalt-border);
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.user > img {
+    height: 128px;
+    width: 128px;
+    transform: scale(1.3);
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    line-height: 16px;
+}
+
+.userInfo > p:first-child {
+    font-weight: 700;
+    font-family: "Chillax", sans-serif;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-weight: 400;
+}
+
+.logout {
+    font-weight: 700;
+    color: var(--darker-red);
 }
