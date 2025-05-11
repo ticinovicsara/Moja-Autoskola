@@ -13,8 +13,6 @@ export const InstructorDashboard = () => {
 
   const { loading, activity, startTime } = useInstructorNextSession(userId);
 
-  console.log("Instructor Dashboard data:", { loading, activity, startTime });
-
   const scheduleContent = useMemo(() => {
     if (loading) return "Učitavanje...";
     if (!activity) return "Nema zakazanih aktivnosti";
