@@ -1,5 +1,7 @@
 export const isValidCroatianPhoneNumber = (phone: string) => {
   const cleanPhone = phone.replace(/\s/g, "");
 
-  return /^(\+385\d{9,10}|0\d{9,10})$/.test(cleanPhone);
+  const regex = /^\+3859[1-5]\d{3}\d{4}$/;
+
+  return regex.test(cleanPhone);
 };

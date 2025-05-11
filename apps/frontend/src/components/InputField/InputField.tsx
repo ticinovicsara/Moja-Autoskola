@@ -8,7 +8,6 @@ type InputFieldType = {
   required?: boolean;
   error?: string;
   pattern?: string;
-  onInput?: (e: React.FormEvent<HTMLInputElement>) => void;
 };
 
 export const InputField = ({
@@ -19,7 +18,6 @@ export const InputField = ({
   required = true,
   error,
   pattern,
-  onInput,
 }: InputFieldType) => {
   return (
     <>
@@ -28,7 +26,6 @@ export const InputField = ({
         className={c.input}
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
-        onInput={onInput}
         value={value}
         required={required}
         pattern={pattern}

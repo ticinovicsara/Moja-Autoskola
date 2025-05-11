@@ -9,9 +9,11 @@ import { validatePassword } from "@/utils/validatePassword";
 import { isValidCroatianPhoneNumber } from "@/utils/formatPhoneNumber";
 import { CreateUserFormData } from "@/types";
 import { registerService } from "@/api/auth";
+import { useAuth } from "@/hooks";
 
 export const Register = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<CreateUserFormData>({
     firstName: "",
@@ -62,8 +64,15 @@ export const Register = () => {
         }
         break;
       case 4:
+        const min = new Date("1900-01-01");
+        const max = new Date();
+        const dateOfBirth = new Date(formData.dateOfBirth);
         if (!formData.dateOfBirth)
-          stepErrors.dateOfBirth = "Datum rođenja je obavezan";
+          stepErrors.dateOfBirth = "Unesite datum rođenja";
+
+        if (dateOfBirth < min || dateOfBirth > max)
+          stepErrors.dateOfBirth =
+            "Datum rođenja mora biti veći od 1900. i manji od današnjeg dana.";
 
         if (!/^\d{11}$/.test(formData.oib))
           stepErrors.oib = "OIB mora imati 11 znamenki";
@@ -77,7 +86,6 @@ export const Register = () => {
     const stepErrors = validateStep(step);
     if (Object.keys(stepErrors).length > 0) {
       setErrors(stepErrors);
-      toast.error("Molimo popunite trenutni korak");
       return;
     }
 
@@ -86,12 +94,18 @@ export const Register = () => {
       setStep((prev) => prev + 1);
     } else {
       try {
-        console.log("Submitting data:", formData);
-        await registerService(formData);
-        navigate(routes.HOME);
-      } catch (error) {
+        if (localStorage.getItem("token")) localStorage.removeItem("token");
+
+        const data = await registerService(formData);
+        if (data.access_token) {
+          login(data.access_token);
+          navigate(routes.HOME);
+        }
+      } catch (error: any) {
         console.error("Error while registering: ", error);
-        toast.error("Došlo je do greške priliko registracije.");
+        toast.error(
+          error.message || "Došlo je do greške prilikom registracije."
+        );
       }
     }
   };

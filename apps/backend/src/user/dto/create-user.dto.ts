@@ -34,7 +34,7 @@ export class CreateUserDto {
   })
   password: string;
 
-  @IsPhoneNumber()
+  @IsPhoneNumber(undefined, { message: 'Neispravan broj telefona' })
   phoneNumber: string;
 
   @IsDate()

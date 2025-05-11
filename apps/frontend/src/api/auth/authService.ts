@@ -17,11 +17,6 @@ export const loginService = async (email: string, password: string) => {
 };
 
 export const registerService = async (user: CreateUserFormData) => {
-  try {
-    const response = await api.post(API_ENDPOINTS.AUTH.REGISTER, user);
-    return response.data;
-  } catch (error) {
-    console.log("Register error: ", error);
-    throw error;
-  }
+  const response = await api.post(API_ENDPOINTS.AUTH.REGISTER, user);
+  return response.data;
 };

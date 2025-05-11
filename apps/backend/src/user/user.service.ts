@@ -18,10 +18,14 @@ export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createUserDto: CreateUserDto) {
-    const userByEmail = await this.getByEmail(createUserDto.email);
+    const userByEmail = await this.prisma.user.findUnique({
+      where: { email: createUserDto.email },
+    });
     if (userByEmail) throw new ConflictException('The email already exists');
 
-    const userByOib = await this.getByOIB(createUserDto.oib);
+    const userByOib = await this.prisma.user.findUnique({
+      where: { oib: createUserDto.oib },
+    });
     if (userByOib) throw new ConflictException('OIB already exists');
 
     const newUser = await this.prisma.user.create({

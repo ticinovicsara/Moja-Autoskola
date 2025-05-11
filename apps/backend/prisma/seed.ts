@@ -21,7 +21,7 @@ async function main() {
       firstName: 'Admin',
       lastName: 'System',
       email: 'admin@admin.hr',
-      password: await hashPassword('admin123'),
+      password: await hashPassword('Admin123$'),
       dateOfBirth: new Date('2000-02-02'),
       role: UserRole.Admin,
       phoneNumber: '+385 95 533 9200',

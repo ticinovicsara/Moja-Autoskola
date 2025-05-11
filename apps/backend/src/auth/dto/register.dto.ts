@@ -24,7 +24,7 @@ export class RegisterDto {
   @IsEmail()
   email: string;
 
-  @IsPhoneNumber()
+  @IsPhoneNumber(undefined, { message: 'Neispravan broj telefona' })
   phoneNumber: string;
 
   @IsString()
