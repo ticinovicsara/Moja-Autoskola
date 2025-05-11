@@ -1,18 +1,29 @@
 import DashboardLayout from "./DashboardLayuot";
 import { StatusCard, ScheduleCard } from "../Cards";
-import { useNavigate } from "react-router-dom";
 import { routes } from "@/constants";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { InstructorPopup } from "../Popup/InstructorPopup";
-import { useAuth } from "@/hooks";
+import { useAuth, useInstructorNextSession } from "@/hooks";
+import { formatSessionTime } from "@/utils/formatSessionTime";
 
 export const InstructorDashboard = () => {
-  const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
   const { user } = useAuth();
   const userId = user?.id || "";
-  const { nextSession, loading: loadingNext } =
-    useInstructorNextSession(userId);
+
+  const { loading, activity, startTime } = useInstructorNextSession(userId);
+
+  console.log("Instructor Dashboard data:", { loading, activity, startTime });
+
+  const scheduleContent = useMemo(() => {
+    if (loading) return "Učitavanje...";
+    if (!activity) return "Nema zakazanih aktivnosti";
+    return activity;
+  }, [loading, activity]);
+
+  const scheduleTime = useMemo(() => {
+    return startTime ? formatSessionTime(startTime) : "";
+  }, [startTime]);
 
   return (
     <>
@@ -31,15 +42,8 @@ export const InstructorDashboard = () => {
             linkTo={routes.INSTRUCTOR_CANDIDATE_LIST}
           />
         }
-        bottom={
-          <ScheduleCard
-            activity="Predavanje"
-            time="Četvrtak, 16:00"
-            onClick={() => navigate(routes.INSTRUCTOR_CALENDAR)}
-          />
-        }
+        bottom={<ScheduleCard activity={scheduleContent} time={scheduleTime} />}
       />
-
       {showPopup && <InstructorPopup onClose={() => setShowPopup(false)} />}
     </>
   );

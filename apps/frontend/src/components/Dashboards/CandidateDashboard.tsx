@@ -59,12 +59,12 @@ export const CandidateDashboard = () => {
   const scheduleContent = useMemo(() => {
     if (loadingNext) return "Učitavanje...";
     if (!nextSession) return "Nema zakazanih aktivnosti";
-    return `Sljedeća aktivnost: ${nextSession.activity}`;
+    return `Sljedeća aktivnost: ${nextSession.type}`;
   }, [loadingNext, nextSession]);
 
   const scheduleTime = useMemo(() => {
-    return nextSession
-      ? new Date(nextSession.date).toLocaleString("hr-HR")
+    return nextSession && nextSession.startTime
+      ? new Date(nextSession.startTime).toLocaleString("hr-HR")
       : "";
   }, [nextSession]);
 

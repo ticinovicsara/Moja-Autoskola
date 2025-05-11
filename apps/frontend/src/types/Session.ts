@@ -1,4 +1,9 @@
 export interface Session {
-  activity: string;
-  date: Date;
+  id?: string;
+  schoolId?: string;
+  instructorId?: string;
+  type?: string;
+  format?: string;
+  startTime?: string;
+  endTime?: string;
 }
