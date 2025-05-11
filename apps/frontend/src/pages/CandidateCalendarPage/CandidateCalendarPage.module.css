@@ -19,13 +19,21 @@
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom: none;
-    padding: 16px 0;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.upcomingContainer > p {
+    font-family: "Satoshi", sans-serif;
+    font-weight: 400;
 }
 
 .upcomingHeader {
     display: flex;
     justify-content: space-between;
-    font-family: "Satoshi", sans-serif;
 }
 
 .upcomingHeader > h3 {

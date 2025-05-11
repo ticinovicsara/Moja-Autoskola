@@ -124,7 +124,7 @@
 }
 
 .calendar :global(.markedDateTile) {
-    border: 1px solid #afafaf !important;
+    border: 1px solid var(--gray) !important;
     border-radius: 4px !important;
     position: relative;
 }

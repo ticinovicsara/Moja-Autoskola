@@ -1,1 +1,1 @@
-export * from "./useSession";
+export { default as useCandidateSessions } from "./useSession";

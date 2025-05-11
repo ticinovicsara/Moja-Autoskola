@@ -1,9 +1,5 @@
 .inputsWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.errorMessage {
-  color: red;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }

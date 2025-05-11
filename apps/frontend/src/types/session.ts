@@ -11,4 +11,4 @@ type Session = {
 type SessionType = "Theory" | "FirstAid" | "Driving";
 type SessionFormat = "Lesson" | "Test";
 
-export type { Session };
+export type { Session, SessionType, SessionFormat };
