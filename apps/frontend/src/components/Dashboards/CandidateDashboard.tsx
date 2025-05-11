@@ -13,6 +13,7 @@ import {
   useGetInstructor,
 } from "@/hooks";
 import { CandidatePopup } from "../Popup/CandidatePopup";
+import { formatSessionTime } from "@/utils/formatSessionTime";
 
 export const CandidateDashboard = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -25,7 +26,7 @@ export const CandidateDashboard = () => {
     error: progressError,
   } = useCandidateProgress(userId);
 
-  const { nextSession, loading: loadingNext } = useCandidateNextSession(userId);
+  const { activity, startTime } = useCandidateNextSession(userId);
   const instructorData = useGetInstructor(userId);
 
   const instructorInfo = useMemo(() => {
@@ -56,17 +57,24 @@ export const CandidateDashboard = () => {
     ? "Učitavanje napretka..."
     : progressError;
 
-  const scheduleContent = useMemo(() => {
-    if (loadingNext) return "Učitavanje...";
-    if (!nextSession) return "Nema zakazanih aktivnosti";
-    return `Sljedeća aktivnost: ${nextSession.type}`;
-  }, [loadingNext, nextSession]);
+  let scheduleContent = "Nema zakazanih aktivnosti";
+
+  if (activity) {
+    switch (activity) {
+      case "Theory":
+        scheduleContent = "Teorija";
+        break;
+      case "Driving":
+        scheduleContent = "Vožnja";
+        break;
+      default:
+        scheduleContent = scheduleContent;
+    }
+  }
 
   const scheduleTime = useMemo(() => {
-    return nextSession && nextSession.startTime
-      ? new Date(nextSession.startTime).toLocaleString("hr-HR")
-      : "";
-  }, [nextSession]);
+    return startTime ? formatSessionTime(startTime) : "";
+  }, [startTime]);
 
   return (
     <>

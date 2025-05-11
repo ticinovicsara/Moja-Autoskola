@@ -36,5 +36,8 @@ export const useCandidateNextSession = (candidateId: string) => {
     }
   }, [candidateId]);
 
-  return { nextSession, loading, error };
+  const activity = nextSession?.type;
+  const startTime = nextSession?.startTime;
+
+  return { activity, startTime, loading, error };
 };

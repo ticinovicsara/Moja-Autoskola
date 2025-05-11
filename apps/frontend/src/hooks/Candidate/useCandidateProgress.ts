@@ -10,10 +10,10 @@ const calculateProgress = (
   const completedTests = passedTests.length;
   const completedLessons = passedLessons.length;
 
-  return Math.min(
-    ((completedTests + completedLessons) / (totalTests + totalLessons)) * 100,
-    100
-  );
+  const progress =
+    ((completedTests + completedLessons) / (totalTests + totalLessons)) * 100;
+
+  return parseFloat(Math.min(progress, 100).toFixed(2));
 };
 
 export const useCandidateProgress = (candidateId: string) => {
