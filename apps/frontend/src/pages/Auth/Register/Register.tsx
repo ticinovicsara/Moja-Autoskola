@@ -53,7 +53,8 @@ export const Register = () => {
         if (!formData.phoneNumber)
           stepErrors.phoneNumber = "Broj mobitela je obavezan";
         else if (!isValidCroatianPhoneNumber(formData.phoneNumber))
-          stepErrors.phoneNumber = "Unesite ispravan hrvatski broj mobitela";
+          stepErrors.phoneNumber =
+            "Unesite ispravan hrvatski broj mobitela (+385 9X XXX XXXX)";
 
         break;
       case 3:
