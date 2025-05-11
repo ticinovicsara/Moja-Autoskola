@@ -1,6 +1,10 @@
 import { routes } from "@/constants";
 import { AuthLayout, CandidateLayout, PublicLayout } from "@/layouts";
-import { HomePage, CandidateDashboardPage } from "@/pages";
+import {
+    HomePage,
+    CandidateDashboardPage,
+    CandidateCalendarPage,
+} from "@/pages";
 import { Login, Register } from "@/pages/Auth";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -21,6 +25,10 @@ const AppRouter = () => {
                     <Route
                         path={routes.CANDIDATE_DASHBOARD}
                         element={<CandidateDashboardPage />}
+                    />
+                    <Route
+                        path={routes.CANDIDATE_CALENDAR}
+                        element={<CandidateCalendarPage />}
                     />
                 </Route>
             </Routes>
