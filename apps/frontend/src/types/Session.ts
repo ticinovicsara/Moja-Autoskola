@@ -1,9 +1,14 @@
-export interface Session {
-  id?: string;
-  schoolId?: string;
-  instructorId?: string;
-  type?: string;
-  format?: string;
-  startTime?: string;
-  endTime?: string;
-}
+type Session = {
+  id: string;
+  schoolId: string;
+  instructorId: string | null;
+  type: SessionType;
+  format: SessionFormat;
+  startTime: Date;
+  endTime: Date;
+};
+
+type SessionType = "Theory" | "FirstAid" | "Driving";
+type SessionFormat = "Lesson" | "Test";
+
+export type { Session, SessionType, SessionFormat };
