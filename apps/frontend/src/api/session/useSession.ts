@@ -11,13 +11,13 @@ const useCandidateSessions = (candidateId: string) => {
             getData(API_ENDPOINTS.SESSION + "/candidate/" + candidateId),
     });
 
-    const sessions = data?.map((session) => ({
+    const sessions: Session[] | undefined = data?.map((session: Session) => ({
         ...session,
         startTime: new Date(session.startTime),
         endTime: new Date(session.endTime),
     }));
 
-    return { sessions, isLoading, error };
+    return { sessions: sessions || [], isLoading, error };
 };
 
 export default useCandidateSessions;

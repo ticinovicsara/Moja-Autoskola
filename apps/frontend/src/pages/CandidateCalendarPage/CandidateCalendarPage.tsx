@@ -13,7 +13,7 @@ const CandidateCalendarPage = () => {
                 <ArrowBack />
                 <h2>KALENDAR</h2>
             </div>
-            <Calendar />
+            <Calendar sessions={sessions} />
             <div className={`${styles.upcomingContainer} container`}>
                 <div className={`${styles.upcomingHeader} container`}>
                     <h3>Ovaj tjedan</h3>

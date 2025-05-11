@@ -1,15 +1,14 @@
 import ReactCalendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import styles from "./Calendar.module.css";
+import { FC } from "react";
+import { Session } from "@/types";
 
-const markedDates = [
-    { date: new Date(2025, 4, 15), type: "FirstAid" },
-    { date: new Date(2025, 4, 16), type: "FirstAid" },
-    { date: new Date(2025, 4, 20), type: "Driving" },
-    { date: new Date(2025, 4, 25), type: "Theory" },
-];
+interface CalendarProps {
+    sessions: Session[];
+}
 
-const Calendar = () => {
+const Calendar: FC<CalendarProps> = ({ sessions }) => {
     const formatShortWeekday = (_locale: string | undefined, date: Date) => {
         return ["N", "P", "U", "S", "Č", "P", "S"][date.getDay()];
     };
@@ -34,11 +33,11 @@ const Calendar = () => {
     };
 
     const isMarkedDate = (date: Date) => {
-        return markedDates.find(
-            (markedDate) =>
-                markedDate.date.getDate() === date.getDate() &&
-                markedDate.date.getMonth() === date.getMonth() &&
-                markedDate.date.getFullYear() === date.getFullYear()
+        return sessions.find(
+            (session) =>
+                session.startTime.getDate() === date.getDate() &&
+                session.startTime.getMonth() === date.getMonth() &&
+                session.startTime.getFullYear() === date.getFullYear()
         );
     };
 

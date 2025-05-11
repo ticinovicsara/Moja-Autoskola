@@ -7,8 +7,6 @@ interface SessionListProps {
 }
 
 const SessionList: FC<SessionListProps> = ({ sessions }) => {
-    console.log("sessions: ", sessions);
-
     return (
         <div className={styles.sessionList}>
             {sessions.map((session) => (
