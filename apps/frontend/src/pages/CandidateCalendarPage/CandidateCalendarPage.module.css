@@ -7,4 +7,9 @@
     align-items: center;
     justify-content: flex-start;
     gap: 24px;
+    margin-bottom: 32px;
+}
+
+.header > h2 {
+    font-weight: 600;
 }

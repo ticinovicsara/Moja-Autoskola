@@ -3,8 +3,8 @@
     border: none !important;
 }
 
-.sundayTile {
-    color: #888888 !important;
+.sundayTile > abbr {
+    opacity: 0.5 !important;
 }
 
 .calendar
@@ -21,13 +21,16 @@
         .react-calendar__month-view__days__day--weekend:nth-child(7n + 1):not(
                 .react-calendar__month-view__days__day--neighboringMonth
             )
-    ) {
-    color: #888888;
+    )
+    > abbr {
+    opacity: 0.5;
 }
 
 .calendar :global(.react-calendar__month-view__weekdays__weekday) {
     border-bottom: none !important;
     text-decoration: none !important;
+    font-weight: 700 !important;
+    color: var(--asphalt-border) !important;
 }
 
 .calendar :global(.react-calendar__month-view__weekdays__weekday abbr) {
@@ -37,10 +40,33 @@
 
 .calendar :global(.react-calendar__navigation) {
     border: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 4px;
+}
+
+.calendar :global(.react-calendar__navigation__arrow) {
+    font-size: 32px !important;
+    padding: 8px !important;
+    opacity: 0.5;
+    font-weight: 300 !important;
+}
+
+.calendar :global(.react-calendar__navigation__label) {
+    font-weight: 700 !important;
+    color: var(--asphalt-border) !important;
+    flex-grow: 0 !important;
+    max-width: 200px !important;
 }
 
 .calendar :global(.react-calendar__tile) {
     border: none !important;
+}
+
+.calendar :global(.react-calendar__month-view__days__day) {
+    font-weight: 400 !important;
 }
 
 .calendar :global(.react-calendar__month-view) {
@@ -53,6 +79,8 @@
 
 .calendar :global(*) {
     border-color: transparent !important;
+    font-size: 16px !important;
+    font-family: "Satoshi", sans-serif !important;
 }
 
 .calendar :global(.react-calendar__tile--now) {
@@ -73,7 +101,14 @@
     transform: translate(-50%, -50%);
     width: 2rem;
     height: 2rem;
-    border: 2px solid var(--text-color, #000000);
+    border: 1px solid var(--asphalt-border);
     border-radius: 50%;
     z-index: 0;
+    opacity: 1 !important;
+}
+
+.sundayTile.react-calendar__tile--now::before,
+.calendar :global(.sundayTile.react-calendar__tile--now::before) {
+    opacity: 1 !important;
+    border: 1px solid black !important;
 }
