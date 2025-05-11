@@ -15,6 +15,15 @@ export class InstructorCandidateService {
     private readonly userService: UserService,
   ) {}
 
+  async getInstructorFromCandidate(candidateId: string) {
+    return await this.prisma.candidateInstructor.findFirst({
+      where: { candidateId: candidateId },
+      include: {
+        instructor: true,
+      },
+    });
+  }
+
   async getAllInstructorCandidates() {
     const allInstructorCandidates =
       await this.prisma.candidateInstructor.findMany({

@@ -4,10 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { routes } from "@/constants";
 import { useState } from "react";
 import { InstructorPopup } from "../Popup/InstructorPopup";
+import { useAuth } from "@/hooks";
 
 export const InstructorDashboard = () => {
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
+  const { user } = useAuth();
+  const userId = user?.id || "";
+  const { nextSession, loading: loadingNext } =
+    useInstructorNextSession(userId);
 
   return (
     <>

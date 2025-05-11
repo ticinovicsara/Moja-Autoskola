@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import DashboardLayout from "./DashboardLayuot";
 import {
   ProgressCard,
@@ -9,9 +10,9 @@ import {
   useAuth,
   useCandidateNextSession,
   useCandidateProgress,
+  useGetInstructor,
 } from "@/hooks";
 import { CandidatePopup } from "../Popup/CandidatePopup";
-import { useMemo, useState } from "react";
 
 export const CandidateDashboard = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -25,10 +26,30 @@ export const CandidateDashboard = () => {
   } = useCandidateProgress(userId);
 
   const { nextSession, loading: loadingNext } = useCandidateNextSession(userId);
+  const instructorData = useGetInstructor(userId);
+
+  const instructorInfo = useMemo(() => {
+    if (!instructorData || !instructorData.name) {
+      return {
+        name: "Instruktor nije dostupan",
+        phone: "N/A",
+      };
+    }
+
+    return {
+      name: instructorData.name,
+      phone: "099-123-456",
+    };
+  }, [instructorData, userId]);
 
   const memoizedInstructorCard = useMemo(
-    () => <CandidateInstructorCard instructor="Marko Marković" phone="123" />,
-    []
+    () => (
+      <CandidateInstructorCard
+        instructor={instructorInfo.name}
+        phone={instructorInfo.phone}
+      />
+    ),
+    [instructorInfo]
   );
 
   const progressMessage = loadingProgress
@@ -41,13 +62,12 @@ export const CandidateDashboard = () => {
     return `Sljedeća aktivnost: ${nextSession.activity}`;
   }, [loadingNext, nextSession]);
 
-  const scheduleTime = nextSession
-    ? new Date(nextSession.date).toLocaleString("hr-HR")
-    : "";
+  const scheduleTime = useMemo(() => {
+    return nextSession
+      ? new Date(nextSession.date).toLocaleString("hr-HR")
+      : "";
+  }, [nextSession]);
 
-  if (!userId) {
-    return <div>User not found</div>;
-  }
   return (
     <>
       <DashboardLayout

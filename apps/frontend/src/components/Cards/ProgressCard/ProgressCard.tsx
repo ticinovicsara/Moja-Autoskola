@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./progressCard.module.css";
 import CardComponent from "../CardComponent/CardComponent";
 import c from "../CardComponent/cardComponent.module.css";

@@ -12,4 +12,6 @@ export const API_ENDPOINTS = {
     CANDIDATE: "/session/candidate",
     INSTRUCTOR: "/session/instructor",
   },
+
+  INSTRUCTOR_CANDIDATE: "/instructor-candidate",
 };
