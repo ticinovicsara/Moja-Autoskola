@@ -7,4 +7,9 @@ export const API_ENDPOINTS = {
   USER: {
     PROGRESS: "/user/progress",
   },
+
+  SESSION: {
+    CANDIDATE: "/session/candidate",
+    INSTRUCTOR: "/session/instructor",
+  },
 };

@@ -38,10 +38,12 @@ export const ScheduleCard: React.FC<ScheduleCardProps> = ({
         <div style={{ fontWeight: "bold", marginBottom: "0.5em" }}>
           {activity}
         </div>
-        <div>
-          <span style={{ marginRight: "8px" }}>🕒</span>
-          <span>{time}</span>
-        </div>
+        {time && (
+          <div>
+            <span style={{ marginRight: "8px" }}>🕒</span>
+            <span>{time}</span>
+          </div>
+        )}
       </div>
     </CardComponent>
   );

@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
   margin-top: 10px;
-  border-top: 1px solid var(--asphalt-border);
+  border-top: 1px solid #3e9ac4;
   border-radius: 1em;
 }
 

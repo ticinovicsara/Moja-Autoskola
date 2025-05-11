@@ -3,7 +3,7 @@ import { StatusCard, ScheduleCard } from "../Cards";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@/constants";
 import { useState } from "react";
-import Popup from "../Popup/Popup";
+import { InstructorPopup } from "../Popup/InstructorPopup";
 
 export const InstructorDashboard = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ export const InstructorDashboard = () => {
         }
       />
 
-      {showPopup && <Popup onClose={() => setShowPopup(false)} />}
+      {showPopup && <InstructorPopup onClose={() => setShowPopup(false)} />}
     </>
   );
 };

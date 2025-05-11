@@ -14,8 +14,8 @@ import {
   Register,
   ProfilePage,
   InstructorCalendarPage,
+  CandidateCalendarPage,
 } from "@/pages";
-import CandidateCalendarPage from "@/pages/Candidate/CandidateCalendarPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const AppRouter = () => {

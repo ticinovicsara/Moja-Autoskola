@@ -8,7 +8,6 @@
 }
 
 .card-header {
-  border: 1px solid var(--asphalt-border);
   padding: 3%;
   border-radius: 1em;
   z-index: 10;
@@ -18,7 +17,6 @@
 .card-body {
   z-index: 1;
   position: relative;
-  border: 1px solid var(--asphalt-border);
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-bottom-left-radius: 1em;
@@ -29,7 +27,6 @@
 }
 
 .card-body-noHeader {
-  border: 1px solid var(--asphalt-border);
   border-radius: 1em;
   padding: 1em;
 }
@@ -42,4 +39,5 @@
 
 .center-title {
   text-align: center;
+  padding: 0.3em;
 }

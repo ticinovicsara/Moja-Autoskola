@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { getCandidateProgress } from "@/api";
 
 const calculateProgress = (
@@ -6,7 +6,7 @@ const calculateProgress = (
   passedLessons: any[],
   totalTests: number,
   totalLessons: number
-) => {
+): number => {
   const completedTests = passedTests.length;
   const completedLessons = passedLessons.length;
 
@@ -18,16 +18,27 @@ const calculateProgress = (
 
 export const useCandidateProgress = (candidateId: string) => {
   const [progress, setProgress] = useState<number | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const prevCandidateIdRef = useRef<string | null>(null);
+
   useEffect(() => {
+    if (candidateId === prevCandidateIdRef.current) return;
+    prevCandidateIdRef.current = candidateId;
+
+    let isMounted = true;
+
     const fetchProgress = async () => {
+      if (!candidateId) return;
+
       setLoading(true);
       setError(null);
+
       try {
         const data = await getCandidateProgress(candidateId);
-        if (data) {
+
+        if (data && isMounted) {
           const { passedTests, passedLessons } = data;
 
           const totalTests = 10;
@@ -42,23 +53,27 @@ export const useCandidateProgress = (candidateId: string) => {
 
           setProgress(progressPercentage);
         }
-      } catch (error) {
-        setError("Došlo je do pogreške prilikom učitavanja napretka.");
+      } catch (err) {
+        if (isMounted) {
+          setError("Došlo je do pogreške prilikom učitavanja napretka.");
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
     fetchProgress();
+
+    return () => {
+      isMounted = false;
+    };
   }, [candidateId]);
 
-  if (loading) {
-    return { progress: null, message: "Učitavanje napretka..." };
-  }
-
-  if (error) {
-    return { progress: null, message: error };
-  }
-
-  return { progress, message: null };
+  return {
+    progress,
+    loading,
+    error,
+  };
 };
