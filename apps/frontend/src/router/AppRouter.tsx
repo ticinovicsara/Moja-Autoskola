@@ -12,7 +12,6 @@ import {
   InstructorCandidateListPage,
   Login,
   Register,
-  ProfilePage,
   InstructorCalendarPage,
   CandidateCalendarPage,
 } from "@/pages";
@@ -40,7 +39,6 @@ const AppRouter = () => {
             path={routes.CANDIDATE_CALENDAR}
             element={<CandidateCalendarPage />}
           />
-          <Route path={routes.PROFLE} element={<ProfilePage />} />
         </Route>
 
         <Route element={<InstructorLayout />}>
@@ -48,7 +46,6 @@ const AppRouter = () => {
             path={routes.INSTRUCTOR_DASHBOARD}
             element={<InstructorDashboardPage />}
           />{" "}
-          <Route path={routes.PROFLE} element={<ProfilePage />} />
           <Route
             path={routes.INSTRUCTOR_CANDIDATE_LIST}
             element={<InstructorCandidateListPage />}

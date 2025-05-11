@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/constants/endpoints";
-import api from "../base";
+import api from "../api";
 
 export const loginService = async (email: string, password: string) => {
   try {

@@ -1,4 +1,4 @@
-export interface StatusCardProps {
+export interface ArrowCardProps {
   title: string;
   color: string;
   onClick?: () => void;

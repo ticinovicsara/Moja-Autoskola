@@ -5,6 +5,8 @@
   font-family: "Satoshi", sans-serif;
   font-size: large;
   color: var(--asphalt-border);
+  flex: 1;
+  height: 100%;
 }
 
 .card-header {

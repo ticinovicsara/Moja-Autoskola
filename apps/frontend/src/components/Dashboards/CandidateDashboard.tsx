@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import DashboardLayout from "./DashboardLayuot";
 import {
   ProgressCard,
-  StatusCard,
+  ArrowCard,
   ScheduleCard,
   CandidateInstructorCard,
 } from "../Cards";
@@ -43,16 +43,6 @@ export const CandidateDashboard = () => {
     };
   }, [instructorData, userId]);
 
-  const memoizedInstructorCard = useMemo(
-    () => (
-      <CandidateInstructorCard
-        instructor={instructorInfo.name}
-        phone={instructorInfo.phone}
-      />
-    ),
-    [instructorInfo]
-  );
-
   const progressMessage = loadingProgress
     ? "Učitavanje napretka..."
     : progressError;
@@ -73,7 +63,9 @@ export const CandidateDashboard = () => {
   }
 
   const scheduleTime = useMemo(() => {
-    return startTime ? formatSessionTime(startTime) : "";
+    return startTime
+      ? formatSessionTime(new Date(startTime).toISOString())
+      : undefined;
   }, [startTime]);
 
   return (
@@ -86,15 +78,32 @@ export const CandidateDashboard = () => {
             <ProgressCard title="Ukupno odrađeno" progress={progress || 0} />
           )
         }
-        left={
-          <StatusCard
-            title="ODABERI TERMIN VOŽNJE"
-            color="#F97C7C"
-            onClick={() => setShowPopup(true)}
-          />
+        middle={
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              gap: "1rem",
+            }}
+          >
+            <div style={{ flex: 1 }}>
+              <ArrowCard
+                title="ODABERI TERMIN VOŽNJE"
+                color="#F97C7C"
+                onClick={() => setShowPopup(true)}
+              />
+            </div>
+            <div style={{ flex: 1 }}>
+              <CandidateInstructorCard
+                instructor={instructorInfo.name}
+                phone={instructorInfo.phone}
+              />
+            </div>
+          </div>
         }
-        right={memoizedInstructorCard}
-        bottom={<ScheduleCard activity={scheduleContent} time={scheduleTime} />}
+        bottom={
+          <ScheduleCard activity={scheduleContent} time={scheduleTime ?? ""} />
+        }
       />
 
       {showPopup && <CandidatePopup onClose={() => setShowPopup(false)} />}

@@ -1,10 +1,10 @@
 import React, { useMemo } from "react";
-import "./scheduleCard.module.css";
 import CardComponent from "../CardComponent/CardComponent";
 import { ScheduleCardProps } from "./ScheduleCardProps";
 import { routes } from "@/constants";
 import { UserRole } from "@/enums";
 import { useAuth } from "@/hooks";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 export const ScheduleCard: React.FC<ScheduleCardProps> = ({
   activity,
@@ -39,8 +39,8 @@ export const ScheduleCard: React.FC<ScheduleCardProps> = ({
           {activity}
         </div>
         {time && (
-          <div>
-            <span style={{ marginRight: "8px" }}>🕒</span>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5em" }}>
+            <CalendarMonthIcon />
             <span>{time}</span>
           </div>
         )}

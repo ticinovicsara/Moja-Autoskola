@@ -16,7 +16,7 @@ export const CandidateInstructorCard: React.FC<
     >
       <div>
         <div>{instructor}</div>
-        <span>Br. tel: {phone}</span>
+        <span>{phone}</span>
       </div>
     </CardComponent>
   );

@@ -2,10 +2,10 @@ import { ArrowBack, Calendar, SessionList } from "@/components";
 import styles from "./CandidateCalendarPage.module.css";
 import { Plus } from "@/assets/svgs";
 import { getIdFromToken, getUpcomingMonday } from "@/utils";
-import { useCandidateSessions } from "@/api";
+import { useUserSessions } from "@/api";
 
 const CandidateCalendarPage = () => {
-  const { sessions, isLoading, error } = useCandidateSessions(
+  const { sessions, isLoading, error } = useUserSessions(
     getIdFromToken() ?? ""
   );
   const upcomingSessions = sessions

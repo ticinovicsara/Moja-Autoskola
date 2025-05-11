@@ -1,5 +1,5 @@
 import DashboardLayout from "./DashboardLayuot";
-import { StatusCard, ScheduleCard } from "../Cards";
+import { ArrowCard, ScheduleCard } from "../Cards";
 import { routes } from "@/constants";
 import { useMemo, useState } from "react";
 import { InstructorPopup } from "../Popup/InstructorPopup";
@@ -20,25 +20,25 @@ export const InstructorDashboard = () => {
   }, [loading, activity]);
 
   const scheduleTime = useMemo(() => {
-    return startTime ? formatSessionTime(startTime) : "";
+    return startTime ? formatSessionTime(startTime.toISOString()) : "";
   }, [startTime]);
 
   return (
     <>
       <DashboardLayout
-        left={
-          <StatusCard
-            title="REZERVIRAJ TERMIN VOŽNJE"
-            color="#F97C7C"
-            onClick={() => setShowPopup(true)}
-          />
-        }
-        right={
-          <StatusCard
-            title="POGLEDAJ LISTU KANDIDATA"
-            color="#B1CF86"
-            linkTo={routes.INSTRUCTOR_CANDIDATE_LIST}
-          />
+        middle={
+          <>
+            <ArrowCard
+              title="REZERVIRAJ TERMIN VOŽNJE"
+              color="#F97C7C"
+              onClick={() => setShowPopup(true)}
+            />
+            <ArrowCard
+              title="POGLEDAJ LISTU KANDIDATA"
+              color="#B1CF86"
+              linkTo={routes.INSTRUCTOR_CANDIDATE_LIST}
+            />
+          </>
         }
         bottom={<ScheduleCard activity={scheduleContent} time={scheduleTime} />}
       />

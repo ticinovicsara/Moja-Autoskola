@@ -1,10 +1,10 @@
 import React from "react";
 import CardComponent from "../CardComponent/CardComponent";
-import styles from "./status.module.css";
-import { StatusCardProps } from "./StatusCardProps";
+import styles from "./arrowCard.module.css";
+import { ArrowCardProps } from "./ArrowCardProps";
 import { ArrowBack } from "@/components/ArrowBack/ArrowBack";
 
-export const StatusCard: React.FC<StatusCardProps> = ({
+export const ArrowCard: React.FC<ArrowCardProps> = ({
   title,
   color,
   onClick,
@@ -14,7 +14,6 @@ export const StatusCard: React.FC<StatusCardProps> = ({
     <CardComponent
       bodyBgColor={color}
       width="100%"
-      height="100%"
       bodyPadding="1.5em"
       linkTo={linkTo}
     >

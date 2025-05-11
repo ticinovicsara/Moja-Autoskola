@@ -10,7 +10,7 @@ export const GreetingComponent: React.FC = () => {
   return (
     <div className={styles.wrapper}>
       <p className={styles.greetingText}>Pozdrav,</p>
-      <h2 className={styles.name}>{name}</h2>
+      <h2 className={styles.name}>{name?.toUpperCase()}</h2>
     </div>
   );
 };

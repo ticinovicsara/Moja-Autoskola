@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { Session } from "@/types";
-import { getInstructorSessions } from "@/api/instructor/getInstructorSessions";
+import { useUserSessions } from "@/api";
 
 export const useInstructorNextSession = (instructorId: string) => {
   const [nextSession, setNextSession] = useState<Session | null>(null);
@@ -17,7 +17,7 @@ export const useInstructorNextSession = (instructorId: string) => {
     setError(null);
 
     try {
-      const sessions = await getInstructorSessions(instructorId);
+      const { sessions } = await useUserSessions(instructorId);
 
       if (!sessions || sessions.length === 0) {
         setNextSession(null);
@@ -28,14 +28,24 @@ export const useInstructorNextSession = (instructorId: string) => {
       const now = new Date();
 
       const upcomingSessions = sessions
-        .filter((session: { startTime: string }) => {
-          const sessionStartTime = new Date(session.startTime);
+        .filter((session: Session) => {
+          const sessionStartTime =
+            session.startTime instanceof Date
+              ? session.startTime
+              : new Date(session.startTime);
           return sessionStartTime >= now;
         })
-        .sort(
-          (a: { startTime: string }, b: { startTime: string }) =>
-            new Date(a.startTime).getTime() - new Date(b.startTime).getTime()
-        );
+        .sort((a: Session, b: Session) => {
+          const aTime =
+            a.startTime instanceof Date
+              ? a.startTime.getTime()
+              : new Date(a.startTime).getTime();
+          const bTime =
+            b.startTime instanceof Date
+              ? b.startTime.getTime()
+              : new Date(b.startTime).getTime();
+          return aTime - bTime;
+        });
 
       setNextSession(upcomingSessions[0] || null);
     } catch (err: any) {

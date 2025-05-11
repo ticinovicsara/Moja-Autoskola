@@ -1,5 +1,4 @@
 import { GreetingComponent, CandidateDashboard, Navbar } from "@/components";
-import FooterComponent from "@/components/Footer/FooterComponent";
 
 const CandidateDashboardPage = () => {
   return (
@@ -7,7 +6,6 @@ const CandidateDashboardPage = () => {
       <Navbar />
       <GreetingComponent />
       <CandidateDashboard />
-      <FooterComponent />
     </>
   );
 };
