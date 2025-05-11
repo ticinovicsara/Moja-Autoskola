@@ -3,7 +3,19 @@
 
   --text-color: #000000;
 
+<<<<<<< HEAD
   --asphalt-border: #3d3d3d;
 
   --green: #b1cf86;
+=======
+    --asphalt-border: #4d4d4d;
+
+    --green: #b1cf86;
+
+    --blue: #84cdee;
+
+    --red: #f97c7c;
+
+    --gray: #afafaf;
+>>>>>>> 4d47fe617a071e8ab87497a4d53f09ce2a4ed569
 }

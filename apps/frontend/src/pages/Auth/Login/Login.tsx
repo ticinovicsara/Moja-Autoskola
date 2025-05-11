@@ -70,7 +70,7 @@ export const Login = () => {
           value={password}
         />
 
-        {error && <div className={c.errorMessage}>{error}</div>}
+        {error && <div className="errorMessage">{error}</div>}
 
         <button className="authBtn">Dalje</button>
       </form>

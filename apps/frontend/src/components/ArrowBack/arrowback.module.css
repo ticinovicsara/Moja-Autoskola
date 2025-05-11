@@ -7,3 +7,7 @@
 .rotateArrow {
   transform: rotate(180deg);
 }
+
+.arrowWrapper img {
+    color: var(--asphalt-border);
+}

@@ -26,3 +26,13 @@ export const getUserFromToken = (token: string): JwtPayload | null => {
     return null;
   }
 };
+
+export const getIdFromToken = (): string | null => {
+  const token = localStorage.getItem("token");
+  if (!token) return null;
+
+  const decoded = getUserFromToken(token);
+  if (!decoded) return null;
+
+  return decoded.id;
+};
