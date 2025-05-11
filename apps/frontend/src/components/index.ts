@@ -7,3 +7,4 @@ export * from "./Dashboards/CandidateDashboard";
 export * from "./Dashboards/DashboardLayuot";
 export * from "./Dashboards/InstructorDashboard";
 export * from "./Footer/FooterComponent";
+export { default as Calendar } from "./Calendar/Calendar";
