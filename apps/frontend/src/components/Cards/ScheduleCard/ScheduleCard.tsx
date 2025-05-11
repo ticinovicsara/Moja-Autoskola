@@ -1,22 +1,29 @@
-import React, { useContext } from "react";
+import React, { useMemo } from "react";
 import "./scheduleCard.module.css";
 import CardComponent from "../CardComponent/CardComponent";
 import { ScheduleCardProps } from "./ScheduleCardProps";
-import { AuthContext } from "@/contexts/AuthContext/authContext";
 import { routes } from "@/constants";
 import { UserRole } from "@/enums";
+import { useAuth } from "@/hooks";
 
 export const ScheduleCard: React.FC<ScheduleCardProps> = ({
   activity,
   time,
 }) => {
-  const context = useContext(AuthContext);
-  const user = context?.user;
+  const context = useAuth();
+  const user = context.user;
 
-  const calendarLink =
-    user?.role === UserRole.Candidate
-      ? routes.CANDIDATE_DASHBOARD
-      : routes.INSTRUCTOR_CALENDAR;
+  const calendarLink = useMemo(() => {
+    if (!user) return "#";
+
+    if (user.role === UserRole.Candidate) return routes.CANDIDATE_CALENDAR;
+    if (user.role === UserRole.Instructor) return routes.INSTRUCTOR_CALENDAR;
+
+    console.warn("Nepoznata uloga:", user.role);
+    return "#";
+  }, [user]);
+
+  if (!user) return null;
 
   return (
     <CardComponent

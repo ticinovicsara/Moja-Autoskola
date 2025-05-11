@@ -15,6 +15,7 @@ import {
   ProfilePage,
   InstructorCalendarPage,
 } from "@/pages";
+import CandidateCalendarPage from "@/pages/Candidate/CandidateCalendarPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const AppRouter = () => {
@@ -34,6 +35,10 @@ const AppRouter = () => {
           <Route
             path={routes.CANDIDATE_DASHBOARD}
             element={<CandidateDashboardPage />}
+          />
+          <Route
+            path={routes.CANDIDATE_CALENDAR}
+            element={<CandidateCalendarPage />}
           />
           <Route path={routes.PROFLE} element={<ProfilePage />} />
         </Route>

@@ -193,6 +193,53 @@ async function main() {
     },
   });
 
+  await prisma.testResult.createMany({
+    data: [
+      {
+        candidateId: candidate1.id,
+        date: new Date('2025-05-01T09:00:00Z'),
+        type: SessionType.Theory,
+        points: 85,
+        passed: true,
+      },
+      {
+        candidateId: candidate1.id,
+        date: new Date('2025-05-02T09:00:00Z'),
+        type: SessionType.Driving,
+        points: 90,
+        passed: true,
+      },
+      {
+        candidateId: candidate2.id,
+        date: new Date('2025-05-01T09:00:00Z'),
+        type: SessionType.Theory,
+        points: 75,
+        passed: false,
+      },
+      {
+        candidateId: candidate2.id,
+        date: new Date('2025-05-02T09:00:00Z'),
+        type: SessionType.Driving,
+        points: 80,
+        passed: true,
+      },
+      {
+        candidateId: candidate3.id,
+        date: new Date('2025-05-01T09:00:00Z'),
+        type: SessionType.Theory,
+        points: 92,
+        passed: true,
+      },
+      {
+        candidateId: candidate3.id,
+        date: new Date('2025-05-02T09:00:00Z'),
+        type: SessionType.Driving,
+        points: 88,
+        passed: true,
+      },
+    ],
+  });
+
   await prisma.enrollmentRequest.create({
     data: {
       candidateId: candidate1.id,
