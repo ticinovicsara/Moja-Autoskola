@@ -1,6 +1,7 @@
 .calendar {
     width: 100%;
     border: none !important;
+    background-color: var(--background-color);
 }
 
 .sundayTile {
