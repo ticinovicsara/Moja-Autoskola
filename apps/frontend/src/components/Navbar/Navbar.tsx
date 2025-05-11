@@ -1,4 +1,4 @@
-import { Hamburger, Logo, Profile } from "@/assets/images";
+import { Hamburger, Logo, Profile } from "@/assets/svgs";
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {

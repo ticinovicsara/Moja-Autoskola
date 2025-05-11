@@ -1,0 +1,8 @@
+.sessionList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.session {
+}

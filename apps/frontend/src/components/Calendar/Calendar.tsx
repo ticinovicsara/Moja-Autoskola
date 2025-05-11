@@ -41,6 +41,7 @@ const Calendar = () => {
                 markedDate.date.getFullYear() === date.getFullYear()
         );
     };
+
     const tileClassName = ({ date, view }: { date: Date; view: string }) => {
         if (view !== "month") return null;
 
@@ -58,6 +59,7 @@ const Calendar = () => {
 
         return classes.length ? classes.join(" ") : null;
     };
+
     return (
         <ReactCalendar
             className={`${styles.calendar} container`}

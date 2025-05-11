@@ -2,7 +2,7 @@
     margin-top: 28px;
 }
 
-.header {
+.calendarHeader {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -10,6 +10,26 @@
     margin-bottom: 32px;
 }
 
-.header > h2 {
+.calendarHeader > h2 {
     font-weight: 600;
+}
+
+.upcomingContainer {
+    border: var(--asphalt-border) 1px solid;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom: none;
+    padding: 16px 0;
+}
+
+.upcomingHeader {
+    display: flex;
+    justify-content: space-between;
+    font-family: "Satoshi", sans-serif;
+}
+
+.upcomingHeader > h3 {
+    font-family: "Satoshi", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
 }
