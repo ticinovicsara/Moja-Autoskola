@@ -1,6 +1,7 @@
 import c from "./inputfield.module.css";
 
 type InputFieldType = {
+  label?: string;
   type: string;
   placeholder: string;
   onChange: (value: string) => void;
@@ -11,6 +12,7 @@ type InputFieldType = {
 };
 
 export const InputField = ({
+  label,
   type,
   placeholder,
   onChange,
@@ -21,6 +23,8 @@ export const InputField = ({
 }: InputFieldType) => {
   return (
     <>
+      <label className={c.label}> {label}</label>
+
       <input
         type={type}
         className={c.input}
@@ -30,6 +34,7 @@ export const InputField = ({
         required={required}
         pattern={pattern}
       />
+
       {error && <p className={c.error}>{error}</p>}
     </>
   );

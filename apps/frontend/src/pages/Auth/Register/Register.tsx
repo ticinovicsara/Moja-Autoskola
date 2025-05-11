@@ -199,12 +199,18 @@ export const Register = () => {
         return (
           <div className={c.inputsWrapper}>
             <InputField
+              label="Datum rođenja"
               type="date"
-              value={formData.dateOfBirth}
+              value={
+                formData.dateOfBirth
+                  ? formData.dateOfBirth.toString().split("T")[0]
+                  : ""
+              }
               onChange={(val) => updateField("dateOfBirth", val)}
               placeholder="Datum rođenja"
               error={errors.dateOfBirth}
             />
+
             <InputField
               type="text"
               value={formData.oib}
