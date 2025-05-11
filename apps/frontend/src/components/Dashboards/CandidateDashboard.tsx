@@ -10,7 +10,7 @@ export const CandidateDashboard = () => {
   return (
     <DashboardLayout
       top={<ProgressCard title="Ukupno odrađeno" progress={55} />}
-      left={<StatusCard title="Rezerviraj termin vožnje" color="#F97C7C" />}
+      left={<StatusCard title="ODABERI TERMIN VOŽNJE" color="#F97C7C" />}
       right={
         <CandidateInstructorCard instructor="Marko Marković" phone="123" />
       }

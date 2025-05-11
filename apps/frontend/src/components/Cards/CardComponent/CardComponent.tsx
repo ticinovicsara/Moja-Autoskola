@@ -10,6 +10,7 @@ export default function CardComponent({
   width,
   height,
   headerTitle,
+  titlePosition,
   children,
   className,
   bodyPadding,
@@ -18,6 +19,7 @@ export default function CardComponent({
   const headerStyle = {
     backgroundColor: headerBgColor,
     color: headerTextColor,
+    titlePosition: titlePosition,
   };
 
   const bodyStyle = {
@@ -31,13 +33,17 @@ export default function CardComponent({
     height: height,
   };
 
+  const titleClass = titlePosition === "center" ? styles["center-title"] : "";
+
   return (
     <Link to={linkTo ?? "#"} style={{ textDecoration: "none" }}>
       <div className={`${styles["card-container"]} ${className}`}>
         <div className={styles["custom-card"]} style={cardStyle}>
           {headerTitle && (
             <div className={styles["card-header"]} style={headerStyle}>
-              <div className={styles["card-title"]}>{headerTitle}</div>
+              <div className={`${styles["card-title"]} ${titleClass}`}>
+                {headerTitle}
+              </div>
             </div>
           )}
           <div

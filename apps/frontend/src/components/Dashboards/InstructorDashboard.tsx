@@ -9,11 +9,6 @@ export const InstructorDashboard = () => {
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
 
-  const handleNavigateToCandidates = () => {
-    console.log("Attempting navigation to:", routes.INSTRUCTOR_CANDIDATE_LIST);
-    navigate("/instructor-candidate-list");
-  };
-
   return (
     <>
       <DashboardLayout
@@ -28,7 +23,7 @@ export const InstructorDashboard = () => {
           <StatusCard
             title="POGLEDAJ LISTU KANDIDATA"
             color="#B1CF86"
-            onClick={handleNavigateToCandidates}
+            linkTo={routes.INSTRUCTOR_CANDIDATE_LIST}
           />
         }
         bottom={

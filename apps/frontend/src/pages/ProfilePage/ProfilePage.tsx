@@ -1,46 +1,31 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import styles from "./profile.module.css";
 import { ArrowBack } from "@/components";
-
-type UserRole = "candidate" | "instructor" | "admin";
-
-interface User {
-  id: string;
-  name: string;
-  role: UserRole;
-  profileImage?: string;
-}
+import { AuthContext } from "@/contexts/AuthContext/authContext";
+import { UserRole } from "@/enums";
+import { routes } from "@/constants";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const context = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      setLoading(true);
-      try {
-        const mockUser: User = {
-          id: "1",
-          name: "Ante Antić",
-          role: "candidate",
-          profileImage: undefined,
-        };
-        await new Promise((resolve) => setTimeout(resolve, 500));
-        setUser(mockUser);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchUser();
-  }, []);
+  if (!context) {
+    return (
+      <div className={styles["error-screen"]}>
+        <p>Error loading user profile</p>
+      </div>
+    );
+  }
+
+  const { user, isLoading, logout } = context;
 
   const handleLogout = () => {
-    console.log("Logging out...");
+    logout();
+    navigate(routes.HOME);
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className={styles["loading-screen"]}>
         <p>Loading...</p>
@@ -71,15 +56,17 @@ const ProfilePage = () => {
         </svg>
 
         <div className={styles["profile-name-group"]}>
-          <h2 className={styles["profile-name"]}>{user.name}</h2>
+          <h2 className={styles["profile-name"]}>
+            {user.firstName} {user.lastName}
+          </h2>
           <p className={styles["profile-label"]}>Telefax</p>
         </div>
       </div>
 
       <div className={styles["profile-options"]}>
         <button className={styles["profile-button"]}>Tvoji podaci</button>
-        <button className={styles["profile-button"]}>Promijeni lozinku</button>
-        {user.role === "candidate" && (
+        <button className={styles["profile-button"]}>Postavke profila</button>
+        {user.role === UserRole.Candidate && (
           <button className={styles["profile-button"]}>Tvoj napredak</button>
         )}
       </div>

@@ -8,6 +8,7 @@ export const CandidateInstructorCard: React.FC<
   return (
     <CardComponent
       headerTitle="Tvoj instruktor"
+      titlePosition="center"
       headerBgColor="#6C8C3E"
       bodyBgColor="#B1CF86"
       borderColor="#eab308"

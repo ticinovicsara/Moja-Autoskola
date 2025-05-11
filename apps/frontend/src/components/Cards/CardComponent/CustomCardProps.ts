@@ -6,6 +6,7 @@ export interface CustomCardProps {
   width?: string;
   height?: string;
   headerTitle?: string;
+  titlePosition?: string;
   children?: React.ReactNode;
   borderColor?: string;
   className?: string;

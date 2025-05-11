@@ -1,10 +1,10 @@
-import { UserRoles } from "@/enums";
+import { UserRole } from "@/enums";
 import { jwtDecode } from "jwt-decode";
 
 export type JwtPayload = {
   id: string;
   email: string;
-  role: UserRoles;
+  role: UserRole;
   firstName: string;
   lastName: string;
   dateOfBirth: Date;

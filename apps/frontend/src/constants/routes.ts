@@ -2,12 +2,12 @@ const routes = {
   HOME: "/",
   LOGIN: "/login",
   REGISTER: "/register",
+  PROFLE: "/profile",
 
   CANDIDATE_DASHBOARD: "/candidate-dashboard",
-  CANDIDATE_PROFILE: "/candidate-profile",
+  CANDIDATE_CALENDAR: "/candidate-calendar",
 
   INSTRUCTOR_DASHBOARD: "/instructor-dashboard",
-  INSTRUCTOR_PROFILE: "/instructor-profile",
   INSTRUCTOR_CANDIDATE_LIST: "/instructor-candidate-list",
   INSTRUCTOR_CALENDAR: "/instructor-calendar",
 };
