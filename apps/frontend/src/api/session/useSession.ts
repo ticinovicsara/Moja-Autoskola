@@ -8,7 +8,7 @@ const useCandidateSessions = (candidateId: string) => {
     const { data, isLoading, error } = useQuery<Session[], AxiosError>({
         queryKey: ["sessions", candidateId],
         queryFn: () =>
-            getData(API_ENDPOINTS.SESSION + "/candidate/" + candidateId),
+            getData(API_ENDPOINTS.SESSION.CANDIDATE + "/" + candidateId),
     });
 
     const sessions: Session[] | undefined = data?.map((session: Session) => ({
