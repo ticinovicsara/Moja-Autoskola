@@ -1,0 +1,111 @@
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: white;
+  border-bottom: 1px solid #eee;
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
+  background-color: #333;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: white;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.page-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.search-container {
+  padding: 15px;
+  background-color: white;
+}
+
+.search-box {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  outline: none;
+}
+
+.search-button {
+  padding: 10px 15px;
+  background-color: #f5f5f5;
+  border: none;
+  border-left: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.candidates-list {
+  padding: 10px 15px;
+  background-color: white;
+}
+
+.candidate-card {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  background-color: white;
+}
+
+.candidate-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 15px;
+  object-fit: cover;
+}
+
+.candidate-name {
+  font-size: 16px;
+}
