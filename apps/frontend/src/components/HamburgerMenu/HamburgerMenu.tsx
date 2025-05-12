@@ -33,7 +33,7 @@ const HamburgerMenu: FC<HamburgerMenuProps> = ({ toggleMenu }) => {
                         {user?.firstName} {user?.lastName}
                     </p>
                     <p>{user?.email}</p>
-                    <p>098 903 2571</p>
+                    <p>{user?.phoneNumber}</p>
                 </div>
             </div>
             <div className={styles.links}>
