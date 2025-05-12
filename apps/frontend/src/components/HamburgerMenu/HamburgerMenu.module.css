@@ -3,14 +3,13 @@
   top: 0;
   right: 0;
   width: 100%;
-  max-width: 400px;
+  max-width: 700px;
   height: 100%;
   background-color: var(--background-color);
   opacity: 1;
   z-index: 1000;
   padding-top: 32px;
   padding-bottom: 32px;
-
   box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
 }
 

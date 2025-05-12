@@ -13,3 +13,4 @@ export * from "./SectionWrapper/SectionWrapper";
 export * from "./Landing/Blog/BlogSlider/BlogSlider";
 export * from "./Landing/Blog/BlogCard/BlogCard";
 export * from "./Landing/FAQ/FaqSection";
+export * from "./LogoAndText/LogoAndText";

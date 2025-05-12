@@ -31,11 +31,11 @@
 }
 
 .startBtn {
-  background-color: var(--green);
+  background-color: transparent;
   color: var(--asphalt-border);
   padding: 20px;
   border-radius: 20px;
-  border: none;
+  border: 1px solid var(--green-dark);
   font-weight: bold;
   transition: all 0.2s ease;
   max-width: 500px;
@@ -43,7 +43,7 @@
 }
 
 .startBtn:hover {
-  background-color: #98b372;
+  background-color: #e2ebd6;
 }
 
 .text {
