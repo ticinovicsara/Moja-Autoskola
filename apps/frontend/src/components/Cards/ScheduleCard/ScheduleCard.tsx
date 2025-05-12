@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import CardComponent from "../CardComponent/CardComponent";
 import { ScheduleCardProps } from "./ScheduleCardProps";
 import { routes } from "@/constants";
-import { UserRoles } from "@/types";
+import { SessionType, UserRoles } from "@/types";
 import { useAuth } from "@/hooks";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import styles from "./scheduleCard.module.css";
@@ -13,6 +13,12 @@ export const ScheduleCard: React.FC<ScheduleCardProps> = ({
   time,
 }) => {
   const { user } = useAuth();
+
+  const sessionTypeTranslations: Record<SessionType, string> = {
+    Theory: "Teorija",
+    FirstAid: "Prva pomoć",
+    Driving: "Vožnja",
+  };
 
   const calendarLink = useMemo(() => {
     if (!user) return "#";
@@ -31,10 +37,13 @@ export const ScheduleCard: React.FC<ScheduleCardProps> = ({
       <div className={styles["schedule-content"]}>
         <div className={styles["schedule-title"]}>
           <div>Sljedeće na redu u kalendaru</div>
-          <ArrowBack />
+          <ArrowBack rotate />
         </div>
         <div className={styles["schedule-body"]}>
-          <div className={styles["schedule-activity"]}>{activity}</div>
+          <div className={styles["schedule-activity"]}>
+            {sessionTypeTranslations[activity as SessionType] ?? activity}
+          </div>
+
           {time && (
             <div className={styles["schedule-time"]}>
               <CalendarMonthIcon className={styles["schedule-icon"]} />

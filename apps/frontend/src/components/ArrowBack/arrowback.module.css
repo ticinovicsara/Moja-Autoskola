@@ -6,3 +6,7 @@
 .arrowWrapper img {
   color: var(--asphalt-border);
 }
+
+.rotateArrow {
+  transform: rotate(180deg);
+}

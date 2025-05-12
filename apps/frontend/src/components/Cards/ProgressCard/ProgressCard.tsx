@@ -15,7 +15,7 @@ export const ProgressCard: React.FC<ProgressCardProps> = ({
     <CardComponent className={styles["progress-card"]}>
       <div className={styles["title"]}>
         <div>{title}</div>
-        <ArrowBack />
+        <ArrowBack rotate />
       </div>
       <div className={styles["progress-container"]}>
         <div className={styles["progress-bar"]}>
