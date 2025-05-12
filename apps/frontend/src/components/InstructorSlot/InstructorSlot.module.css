@@ -8,6 +8,11 @@
     gap: 16px;
 }
 
+.slot > img {
+    margin-left: auto;
+    margin-right: 24px;
+}
+
 .date {
     display: flex;
     flex-direction: column;
@@ -30,8 +35,62 @@
 
 .sessionInfo > p:last-child {
     font-weight: 400;
+    opacity: 0.6;
 }
 
 .sessionInfo > p > span {
     opacity: 0.5;
+}
+
+.confirmPopup {
+    position: fixed;
+    width: 324px;
+    height: 188px;
+    background-color: var(--background-color);
+    opacity: 1;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--gray);
+    border-radius: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 5px 5px 5px 5px var(--gray);
+    text-align: center;
+}
+
+.confirmPopup > img {
+    width: 24px;
+    height: 24px;
+    margin-left: auto;
+    margin-bottom: 16px;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.options > button {
+    width: 130px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 20px;
+    color: var(--asphalt-border);
+}
+
+.options > button:first-child {
+    background-color: var(--green);
+}
+
+.options > button:last-child {
+    background-color: var(--red);
 }

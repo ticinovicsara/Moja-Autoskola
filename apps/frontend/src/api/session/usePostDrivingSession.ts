@@ -18,7 +18,10 @@ const usePostDrivingSession = () => {
         onSuccess: () => {
             toast.success("Session successfully created");
             queryClient.invalidateQueries({
-                queryKey: ["sessions", "instructor-slot"],
+                queryKey: ["instructor-slot"],
+            });
+            queryClient.invalidateQueries({
+                queryKey: ["sessions"],
             });
         },
         onError: (error) => {
