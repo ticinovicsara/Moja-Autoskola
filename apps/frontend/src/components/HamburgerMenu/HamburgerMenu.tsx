@@ -56,11 +56,11 @@ const HamburgerMenu: FC<HamburgerMenuProps> = ({ toggleMenu }) => {
         </>
       ) : (
         <div className={styles.authLinks}>
-          <Link to={routes.LOGIN} onClick={toggleMenu}>
+          <Link to={routes.LOGIN} onClick={toggleMenu} className="authBtn">
             Prijavi se
           </Link>
-          <Link to={routes.REGISTER} onClick={toggleMenu}>
-            Registruj se
+          <Link to={routes.REGISTER} onClick={toggleMenu} className="authBtn">
+            Registriraj se
           </Link>
         </div>
       )}
