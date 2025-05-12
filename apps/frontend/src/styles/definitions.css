@@ -51,6 +51,10 @@ button {
   transition: all 0.2s ease;
 }
 
+.authBtn:hover {
+  background-color: #e8eedf;
+}
+
 .errorMessage {
   color: var(--red);
 }
