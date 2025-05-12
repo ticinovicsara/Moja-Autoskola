@@ -126,9 +126,8 @@ model CandidateInstructor {
 model InstructorSlot {
   id           String @id @default(uuid())
   instructorId String
-  day          Day
-  startTime    String
-  endTime      String
+  startTime    DateTime
+  endTime      DateTime
   instructor   User   @relation(fields: [instructorId], references: [id], onDelete: Cascade)
 }
 
