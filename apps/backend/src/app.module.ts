@@ -11,6 +11,7 @@ import { TestResultModule } from './test-result/test-result.module';
 import { EnrollmentModule } from './enrollment/enrollment.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { InstructorModule } from './instructor/instructor.module';
+import { CandidateModule } from './candidate/candidate.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { InstructorModule } from './instructor/instructor.module';
     TestResultModule,
     EnrollmentModule,
     InstructorModule,
+    CandidateModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],

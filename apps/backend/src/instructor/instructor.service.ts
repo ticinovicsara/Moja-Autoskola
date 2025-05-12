@@ -27,11 +27,9 @@ export class InstructorService {
 
   async getInstructorSlots(instructorId: string) {
     await this.userService.getById(instructorId);
-
     const slots = await this.prisma.instructorSlot.findMany({
       where: { instructorId },
     });
-
     return slots.map((s) => InstructorSlot.fromPrisma(s));
   }
 
@@ -42,7 +40,7 @@ export class InstructorService {
   }
 
   async addInstructorSlot(body: AddInstructorSlotDto) {
-    const { instructorId, day, startTime, endTime } = body;
+    const { instructorId, startTime, endTime } = body;
     await this.userService.getById(instructorId);
 
     const slot = await this.prisma.instructorSlot.create({

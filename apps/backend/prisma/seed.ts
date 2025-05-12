@@ -4,7 +4,6 @@ import {
   SessionFormat,
   PrismaClient,
   EnrollmentStatus,
-  Day,
 } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 

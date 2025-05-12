@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { InstructorService } from './instructor.service';
 import { AddInstructorSlotDto } from './dto/add-instructor-slot.dto';
 import { Auth } from '@/auth/guards/auth-roles.decorator';
