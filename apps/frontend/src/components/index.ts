@@ -6,3 +6,6 @@ export { default as Calendar } from "./Calendar/Calendar";
 export { default as SessionList } from "./SessionList/SessionList";
 export { default as SessionCard } from "./SessionCard/SessionCard";
 export * from "./Landing/Hero/HeroSection";
+export * from "./Landing/AllOnOnePlace/AllOnOneSection";
+export * from "./Landing/ScheduleRide/ScheduleRideSection";
+export * from "./SectionWrapper/SectionWrapper";
