@@ -7,6 +7,7 @@ import { isValidEmail } from "@/utils/validateEmail";
 import { useAuth } from "@/hooks";
 import toast from "react-hot-toast";
 import { loginService } from "@/api";
+import { validatePassword } from "@/utils/validatePassword";
 
 export const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -23,8 +24,9 @@ export const Login = () => {
       return false;
     }
 
-    if (password.length < 5) {
-      setError("Lozinka mora imati barem 5 znakova");
+    const passwordErrorMessage = validatePassword(password);
+    if (passwordErrorMessage) {
+      setError(passwordErrorMessage);
       return false;
     }
 

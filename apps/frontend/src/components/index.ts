@@ -1,6 +1,7 @@
 export * from "./InputField/InputField";
 export * from "./ArrowBack/ArrowBack";
 export { default as Navbar } from "./Navbar/Navbar";
+export { default as HamburgerMenu } from "./HamburgerMenu/HamburgerMenu";
 export * from "./Cards/CardComponent/CardComponent";
 export * from "./Greeting/Greeting";
 export * from "./Dashboards/CandidateDashboard";

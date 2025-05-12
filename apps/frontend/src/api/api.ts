@@ -14,4 +14,25 @@ api.interceptors.request.use((config) => {
     return config;
 });
 
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (axios.isAxiosError(error)) {
+      const backendError = error.response?.data;
+
+      let message = "Došlo je do greške.";
+
+      if (Array.isArray(backendError?.message)) {
+        message = backendError.message.join("\n");
+      } else if (typeof backendError?.message === "string") {
+        message = backendError.message;
+      }
+
+      return Promise.reject(new Error(message));
+    }
+
+    return Promise.reject(error);
+  }
+);
+
 export default api;

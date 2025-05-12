@@ -42,6 +42,7 @@ export class AuthService {
       lastName: user.lastName,
       dateOfBirth: user.dateOfBirth,
       oib: user.oib,
+      phoneNumber: user.phoneNumber,
     };
 
     return {
@@ -65,6 +66,7 @@ export class AuthService {
       password: body.password,
       dateOfBirth: body.dateOfBirth,
       oib: body.oib,
+      phoneNumber: body.phoneNumber,
     };
 
     const createdUser = await this.userService.create(user);
@@ -79,6 +81,7 @@ export class AuthService {
       lastName: createdUser.lastName,
       dateOfBirth: createdUser.dateOfBirth,
       oib: createdUser.oib,
+      phoneNumber: createdUser.phoneNumber,
     };
 
     return {

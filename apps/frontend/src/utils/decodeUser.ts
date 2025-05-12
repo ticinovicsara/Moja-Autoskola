@@ -9,6 +9,7 @@ export type JwtPayload = {
   lastName: string;
   dateOfBirth: Date;
   oib: string;
+  phoneNumber: string;
   exp: number;
 };
 
@@ -25,14 +26,4 @@ export const getUserFromToken = (token: string): JwtPayload | null => {
   } catch (error) {
     return null;
   }
-};
-
-export const getIdFromToken = (): string | null => {
-  const token = localStorage.getItem("token");
-  if (!token) return null;
-
-  const decoded = getUserFromToken(token);
-  if (!decoded) return null;
-
-  return decoded.id;
 };

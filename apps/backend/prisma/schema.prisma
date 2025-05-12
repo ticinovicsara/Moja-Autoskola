@@ -68,6 +68,7 @@ model User {
   role               UserRole            @default(Guest)
   oib                String              @unique @db.VarChar(11)
   dateOfBirth        DateTime
+  phoneNumber        String
   schoolUser         SchoolUser?
   sessions           Session[]
   sessionCandidates  SessionCandidate[]
