@@ -20,14 +20,25 @@ export const InstructorDashboard = () => {
   }, [loading, activity]);
 
   const scheduleTime = useMemo(() => {
-    return startTime ? formatSessionTime(startTime.toISOString()) : "";
+    if (!startTime) return "";
+
+    const startTimeDate =
+      startTime instanceof Date ? startTime : new Date(startTime);
+
+    return formatSessionTime(startTimeDate.toISOString());
   }, [startTime]);
 
   return (
     <>
       <DashboardLayout
         middle={
-          <>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "1em",
+            }}
+          >
             <ArrowCard
               title="REZERVIRAJ TERMIN VOŽNJE"
               color="#F97C7C"
@@ -38,7 +49,7 @@ export const InstructorDashboard = () => {
               color="#B1CF86"
               linkTo={routes.INSTRUCTOR_CANDIDATE_LIST}
             />
-          </>
+          </div>
         }
         bottom={<ScheduleCard activity={scheduleContent} time={scheduleTime} />}
       />

@@ -1,72 +1,41 @@
-import { useEffect, useState, useCallback } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getData } from "@/utils/fetchUtils";
+import { API_ENDPOINTS } from "@/constants";
 import { Session } from "@/types";
-import { useUserSessions } from "@/api";
+import { getUpcomingSessions } from "@/utils";
+import { AxiosError } from "axios";
 
 export const useInstructorNextSession = (instructorId: string) => {
-  const [nextSession, setNextSession] = useState<Session | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const {
+    data: sessions,
+    isLoading,
+    error,
+  } = useQuery<Session[], AxiosError>({
+    queryKey: ["instructorSessions", instructorId],
+    queryFn: () =>
+      getData(`${API_ENDPOINTS.SESSION.INSTRUCTOR}/${instructorId}`),
+    enabled: !!instructorId,
+  });
 
-  const fetchNextSession = useCallback(async () => {
-    if (!instructorId) {
-      setLoading(false);
-      return;
-    }
+  if (isLoading) {
+    return { activity: null, startTime: null, loading: true, error: null };
+  }
 
-    setLoading(true);
-    setError(null);
+  if (error) {
+    return {
+      activity: null,
+      startTime: null,
+      loading: false,
+      error: error.message,
+    };
+  }
 
-    try {
-      const { sessions } = await useUserSessions(instructorId);
+  const upcomingSessions = getUpcomingSessions(sessions || []);
 
-      if (!sessions || sessions.length === 0) {
-        setNextSession(null);
-        setLoading(false);
-        return;
-      }
-
-      const now = new Date();
-
-      const upcomingSessions = sessions
-        .filter((session: Session) => {
-          const sessionStartTime =
-            session.startTime instanceof Date
-              ? session.startTime
-              : new Date(session.startTime);
-          return sessionStartTime >= now;
-        })
-        .sort((a: Session, b: Session) => {
-          const aTime =
-            a.startTime instanceof Date
-              ? a.startTime.getTime()
-              : new Date(a.startTime).getTime();
-          const bTime =
-            b.startTime instanceof Date
-              ? b.startTime.getTime()
-              : new Date(b.startTime).getTime();
-          return aTime - bTime;
-        });
-
-      setNextSession(upcomingSessions[0] || null);
-    } catch (err: any) {
-      setError(err.message || "Greška pri dohvaćanju sesija.");
-    } finally {
-      setLoading(false);
-    }
-  }, [instructorId]);
-
-  useEffect(() => {
-    if (instructorId) {
-      fetchNextSession();
-    } else {
-      setLoading(false);
-    }
-
-    return () => {};
-  }, [instructorId, fetchNextSession]);
+  const nextSession = upcomingSessions[0] || null;
 
   const activity = nextSession?.type ?? "Nema aktivnosti";
-  const startTime = nextSession?.startTime;
+  const startTime = nextSession?.startTime ?? null;
 
-  return { activity, loading, error, startTime, refetch: fetchNextSession };
+  return { activity, startTime, loading: false, error: null };
 };

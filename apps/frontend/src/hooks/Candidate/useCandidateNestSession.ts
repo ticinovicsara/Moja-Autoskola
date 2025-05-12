@@ -1,43 +1,40 @@
-import { getCandidateSessions } from "@/api";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getData } from "@/utils/fetchUtils";
+import { API_ENDPOINTS } from "@/constants";
 import { Session } from "@/types";
+import { getUpcomingSessions } from "@/utils";
+import { AxiosError } from "axios";
 
 export const useCandidateNextSession = (candidateId: string) => {
-  const [nextSession, setNextSession] = useState<Session | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const {
+    data: sessions,
+    isLoading,
+    error,
+  } = useQuery<Session[], AxiosError>({
+    queryKey: ["candidateSessions", candidateId],
+    queryFn: () => getData(`${API_ENDPOINTS.SESSION.CANDIDATE}/${candidateId}`),
+    enabled: !!candidateId,
+  });
 
-  useEffect(() => {
-    const fetchNextSession = async () => {
-      try {
-        const sessions = await getCandidateSessions(candidateId);
-        const now = new Date();
+  if (isLoading) {
+    return { activity: null, startTime: null, loading: true, error: null };
+  }
 
-        const upcomingSessions = sessions
-          .filter(
-            (session: { startTime: string }) =>
-              new Date(session.startTime) > now
-          )
-          .sort(
-            (a: { startTime: string }, b: { startTime: string }) =>
-              new Date(a.startTime).getTime() - new Date(b.startTime).getTime()
-          );
-
-        setNextSession(upcomingSessions[0] || null);
-      } catch (err: any) {
-        setError(err.message || "Greška pri dohvaćanju sesija.");
-      } finally {
-        setLoading(false);
-      }
+  if (error) {
+    return {
+      activity: null,
+      startTime: null,
+      loading: false,
+      error: error.message,
     };
+  }
 
-    if (candidateId) {
-      fetchNextSession();
-    }
-  }, [candidateId]);
+  const upcomingSessions = getUpcomingSessions(sessions || []);
 
-  const activity = nextSession?.type;
-  const startTime = nextSession?.startTime;
+  const nextSession = upcomingSessions[0] || null;
 
-  return { activity, startTime, loading, error };
+  const activity = nextSession?.type ?? "Nema aktivnosti";
+  const startTime = nextSession?.startTime ?? null;
+
+  return { activity, startTime, loading: false, error: null };
 };

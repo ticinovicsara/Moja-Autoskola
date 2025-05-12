@@ -45,7 +45,15 @@ export const CandidateDashboard = () => {
 
   const progressMessage = loadingProgress
     ? "Učitavanje napretka..."
-    : progressError;
+    : progressError
+      ? typeof progressError === "string"
+        ? progressError
+        : progressError instanceof Error
+          ? progressError.message
+          : String(progressError)
+      : "";
+
+  console.log("API: ", activity, startTime);
 
   let scheduleContent = "Nema zakazanih aktivnosti";
 
@@ -81,24 +89,20 @@ export const CandidateDashboard = () => {
         middle={
           <div
             style={{
-              display: "flex",
-              justifyContent: "space-between",
-              gap: "1rem",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "1em",
             }}
           >
-            <div style={{ flex: 1 }}>
-              <ArrowCard
-                title="ODABERI TERMIN VOŽNJE"
-                color="#F97C7C"
-                onClick={() => setShowPopup(true)}
-              />
-            </div>
-            <div style={{ flex: 1 }}>
-              <CandidateInstructorCard
-                instructor={instructorInfo.name}
-                phone={instructorInfo.phone}
-              />
-            </div>
+            <ArrowCard
+              title="ODABERI TERMIN VOŽNJE"
+              color="#F97C7C"
+              onClick={() => setShowPopup(true)}
+            />
+            <CandidateInstructorCard
+              instructor={instructorInfo.name}
+              phone={instructorInfo.phone}
+            />
           </div>
         }
         bottom={

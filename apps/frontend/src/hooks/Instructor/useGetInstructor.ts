@@ -1,41 +1,29 @@
-import { getInstructorById } from "@/api";
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+import { getData } from "@/utils/fetchUtils";
+import { API_ENDPOINTS } from "@/constants";
+
+interface InstructorInfo {
+  name: string;
+  phone: string;
+}
 
 export const useGetInstructor = (candidateId: string) => {
-  const [instructor, setInstructor] = useState<{
-    name: string;
-    phone: string;
-  } | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, isLoading, error } = useQuery<any, AxiosError>({
+    queryKey: ["instructor", candidateId],
+    queryFn: () =>
+      getData(`${API_ENDPOINTS.INSTRUCTOR_CANDIDATE}/${candidateId}`),
+    enabled: !!candidateId,
+    select: (result) => {
+      const i = result?.instructor;
+      if (!i) return null;
 
-  useEffect(() => {
-    if (!candidateId) return;
+      return {
+        name: `${i.firstName} ${i.lastName}`,
+        phone: i.phone,
+      } as InstructorInfo;
+    },
+  });
 
-    const fetchUser = async () => {
-      setLoading(true);
-      setError(null);
-
-      try {
-        const result = await getInstructorById(candidateId);
-
-        const i = result?.instructor;
-
-        if (i) {
-          setInstructor({
-            name: `${i.firstName} ${i.lastName}`,
-            phone: i.phone,
-          });
-        }
-      } catch (err: any) {
-        setError(err.message || "Greška pri dohvaćanju korisnika.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUser();
-  }, [candidateId]);
-
-  return { ...instructor, loading, error };
+  return { ...data, loading: isLoading, error };
 };

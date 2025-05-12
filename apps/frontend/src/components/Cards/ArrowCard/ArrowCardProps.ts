@@ -3,4 +3,5 @@ export interface ArrowCardProps {
   color: string;
   onClick?: () => void;
   linkTo?: string;
+  style?: React.CSSProperties;
 }

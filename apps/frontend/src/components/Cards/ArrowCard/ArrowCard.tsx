@@ -9,6 +9,7 @@ export const ArrowCard: React.FC<ArrowCardProps> = ({
   color,
   onClick,
   linkTo,
+  style,
 }) => {
   return (
     <CardComponent
@@ -23,7 +24,7 @@ export const ArrowCard: React.FC<ArrowCardProps> = ({
           style={{
             textAlign: "left",
             fontWeight: "bold",
-            width: "70%",
+            ...(typeof style === "object" && style !== null ? style : {}),
           }}
         >
           {title}
