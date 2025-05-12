@@ -21,3 +21,8 @@
   align-items: center;
   padding-top: 8px;
 }
+
+.message {
+  text-align: left;
+  padding-left: 2em;
+}

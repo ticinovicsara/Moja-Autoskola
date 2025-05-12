@@ -12,7 +12,6 @@ const useInstructorCandidates = (instructorId: string) => {
         `${API_ENDPOINTS.INSTRUCTOR_CANDIDATES}/${instructorId}`
       ),
     enabled: !!instructorId,
-    select: (data) => data.filter((c) => !!c?.name),
   });
 
   return {

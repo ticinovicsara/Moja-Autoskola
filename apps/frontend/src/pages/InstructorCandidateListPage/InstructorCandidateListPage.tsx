@@ -8,21 +8,25 @@ import { useInstructorCandidates } from "@/api";
 
 const InstructorCandidateListPage = () => {
   const { user } = useAuth();
-  if (!user?.id) return <p>Učitavanje korisnika...</p>;
+  const instructorId = user?.id;
 
-  const instructorId = user.id;
-
-  const { candidates, isLoading, error } =
-    useInstructorCandidates(instructorId);
-
-  if (isLoading) return <p>Učitavanje...</p>;
-  if (error) return <p>Došlo je do greške.</p>;
+  const { candidates, isLoading, error } = useInstructorCandidates(
+    instructorId || ""
+  );
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredCandidates = candidates.filter((candidate) =>
-    candidate.name?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  if (!instructorId) return <p>Učitavanje korisnika...</p>;
+  if (isLoading) return <p>Učitavanje...</p>;
+  if (error) return <p>Došlo je do greške.</p>;
+
+  const filteredCandidates = searchTerm
+    ? candidates.filter((candidate) => {
+        const fullName =
+          `${candidate.firstName} ${candidate.lastName}`.toLowerCase();
+        return fullName.includes(searchTerm.toLowerCase());
+      })
+    : candidates;
 
   return (
     <div className={styles["container"]}>
@@ -37,7 +41,19 @@ const InstructorCandidateListPage = () => {
       />
 
       <div className={styles["candidates-list"]}>
-        <CandidateList candidates={filteredCandidates} />
+        {filteredCandidates.length > 0 ? (
+          <CandidateList
+            candidates={filteredCandidates.map((candidate) => ({
+              id: String(candidate.id),
+              firstName: candidate.firstName,
+              lastName: candidate.lastName,
+            }))}
+          />
+        ) : (
+          <p className={styles["message"]}>
+            Nema kandidata koji odgovaraju pretrazi.
+          </p>
+        )}
       </div>
     </div>
   );
