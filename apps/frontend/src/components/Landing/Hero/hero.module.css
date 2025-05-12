@@ -1,0 +1,47 @@
+.hero {
+  height: calc(100vh - 102px);
+  padding-block: 106px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo h1 {
+  width: 100px;
+  line-height: 1;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.startBtn {
+  background-color: var(--green);
+  color: var(--asphalt-border);
+  padding: 20px;
+  border-radius: 20px;
+  border: none;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  max-width: 500px;
+  width: 100%;
+}
+
+.startBtn:hover {
+  background-color: #98b372;
+}
