@@ -1,5 +1,6 @@
 const routes = {
   HOME: "/",
+  AUTH: "/auth",
   LOGIN: "/login",
   REGISTER: "/register",
   BLOG: (id: string) => `/blog/${id}`,

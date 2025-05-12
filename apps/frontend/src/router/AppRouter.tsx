@@ -6,7 +6,7 @@ import {
   CandidateCalendarPage,
   BlogPage,
 } from "@/pages";
-import { Login, Register } from "@/pages/Auth";
+import { AuthPage, Login, Register } from "@/pages/Auth";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const AppRouter = () => {
@@ -20,6 +20,7 @@ const AppRouter = () => {
 
         <Route element={<PublicLayout />}>
           <Route path="/blog/:id" element={<BlogPage />} />
+          <Route path={routes.AUTH} element={<AuthPage />} />
         </Route>
 
         <Route element={<CandidateLayout />}>

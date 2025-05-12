@@ -10,7 +10,7 @@ export const HeroSection = () => {
 
   const handleStart = () => {
     if (!user) {
-      navigate(routes.LOGIN);
+      navigate(routes.AUTH);
       return;
     }
 
@@ -36,7 +36,7 @@ export const HeroSection = () => {
   return (
     <div className={c.hero}>
       <LogoAndText />
-      <button className={c.startBtn} onClick={handleStart}>
+      <button className={"authBtn"} onClick={handleStart}>
         ZAPOČNI
       </button>
     </div>
