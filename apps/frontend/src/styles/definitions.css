@@ -1,19 +1,19 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-size: 16px;
-  background-color: var(--background-color);
-  font-family: "Satoshi", sans-serif;
+    font-size: 16px;
+    background-color: var(--background-color);
+    font-family: "Satoshi", sans-serif;
 }
 
 /* ovo je za svaki layout ovako za mobile verziju  */
 .container {
-  width: 100%;
-  padding-inline: 24px;
+    width: 100%;
+    padding-inline: 24px;
 }
 
 h1,
@@ -21,44 +21,28 @@ h2,
 h3,
 h4,
 h5,
-h6 {
-  font-family: "Chillax", sans-serif;
+h6,
+p {
+    font-family: "Chillax", sans-serif;
+    color: var(--asphalt-border);
 }
 
 .authBtn {
-  margin-top: 32px;
-  font-family: "Chillax", sans-serif;
-  text-transform: uppercase;
-  font-weight: 600;
-  width: 100%;
-  border-radius: 20px;
-  font-size: 24px;
-  background-color: var(--green);
-  padding: 9px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.18);
+    margin-top: 32px;
+    font-family: "Chillax", sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    width: 100%;
+    border-radius: 20px;
+    font-size: 24px;
+    background-color: var(--green);
+    padding: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.18);
 }
 
-@font-face {
-  font-family: "Chillax";
-  src:
-    url("../assets/fonts/chillax/Chillax-Variable.woff2") format("woff2"),
-    url("../assets/fonts/chillax/Chillax-Variable.woff") format("woff"),
-    url("../assets/fonts/chillax/Chillax-Variable.ttf") format("truetype");
-  font-weight: 200 700;
-  font-display: swap;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Satoshi";
-  src:
-    url("../assets/fonts/satoshi/Satoshi-Variable.woff2") format("woff2"),
-    url("../assets/fonts/satoshi/Satoshi-Variable.woff") format("woff"),
-    url("../assets/fonts/satoshi/Satoshi-Variable.ttf") format("truetype");
-  font-weight: 300 900;
-  font-display: swap;
-  font-style: normal;
+.errorMessage {
+    color: var(--red);
 }

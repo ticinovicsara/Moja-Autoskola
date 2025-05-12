@@ -1,4 +1,4 @@
-import { Hamburger, Logo } from "@/assets/svgs";
+import { Hamburger, Logo, Profile } from "@/assets/svgs";
 import styles from "./Navbar.module.css";
 import { routes } from "@/constants";
 import { useNavigate } from "react-router-dom";
