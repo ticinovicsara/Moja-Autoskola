@@ -9,6 +9,7 @@ export type JwtPayload = {
     lastName: string;
     dateOfBirth: Date;
     oib: string;
+    phoneNumber: string;
     exp: number;
 };
 
