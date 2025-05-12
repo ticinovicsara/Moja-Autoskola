@@ -26,16 +26,6 @@ enum SessionFormat {
   Test
 }
 
-enum Day {
-  Monday
-  Tuesday
-  Wednesday
-  Thursday
-  Friday
-  Saturday
-  Sunday
-}
-
 enum EnrollmentStatus {
   Approved
   Pending
