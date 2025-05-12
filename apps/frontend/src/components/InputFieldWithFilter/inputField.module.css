@@ -1,0 +1,34 @@
+.search-container {
+  padding: 20px;
+  position: relative;
+}
+
+.search-box {
+  display: flex;
+  border-radius: 1em;
+  overflow: hidden;
+  gap: 0.5em;
+}
+
+.search-icon {
+  position: absolute;
+  left: 2em;
+  top: 38%;
+  pointer-events: none;
+  color: #888;
+  font-size: 16px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 10px 10px 45px;
+  border: 1px solid #ccc;
+  border-radius: 1em;
+  font-size: 14px;
+  font-family: "Satoshi";
+  font-size: medium;
+}
+
+.filter-button {
+  border: 0px;
+}

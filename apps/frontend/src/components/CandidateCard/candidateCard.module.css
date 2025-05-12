@@ -1,0 +1,19 @@
+.candidate-card {
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  border: 1px solid #afafaf;
+  border-radius: 1em;
+}
+
+.candidate-avatar {
+  width: 4em;
+  border-radius: 50%;
+  margin-right: 15px;
+  object-fit: cover;
+}
+
+.candidate-name {
+  font-size: 1em;
+  font-weight: bold;
+}
