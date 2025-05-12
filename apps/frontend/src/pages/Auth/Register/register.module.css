@@ -1,0 +1,25 @@
+.stepDots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 1px solid var(--asphalt-border);
+  cursor: pointer;
+}
+
+.activeDot {
+  background-color: var(--asphalt-border);
+}
+
+.inputsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

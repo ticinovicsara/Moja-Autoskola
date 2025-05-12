@@ -5,6 +5,7 @@ import {
   IsEmail,
   IsEnum,
   IsNotEmpty,
+  IsPhoneNumber,
   IsString,
   IsUUID,
   Length,
@@ -26,6 +27,9 @@ export class UserResponseDto {
   @IsNotEmpty()
   email: string;
 
+  @IsPhoneNumber()
+  phoneNumber: string;
+
   @IsDate()
   @Type(() => Date)
   dateOfBirth: Date;
@@ -42,6 +46,7 @@ export class UserResponseDto {
     firstName: string,
     lastName: string,
     email: string,
+    phoneNumber: string,
     dateOfBirth: Date,
     oib: string,
     role: UserRole,
@@ -50,6 +55,7 @@ export class UserResponseDto {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
+    this.phoneNumber = phoneNumber;
     this.dateOfBirth = dateOfBirth;
     this.oib = oib;
     this.role = role;
@@ -61,6 +67,7 @@ export class UserResponseDto {
       prismaUser.firstName,
       prismaUser.lastName,
       prismaUser.email,
+      prismaUser.phoneNumber,
       prismaUser.dateOfBirth,
       prismaUser.oib,
       prismaUser.role,
