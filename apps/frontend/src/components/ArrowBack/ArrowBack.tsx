@@ -1,23 +1,14 @@
 import { Arrow } from "@/assets/svgs";
 import c from "./arrowback.module.css";
 import { useNavigate } from "react-router-dom";
-import clsx from "clsx";
-
-type ArrowBackProps = {
-  rotate?: boolean;
-};
-
-export const ArrowBack = ({ rotate }: ArrowBackProps) => {
+export const ArrowBack = () => {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
     navigate(-1);
   };
   return (
-    <div
-      className={clsx(c.arrowWrapper, rotate && c.rotateArrow)}
-      onClick={handleNavigate}
-    >
+    <div className={c.arrowWrapper} onClick={handleNavigate}>
       <img src={Arrow} alt="arrow" />
     </div>
   );

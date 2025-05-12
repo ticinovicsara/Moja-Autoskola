@@ -14,15 +14,11 @@ export const useGetInstructor = (candidateId: string) => {
     queryFn: () =>
       getData(`${API_ENDPOINTS.INSTRUCTOR_CANDIDATE}/${candidateId}`),
     enabled: !!candidateId,
-    select: (result) => {
-      const i = result?.instructor;
-      if (!i) return null;
 
-      return {
-        name: `${i.firstName} ${i.lastName}`,
-        phone: i.phone,
-      } as InstructorInfo;
-    },
+    select: (result): InstructorInfo => ({
+      name: `${result.firstName} ${result.lastName}`,
+      phone: result.phoneNumber,
+    }),
   });
 
   return { ...data, loading: isLoading, error };

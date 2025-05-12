@@ -31,7 +31,7 @@ export const ArrowCard: React.FC<ArrowCardProps> = ({
         >
           {title}
         </div>
-        <ArrowBack rotate />
+        <ArrowBack />
       </div>
     </CardComponent>
   );

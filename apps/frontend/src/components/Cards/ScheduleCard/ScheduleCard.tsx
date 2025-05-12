@@ -31,7 +31,7 @@ export const ScheduleCard: React.FC<ScheduleCardProps> = ({
       <div className={styles["schedule-content"]}>
         <div className={styles["schedule-title"]}>
           <div>Sljedeće na redu u kalendaru</div>
-          <ArrowBack rotate />
+          <ArrowBack />
         </div>
         <div className={styles["schedule-body"]}>
           <div className={styles["schedule-activity"]}>{activity}</div>
