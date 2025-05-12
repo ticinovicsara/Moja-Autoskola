@@ -3,14 +3,14 @@ import { AxiosError } from "axios";
 import { getData } from "@/utils/fetchUtils";
 import { API_ENDPOINTS } from "@/constants";
 import { Session } from "@/types";
-import { UserRole } from "@/enums";
+import { UserRoles } from "@/enums";
 import { useAuth } from "@/hooks";
 
 const useUserSessions = (userId: string) => {
   const user = useAuth();
   const role = user.user?.role;
   const endpoint =
-    role === UserRole.Instructor
+    role === UserRoles.Instructor
       ? `${API_ENDPOINTS.SESSION.INSTRUCTOR}/${userId}`
       : `${API_ENDPOINTS.SESSION.CANDIDATE}/${userId}`;
 

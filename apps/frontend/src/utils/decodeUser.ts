@@ -1,10 +1,10 @@
-import { UserRole } from "@/enums";
+import { UserRoles } from "@/enums";
 import { jwtDecode } from "jwt-decode";
 
 export type JwtPayload = {
   id: string;
   email: string;
-  role: UserRole;
+  role: UserRoles;
   firstName: string;
   lastName: string;
   dateOfBirth: Date;
@@ -26,4 +26,14 @@ export const getUserFromToken = (token: string): JwtPayload | null => {
   } catch (error) {
     return null;
   }
+};
+
+export const getIdFromToken = (): string | null => {
+  const token = localStorage.getItem("token");
+  if (!token) return null;
+
+  const decoded = getUserFromToken(token);
+  if (!decoded) return null;
+
+  return decoded.id;
 };
