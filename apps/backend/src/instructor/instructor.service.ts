@@ -1,5 +1,5 @@
 import { PrismaService } from '@/prisma/prisma.service';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { AddInstructorSlotDto } from './dto/add-instructor-slot.dto';
 import { UserResponseDto } from '@/user/dto/user-response.dto';
 import { UserService } from '@/user/user.service';
@@ -35,6 +35,12 @@ export class InstructorService {
     return slots.map((s) => InstructorSlot.fromPrisma(s));
   }
 
+  async getInstructorSlotById(id: string) {
+    const slot = await this.prisma.instructorSlot.findUnique({ where: { id } });
+    if (!slot) throw new NotFoundException("The instructor slot doesn't exist");
+    return InstructorSlot.fromPrisma(slot);
+  }
+
   async addInstructorSlot(body: AddInstructorSlotDto) {
     const { instructorId, day, startTime, endTime } = body;
     await this.userService.getById(instructorId);
@@ -47,6 +53,14 @@ export class InstructorService {
       },
     });
 
+    return InstructorSlot.fromPrisma(slot);
+  }
+
+  async deleteInstructorSlot(id: string) {
+    await this.getInstructorSlotById(id);
+    const slot = await this.prisma.instructorSlot.delete({
+      where: { id },
+    });
     return InstructorSlot.fromPrisma(slot);
   }
 }
