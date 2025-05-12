@@ -1,5 +1,6 @@
 import {
   AllOnOneSection,
+  BlogSection,
   HeroSection,
   Navbar,
   ScheduleRideSection,
@@ -14,6 +15,7 @@ const HomePage = () => {
         <HeroSection />
         <AllOnOneSection />
         <ScheduleRideSection />
+        <BlogSection />
       </div>
       <Toaster />
     </>

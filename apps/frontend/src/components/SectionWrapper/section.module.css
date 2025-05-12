@@ -7,3 +7,7 @@
 .section {
   padding-block: 64px;
 }
+
+.sectionHeader {
+  margin-bottom: 32px;
+}

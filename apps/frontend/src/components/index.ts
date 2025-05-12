@@ -8,4 +8,6 @@ export { default as SessionCard } from "./SessionCard/SessionCard";
 export * from "./Landing/Hero/HeroSection";
 export * from "./Landing/AllOnOnePlace/AllOnOneSection";
 export * from "./Landing/ScheduleRide/ScheduleRideSection";
+export * from "./Landing/Blog/BlogSection";
 export * from "./SectionWrapper/SectionWrapper";
+export * from "./Landing/Blog/BlogSlider/BlogSlider";
