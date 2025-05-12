@@ -19,11 +19,12 @@ const AppRouter = () => {
         </Route>
 
         <Route element={<PublicLayout />}>
-          <Route path={routes.HOME} element={<HomePage />} />
           <Route path="/blog/:id" element={<BlogPage />} />
         </Route>
 
         <Route element={<CandidateLayout />}>
+          <Route path={routes.HOME} element={<HomePage />} />
+
           <Route
             path={routes.CANDIDATE_DASHBOARD}
             element={<CandidateDashboardPage />}
