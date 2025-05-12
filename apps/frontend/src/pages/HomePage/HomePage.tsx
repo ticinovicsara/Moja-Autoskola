@@ -5,6 +5,7 @@ import {
   Navbar,
   ScheduleRideSection,
 } from "@/components";
+import FAQSection from "@/components/Landing/FAQ/FaqSection";
 import { Toaster } from "react-hot-toast";
 
 const HomePage = () => {
@@ -16,6 +17,7 @@ const HomePage = () => {
         <AllOnOneSection />
         <ScheduleRideSection />
         <BlogSection />
+        <FAQSection />
       </div>
       <Toaster />
     </>

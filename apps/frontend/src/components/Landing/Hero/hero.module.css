@@ -45,3 +45,7 @@
 .startBtn:hover {
   background-color: #98b372;
 }
+
+.text {
+  font-family: "Chillax", sans-serif;
+}

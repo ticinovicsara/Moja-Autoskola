@@ -9,7 +9,7 @@ export const HeroSection = () => {
             <img src={logo} alt="logo" />
             <h1>Moja Autoškola</h1>
           </div>
-          <p>Autoškola u tvom džepu!</p>
+          <p className={c.text}>Autoškola u tvom džepu!</p>
         </div>
       </div>
       <button className={c.startBtn}>ZAPOČNI</button>
