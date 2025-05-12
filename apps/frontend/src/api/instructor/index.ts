@@ -1,1 +1,1 @@
-export * from "./getInstructorById";
+export * from "./getInstructorFromCandidateById";

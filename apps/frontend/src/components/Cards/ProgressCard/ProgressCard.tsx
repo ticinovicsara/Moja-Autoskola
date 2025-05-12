@@ -1,6 +1,6 @@
 import styles from "./progressCard.module.css";
 import CardComponent from "../CardComponent/CardComponent";
-import c from "../CardComponent/cardComponent.module.css";
+import { ArrowBack } from "@/components/ArrowBack/ArrowBack";
 
 interface ProgressCardProps {
   title: string;
@@ -12,14 +12,10 @@ export const ProgressCard: React.FC<ProgressCardProps> = ({
   progress,
 }) => {
   return (
-    <CardComponent
-      headerBgColor="#84CDEE"
-      bodyBgColor="#84CDEE"
-      width="100%"
-      bodyPadding="10px 0 0 0"
-    >
-      <div style={{ padding: "0.5em" }} className={c["card-title"]}>
-        {title}
+    <CardComponent className={styles["progress-card"]}>
+      <div className={styles["title"]}>
+        <div>{title}</div>
+        <ArrowBack rotate />
       </div>
       <div className={styles["progress-container"]}>
         <div className={styles["progress-bar"]}>

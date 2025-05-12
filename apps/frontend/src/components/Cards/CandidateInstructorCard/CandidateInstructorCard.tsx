@@ -1,22 +1,17 @@
 import React from "react";
 import CardComponent from "../CardComponent/CardComponent";
 import { CandidateInstructorCardProps } from "./CandidateInstructorProps";
+import styles from "./candidateInstructorCard.module.css";
 
 export const CandidateInstructorCard: React.FC<
   CandidateInstructorCardProps
 > = ({ instructor, phone }) => {
   return (
-    <CardComponent
-      headerTitle="Tvoj instruktor"
-      titlePosition="center"
-      headerBgColor="#6C8C3E"
-      bodyBgColor="#B1CF86"
-      borderColor="#eab308"
-      width="100%"
-    >
-      <div>
-        <div>{instructor}</div>
-        <span>{phone}</span>
+    <CardComponent linkTo="#" className={styles["candidate-instructor-card"]}>
+      <div className={styles["content-title"]}>Tvoj Instruktor</div>
+      <div className={styles["card-content"]}>
+        <div className={styles["instructor-name"]}>{instructor}</div>
+        <span className={styles["instructor-phone"]}>{phone}</span>
       </div>
     </CardComponent>
   );

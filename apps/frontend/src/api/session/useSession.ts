@@ -2,13 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { getData } from "@/utils/fetchUtils";
 import { API_ENDPOINTS } from "@/constants";
-import { Session } from "@/types";
-import { UserRoles } from "@/enums";
+import { Session, UserRoles } from "@/types";
 import { useAuth } from "@/hooks";
 
 const useUserSessions = (userId: string) => {
-  const user = useAuth();
-  const role = user.user?.role;
+  const { user } = useAuth();
+  const role = user?.role;
+
   const endpoint =
     role === UserRoles.Instructor
       ? `${API_ENDPOINTS.SESSION.INSTRUCTOR}/${userId}`

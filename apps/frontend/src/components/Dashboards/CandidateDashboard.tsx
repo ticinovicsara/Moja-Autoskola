@@ -13,7 +13,7 @@ import {
   useGetInstructor,
 } from "@/hooks";
 import { CandidatePopup } from "../Popup/CandidatePopup";
-import { formatSessionTime } from "@/utils/formatSessionTime";
+import { formatSessionTime } from "@/utils/sessionsUtil";
 
 export const CandidateDashboard = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -27,10 +27,10 @@ export const CandidateDashboard = () => {
   } = useCandidateProgress(userId);
 
   const { activity, startTime } = useCandidateNextSession(userId);
-  const instructorData = useGetInstructor(userId);
+  const instructor = useGetInstructor(userId);
 
   const instructorInfo = useMemo(() => {
-    if (!instructorData || !instructorData.name) {
+    if (!instructor || !instructor.name) {
       return {
         name: "Instruktor nije dostupan",
         phone: "N/A",
@@ -38,10 +38,10 @@ export const CandidateDashboard = () => {
     }
 
     return {
-      name: instructorData.name,
-      phone: "099-123-456",
+      name: instructor.name,
+      phone: instructor.phone,
     };
-  }, [instructorData, userId]);
+  }, [instructor, userId]);
 
   const progressMessage = loadingProgress
     ? "Učitavanje napretka..."
@@ -52,8 +52,6 @@ export const CandidateDashboard = () => {
           ? progressError.message
           : String(progressError)
       : "";
-
-  console.log("API: ", activity, startTime);
 
   let scheduleContent = "Nema zakazanih aktivnosti";
 
@@ -96,7 +94,6 @@ export const CandidateDashboard = () => {
           >
             <ArrowCard
               title="ODABERI TERMIN VOŽNJE"
-              color="#F97C7C"
               onClick={() => setShowPopup(true)}
             />
             <CandidateInstructorCard

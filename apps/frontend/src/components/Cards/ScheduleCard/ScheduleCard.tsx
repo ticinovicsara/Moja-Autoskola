@@ -2,22 +2,23 @@ import React, { useMemo } from "react";
 import CardComponent from "../CardComponent/CardComponent";
 import { ScheduleCardProps } from "./ScheduleCardProps";
 import { routes } from "@/constants";
-import { UserRole } from "@/enums";
+import { UserRoles } from "@/types";
 import { useAuth } from "@/hooks";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import styles from "./scheduleCard.module.css";
+import { ArrowBack } from "@/components/ArrowBack/ArrowBack";
 
 export const ScheduleCard: React.FC<ScheduleCardProps> = ({
   activity,
   time,
 }) => {
-  const context = useAuth();
-  const user = context.user;
+  const { user } = useAuth();
 
   const calendarLink = useMemo(() => {
     if (!user) return "#";
 
-    if (user.role === UserRole.Candidate) return routes.CANDIDATE_CALENDAR;
-    if (user.role === UserRole.Instructor) return routes.INSTRUCTOR_CALENDAR;
+    if (user.role === UserRoles.Candidate) return routes.CANDIDATE_CALENDAR;
+    if (user.role === UserRoles.Instructor) return routes.INSTRUCTOR_CALENDAR;
 
     console.warn("Nepoznata uloga:", user.role);
     return "#";
@@ -26,24 +27,21 @@ export const ScheduleCard: React.FC<ScheduleCardProps> = ({
   if (!user) return null;
 
   return (
-    <CardComponent
-      headerTitle="Sljedeće na redu u kalendaru"
-      bodyBgColor="#FFF192"
-      headerBgColor="#FFB855"
-      borderColor="#eab308"
-      width="100%"
-      linkTo={calendarLink}
-    >
-      <div>
-        <div style={{ fontWeight: "bold", marginBottom: "0.5em" }}>
-          {activity}
+    <CardComponent linkTo={calendarLink} className={styles["schedule-card"]}>
+      <div className={styles["schedule-content"]}>
+        <div className={styles["schedule-title"]}>
+          <div>Sljedeće na redu u kalendaru</div>
+          <ArrowBack rotate />
         </div>
-        {time && (
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5em" }}>
-            <CalendarMonthIcon />
-            <span>{time}</span>
-          </div>
-        )}
+        <div className={styles["schedule-body"]}>
+          <div className={styles["schedule-activity"]}>{activity}</div>
+          {time && (
+            <div className={styles["schedule-time"]}>
+              <CalendarMonthIcon className={styles["schedule-icon"]} />
+              <span>{time}</span>
+            </div>
+          )}
+        </div>
       </div>
     </CardComponent>
   );

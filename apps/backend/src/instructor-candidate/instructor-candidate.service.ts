@@ -7,6 +7,7 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { AssignInstructorCandidateDto } from './dto/assign-instructor.dto';
 import { InstructorCandidate } from './entities/instructor-candidate.entity';
 import { UserService } from '@/user/user.service';
+import { UserResponseDto } from '@/user/dto/user-response.dto';
 
 @Injectable()
 export class InstructorCandidateService {
@@ -16,12 +17,18 @@ export class InstructorCandidateService {
   ) {}
 
   async getInstructorFromCandidate(candidateId: string) {
-    return await this.prisma.candidateInstructor.findFirst({
-      where: { candidateId: candidateId },
+    const result = await this.prisma.candidateInstructor.findFirst({
+      where: { candidateId },
       include: {
         instructor: true,
       },
     });
+
+    if (!result || !result.instructor) {
+      return null;
+    }
+
+    return UserResponseDto.fromPrisma(result.instructor);
   }
 
   async getAllInstructorCandidates() {

@@ -1,5 +1,4 @@
 .arrowWrapper {
-  margin-left: 6%;
   width: 24px;
   height: 24px;
 }
@@ -9,5 +8,5 @@
 }
 
 .arrowWrapper img {
-    color: var(--asphalt-border);
+  color: var(--asphalt-border);
 }

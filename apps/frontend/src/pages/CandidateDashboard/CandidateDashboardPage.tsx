@@ -1,9 +1,8 @@
-import { GreetingComponent, CandidateDashboard, Navbar } from "@/components";
+import { GreetingComponent, CandidateDashboard } from "@/components";
 
 const CandidateDashboardPage = () => {
   return (
     <>
-      <Navbar />
       <GreetingComponent />
       <CandidateDashboard />
     </>

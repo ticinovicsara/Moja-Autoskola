@@ -1,31 +1,33 @@
 import React from "react";
 import CardComponent from "../CardComponent/CardComponent";
-import styles from "./arrowCard.module.css";
-import { ArrowCardProps } from "./ArrowCardProps";
 import { ArrowBack } from "@/components/ArrowBack/ArrowBack";
+import styles from "./arrowCard.module.css";
+
+export interface ArrowCardProps {
+  title: string;
+  onClick?: () => void;
+  linkTo?: string;
+  style?: React.CSSProperties;
+  className?: string;
+}
 
 export const ArrowCard: React.FC<ArrowCardProps> = ({
   title,
-  color,
   onClick,
   linkTo,
   style,
+  className,
 }) => {
   return (
     <CardComponent
-      bodyBgColor={color}
-      width="100%"
-      bodyPadding="1.5em"
       linkTo={linkTo}
+      className={`${styles["arrow-card"]} ${className}`}
     >
-      <div className={styles["status-card-arrow"]}>
+      <div className={styles["arrow-card-content"]}>
         <div
           onClick={onClick}
-          style={{
-            textAlign: "left",
-            fontWeight: "bold",
-            ...(typeof style === "object" && style !== null ? style : {}),
-          }}
+          className={styles["arrow-card-title"]}
+          style={style}
         >
           {title}
         </div>

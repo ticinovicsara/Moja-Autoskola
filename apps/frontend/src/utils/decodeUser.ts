@@ -1,4 +1,4 @@
-import { UserRoles } from "@/enums";
+import { UserRoles } from "@/types";
 import { jwtDecode } from "jwt-decode";
 
 export type JwtPayload = {

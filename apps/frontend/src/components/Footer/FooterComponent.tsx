@@ -1,6 +1,6 @@
+import { LogoHorizontal } from "@/assets/images";
 import styles from "./footer.module.css";
 import { FaInstagram, FaFacebookF, FaTiktok } from "react-icons/fa";
-import { LogoHorizontal } from "@/assets/svgs";
 
 const FooterComponent = () => {
   return (

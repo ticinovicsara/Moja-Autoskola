@@ -4,7 +4,8 @@ import { routes } from "@/constants";
 import { useMemo, useState } from "react";
 import { InstructorPopup } from "../Popup/InstructorPopup";
 import { useAuth, useInstructorNextSession } from "@/hooks";
-import { formatSessionTime } from "@/utils/formatSessionTime";
+import { formatSessionTime } from "@/utils";
+import styles from "../Cards/ArrowCard/arrowCard.module.css";
 
 export const InstructorDashboard = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -41,13 +42,13 @@ export const InstructorDashboard = () => {
           >
             <ArrowCard
               title="REZERVIRAJ TERMIN VOŽNJE"
-              color="#F97C7C"
               onClick={() => setShowPopup(true)}
+              className={`${styles["arrow-card"]} ${styles["card-red"]}`}
             />
             <ArrowCard
               title="POGLEDAJ LISTU KANDIDATA"
-              color="#B1CF86"
               linkTo={routes.INSTRUCTOR_CANDIDATE_LIST}
+              className={`${styles["arrow-card"]} ${styles["card-green"]}`}
             />
           </div>
         }
