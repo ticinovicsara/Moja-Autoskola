@@ -1,0 +1,48 @@
+.slot {
+    border: 1px solid var(--asphalt-border);
+    border-radius: 20px;
+    height: 72px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+}
+
+.date {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 72px;
+    border-right: 1px solid var(--asphalt-border);
+    border-radius: 20px;
+    height: 100%;
+    font-family: "Chillax", sans-serif;
+    font-weight: 700;
+}
+
+.sessionInfo > * {
+    font-family: "Satoshi", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.sessionInfo > p:last-child {
+    font-weight: 400;
+}
+
+.sessionInfo > p > span {
+    opacity: 0.5;
+}
+
+.theory {
+    background-color: var(--blue) !important;
+}
+
+.firstAid {
+    background-color: var(--green) !important;
+}
+
+.driving {
+    background-color: var(--red) !important;
+}

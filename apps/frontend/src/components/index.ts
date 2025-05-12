@@ -6,3 +6,4 @@ export { default as Calendar } from "./Calendar/Calendar";
 export { default as SessionList } from "./SessionList/SessionList";
 export { default as SessionCard } from "./SessionCard/SessionCard";
 export { default as ChooseSessionMenu } from "./ChooseSessionMenu/ChooseSessionMenu";
+export { default as InstructorSlot } from "./InstructorSlot/InstructorSlot";
