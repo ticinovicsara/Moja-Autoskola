@@ -1,0 +1,41 @@
+.menu {
+    position: fixed;
+    width: 327px;
+    height: 608px;
+    background-color: var(--background-color);
+    opacity: 1;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--gray);
+    border-radius: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 5px 5px 5px 5px var(--gray);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--asphalt-border);
+    height: 96px;
+}
+
+.header > h2 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.header > img {
+    width: 24px;
+    height: 24px;
+}
+
+.slotList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+}

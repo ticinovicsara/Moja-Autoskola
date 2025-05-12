@@ -14,7 +14,7 @@ const ChooseSessionMenu: FC<ChooseSessionMenuProps> = ({
     const { slots, isLoading, error } = useInstructorSlot();
 
     return (
-        <div className={styles.menu}>
+        <div className={`${styles.menu} container`}>
             <div className={styles.header}>
                 <h2>Slobodni termini</h2>
                 <img

@@ -1,18 +1,39 @@
-import { InstructorSlot as InstructorSlotType } from "@/types";
-import { FC } from "react";
+import {
+    DrivingSessionReq,
+    InstructorSlot as InstructorSlotType,
+} from "@/types";
+import { FC, useState } from "react";
 import styles from "./InstructorSlot.module.css";
 import {
     getDayFromDate,
     getFormattedTime,
     getMonthAbbreviation,
 } from "@/utils";
+import { Arrow2 } from "@/assets/svgs";
+import { usePostDrivingSession } from "@/api";
+import { useAuth } from "@/hooks";
 
 interface InstructorSlotProps {
     slot: InstructorSlotType;
 }
 
 const InstructorSlot: FC<InstructorSlotProps> = ({ slot }) => {
-    console.log(slot);
+    const { user } = useAuth();
+    const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
+    const { addDrivingSession } = usePostDrivingSession();
+
+    function toggleConfirmPopup() {
+        setIsConfirmPopupOpen((prev) => !prev);
+    }
+
+    function handleConfirm() {
+        const drivingSessionReq: DrivingSessionReq = {
+            candidateId: user?.id ?? "",
+            instructorId: slot.instructorId,
+            instructorSlotId: slot.id,
+        };
+        addDrivingSession(drivingSessionReq);
+    }
 
     return (
         <div className={styles.slot}>
@@ -27,6 +48,14 @@ const InstructorSlot: FC<InstructorSlotProps> = ({ slot }) => {
                     {getFormattedTime(slot.endTime)}
                 </p>
             </div>
+            <img src={Arrow2} alt="arrow" onClick={toggleConfirmPopup} />
+            {isConfirmPopupOpen && (
+                <div className={styles.confirmPopup}>
+                    <p>Jesi li siguran da želiš odabrati ovaj termin?</p>
+                    <button onClick={handleConfirm}>Da</button>
+                    <button onClick={toggleConfirmPopup}>Ne</button>
+                </div>
+            )}
         </div>
     );
 };

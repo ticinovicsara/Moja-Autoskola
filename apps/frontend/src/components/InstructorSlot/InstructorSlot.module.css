@@ -1,5 +1,5 @@
 .slot {
-    border: 1px solid var(--asphalt-border);
+    border: 1px solid var(--gray);
     border-radius: 20px;
     height: 72px;
     display: flex;
@@ -14,11 +14,12 @@
     justify-content: center;
     align-items: center;
     width: 72px;
-    border-right: 1px solid var(--asphalt-border);
+    border-right: 1px solid var(--gray);
     border-radius: 20px;
     height: 100%;
     font-family: "Chillax", sans-serif;
     font-weight: 700;
+    background-color: var(--blue);
 }
 
 .sessionInfo > * {
@@ -33,16 +34,4 @@
 
 .sessionInfo > p > span {
     opacity: 0.5;
-}
-
-.theory {
-    background-color: var(--blue) !important;
-}
-
-.firstAid {
-    background-color: var(--green) !important;
-}
-
-.driving {
-    background-color: var(--red) !important;
 }
