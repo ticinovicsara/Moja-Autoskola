@@ -19,13 +19,13 @@ export const HeroSection = () => {
         navigate(routes.CANDIDATE_DASHBOARD);
         break;
       case UserRoles.Guest:
-        navigate("/guest/dashboard");
+        navigate(routes.GUEST);
         break;
       case UserRoles.SchoolAdmin:
         navigate("/school-admin/dashboard");
         break;
       case UserRoles.Instructor:
-        navigate("/instructor/dashboard"); //kad budu postojala ova 3 pa dodat onda samo u routes
+        navigate("/instructor/dashboard"); //kad budu postojala ova 2 pa dodat onda samo u routes
         break;
       default:
         navigate(routes.HOME);

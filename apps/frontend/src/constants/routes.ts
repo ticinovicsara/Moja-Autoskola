@@ -6,6 +6,7 @@ const routes = {
   BLOG: "/blog",
   CANDIDATE_DASHBOARD: "/candidate/dashboard",
   CANDIDATE_CALENDAR: "/candidate/calendar",
+  GUEST: "/guest",
 };
 
 export { routes };
