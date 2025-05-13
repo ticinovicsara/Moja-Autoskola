@@ -1,12 +1,20 @@
 import { routes } from "@/constants";
-import { AuthLayout, CandidateLayout, PublicLayout } from "@/layouts";
+import {
+  AuthLayout,
+  CandidateLayout,
+  GuestRoute,
+  PublicLayout,
+} from "@/layouts";
 import {
   HomePage,
   CandidateDashboardPage,
   CandidateCalendarPage,
+  BlogPage,
+  GuestPage,
   CandidateProgressPage,
+  InstructorCandidateListPage,
 } from "@/pages";
-import { Login, Register } from "@/pages/Auth";
+import { AuthPage, Login, Register } from "@/pages/Auth";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const AppRouter = () => {
@@ -21,8 +29,20 @@ const AppRouter = () => {
         <Route element={<PublicLayout />}>
           <Route path={routes.HOME} element={<HomePage />} />
         </Route>
+        <Route element={<PublicLayout />}>
+          <Route path={routes.HOME} element={<HomePage />} />
+        </Route>
+        <Route element={<PublicLayout />}>
+          <Route path={`${routes.BLOG}/:id`} element={<BlogPage />} />
+          <Route path={routes.AUTH} element={<AuthPage />} />
+        </Route>
 
         <Route element={<CandidateLayout />}>
+          <Route element={<GuestRoute />}>
+            <Route path={routes.GUEST} element={<GuestPage />} />
+          </Route>
+          <Route path={routes.HOME} element={<HomePage />} />
+
           <Route
             path={routes.CANDIDATE_DASHBOARD}
             element={<CandidateDashboardPage />}
@@ -34,6 +54,16 @@ const AppRouter = () => {
           <Route
             path={routes.CANDIDATE_PROGRESS}
             element={<CandidateProgressPage />}
+          />
+        </Route>
+        <Route element={<CandidateLayout />}>
+          <Route
+            path={routes.INSTRUCTOR_CANDIDATE_LIST}
+            element={<InstructorCandidateListPage />}
+          />
+          <Route
+            path={routes.CANDIDATE_CALENDAR}
+            element={<CandidateCalendarPage />}
           />
         </Route>
       </Routes>

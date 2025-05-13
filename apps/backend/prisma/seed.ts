@@ -4,7 +4,6 @@ import {
   SessionFormat,
   PrismaClient,
   EnrollmentStatus,
-  Day,
 } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
@@ -40,7 +39,40 @@ async function main() {
       info: 'Najmodernija autoškola u Zagrebu.',
       websiteUrl: 'https://www.autoskola-start.hr',
       imageUrl:
-        'https://autoskola-start.hr/wp-content/uploads/2023/01/1672650633240-1536x650.jpg',
+        'https://www.autoskolastart.hr/wp-content/themes/sage/dist/images/logo/autoskola_start_logo_full.svg',
+      rating: 4.8,
+    },
+  });
+
+  const school2 = await prisma.school.create({
+    data: {
+      name: 'Kružni tok',
+      city: 'Split',
+      address: 'Ulica Domovinskog rata 5',
+      contactNumber: '+385 91 892 1344',
+      email: 'kontaktkruzni@autoskola.hr',
+      enrollmentFee: 150.0,
+      info: 'Najprovjerenija autoškola u Splitu.',
+      websiteUrl: 'https://kruznitok.hr/',
+      imageUrl:
+        'https://kruznitok.hr/wp-content/uploads/2020/01/logo-autoskola-kt-web.png',
+      rating: 4.8,
+    },
+  });
+
+  const school3 = await prisma.school.create({
+    data: {
+      name: 'Hajduk',
+      city: 'Split',
+      address: 'Ulica A. Matoša 5',
+      contactNumber: '+385 92 999 0123',
+      email: 'kontakthajduk@autoskola.hr',
+      enrollmentFee: 140.0,
+      info: 'Najmodernija autoškola u Splitu.',
+      websiteUrl: 'https://www.autoskola-hajduk.hr/',
+      imageUrl:
+        'https://www.autoskola-hajduk.hr/wp-content/uploads/2021/01/logo-Hajduk-i-Hr-kvaliteta.png',
+      rating: 4.9,
     },
   });
 
@@ -164,21 +196,18 @@ async function main() {
     data: [
       {
         instructorId: instructor1.id,
-        day: Day.Monday,
-        startTime: '10:00',
-        endTime: '12:00',
+        startTime: new Date('2025-05-15T09:00:00Z'),
+        endTime: new Date('2025-05-15T10:00:00Z'),
       },
       {
         instructorId: instructor1.id,
-        day: Day.Wednesday,
-        startTime: '12:00',
-        endTime: '14:00',
+        startTime: new Date('2025-05-15T10:00:00Z'),
+        endTime: new Date('2025-05-15T11:00:00Z'),
       },
       {
         instructorId: instructor2.id,
-        day: Day.Tuesday,
-        startTime: '14:00',
-        endTime: '16:00',
+        startTime: new Date('2025-05-16T09:00:00Z'),
+        endTime: new Date('2025-05-16T10:00:00Z'),
       },
     ],
   });

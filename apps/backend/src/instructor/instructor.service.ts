@@ -1,8 +1,9 @@
 import { PrismaService } from '@/prisma/prisma.service';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { AddInstructorSlotDto } from './dto/add-instructor-slot.dto';
 import { UserResponseDto } from '@/user/dto/user-response.dto';
 import { UserService } from '@/user/user.service';
+import { InstructorSlot } from './entities/instructor-slot.entity';
 
 @Injectable()
 export class InstructorService {
@@ -26,23 +27,38 @@ export class InstructorService {
 
   async getInstructorSlots(instructorId: string) {
     await this.userService.getById(instructorId);
-
-    return this.prisma.instructorSlot.findMany({
+    const slots = await this.prisma.instructorSlot.findMany({
       where: { instructorId },
     });
+    return slots.map((s) => InstructorSlot.fromPrisma(s));
+  }
+
+  async getInstructorSlotById(id: string) {
+    const slot = await this.prisma.instructorSlot.findUnique({ where: { id } });
+    if (!slot) throw new NotFoundException("The instructor slot doesn't exist");
+    return InstructorSlot.fromPrisma(slot);
   }
 
   async addInstructorSlot(body: AddInstructorSlotDto) {
-    const { instructorId, day, startTime, endTime } = body;
+    const { instructorId, startTime, endTime } = body;
     await this.userService.getById(instructorId);
 
-    return this.prisma.instructorSlot.create({
+    const slot = await this.prisma.instructorSlot.create({
       data: {
         instructorId: instructorId,
-        day: day,
         startTime: startTime,
         endTime: endTime,
       },
     });
+
+    return InstructorSlot.fromPrisma(slot);
+  }
+
+  async deleteInstructorSlot(id: string) {
+    await this.getInstructorSlotById(id);
+    const slot = await this.prisma.instructorSlot.delete({
+      where: { id },
+    });
+    return InstructorSlot.fromPrisma(slot);
   }
 }

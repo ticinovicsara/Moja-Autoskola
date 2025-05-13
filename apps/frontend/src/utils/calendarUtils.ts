@@ -56,10 +56,25 @@ function getUpcomingMonday(date: Date): Date {
     upcomingMonday.setHours(0, 0, 0, 0);
     return upcomingMonday;
 }
+
+function getDayFromDate(date: Date): string {
+    const days = [
+        "Nedjelja",
+        "Ponedjeljak",
+        "Utorak",
+        "Srijeda",
+        "Četvrtak",
+        "Petak",
+        "Subota",
+    ];
+    return days[date.getDay()];
+}
+
 export {
     getMonthAbbreviation,
     getSessionType,
     getSessionFormat,
     getFormattedTime,
     getUpcomingMonday,
+    getDayFromDate,
 };

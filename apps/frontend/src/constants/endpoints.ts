@@ -3,9 +3,24 @@ export const API_ENDPOINTS = {
     LOGIN: "/auth/login",
     REGISTER: "/auth/register",
   },
+
   SESSION: {
     CANDIDATE: "/session/candidate",
     INSTRUCTOR: "/session/instructor",
+    DRIVING: "/session/driving",
   },
-  CANDIDATE_PROGRESS: "/user/progress",
+
+  INSTRUCTOR: {
+    SLOT: "/instructor/slot",
+    CANDIDATES: "/instructor/candidates",
+  },
+
+  CANDIDATE: {
+    INSTRUCTOR: "/candidate/instructor",
+    PROGRESS: "/user/progress",
+  },
+
+  SCHOOL: {
+    ALL: "/school",
+  },
 };

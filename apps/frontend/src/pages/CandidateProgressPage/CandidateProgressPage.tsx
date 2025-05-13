@@ -9,6 +9,8 @@ const CandidateProgressPage = () => {
   const [isVisible, setIsVisible] = useState(true);
   const { data, loading, error } = useCandidateProgressData(user?.id ?? "");
 
+  console.log("DATA: ", data);
+
   const closePage = () => {
     setIsVisible(false);
   };
@@ -27,8 +29,7 @@ const CandidateProgressPage = () => {
   const { passedTests, passedLessons } = data;
 
   const progressExams =
-    ((passedTests.theory + passedTests.driving + passedTests.firstAid) / 3) *
-    100;
+    passedTests.theory + passedTests.driving + passedTests.firstAid;
 
   return (
     <div className={styles["container"]}>

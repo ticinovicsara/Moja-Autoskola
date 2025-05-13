@@ -11,3 +11,9 @@
   margin-bottom: 56px;
   font-size: 32px;
 }
+
+.info {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}

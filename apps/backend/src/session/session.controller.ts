@@ -12,6 +12,7 @@ import { CreateSessionDto } from './dto/create-session.dto';
 import { UpdateSessionDto } from './dto/update-session.dto';
 import { UserRole } from '@prisma/client';
 import { Auth } from '@/auth/guards/auth-roles.decorator';
+import { CreateDrivingSessionDto } from './dto/create-driving-session.dto';
 
 @Controller('session')
 export class SessionController {
@@ -21,6 +22,14 @@ export class SessionController {
   @Post()
   create(@Body() createSessionDto: CreateSessionDto) {
     return this.sessionService.create(createSessionDto);
+  }
+
+  @Auth(UserRole.Candidate)
+  @Post('driving')
+  createDrivingSession(
+    @Body() createDrivingSessionDto: CreateDrivingSessionDto,
+  ) {
+    return this.sessionService.createDrivingSession(createDrivingSessionDto);
   }
 
   @Auth(UserRole.Admin)

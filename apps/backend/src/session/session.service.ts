@@ -1,21 +1,21 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateSessionDto } from './dto/create-session.dto';
 import { UpdateSessionDto } from './dto/update-session.dto';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Session } from './entities/session.entity';
-import { UserRole } from '@prisma/client';
-import { User } from '@/user/entities/user.entity';
+import { SessionFormat, SessionType, UserRole } from '@prisma/client';
 import { UserService } from '@/user/user.service';
+import { CreateDrivingSessionDto } from './dto/create-driving-session.dto';
+import { InstructorService } from '@/instructor/instructor.service';
+import { SchoolService } from '@/school/school.service';
 
 @Injectable()
 export class SessionService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly userService: UserService,
+    private readonly instructorService: InstructorService,
+    private readonly schoolService: SchoolService,
   ) {}
 
   async create(createSessionDto: CreateSessionDto) {
@@ -30,6 +30,40 @@ export class SessionService {
         format: createSessionDto.format,
         startTime: createSessionDto.startTime,
         endTime: createSessionDto.endTime,
+      },
+    });
+
+    return Session.fromPrisma(newSession);
+  }
+
+  async createDrivingSession(createDrivingSessionDto: CreateDrivingSessionDto) {
+    const candidate = await this.userService.getById(
+      createDrivingSessionDto.candidateId,
+    );
+    const instructorSlot = await this.instructorService.getInstructorSlotById(
+      createDrivingSessionDto.instructorSlotId,
+    );
+    const school = await this.schoolService.getUsersSchool(candidate.id);
+
+    await this.instructorService.deleteInstructorSlot(
+      createDrivingSessionDto.instructorSlotId,
+    );
+
+    const newSession = await this.prisma.session.create({
+      data: {
+        schoolId: school.id,
+        instructorId: createDrivingSessionDto.instructorId,
+        type: SessionType.Driving,
+        format: SessionFormat.Lesson,
+        startTime: instructorSlot.startTime,
+        endTime: instructorSlot.endTime,
+      },
+    });
+
+    await this.prisma.sessionCandidate.create({
+      data: {
+        candidateId: candidate.id,
+        sessionId: newSession.id,
       },
     });
 

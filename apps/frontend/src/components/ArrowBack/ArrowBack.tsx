@@ -1,4 +1,4 @@
-import { Arrow } from "@/assets/svgs";
+import { Arrow } from "@/assets/images";
 import c from "./arrowback.module.css";
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";

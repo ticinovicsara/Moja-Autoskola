@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { InstructorService } from './instructor.service';
 import { AddInstructorSlotDto } from './dto/add-instructor-slot.dto';
 import { Auth } from '@/auth/guards/auth-roles.decorator';
@@ -14,9 +14,9 @@ export class InstructorController {
     return this.instructorService.getCandidatesForInstructor(instructorId);
   }
 
-  @Auth(UserRole.Instructor)
-  @Get('slot/:id')
-  async getInstructorSlots(@Param('id') instructorId: string) {
+  @Auth(UserRole.Candidate)
+  @Get('slot/:instructorId')
+  async getInstructorSlots(@Param('instructorId') instructorId: string) {
     return this.instructorService.getInstructorSlots(instructorId);
   }
 
