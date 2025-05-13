@@ -231,7 +231,7 @@ export const Register = () => {
       {renderStepContent()}
       {renderStepDots()}
       <div className={c.buttonContainer}>
-        <button onClick={nextStep} className={`${c.nextButton} authBtn`}>
+        <button onClick={nextStep} className={`${c.formBtn} authBtn`}>
           {step === 4 ? "ZAVRŠI" : "DALJE"}
         </button>
       </div>

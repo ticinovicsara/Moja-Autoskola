@@ -1,19 +1,22 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-size: 16px;
-    background-color: var(--background-color);
-    font-family: "Satoshi", sans-serif;
+  font-size: 16px;
+  background-color: var(--background-color);
+  font-family: "Satoshi", sans-serif;
 }
 
 /* ovo je za svaki layout ovako za mobile verziju  */
 .container {
-    width: 100%;
-    padding-inline: 24px;
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+  padding-inline: 24px;
+  position: relative;
 }
 
 h1,
@@ -21,28 +24,36 @@ h2,
 h3,
 h4,
 h5,
-h6,
-p {
-    font-family: "Chillax", sans-serif;
-    color: var(--asphalt-border);
+h6 {
+  font-family: "Chillax", sans-serif;
+  color: var(--asphalt-border);
+}
+
+button {
+  cursor: pointer;
 }
 
 .authBtn {
-    margin-top: 32px;
-    font-family: "Chillax", sans-serif;
-    text-transform: uppercase;
-    font-weight: 600;
-    width: 100%;
-    border-radius: 20px;
-    font-size: 24px;
-    background-color: var(--green);
-    padding: 9px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.18);
+  font-family: "Chillax", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  width: 100%;
+  border-radius: 20px;
+  font-size: 24px;
+  background-color: transparent;
+  border: 1px solid var(--green-dark);
+  padding: 9px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+  transition: all 0.2s ease;
+}
+
+.authBtn:hover {
+  background-color: #e8eedf;
 }
 
 .errorMessage {
-    color: var(--red);
+  color: var(--red);
 }
