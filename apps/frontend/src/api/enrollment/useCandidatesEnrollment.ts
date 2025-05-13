@@ -12,9 +12,8 @@ const useCandidateEnrollment = (userId: string) => {
         `${API_ENDPOINTS.ENROLLMENT.CANDIDATE}/${userId}`
       ),
     enabled: !!userId,
+    refetchOnMount: true,
   });
-
-  console.log(data);
   return {
     enrollment: data,
     isLoading,

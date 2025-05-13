@@ -38,7 +38,7 @@ export class EnrollmentService {
   async getCandidateEnrollmentRequests(candidateId: string) {
     await this.userService.getById(candidateId);
 
-    const requests = await this.prisma.enrollmentRequest.findMany({
+    const request = await this.prisma.enrollmentRequest.findFirst({
       where: { candidateId },
       include: {
         school: true,
@@ -46,15 +46,13 @@ export class EnrollmentService {
       },
     });
 
-    if (!requests.length) {
+    if (!request) {
       throw new NotFoundException(
-        'No enrollment requests found for this candidate.',
+        'No enrollment request found for this candidate.',
       );
     }
 
-    return requests.map((request) =>
-      EnrollmentRequestEntity.fromPrisma(request),
-    );
+    return EnrollmentRequestEntity.fromPrisma(request);
   }
 
   async getSchoolEnrollmentRequests(schoolId: string) {
@@ -85,6 +83,16 @@ export class EnrollmentService {
     await this.userService.getById(candidateId);
     await this.schoolService.getById(schoolId);
 
+    const userEnrollment = await this.prisma.enrollmentRequest.findFirst({
+      where: {
+        candidateId: candidateId,
+      },
+    });
+
+    if (userEnrollment) {
+      throw new ConflictException('User already has enrollment request.');
+    }
+
     const existing = await this.prisma.enrollmentRequest.findUnique({
       where: {
         candidateId_schoolId: {
@@ -103,6 +111,10 @@ export class EnrollmentService {
         candidateId,
         schoolId,
         status: EnrollmentStatus.Pending,
+      },
+      include: {
+        candidate: true,
+        school: true,
       },
     });
 

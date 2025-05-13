@@ -36,13 +36,13 @@ export class EnrollmentController {
     return this.enrollmentService.getSchoolEnrollmentRequests(schoolId);
   }
 
-  @Auth(UserRole.SchoolAdmin)
+  @Auth(UserRole.SchoolAdmin, UserRole.Guest)
   @Post()
   async requestEnrollment(@Body() body: RequestEnrollmentDto) {
     return this.enrollmentService.requestEnrollment(body);
   }
 
-  @Auth(UserRole.SchoolAdmin)
+  @Auth(UserRole.SchoolAdmin, UserRole.Candidate)
   @Patch()
   async updateEnrollmentStatus(@Body() body: UpdateRequestDto) {
     return this.enrollmentService.updateEnrollmentStatus(body);
