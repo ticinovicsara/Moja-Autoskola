@@ -37,7 +37,7 @@ const InstructorSlot: FC<InstructorSlotProps> = ({ slot }) => {
     }
 
     return (
-        <div className={styles.slot}>
+        <div className={styles.slot} onClick={toggleConfirmPopup}>
             <div className={styles.date}>
                 <p>{slot.startTime.getDate()}</p>
                 <p>{getMonthAbbreviation(slot.startTime.getMonth())}</p>
@@ -53,11 +53,7 @@ const InstructorSlot: FC<InstructorSlotProps> = ({ slot }) => {
             {isConfirmPopupOpen && (
                 <div className={styles.confirmPopupContainer}>
                     <div className={`${styles.confirmPopup} container`}>
-                        <img
-                            src={Cross}
-                            alt="cross"
-                            onClick={toggleConfirmPopup}
-                        />
+                        <img src={Cross} alt="cross" />
                         <p>Jesi li siguran da želiš odabrati ovaj termin?</p>
                         <div className={styles.options}>
                             <button onClick={handleConfirm}>Da</button>
