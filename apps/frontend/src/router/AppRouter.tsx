@@ -7,6 +7,7 @@ import {
   BlogPage,
 } from "@/pages";
 import { AuthPage, Login, Register } from "@/pages/Auth";
+import InstructorCandidateListPage from "@/pages/InstructorCandidateListPage/InstructorCandidateListPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const AppRouter = () => {
@@ -19,6 +20,9 @@ const AppRouter = () => {
         </Route>
 
         <Route element={<PublicLayout />}>
+          <Route path={routes.HOME} element={<HomePage />} />
+        </Route>
+        <Route element={<PublicLayout />}>
           <Route path={`${routes.BLOG}/:id`} element={<BlogPage />} />
           <Route path={routes.AUTH} element={<AuthPage />} />
         </Route>
@@ -29,6 +33,17 @@ const AppRouter = () => {
           <Route
             path={routes.CANDIDATE_DASHBOARD}
             element={<CandidateDashboardPage />}
+          />
+          <Route
+            path={routes.CANDIDATE_CALENDAR}
+            element={<CandidateCalendarPage />}
+          />
+        </Route>
+
+        <Route element={<CandidateLayout />}>
+          <Route
+            path={routes.INSTRUCTOR_CANDIDATE_LIST}
+            element={<InstructorCandidateListPage />}
           />
           <Route
             path={routes.CANDIDATE_CALENDAR}

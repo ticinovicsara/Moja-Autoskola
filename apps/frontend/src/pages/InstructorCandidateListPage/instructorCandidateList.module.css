@@ -1,0 +1,27 @@
+.container {
+  width: 100%;
+  margin: 0 auto;
+  background-color: var(--background-color);
+  font-family: "Satoshi", sans-serif;
+  position: relative;
+  padding: 1em;
+}
+
+.navigation-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em;
+  text-align: center;
+}
+
+.page-title {
+  text-align: center;
+  padding-top: 8px;
+  width: 100%;
+}
+
+.message {
+  text-align: left;
+  padding-left: 2em;
+}

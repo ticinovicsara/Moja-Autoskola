@@ -1,17 +1,22 @@
 export const API_ENDPOINTS = {
-    AUTH: {
-        LOGIN: "/auth/login",
-        REGISTER: "/auth/register",
-    },
-    SESSION: {
-        CANDIDATE: "/session/candidate",
-        INSTRUCTOR: "/session/instructor",
-        DRIVING: "/session/driving",
-    },
-    INSTRUCTOR: {
-        SLOT: "/instructor/slot",
-    },
-    CANDIDATE: {
-        INSTRUCTOR: "/candidate/instructor",
-    },
+  AUTH: {
+    LOGIN: "/auth/login",
+    REGISTER: "/auth/register",
+  },
+
+  SESSION: {
+    CANDIDATE: "/session/candidate",
+    INSTRUCTOR: "/session/instructor",
+    DRIVING: "/session/driving",
+  },
+
+  INSTRUCTOR: {
+    SLOT: "/instructor/slot",
+  },
+
+  CANDIDATE: {
+    INSTRUCTOR: "/candidate/instructor",
+  },
+
+  INSTRUCTOR_CANDIDATES: "/instructor/candidates",
 };
