@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import DashboardLayout from "./DashboardLayuot";
 import {
   ProgressCard,
@@ -13,10 +13,12 @@ import {
   useNextSession,
 } from "@/hooks";
 import { formatSessionTime } from "@/utils/sessionsUtil";
+import ChooseSessionMenu from "../ChooseSessionMenu/ChooseSessionMenu";
 
 export const CandidateDashboard = () => {
   const { user } = useAuth();
   const userId = user?.id || "";
+  const [isChooseSessionMenuOpen, setIsChooseSessionMenuOpen] = useState(false);
 
   const {
     progress,
@@ -26,8 +28,6 @@ export const CandidateDashboard = () => {
 
   const { activity, startTime } = useNextSession(userId);
   const instructor = useGetInstructor(userId);
-
-  console.log("INS", instructor);
 
   const instructorInfo = useMemo(() => {
     if (!instructor || !instructor.firstName) {
@@ -74,33 +74,45 @@ export const CandidateDashboard = () => {
       : undefined;
   }, [startTime]);
 
+  const toggleChooseSessionMenu = () => {
+    setIsChooseSessionMenuOpen((prev) => !prev);
+  };
+
   return (
-    <DashboardLayout
-      top={
-        progressMessage ? (
-          <div>{progressMessage}</div>
-        ) : (
-          <ProgressCard title="Ukupno odrađeno" progress={progress || 0} />
-        )
-      }
-      middle={
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "1em",
-          }}
-        >
-          <ArrowCard title="ODABERI TERMIN VOŽNJE" />
-          <CandidateInstructorCard
-            instructor={instructorInfo.name}
-            phone={instructorInfo.phone ?? ""}
-          />
-        </div>
-      }
-      bottom={
-        <ScheduleCard activity={scheduleContent} time={scheduleTime ?? ""} />
-      }
-    />
+    <>
+      <DashboardLayout
+        top={
+          progressMessage ? (
+            <div>{progressMessage}</div>
+          ) : (
+            <ProgressCard title="Ukupno odrađeno" progress={progress || 0} />
+          )
+        }
+        middle={
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "1em",
+            }}
+          >
+            <ArrowCard
+              title="ODABERI TERMIN VOŽNJE"
+              onClick={toggleChooseSessionMenu}
+            />
+            <CandidateInstructorCard
+              instructor={instructorInfo.name}
+              phone={instructorInfo.phone ?? ""}
+            />
+          </div>
+        }
+        bottom={
+          <ScheduleCard activity={scheduleContent} time={scheduleTime ?? ""} />
+        }
+      />
+      {isChooseSessionMenuOpen && (
+        <ChooseSessionMenu toggleChooseSessionMenu={toggleChooseSessionMenu} />
+      )}
+    </>
   );
 };

@@ -23,8 +23,5 @@ export const useGetInstructor = (candidateId: string) => {
     }),
   });
 
-  console.log("DATA", data);
-  console.log("ID", candidateId);
-
   return { ...data, loading: isLoading, error };
 };
