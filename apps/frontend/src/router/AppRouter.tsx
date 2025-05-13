@@ -4,8 +4,9 @@ import {
   HomePage,
   CandidateDashboardPage,
   CandidateCalendarPage,
+  BlogPage,
 } from "@/pages";
-import { Login, Register } from "@/pages/Auth";
+import { AuthPage, Login, Register } from "@/pages/Auth";
 import InstructorCandidateListPage from "@/pages/InstructorCandidateListPage/InstructorCandidateListPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -21,8 +22,14 @@ const AppRouter = () => {
         <Route element={<PublicLayout />}>
           <Route path={routes.HOME} element={<HomePage />} />
         </Route>
+        <Route element={<PublicLayout />}>
+          <Route path={`${routes.BLOG}/:id`} element={<BlogPage />} />
+          <Route path={routes.AUTH} element={<AuthPage />} />
+        </Route>
 
         <Route element={<CandidateLayout />}>
+          <Route path={routes.HOME} element={<HomePage />} />
+
           <Route
             path={routes.CANDIDATE_DASHBOARD}
             element={<CandidateDashboardPage />}

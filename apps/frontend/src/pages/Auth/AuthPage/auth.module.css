@@ -1,0 +1,30 @@
+.authContainer {
+  padding-block: 50px;
+  height: 100vh;
+}
+
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-block: 128px;
+}
+
+.register {
+  color: #3e9ac4;
+  cursor: pointer;
+}
+
+.createAcc {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.functions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}

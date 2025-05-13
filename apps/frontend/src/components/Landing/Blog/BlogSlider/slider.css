@@ -1,0 +1,106 @@
+.sliderContainer {
+  position: relative;
+  width: 100%;
+  padding: 0 50px;
+  overflow: hidden;
+}
+
+.sliderWrapper {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.slider {
+  width: 100%;
+  overflow: visible;
+}
+
+.slide {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  border: 1px solid #afafaf;
+  border-radius: 20px;
+  margin: 0 auto;
+  min-height: 380px;
+}
+
+.title {
+  font-size: 18px;
+  color: #000;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.description {
+  color: #666;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  max-width: 100%;
+}
+
+.readMore {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #007bff;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.readMore:hover {
+  text-decoration: underline;
+}
+
+.custom-swiper-button-next,
+.custom-swiper-button-prev {
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  z-index: 10;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--asphalt-border, #333);
+}
+
+.custom-swiper-button-next {
+  right: -35px;
+}
+
+.custom-swiper-button-prev {
+  left: -35px;
+}
+
+.custom-swiper-button-next:after,
+.custom-swiper-button-prev:after {
+  font-family: "swiper-icons";
+  font-size: 18px;
+  text-transform: none !important;
+  letter-spacing: 0;
+  font-variant: initial;
+  line-height: 1;
+}
+
+.custom-swiper-button-prev:after {
+  content: "prev";
+}
+
+.custom-swiper-button-next:after {
+  content: "next";
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  display: none;
+}
+
+.swiper-pagination {
+  display: none;
+}
