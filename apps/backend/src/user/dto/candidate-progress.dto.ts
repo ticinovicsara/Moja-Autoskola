@@ -1,20 +1,20 @@
 import { Type } from 'class-transformer';
-import { IsArray, ValidateNested } from 'class-validator';
-import { Session } from '../../session/entities/session.entity';
-import { TestResult } from '../../test-result/entities/test-result.entity';
+import { ValidateNested, IsObject } from 'class-validator';
+import { PassedLessonsDto } from './ProgressHours/PassedLessionsDto';
+import { PassedTestsDto } from './ProgressHours/PassedTestsDto';
 
 export class CandidateProgressDto {
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => TestResult)
-  passedTests: TestResult[];
+  @IsObject()
+  @ValidateNested()
+  @Type(() => PassedTestsDto)
+  passedTests: PassedTestsDto;
 
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => Session)
-  passedLessons: Session[];
+  @IsObject()
+  @ValidateNested()
+  @Type(() => PassedLessonsDto)
+  passedLessons: PassedLessonsDto;
 
-  constructor(passedTests: TestResult[], passedLessons: Session[]) {
+  constructor(passedTests: PassedTestsDto, passedLessons: PassedLessonsDto) {
     this.passedTests = passedTests;
     this.passedLessons = passedLessons;
   }

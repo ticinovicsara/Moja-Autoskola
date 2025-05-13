@@ -99,7 +99,47 @@ export class UserService {
       .map((lesson) => Session.fromPrisma(lesson.session))
       .filter((session): session is Session => session !== null);
 
-    return new CandidateProgressDto(testResults, passedLessons);
+    const passedTestsDto = {
+      theory: 0,
+      driving: 0,
+      firstAid: 0,
+    };
+
+    for (const test of testResults) {
+      switch (test.type) {
+        case 'Theory':
+          passedTestsDto.theory++;
+          break;
+        case 'Driving':
+          passedTestsDto.driving++;
+          break;
+        case 'FirstAid':
+          passedTestsDto.firstAid++;
+          break;
+      }
+    }
+
+    const passedLessionsDto = {
+      theory: 0,
+      driving: 0,
+      firstAid: 0,
+    };
+
+    for (const lesson of passedLessons) {
+      switch (lesson.type) {
+        case 'Theory':
+          passedLessionsDto.theory++;
+          break;
+        case 'Driving':
+          passedLessionsDto.driving++;
+          break;
+        case 'FirstAid':
+          passedLessionsDto.firstAid++;
+          break;
+      }
+    }
+
+    return new CandidateProgressDto(passedTestsDto, passedLessionsDto);
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {

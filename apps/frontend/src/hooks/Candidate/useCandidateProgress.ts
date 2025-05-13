@@ -10,20 +10,12 @@ export const useCandidateProgress = (candidateId: string) => {
   });
 
   const progress =
-    data &&
-    data.passedTests != null &&
-    data.firstAidHours != null &&
-    data.theoryHours != null &&
-    data.drivingHours != null
-      ? calculateProgress(
-          data.passedTests,
-          data.firstAidHours,
-          data.theoryHours,
-          data.drivingHours
-        )
+    data && data.passedTests != null && data.passedLessons != null
+      ? calculateProgress(data.passedTests, data.passedLessons)
       : null;
 
   console.log("DATA: ", data);
+  console.log("ID:", candidateId);
 
   return {
     progress,
