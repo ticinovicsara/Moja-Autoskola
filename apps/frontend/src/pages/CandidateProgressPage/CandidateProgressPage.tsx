@@ -1,14 +1,24 @@
-// src/pages/CandidateProgressPage.tsx
 import { Cross } from "@/assets/svgs";
 import styles from "./candidateProgress.module.css";
 import ProgressBar from "@/components/Cards/ProgressCard/ProgressBar/ProgressBar";
+import { useState } from "react";
 
 const CandidateProgressPage = () => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  const closePage = () => {
+    setIsVisible(false);
+  };
+
+  if (!isVisible) {
+    return null;
+  }
+
   return (
     <div className={styles["container"]}>
       <div className={styles["header"]}>
         <h1 className={styles["title"]}>Tvoj Napredak</h1>
-        <img src={Cross} alt="" />
+        <img src={Cross} alt="close" onClick={closePage} />
       </div>
 
       <div className={styles["progress-list"]}>
