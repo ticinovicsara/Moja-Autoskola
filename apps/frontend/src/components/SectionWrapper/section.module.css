@@ -1,0 +1,13 @@
+.sectionHeader {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 24px;
+}
+
+.section {
+  padding-block: 64px;
+}
+
+.sectionHeader {
+  margin-bottom: 32px;
+}

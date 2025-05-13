@@ -1,8 +1,9 @@
 const routes = {
   HOME: "/",
+  AUTH: "/auth",
   LOGIN: "/login",
   REGISTER: "/register",
-  PROFLE: "/profile",
+  BLOG: "/blog",
 
   CANDIDATE_DASHBOARD: "/candidate/dashboard",
   CANDIDATE_CALENDAR: "/candidate/calendar",

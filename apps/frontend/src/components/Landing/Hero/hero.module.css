@@ -1,0 +1,12 @@
+.hero {
+  height: calc(100vh - 102px);
+  padding-block: 106px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.startBtn:hover {
+  background-color: #e2ebd6;
+}

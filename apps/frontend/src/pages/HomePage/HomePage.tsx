@@ -1,11 +1,22 @@
-import { useAuth } from "@/hooks";
+import {
+  AllOnOneSection,
+  BlogSection,
+  HeroSection,
+  ScheduleRideSection,
+} from "@/components";
+import FAQSection from "@/components/Landing/FAQ/FaqSection";
 import { Toaster } from "react-hot-toast";
 
 const HomePage = () => {
-  const { user } = useAuth();
   return (
     <>
-      <h1>Welcome back on home page {user?.firstName} 👋</h1>
+      <div className="container">
+        <HeroSection />
+        <AllOnOneSection />
+        <ScheduleRideSection />
+        <BlogSection />
+        <FAQSection />
+      </div>
       <Toaster />
     </>
   );

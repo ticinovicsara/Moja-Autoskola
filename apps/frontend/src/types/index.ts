@@ -1,4 +1,5 @@
 export * from "./session";
-export * from "./create-user";
+export * from "./user";
+export * from "./instructor-slot";
 export * from "./day";
 export * from "./user";
