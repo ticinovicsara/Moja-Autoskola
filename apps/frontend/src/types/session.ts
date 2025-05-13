@@ -12,9 +12,9 @@ type SessionType = "Theory" | "FirstAid" | "Driving";
 type SessionFormat = "Lesson" | "Test";
 
 type DrivingSessionReq = {
-    instructorSlotId: string;
-    instructorId: string;
-    candidateId: string;
+  instructorSlotId: string;
+  instructorId: string;
+  candidateId: string;
 };
 
 export type { Session, SessionType, SessionFormat, DrivingSessionReq };
