@@ -1,7 +1,7 @@
 import { Cross, Profile } from "@/assets/svgs";
 import styles from "./HamburgerMenu.module.css";
 import { FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { routes } from "@/constants";
 import { useAuth } from "@/hooks";
 import toast from "react-hot-toast";
@@ -12,11 +12,13 @@ interface HamburgerMenuProps {
 
 const HamburgerMenu: FC<HamburgerMenuProps> = ({ toggleMenu }) => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     toggleMenu();
-    toast.success("Uspješno ste se odjavili");
     logout();
+    toast.success("Uspješno ste se odjavili");
+    navigate(routes.HOME);
   };
 
   return (
