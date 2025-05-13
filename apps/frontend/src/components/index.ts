@@ -17,3 +17,4 @@ export * from "./Landing/Blog/BlogCard/BlogCard";
 export * from "./Landing/FAQ/FaqSection";
 export * from "./LogoAndText/LogoAndText";
 export * from "./SchoolCard/SchoolCard";
+export * from "./FilterSchools/FilterSchools";
