@@ -2,7 +2,7 @@ import DashboardLayout from "./DashboardLayuot";
 import { ArrowCard, ScheduleCard } from "../Cards";
 import { routes } from "@/constants";
 import { useMemo } from "react";
-import { useAuth, useInstructorNextSession } from "@/hooks";
+import { useAuth, useNextSession } from "@/hooks";
 import { formatSessionTime } from "@/utils";
 import styles from "../Cards/ArrowCard/arrowCard.module.css";
 
@@ -10,7 +10,7 @@ export const InstructorDashboard = () => {
   const { user } = useAuth();
   const userId = user?.id || "";
 
-  const { loading, activity, startTime } = useInstructorNextSession(userId);
+  const { loading, activity, startTime } = useNextSession(userId);
 
   const scheduleContent = useMemo(() => {
     if (loading) return "Učitavanje...";

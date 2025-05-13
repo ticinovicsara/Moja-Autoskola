@@ -26,6 +26,8 @@ const useUserSessions = (userId: string) => {
     endTime: new Date(session.endTime),
   }));
 
+  console.log("Sessions data:", sessions);
+
   return { sessions: sessions || [], isLoading, error };
 };
 

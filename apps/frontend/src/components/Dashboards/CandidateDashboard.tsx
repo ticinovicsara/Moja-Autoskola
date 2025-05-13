@@ -8,9 +8,9 @@ import {
 } from "../Cards";
 import {
   useAuth,
-  useCandidateNextSession,
   useCandidateProgress,
   useGetInstructor,
+  useNextSession,
 } from "@/hooks";
 import { formatSessionTime } from "@/utils/sessionsUtil";
 
@@ -24,7 +24,7 @@ export const CandidateDashboard = () => {
     error: progressError,
   } = useCandidateProgress(userId);
 
-  const { activity, startTime } = useCandidateNextSession(userId);
+  const { activity, startTime } = useNextSession(userId);
   const instructor = useGetInstructor(userId);
 
   const instructorInfo = useMemo(() => {
