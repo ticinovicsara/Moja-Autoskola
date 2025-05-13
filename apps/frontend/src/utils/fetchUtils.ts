@@ -1,4 +1,4 @@
-import api from "@/api/base";
+import api from "@/api/api";
 
 async function getData<T = any>(url: string): Promise<T> {
     const response = await api.get<T>(url);

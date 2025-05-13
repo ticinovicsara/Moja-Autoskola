@@ -1,0 +1,114 @@
+.slot {
+    border: 1px solid var(--gray);
+    border-radius: 20px;
+    height: 72px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+}
+
+.slot > img {
+    margin-left: auto;
+    margin-right: 24px;
+}
+
+.date {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 72px;
+    border-right: 1px solid var(--gray);
+    border-radius: 20px;
+    height: 100%;
+    font-family: "Chillax", sans-serif;
+    font-weight: 700;
+    background-color: var(--blue);
+}
+
+.sessionInfo > * {
+    font-family: "Satoshi", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.sessionInfo > p:last-child {
+    font-weight: 400;
+    opacity: 0.6;
+}
+
+.sessionInfo > p > span {
+    opacity: 0.5;
+}
+
+.confirmPopupContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.confirmPopupContainer::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+
+.confirmPopup {
+    width: 324px;
+    height: 188px;
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--gray);
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.confirmPopup > img {
+    width: 24px;
+    height: 24px;
+    margin-left: auto;
+    margin-bottom: 16px;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.options > button {
+    width: 130px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 20px;
+    color: var(--asphalt-border);
+}
+
+.options > button:first-child {
+    background-color: var(--green);
+}
+
+.options > button:last-child {
+    background-color: var(--red);
+}

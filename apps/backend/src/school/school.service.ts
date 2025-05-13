@@ -49,6 +49,15 @@ export class SchoolService {
     return School.fromPrisma(school);
   }
 
+  async getUsersSchool(userId: string) {
+    const userSchool = await this.prisma.schoolUser.findFirst({
+      where: { userId },
+      include: { school: true },
+    });
+    if (!userSchool) throw new NotFoundException("The user isn't in a school");
+    return School.fromPrisma(userSchool.school);
+  }
+
   async update(id: string, updateSchoolDto: UpdateSchoolDto) {
     await this.getById(id);
 
