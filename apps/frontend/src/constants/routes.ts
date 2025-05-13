@@ -3,7 +3,7 @@ const routes = {
   AUTH: "/auth",
   LOGIN: "/login",
   REGISTER: "/register",
-  BLOG: (id: string) => `/blog/${id}`,
+  BLOG: "/blog",
   CANDIDATE_DASHBOARD: "/candidate/dashboard",
   CANDIDATE_CALENDAR: "/candidate/calendar",
 };

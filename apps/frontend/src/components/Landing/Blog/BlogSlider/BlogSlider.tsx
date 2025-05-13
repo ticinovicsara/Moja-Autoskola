@@ -10,7 +10,7 @@ export default function BlogSlider() {
   const navigate = useNavigate();
 
   const handleOpenBlog = (id: string) => {
-    navigate(routes.BLOG(id));
+    navigate(`${routes.BLOG}/${id}`);
   };
   return (
     <div className="sliderContainer">
