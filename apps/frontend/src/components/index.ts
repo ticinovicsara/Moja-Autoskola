@@ -21,3 +21,4 @@ export * from "./FilterSchools/FilterSchools";
 export * from "./CandidateCard/CandidateCard";
 export * from "./CandidateList/CandidateList";
 export * from "./InputFieldWithFilter/InputFieldWithFiler";
+export * from "./ConfirmationPopup/ConfirmationPopup";

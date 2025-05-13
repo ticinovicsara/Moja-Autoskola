@@ -9,10 +9,10 @@ import {
   getFormattedTime,
   getMonthAbbreviation,
 } from "@/utils";
-import { Cross } from "@/assets/svgs";
 import { usePostDrivingSession } from "@/api";
 import { useAuth } from "@/hooks";
 import { Arrow } from "@/assets/images";
+import { ConfirmationPopup } from "../ConfirmationPopup/ConfirmationPopup";
 
 interface InstructorSlotProps {
   slot: InstructorSlotType;
@@ -25,6 +25,7 @@ const InstructorSlot: FC<InstructorSlotProps> = ({ slot }) => {
 
   function toggleConfirmPopup() {
     setIsConfirmPopupOpen((prev) => !prev);
+    console.log(isConfirmPopupOpen);
   }
 
   function handleConfirm() {
@@ -51,16 +52,11 @@ const InstructorSlot: FC<InstructorSlotProps> = ({ slot }) => {
       </div>
       <img src={Arrow} alt="arrow" onClick={toggleConfirmPopup} />
       {isConfirmPopupOpen && (
-        <div className={styles.confirmPopupContainer}>
-          <div className={`${styles.confirmPopup} container`}>
-            <img src={Cross} alt="cross" />
-            <p>Jesi li siguran da želiš odabrati ovaj termin?</p>
-            <div className={styles.options}>
-              <button onClick={handleConfirm}>Da</button>
-              <button onClick={toggleConfirmPopup}>Ne</button>
-            </div>
-          </div>
-        </div>
+        <ConfirmationPopup
+          prompt="Jesi li siguran da želiš ovaj termin?"
+          handleConfirm={handleConfirm}
+          togglePopup={toggleConfirmPopup}
+        />
       )}
     </div>
   );

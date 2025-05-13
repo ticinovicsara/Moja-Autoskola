@@ -1,48 +1,3 @@
-.slot {
-  border: 1px solid var(--gray);
-  border-radius: 20px;
-  height: 72px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 16px;
-}
-
-.slot > img {
-  transform: rotate(180deg);
-  margin-left: auto;
-  margin-right: 24px;
-}
-
-.date {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 72px;
-  border-right: 1px solid var(--gray);
-  border-radius: 20px;
-  height: 100%;
-  font-family: "Chillax", sans-serif;
-  font-weight: 700;
-  background-color: var(--blue);
-}
-
-.sessionInfo > * {
-  font-family: "Satoshi", sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.sessionInfo > p:last-child {
-  font-weight: 400;
-  opacity: 0.6;
-}
-
-.sessionInfo > p > span {
-  opacity: 0.5;
-}
-
 .confirmPopupContainer {
   position: fixed;
   top: 0;
@@ -107,9 +62,11 @@
 }
 
 .options > button:first-child {
-  background-color: var(--green);
+  background-color: transparent;
+  border: 1px solid var(--green-dark);
 }
 
 .options > button:last-child {
-  background-color: var(--red);
+  background-color: transparent;
+  border: 1px solid var(--darker-red);
 }

@@ -26,9 +26,6 @@ const AppRouter = () => {
         </Route>
 
         <Route element={<PublicLayout />}>
-          <Route path={routes.HOME} element={<HomePage />} />
-        </Route>
-        <Route element={<PublicLayout />}>
           <Route path={`${routes.BLOG}/:id`} element={<BlogPage />} />
           <Route path={routes.AUTH} element={<AuthPage />} />
         </Route>
