@@ -11,6 +11,7 @@ export class School {
   info: string | null;
   websiteUrl: string | null;
   imageUrl: string | null;
+  rating: number;
 
   constructor(
     id: string,
@@ -23,6 +24,7 @@ export class School {
     info: string | null,
     websiteUrl: string | null,
     imageUrl: string | null,
+    rating: number,
   ) {
     this.id = id;
     this.name = name;
@@ -34,6 +36,7 @@ export class School {
     this.info = info;
     this.websiteUrl = websiteUrl;
     this.imageUrl = imageUrl;
+    this.rating = rating;
   }
 
   static fromPrisma(prismaSchool: PrismaSchool) {
@@ -48,6 +51,7 @@ export class School {
       prismaSchool.info,
       prismaSchool.websiteUrl,
       prismaSchool.imageUrl,
+      Number(prismaSchool.rating),
     );
   }
 }

@@ -12,12 +12,12 @@ export const GuestRoute = () => {
   }
 
   if (!user) {
-    toast.error("You must log in to continue");
+    toast.error("Morate se prijaviti da bi nastavili");
     return <Navigate to={routes.LOGIN} />;
   }
 
   if (user.role !== UserRoles.Guest) {
-    toast.error("You have to log in as guest to access that page");
+    toast.error("Samo novi korisnici mogu pristupiti ovoj stranici");
     return <Navigate to={routes.HOME} />;
   }
 

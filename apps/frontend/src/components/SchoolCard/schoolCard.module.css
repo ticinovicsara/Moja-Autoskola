@@ -1,0 +1,79 @@
+.card {
+  border-radius: 20px;
+  border: 1px solid var(--gray);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  cursor: pointer;
+  background-color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.cardWrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.logoAndName {
+  display: flex;
+  align-items: center;
+}
+
+.imageWrapper {
+  width: 100%;
+  height: auto;
+  max-width: 120px;
+  min-width: 77px;
+  overflow: hidden;
+}
+
+.imageWrapper img {
+  width: 80%;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+}
+
+.ratingContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.name {
+  font-size: 16px;
+}
+
+.info {
+  position: relative;
+  margin-top: -20px;
+  z-index: 0;
+  padding: 52px 24px 32px 24px;
+  background-color: rgb(230, 235, 232);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.details {
+  display: flex;
+  gap: 8px;
+}
+
+.details span {
+  opacity: 0.5;
+}
+
+.link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.link .infoMark {
+  color: var(--asphalt-border);
+}

@@ -12,6 +12,7 @@ import { CreateSchoolDto } from './dto/create-school.dto';
 import { UpdateSchoolDto } from './dto/update-school.dto';
 import { Auth } from '@/auth/guards/auth-roles.decorator';
 import { UserRole } from '@prisma/client';
+import { User } from '@/user/entities/user.entity';
 
 @Controller('school')
 export class SchoolController {
@@ -23,7 +24,7 @@ export class SchoolController {
     return this.schoolService.create(createSchoolDto);
   }
 
-  @Auth(UserRole.Admin)
+  @Auth(UserRole.Admin, UserRole.Guest)
   @Get()
   findAll() {
     return this.schoolService.getAll();

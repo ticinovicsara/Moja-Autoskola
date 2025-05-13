@@ -39,7 +39,7 @@ async function main() {
       info: 'Najmodernija autoškola u Zagrebu.',
       websiteUrl: 'https://www.autoskola-start.hr',
       imageUrl:
-        'https://autoskola-start.hr/wp-content/uploads/2023/01/1672650633240-1536x650.jpg',
+        'https://www.autoskolastart.hr/wp-content/themes/sage/dist/images/logo/autoskola_start_logo_full.svg',
       rating: 4.8,
     },
   });
