@@ -27,6 +27,8 @@ export const CandidateDashboard = () => {
   const { activity, startTime } = useNextSession(userId);
   const instructor = useGetInstructor(userId);
 
+  console.log("INS", instructor);
+
   const instructorInfo = useMemo(() => {
     if (!instructor || !instructor.firstName) {
       return {
@@ -37,7 +39,7 @@ export const CandidateDashboard = () => {
 
     return {
       name: `${instructor.firstName} ${instructor.lastName}`,
-      phone: instructor.phone,
+      phone: instructor.phoneNumber,
     };
   }, [instructor, userId]);
 

@@ -16,12 +16,12 @@ export const API_ENDPOINTS = {
 
   INSTRUCTOR: {
     SLOT: "/instructor/slot",
-    CANDIDATE: "/instructor/candidate",
+    CANDIDATE: "/instructor/candidates",
   },
 
   CANDIDATE: {
     INSTRUCTOR: "/candidate/instructor",
   },
 
-  INSTRUCTOR_CANDIDATES: "/instructor/candidates",
+  GET_INSTRUCTOR_CANDIDATE: "/instructor-candidate",
 };
