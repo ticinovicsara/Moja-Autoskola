@@ -1,0 +1,48 @@
+.card-container {
+  border-radius: 1em;
+  overflow: hidden;
+  display: flex;
+  font-family: "Satoshi", sans-serif;
+  font-size: large;
+  color: var(--asphalt-border);
+  flex: 1;
+  height: 100%;
+}
+
+.card-header {
+  padding: 3%;
+  border-radius: 1em;
+  z-index: 10;
+  position: relative;
+}
+
+.card-body {
+  z-index: 1;
+  position: relative;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+  padding: 1em;
+  padding-top: 30px;
+  margin-top: -20px;
+}
+
+.card-body-noHeader {
+  border-radius: 1em;
+  padding: 1em;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.card-title {
+  font-size: 1em;
+  font-weight: 700;
+  text-align: left;
+}
+
+.center-title {
+  text-align: center;
+  padding: 0.3em;
+}

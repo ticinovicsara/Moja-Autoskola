@@ -1,0 +1,74 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-color);
+  opacity: 1;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 5em;
+  padding: 2em;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  height: 102px;
+  padding-top: 50px;
+  width: 100%;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.progress-list {
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  gap: 1em;
+}
+
+.list-title {
+  font-family: "Satoshi", sans-serif;
+  font-weight: 400;
+  margin-bottom: -20px;
+}
+
+/*FILL*/
+.yellow-fill {
+  background-color: #ffb855a3;
+}
+
+.blue-fill {
+  background-color: #3e9ac4;
+}
+
+.green-fill {
+  background-color: #6c8c3e;
+}
+
+.red-fill {
+  background-color: #f97c7c;
+}
+
+/*BAR*/
+.yellow-bar {
+  background-color: #ffc16aa3;
+}
+
+.blue-bar {
+  background-color: #b4d1e8;
+}
+
+.green-bar {
+  background-color: #b1cf86;
+}
+
+.red-bar {
+  background-color: #f3c0bc;
+}
