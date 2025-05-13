@@ -14,9 +14,6 @@ export const useCandidateProgress = (candidateId: string) => {
       ? calculateProgress(data.passedTests, data.passedLessons)
       : null;
 
-  console.log("DATA: ", data);
-  console.log("ID:", candidateId);
-
   return {
     progress,
     loading: isLoading,

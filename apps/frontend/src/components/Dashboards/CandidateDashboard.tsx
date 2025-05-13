@@ -27,8 +27,6 @@ export const CandidateDashboard = () => {
   const { activity, startTime } = useCandidateNextSession(userId);
   const instructor = useGetInstructor(userId);
 
-  console.log("PROGRESS:", progress);
-
   const instructorInfo = useMemo(() => {
     if (!instructor || !instructor.firstName) {
       return {
