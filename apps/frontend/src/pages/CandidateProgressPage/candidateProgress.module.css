@@ -41,34 +41,34 @@
 
 /*FILL*/
 .yellow-fill {
-  background-color: #ffb855a3;
+  background-color: #ffb855a3 !important;
 }
 
 .blue-fill {
-  background-color: #3e9ac4;
+  background-color: #3e9ac4 !important;
 }
 
 .green-fill {
-  background-color: #6c8c3e;
+  background-color: #6c8c3e !important;
 }
 
 .red-fill {
-  background-color: #f97c7c;
+  background-color: #f97c7c !important;
 }
 
 /*BAR*/
 .yellow-bar {
-  background-color: #ffc16aa3;
+  background-color: #fef9c2 !important;
 }
 
 .blue-bar {
-  background-color: #b4d1e8;
+  background-color: #b4d1e8 !important;
 }
 
 .green-bar {
-  background-color: #b1cf86;
+  background-color: #b1cf86 !important;
 }
 
 .red-bar {
-  background-color: #f3c0bc;
+  background-color: #f3c0bc !important;
 }

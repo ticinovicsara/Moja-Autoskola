@@ -47,7 +47,7 @@ const CandidateProgressPage = () => {
         />
         <h3 className={styles["list-title"]}>Vožnja</h3>
         <ProgressBar
-          progress={passedLessons.driving}
+          progress={passedLessons.firstAid}
           total={35}
           colorClass={styles["blue-fill"]}
           barClass={styles["blue-bar"]}
