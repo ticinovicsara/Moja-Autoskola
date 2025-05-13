@@ -32,8 +32,8 @@ export const CandidateDashboard = () => {
   const instructorInfo = useMemo(() => {
     if (!instructor || !instructor.firstName) {
       return {
-        name: "Instruktor nije dostupan",
-        phone: "N/A",
+        name: "",
+        phone: "Još nemaš instruktora!",
       };
     }
 

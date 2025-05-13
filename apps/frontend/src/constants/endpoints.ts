@@ -15,7 +15,7 @@ export const API_ENDPOINTS = {
   },
   INSTRUCTOR: {
     SLOT: "/instructor/slot",
-    CANDIDATE: "/instructor/candidates",
+    CANDIDATES: "/instructor/candidates",
   },
   CANDIDATE: {
     INSTRUCTOR: "/candidate/instructor",
