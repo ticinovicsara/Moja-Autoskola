@@ -13,14 +13,15 @@ export const API_ENDPOINTS = {
     INSTRUCTOR: "/session/instructor",
     DRIVING: "/session/driving",
   },
-
   INSTRUCTOR: {
     SLOT: "/instructor/slot",
     CANDIDATE: "/instructor/candidates",
   },
-
   CANDIDATE: {
     INSTRUCTOR: "/candidate/instructor",
+  },
+  SCHOOL: {
+    ALL: "/school",
   },
 
   GET_INSTRUCTOR_CANDIDATE: "/instructor-candidate",

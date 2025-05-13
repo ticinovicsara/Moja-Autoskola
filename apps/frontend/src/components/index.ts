@@ -22,6 +22,8 @@ export * from "./Landing/Blog/BlogSlider/BlogSlider";
 export * from "./Landing/Blog/BlogCard/BlogCard";
 export * from "./Landing/FAQ/FaqSection";
 export * from "./LogoAndText/LogoAndText";
+export * from "./SchoolCard/SchoolCard";
+export * from "./FilterSchools/FilterSchools";
 export * from "./CandidateCard/CandidateCard";
 export * from "./CandidateList/CandidateList";
 export * from "./InputFieldWithFilter/InputFieldWithFiler";
