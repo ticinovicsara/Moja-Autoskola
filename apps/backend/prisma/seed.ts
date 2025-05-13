@@ -40,6 +40,7 @@ async function main() {
       websiteUrl: 'https://www.autoskola-start.hr',
       imageUrl:
         'https://autoskola-start.hr/wp-content/uploads/2023/01/1672650633240-1536x650.jpg',
+      rating: 4.8,
     },
   });
 
