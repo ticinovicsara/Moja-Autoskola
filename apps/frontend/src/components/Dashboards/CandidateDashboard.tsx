@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import DashboardLayout from "./DashboardLayuot";
 import {
   ProgressCard,
@@ -12,11 +12,9 @@ import {
   useCandidateProgress,
   useGetInstructor,
 } from "@/hooks";
-import { CandidatePopup } from "../Popup/CandidatePopup";
 import { formatSessionTime } from "@/utils/sessionsUtil";
 
 export const CandidateDashboard = () => {
-  const [showPopup, setShowPopup] = useState(false);
   const { user } = useAuth();
   const userId = user?.id || "";
 
@@ -29,10 +27,10 @@ export const CandidateDashboard = () => {
   const { activity, startTime } = useCandidateNextSession(userId);
   const instructor = useGetInstructor(userId);
 
-  console.log("INS:", instructor);
+  console.log("PROGRESS:", progress);
 
   const instructorInfo = useMemo(() => {
-    if (!instructor || !instructor.name) {
+    if (!instructor || !instructor.firstName) {
       return {
         name: "Instruktor nije dostupan",
         phone: "N/A",
@@ -40,7 +38,7 @@ export const CandidateDashboard = () => {
     }
 
     return {
-      name: instructor.name,
+      name: `${instructor.firstName} ${instructor.lastName}`,
       phone: instructor.phone,
     };
   }, [instructor, userId]);
@@ -77,39 +75,32 @@ export const CandidateDashboard = () => {
   }, [startTime]);
 
   return (
-    <>
-      <DashboardLayout
-        top={
-          progressMessage ? (
-            <div>{progressMessage}</div>
-          ) : (
-            <ProgressCard title="Ukupno odrađeno" progress={progress || 0} />
-          )
-        }
-        middle={
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "1em",
-            }}
-          >
-            <ArrowCard
-              title="ODABERI TERMIN VOŽNJE"
-              onClick={() => setShowPopup(true)}
-            />
-            <CandidateInstructorCard
-              instructor={instructorInfo.name}
-              phone={instructorInfo.phone}
-            />
-          </div>
-        }
-        bottom={
-          <ScheduleCard activity={scheduleContent} time={scheduleTime ?? ""} />
-        }
-      />
-
-      {showPopup && <CandidatePopup onClose={() => setShowPopup(false)} />}
-    </>
+    <DashboardLayout
+      top={
+        progressMessage ? (
+          <div>{progressMessage}</div>
+        ) : (
+          <ProgressCard title="Ukupno odrađeno" progress={progress || 0} />
+        )
+      }
+      middle={
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "1em",
+          }}
+        >
+          <ArrowCard title="ODABERI TERMIN VOŽNJE" />
+          <CandidateInstructorCard
+            instructor={instructorInfo.name}
+            phone={instructorInfo.phone ?? ""}
+          />
+        </div>
+      }
+      bottom={
+        <ScheduleCard activity={scheduleContent} time={scheduleTime ?? ""} />
+      }
+    />
   );
 };

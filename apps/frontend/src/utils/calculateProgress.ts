@@ -1,14 +1,21 @@
-export const calculateProgress = (
-  passedTests: any[],
-  passedLessons: any[],
-  totalTests: number,
-  totalLessons: number
-): number => {
-  const completedTests = passedTests.length;
-  const completedLessons = passedLessons.length;
+export function calculateProgress(
+  passedTests: number,
+  firstAidHours: number,
+  theoryHours: number,
+  drivingHours: number
+): number {
+  const totalTests = 3;
+  const totalFirstAid = 9;
+  const totalTheory = 30;
+  const totalDriving = 35;
 
-  const progress =
-    ((completedTests + completedLessons) / (totalTests + totalLessons)) * 100;
+  const testProgress = passedTests / totalTests;
+  const firstAidProgress = firstAidHours / totalFirstAid;
+  const theoryProgress = theoryHours / totalTheory;
+  const drivingProgress = drivingHours / totalDriving;
 
-  return parseFloat(Math.min(progress, 100).toFixed(2));
-};
+  const overallProgress =
+    (testProgress + firstAidProgress + theoryProgress + drivingProgress) / 4;
+
+  return Math.min(1, Math.max(0, overallProgress));
+}

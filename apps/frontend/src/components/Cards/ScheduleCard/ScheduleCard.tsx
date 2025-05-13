@@ -1,12 +1,17 @@
 import React, { useMemo } from "react";
 import CardComponent from "../CardComponent/CardComponent";
-import { ScheduleCardProps } from "./ScheduleCardProps";
 import { routes } from "@/constants";
 import { SessionType, UserRoles } from "@/types";
 import { useAuth } from "@/hooks";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import styles from "./scheduleCard.module.css";
 import { ArrowBack } from "@/components/ArrowBack/ArrowBack";
+
+interface ScheduleCardProps {
+  activity: string;
+  time: string;
+  onClick?: () => void;
+}
 
 export const ScheduleCard: React.FC<ScheduleCardProps> = ({
   activity,

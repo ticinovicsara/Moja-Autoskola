@@ -1,6 +1,7 @@
 export interface User {
-  name: string;
-  role: UserRoles;
+  firstName: string;
+  lastName: string;
+  role?: UserRoles;
   phone: string;
 }
 

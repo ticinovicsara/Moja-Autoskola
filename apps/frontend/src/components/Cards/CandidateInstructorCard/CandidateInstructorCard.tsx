@@ -1,7 +1,11 @@
 import React from "react";
 import CardComponent from "../CardComponent/CardComponent";
-import { CandidateInstructorCardProps } from "./CandidateInstructorProps";
 import styles from "./candidateInstructorCard.module.css";
+
+interface CandidateInstructorCardProps {
+  instructor: string;
+  phone: string;
+}
 
 export const CandidateInstructorCard: React.FC<
   CandidateInstructorCardProps

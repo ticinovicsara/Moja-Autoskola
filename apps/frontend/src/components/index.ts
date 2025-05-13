@@ -11,5 +11,3 @@ export * from "./Footer/FooterComponent";
 export { default as Calendar } from "./Calendar/Calendar";
 export { default as SessionList } from "./SessionList/SessionList";
 export { default as SessionCard } from "./SessionCard/SessionCard";
-export * from "./Popup/CandidatePopup";
-export * from "./Popup/InstructorPopup";
