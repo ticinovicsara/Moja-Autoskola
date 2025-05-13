@@ -1,5 +1,6 @@
 import useSchool from "@/api/school/useSchool";
 import { SchoolCard } from "@/components";
+import c from "./guest.module.css";
 
 export const GuestPage = () => {
   const { schools, isLoading, error } = useSchool();
@@ -8,7 +9,7 @@ export const GuestPage = () => {
   if (error) return <p>Greška: {error.message}</p>;
 
   return (
-    <div className={`container`}>
+    <div className={`container ${c.cardsContainer}`}>
       {schools.map((school) => (
         <SchoolCard key={school.id} school={school} />
       ))}

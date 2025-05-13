@@ -27,30 +27,33 @@ export const SchoolCard = ({ school }: SchoolCardProps) => {
         </div>
       </div>
       {isOpen && (
-        <div className={c.info}>
-          <p>
-            {school.city}, {school.address}
-          </p>
-          <p className={c.details}>
-            <span className={c.infoMark}>Cijena </span>
-            {school.enrollmentFee}€
-          </p>
-          <p className={c.details}>
-            <span className={c.infoMark}>Kontakt </span>
-            {school.contactNumber}
-          </p>
-          <p className={c.details}>
-            <span className={c.infoMark}>Email </span>
-            {school.email}
-          </p>
-          <a
-            target="_blank"
-            className={`${c.details} ${c.link}`}
-            href={school.websiteUrl || ""}
-          >
-            <span className={c.infoMark}>Naš web </span>
-            {school.name}
-          </a>
+        <div className={c.infoWrapper}>
+          <div className={c.info}>
+            <p>
+              {school.city}, {school.address}
+            </p>
+            <p className={c.details}>
+              <span className={c.infoMark}>Cijena </span>
+              {school.enrollmentFee}€
+            </p>
+            <p className={c.details}>
+              <span className={c.infoMark}>Kontakt </span>
+              {school.contactNumber}
+            </p>
+            <p className={c.details}>
+              <span className={c.infoMark}>Email </span>
+              {school.email}
+            </p>
+            <a
+              target="_blank"
+              className={`${c.details} ${c.link}`}
+              href={school.websiteUrl || ""}
+            >
+              <span className={c.infoMark}>Naš web </span>
+              {school.name}
+            </a>
+          </div>
+          <button className={`authBtn ${c.sendReqBtn}`}>Pošalji zahtjev</button>
         </div>
       )}
     </div>
