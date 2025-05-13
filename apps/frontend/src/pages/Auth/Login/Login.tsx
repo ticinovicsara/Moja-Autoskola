@@ -74,11 +74,7 @@ export const Login = () => {
 
         {error && <div className="errorMessage">{error}</div>}
 
-<<<<<<< HEAD
-        <button className="authBtn">Dalje</button>
-=======
         <button className={`authBtn ${c.formBtn}`}>Dalje</button>
->>>>>>> fad5437a5d4fcf9a610f048b1ace51ee22307a03
       </form>
     </>
   );

@@ -2,8 +2,8 @@ import { useAuth } from "@/hooks";
 import c from "./hero.module.css";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@/constants";
-import { UserRoles } from "@/enums";
 import { LogoAndText } from "@/components/LogoAndText/LogoAndText";
+import { UserRoles } from "@/types";
 export const HeroSection = () => {
   const { user } = useAuth();
   const navigate = useNavigate();

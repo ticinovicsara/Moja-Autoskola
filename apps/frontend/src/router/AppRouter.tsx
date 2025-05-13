@@ -9,12 +9,12 @@ import {
   HomePage,
   CandidateDashboardPage,
   InstructorDashboardPage,
-  InstructorCandidateListPage,
   Login,
   Register,
   InstructorCalendarPage,
   CandidateCalendarPage,
   BlogPage,
+  InstructorCandidateListPage,
 } from "@/pages";
 import { AuthPage } from "@/pages/Auth";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -49,7 +49,7 @@ const AppRouter = () => {
           />
         </Route>
 
-        <Route element={<CandidateLayout />}>
+        <Route element={<InstructorLayout />}>
           <Route
             path={routes.INSTRUCTOR_CANDIDATE_LIST}
             element={<InstructorCandidateListPage />}
@@ -63,7 +63,7 @@ const AppRouter = () => {
           <Route
             path={routes.INSTRUCTOR_DASHBOARD}
             element={<InstructorDashboardPage />}
-          />{" "}
+          />
           <Route
             path={routes.INSTRUCTOR_CANDIDATE_LIST}
             element={<InstructorCandidateListPage />}
