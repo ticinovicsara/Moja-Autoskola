@@ -9,14 +9,13 @@ export const API_ENDPOINTS = {
     INSTRUCTOR: "/session/instructor",
     DRIVING: "/session/driving",
   },
-
   INSTRUCTOR: {
     SLOT: "/instructor/slot",
   },
-
   CANDIDATE: {
     INSTRUCTOR: "/candidate/instructor",
   },
-
-  INSTRUCTOR_CANDIDATES: "/instructor/candidates",
+  SCHOOL: {
+    ALL: "/school",
+  },
 };

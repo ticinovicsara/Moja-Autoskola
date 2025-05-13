@@ -44,6 +44,7 @@ model School {
   info               String?
   websiteUrl         String?
   imageUrl           String?
+  rating             Decimal?            @default(0)
   users              SchoolUser[]
   sessions           Session[]
   enrollmentRequests EnrollmentRequest[]
@@ -114,11 +115,11 @@ model CandidateInstructor {
 }
 
 model InstructorSlot {
-  id           String @id @default(uuid())
+  id           String   @id @default(uuid())
   instructorId String
   startTime    DateTime
   endTime      DateTime
-  instructor   User   @relation(fields: [instructorId], references: [id], onDelete: Cascade)
+  instructor   User     @relation(fields: [instructorId], references: [id], onDelete: Cascade)
 }
 
 model TestResult {

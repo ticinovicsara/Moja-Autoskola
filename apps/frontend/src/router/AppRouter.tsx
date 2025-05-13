@@ -1,10 +1,16 @@
 import { routes } from "@/constants";
-import { AuthLayout, CandidateLayout, PublicLayout } from "@/layouts";
+import {
+  AuthLayout,
+  CandidateLayout,
+  GuestRoute,
+  PublicLayout,
+} from "@/layouts";
 import {
   HomePage,
   CandidateDashboardPage,
   CandidateCalendarPage,
   BlogPage,
+  GuestPage,
 } from "@/pages";
 import { AuthPage, Login, Register } from "@/pages/Auth";
 import InstructorCandidateListPage from "@/pages/InstructorCandidateListPage/InstructorCandidateListPage";
@@ -28,6 +34,9 @@ const AppRouter = () => {
         </Route>
 
         <Route element={<CandidateLayout />}>
+          <Route element={<GuestRoute />}>
+            <Route path={routes.GUEST} element={<GuestPage />} />
+          </Route>
           <Route path={routes.HOME} element={<HomePage />} />
 
           <Route
