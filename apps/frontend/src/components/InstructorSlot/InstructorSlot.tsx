@@ -9,9 +9,10 @@ import {
   getFormattedTime,
   getMonthAbbreviation,
 } from "@/utils";
-import { Arrow, Cross } from "@/assets/svgs";
+import { Cross } from "@/assets/svgs";
 import { usePostDrivingSession } from "@/api";
 import { useAuth } from "@/hooks";
+import { Arrow } from "@/assets/images";
 
 interface InstructorSlotProps {
   slot: InstructorSlotType;
