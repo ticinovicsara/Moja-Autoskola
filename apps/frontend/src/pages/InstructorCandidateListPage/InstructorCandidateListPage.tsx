@@ -40,15 +40,13 @@ const InstructorCandidateListPage = () => {
         onSearchChange={setSearchTerm}
       />
 
-      <div className={styles["candidates-list"]}>
-        {filteredCandidates.length > 0 ? (
-          <CandidateList candidates={filteredCandidates} />
-        ) : (
-          <p className={styles["message"]}>
-            Nema kandidata koji odgovaraju pretrazi.
-          </p>
-        )}
-      </div>
+      {filteredCandidates.length > 0 ? (
+        <CandidateList candidates={filteredCandidates} />
+      ) : (
+        <p className={styles["message"]}>
+          Nema kandidata koji odgovaraju pretrazi.
+        </p>
+      )}
     </div>
   );
 };
