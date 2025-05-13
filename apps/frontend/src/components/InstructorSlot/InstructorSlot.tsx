@@ -47,16 +47,22 @@ const InstructorSlot: FC<InstructorSlotProps> = ({ slot }) => {
                 <p>
                     {getFormattedTime(slot.startTime)} -{" "}
                     {getFormattedTime(slot.endTime)}
-                </p>
+                </p>{" "}
             </div>
             <img src={Arrow2} alt="arrow" onClick={toggleConfirmPopup} />
             {isConfirmPopupOpen && (
-                <div className={`${styles.confirmPopup} container`}>
-                    <img src={Cross} alt="cross" onClick={toggleConfirmPopup} />
-                    <p>Jesi li siguran da želiš odabrati ovaj termin?</p>
-                    <div className={styles.options}>
-                        <button onClick={handleConfirm}>Da</button>
-                        <button onClick={toggleConfirmPopup}>Ne</button>
+                <div className={styles.confirmPopupContainer}>
+                    <div className={`${styles.confirmPopup} container`}>
+                        <img
+                            src={Cross}
+                            alt="cross"
+                            onClick={toggleConfirmPopup}
+                        />
+                        <p>Jesi li siguran da želiš odabrati ovaj termin?</p>
+                        <div className={styles.options}>
+                            <button onClick={handleConfirm}>Da</button>
+                            <button onClick={toggleConfirmPopup}>Ne</button>
+                        </div>
                     </div>
                 </div>
             )}
