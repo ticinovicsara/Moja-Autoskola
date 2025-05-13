@@ -4,6 +4,7 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import { routes } from "@/constants";
 import { useAuth } from "@/hooks";
+import toast from "react-hot-toast";
 
 interface HamburgerMenuProps {
   toggleMenu: () => void;
@@ -11,6 +12,12 @@ interface HamburgerMenuProps {
 
 const HamburgerMenu: FC<HamburgerMenuProps> = ({ toggleMenu }) => {
   const { user, logout } = useAuth();
+
+  const handleLogout = () => {
+    toggleMenu();
+    toast.success("Uspješno ste se odjavili");
+    logout();
+  };
 
   return (
     <div className={`${styles.menu} ${user ? styles.userMenu : ""} container`}>
@@ -50,7 +57,7 @@ const HamburgerMenu: FC<HamburgerMenuProps> = ({ toggleMenu }) => {
             </Link>
           </div>
 
-          <p className={styles.logout} onClick={logout}>
+          <p className={styles.logout} onClick={handleLogout}>
             Odjava
           </p>
         </>

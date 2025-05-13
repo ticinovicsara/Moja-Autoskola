@@ -10,72 +10,72 @@ import { loginService } from "@/api/auth";
 import { validatePassword } from "@/utils/validatePassword";
 
 export const Login = () => {
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [error, setError] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const { login } = useAuth();
+  const { login } = useAuth();
 
-    const validateInfo = () => {
-        if (!isValidEmail(email)) {
-            setError("Neispravan format email-a");
-            return false;
-        }
+  const validateInfo = () => {
+    if (!isValidEmail(email)) {
+      setError("Neispravan format email-a");
+      return false;
+    }
 
-        const passwordErrorMessage = validatePassword(password);
-        if (passwordErrorMessage) {
-            setError(passwordErrorMessage);
-            return false;
-        }
+    const passwordErrorMessage = validatePassword(password);
+    if (passwordErrorMessage) {
+      setError(passwordErrorMessage);
+      return false;
+    }
 
-        return true;
-    };
+    return true;
+  };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-        const isValid = validateInfo();
-        if (!isValid) return;
+    const isValid = validateInfo();
+    if (!isValid) return;
 
-        setError("");
+    setError("");
 
-        try {
-            if (localStorage.getItem("token")) localStorage.removeItem("token");
+    try {
+      if (localStorage.getItem("token")) localStorage.removeItem("token");
 
-            const data = await loginService(email, password);
+      const data = await loginService(email, password);
 
-            if (data.access_token) {
-                login(data.access_token);
-                toast.success("Uspješna prijava");
-                navigate(routes.HOME);
-            }
-        } catch (error) {
-            setError("Neispravni podaci");
-        }
-    };
+      if (data.access_token) {
+        login(data.access_token);
+        toast.success("Uspješna prijava");
+        navigate(routes.HOME);
+      }
+    } catch (error) {
+      setError("Neispravni podaci");
+    }
+  };
 
-    return (
-        <>
-            <form className={c.inputsWrapper} onSubmit={handleSubmit}>
-                <InputField
-                    type="email"
-                    placeholder="Email"
-                    onChange={setEmail}
-                    value={email}
-                />
-                <InputField
-                    type="password"
-                    placeholder="Password"
-                    onChange={setPassword}
-                    value={password}
-                />
+  return (
+    <>
+      <form className={c.inputsWrapper} onSubmit={handleSubmit}>
+        <InputField
+          type="email"
+          placeholder="Email"
+          onChange={setEmail}
+          value={email}
+        />
+        <InputField
+          type="password"
+          placeholder="Password"
+          onChange={setPassword}
+          value={password}
+        />
 
-                {error && <div className="errorMessage">{error}</div>}
+        {error && <div className="errorMessage">{error}</div>}
 
-                <button className="authBtn">Dalje</button>
-            </form>
-        </>
-    );
+        <button className={`authBtn ${c.formBtn}`}>Dalje</button>
+      </form>
+    </>
+  );
 };

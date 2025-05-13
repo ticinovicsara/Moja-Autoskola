@@ -23,7 +23,7 @@ export const InputField = ({
 }: InputFieldType) => {
   return (
     <>
-      <label className={c.label}> {label}</label>
+      {label && <label className={c.label}> {label}</label>}
 
       <input
         type={type}
