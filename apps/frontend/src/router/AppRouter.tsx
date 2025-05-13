@@ -4,6 +4,7 @@ import {
   CandidateLayout,
   GuestRoute,
   PublicLayout,
+  WaitingForApprove,
 } from "@/layouts";
 import {
   HomePage,
@@ -11,6 +12,7 @@ import {
   CandidateCalendarPage,
   BlogPage,
   GuestPage,
+  WaitingForApprovePage,
 } from "@/pages";
 import { AuthPage, Login, Register } from "@/pages/Auth";
 import InstructorCandidateListPage from "@/pages/InstructorCandidateListPage/InstructorCandidateListPage";
@@ -31,6 +33,12 @@ const AppRouter = () => {
         </Route>
 
         <Route element={<CandidateLayout />}>
+          <Route element={<WaitingForApprove />}>
+            <Route
+              path={routes.WAITING_FOR_APPROVE}
+              element={<WaitingForApprovePage />}
+            />
+          </Route>
           <Route element={<GuestRoute />}>
             <Route path={routes.GUEST} element={<GuestPage />} />
           </Route>

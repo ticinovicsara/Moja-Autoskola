@@ -25,7 +25,6 @@ const InstructorSlot: FC<InstructorSlotProps> = ({ slot }) => {
 
   function toggleConfirmPopup() {
     setIsConfirmPopupOpen((prev) => !prev);
-    console.log(isConfirmPopupOpen);
   }
 
   function handleConfirm() {

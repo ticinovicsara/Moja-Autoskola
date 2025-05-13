@@ -4,3 +4,4 @@ export { default as CandidateCalendarPage } from "./CandidateCalendarPage/Candid
 export * from "./Blog/BlogPage";
 export * from "./Guest/GuestPage";
 export * from "./InstructorCandidateListPage/InstructorCandidateListPage";
+export * from "./WaitingForApprove/WaitingForApprovePage";

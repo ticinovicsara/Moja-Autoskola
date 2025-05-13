@@ -24,7 +24,7 @@ export class EnrollmentController {
     return this.enrollmentService.getEnrollmentRequests(status);
   }
 
-  @Auth(UserRole.Candidate)
+  @Auth(UserRole.Candidate, UserRole.Guest)
   @Get('candidate/:id')
   async getCandidateEnrollmentRequests(@Param('id') candidateId: string) {
     return this.enrollmentService.getCandidateEnrollmentRequests(candidateId);

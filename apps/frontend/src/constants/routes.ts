@@ -8,6 +8,7 @@ const routes = {
   CANDIDATE_DASHBOARD: "/candidate/dashboard",
   CANDIDATE_CALENDAR: "/candidate/calendar",
   GUEST: "/guest",
+  WAITING_FOR_APPROVE: "/waiting",
 
   INSTRUCTOR_CANDIDATE_LIST: "/instructor/candidate-list",
 };

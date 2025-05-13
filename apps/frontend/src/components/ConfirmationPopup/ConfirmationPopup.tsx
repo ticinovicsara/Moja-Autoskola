@@ -2,12 +2,14 @@ import styles from "./confirmation.module.css";
 import { Cross } from "@/assets/svgs";
 
 type ConfirmationProps = {
+  timeSlot?: string;
   prompt: string;
   handleConfirm: () => void;
   togglePopup: () => void;
 };
 
 export const ConfirmationPopup = ({
+  timeSlot,
   prompt,
   handleConfirm,
   togglePopup,
@@ -23,6 +25,7 @@ export const ConfirmationPopup = ({
             togglePopup();
           }}
         />
+        <p className={styles.timeSlot}> {timeSlot}</p>
         <p>{prompt}</p>
         <div className={styles.options}>
           <button onClick={handleConfirm}>Da</button>
