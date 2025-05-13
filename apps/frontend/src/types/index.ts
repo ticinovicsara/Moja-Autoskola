@@ -1,3 +1,3 @@
 export * from "./session";
 export * from "./create-user";
-export * from "./candidate";
+export * from "./user";

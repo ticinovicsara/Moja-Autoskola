@@ -42,13 +42,7 @@ const InstructorCandidateListPage = () => {
 
       <div className={styles["candidates-list"]}>
         {filteredCandidates.length > 0 ? (
-          <CandidateList
-            candidates={filteredCandidates.map((candidate) => ({
-              id: String(candidate.id),
-              firstName: candidate.firstName,
-              lastName: candidate.lastName,
-            }))}
-          />
+          <CandidateList candidates={filteredCandidates} />
         ) : (
           <p className={styles["message"]}>
             Nema kandidata koji odgovaraju pretrazi.

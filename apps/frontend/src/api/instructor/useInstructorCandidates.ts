@@ -1,16 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { Candidate } from "@/types";
+import { User } from "@/types";
 import { getData } from "@/utils";
 import { API_ENDPOINTS } from "@/constants";
 
 const useInstructorCandidates = (instructorId: string) => {
-  const { data, isLoading, error } = useQuery<Candidate[], AxiosError>({
+  const { data, isLoading, error } = useQuery<User[], AxiosError>({
     queryKey: ["instructor-candidates", instructorId],
     queryFn: () =>
-      getData<Candidate[]>(
-        `${API_ENDPOINTS.INSTRUCTOR_CANDIDATES}/${instructorId}`
-      ),
+      getData<User[]>(`${API_ENDPOINTS.INSTRUCTOR_CANDIDATES}/${instructorId}`),
     enabled: !!instructorId,
   });
 
