@@ -28,3 +28,4 @@ export * from "./CandidateCard/CandidateCard";
 export * from "./CandidateList/CandidateList";
 export * from "./InputFieldWithFilter/InputFieldWithFiler";
 export * from "./CandidateCard/CandidateCard";
+export { default as ChooseInstructorMenu } from "./ChooseInstructorMenu/ChooseInstructorMenu";

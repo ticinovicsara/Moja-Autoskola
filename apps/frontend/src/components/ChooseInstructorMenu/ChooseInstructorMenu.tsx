@@ -1,40 +1,59 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import styles from "../ChooseSessionMenu/ChooseSessionMenu.module.css";
 import { Cross } from "@/assets/svgs";
 import CandidateCard from "../CandidateCard/CandidateCard";
+import { User } from "@/types";
+import { InputFieldWithFilter } from "../InputFieldWithFilter/InputFieldWithFiler";
 
-const mockCandidates = [
-  { id: 1, firstName: "Ana", lastName: "Anić" },
-  { id: 2, firstName: "Marko", lastName: "Marković" },
-  { id: 3, firstName: "Ivana", lastName: "Ivić" },
-];
-
-interface ChooseCandidateMenuProps {
-  toggleChooseSessionMenu: () => void;
+interface ChooseInstructorMenuProps {
+  toggleChooseInstructorMenu: () => void;
+  candidate: User;
+  instructors: User[];
+  onSelectInstructor: (instructor: User) => void;
 }
 
-const ChooseInstructorMenu: FC<ChooseCandidateMenuProps> = ({
-  toggleChooseSessionMenu,
+const ChooseInstructorMenu: FC<ChooseInstructorMenuProps> = ({
+  toggleChooseInstructorMenu,
+  candidate,
+  instructors,
+  onSelectInstructor,
 }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredInstructors = instructors.filter((instructor) => {
+    const fullName =
+      `${instructor.firstName} ${instructor.lastName}`.toLowerCase();
+    return fullName.includes(searchTerm.toLowerCase());
+  });
+
   return (
     <div className={styles.menuContainer}>
       <div className={`${styles.menu} container`}>
         <div className={styles.header}>
-          <h2>Popis kandidata</h2>
-          <img src={Cross} alt="close" onClick={toggleChooseSessionMenu} />
+          <h2>Dodaj instruktora</h2>
+          <img src={Cross} alt="close" onClick={toggleChooseInstructorMenu} />
         </div>
 
+        <InputFieldWithFilter
+          searchTerm={searchTerm}
+          onSearchChange={setSearchTerm}
+        />
+
         <div className={styles.slotList}>
-          {mockCandidates.length > 0 ? (
-            mockCandidates.map((c) => (
-              <CandidateCard
-                key={c.id}
-                firstName={c.firstName}
-                lastName={c.lastName}
-              />
+          {filteredInstructors.length > 0 ? (
+            filteredInstructors.map((instructor) => (
+              <div
+                key={instructor.id}
+                onClick={() => onSelectInstructor(instructor)}
+              >
+                <CandidateCard
+                  firstName={instructor.firstName}
+                  lastName={instructor.lastName}
+                />
+              </div>
             ))
           ) : (
-            <p>Trenutno nema dostupnih kandidata.</p>
+            <p>Trenutno nema dostupnih instruktora.</p>
           )}
         </div>
       </div>

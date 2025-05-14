@@ -11,4 +11,10 @@ type Session = {
 type SessionType = "Theory" | "FirstAid" | "Driving";
 type SessionFormat = "Lesson" | "Test";
 
-export type { Session, SessionType, SessionFormat };
+type DrivingSessionReq = {
+  instructorSlotId: string;
+  instructorId: string;
+  candidateId: string;
+};
+
+export type { Session, SessionType, SessionFormat, DrivingSessionReq };
