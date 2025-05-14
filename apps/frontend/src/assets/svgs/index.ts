@@ -6,5 +6,16 @@ import Plus from "./Plus.svg";
 import Filter from "./filter.svg";
 import Search from "./search-normal.svg";
 import Arrow2 from "./Arrow2.svg";
+import ArrowBack from "./arrowBack.svg";
 
-export { Hamburger, Logo, Profile, Plus, Cross, Filter, Search, Arrow2 };
+export {
+  Hamburger,
+  Logo,
+  ArrowBack,
+  Arrow2,
+  Profile,
+  Plus,
+  Cross,
+  Filter,
+  Search,
+};

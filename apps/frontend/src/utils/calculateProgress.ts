@@ -37,5 +37,5 @@ export function calculateProgress(
       drivingProgress) /
     4;
 
-  return parseFloat(overallProgress.toFixed(2));
+  return parseFloat((overallProgress * 100).toFixed(2)); // Vraća procenat
 }

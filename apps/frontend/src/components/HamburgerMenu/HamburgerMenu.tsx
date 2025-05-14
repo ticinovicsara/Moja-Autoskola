@@ -54,7 +54,7 @@ const HamburgerMenu: FC<HamburgerMenuProps> = ({ toggleMenu }) => {
                 <Link to={routes.HOME} onClick={toggleMenu}>
                   Rezerviraj termin
                 </Link>
-                <Link to={routes.HOME} onClick={toggleMenu}>
+                <Link to={routes.CANDIDATE_PROGRESS} onClick={toggleMenu}>
                   Tvoj napredak
                 </Link>
               </>

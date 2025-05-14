@@ -9,5 +9,6 @@ export { default as InstructorCalendarPage } from "./Instructor/InstructorCalend
 export { default as CandidateCalendarPage } from "./CandidateCalendarPage/CandidateCalendarPage";
 export * from "./Blog/BlogPage";
 export * from "./Guest/GuestPage";
-export * from "./InstructorCandidateListPage/InstructorCandidateListPage";
+
+export { default as CandidateProgressPage } from "./CandidateProgressPage/CandidateProgressPage";
 export { default as CandidateDashboardPage } from "./CandidateDashboard/CandidateDashboardPage";

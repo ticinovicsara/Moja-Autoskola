@@ -1,7 +1,7 @@
 import React from "react";
 import CardComponent from "../CardComponent/CardComponent";
-import { ArrowBack } from "@/components/ArrowBack/ArrowBack";
 import styles from "./arrowCard.module.css";
+import { Arrow2 } from "@/assets/svgs";
 
 export interface ArrowCardProps {
   title: string;
@@ -31,7 +31,7 @@ export const ArrowCard: React.FC<ArrowCardProps> = ({
         >
           {title}
         </div>
-        <ArrowBack rotate />
+        <img src={Arrow2} />
       </div>
     </CardComponent>
   );
