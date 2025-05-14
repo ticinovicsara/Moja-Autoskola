@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 
-const usePostAddInstructorSlot = () => {
+const usePostInstructorSlot = () => {
     const queryClient = useQueryClient();
 
     const { mutate, isPending } = useMutation<
@@ -26,7 +26,7 @@ const usePostAddInstructorSlot = () => {
         },
     });
 
-    return { addAddInstructorSlot: mutate, isPending };
+    return { addInstructorSlot: mutate, isPending };
 };
 
-export default usePostAddInstructorSlot;
+export default usePostInstructorSlot;
