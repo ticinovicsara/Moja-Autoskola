@@ -2,7 +2,7 @@ import { Blog } from "@/types/blog";
 
 export const blogs = [
   {
-    id: 1,
+    id: "1",
     title: "Kako lakše proći kroz proces učenja i polaganja vozačkog ispita?",
     description: `Proces dobivanja vozačke dozvole u Hrvatskoj često može biti zbunjujući i pun izazova. Od odabira odgovarajuće autoškole, organizacije vožnji, praćenja ispita do administrativnih detalja. Mnogi kandidati se suočavaju s problemima poput nejasnoća oko termina, zaboravljenih datuma za predavanja, vožnje ili prijavu ispita. Ako ste i vi u ovoj situaciji, ne brinite - Moja autoškola može vam olakšati cijeli proces. 
     
@@ -21,7 +21,7 @@ export const blogs = [
     Registrirajte se na „Moja autoškola“ i započnite svoje putovanje prema sigurnim i odgovornim vozačkim vještinama!`,
   },
   {
-    id: 2,
+    id: "2",
     title:
       "Reci zbogom panici jer uz ovu aplikaciju polaganje će biti jednostavnije nego što misliš! ☁️",
     description: `Moja autoškola je aplikacija koja korisnicima omogućava pregršt mogućnosti. Tek poneke od njih su:
@@ -44,7 +44,7 @@ export const blogs = [
     Preuzmi svoju aplikaciju danas i osiguraj si brzo položen vozački ispit! 📲`,
   },
   {
-    id: 3,
+    id: "3",
     title: "Jedna aplikacija, a toliko toga! ⚡✅",
     description: `Zaviri u Moja autoškola aplikaciju i cijeli proces polaganja riješi u vrlo kratkom roku - jer naš moto je brzo, jednostavno i efikasno!
     
