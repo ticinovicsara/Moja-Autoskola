@@ -48,7 +48,7 @@ export class EnrollmentController {
     return this.enrollmentService.requestEnrollment(body);
   }
 
-  @Auth(UserRole.SchoolAdmin, UserRole.Candidate)
+  @Auth(UserRole.SchoolAdmin, UserRole.Candidate, UserRole.Guest)
   @Patch()
   async updateEnrollmentStatus(@Body() body: UpdateRequestDto) {
     return this.enrollmentService.updateEnrollmentStatus(body);

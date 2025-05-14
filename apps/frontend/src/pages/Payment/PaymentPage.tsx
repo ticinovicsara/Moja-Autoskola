@@ -10,12 +10,25 @@ import {
   formatExpireDateInput,
   formatCVVInput,
 } from "@/utils";
+import useUpdateEnrollmentRequest from "@/api/enrollment/useUpdateEnrollmentRequest";
+import { useCandidateEnrollment } from "@/api";
+import { useAuth } from "@/hooks";
+import { EnrollmentStatus } from "@/enums";
+import { EnrollmentPatchRequest } from "@/types/enrollmentPatchRequest";
+import { useNavigate } from "react-router-dom";
+import { routes } from "@/constants";
 
 export const PaymentPage = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
   const [cardNum, setCardNum] = useState("");
   const [owner, setOwner] = useState("");
   const [expireDate, setExpireDate] = useState("");
   const [CVV, setCVV] = useState("");
+
+  const { updateEnrollmentRequest } = useUpdateEnrollmentRequest();
+  const { enrollment } = useCandidateEnrollment(user?.id || "");
 
   const [errors, setErrors] = useState({
     cardNum: "",
@@ -64,7 +77,13 @@ export const PaymentPage = () => {
       setShowSuccessPopup(true);
 
       setTimeout(() => {
+        const updatedEnrollmentReq: EnrollmentPatchRequest = {
+          id: enrollment?.requestId || "",
+          status: EnrollmentStatus.Approved,
+        };
+        updateEnrollmentRequest(updatedEnrollmentReq);
         setShowSuccessPopup(false);
+        navigate(routes.CANDIDATE_DASHBOARD);
       }, 2000);
     }, 2000);
   };

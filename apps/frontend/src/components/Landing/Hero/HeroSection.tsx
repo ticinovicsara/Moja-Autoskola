@@ -23,6 +23,8 @@ export const HeroSection = () => {
       case UserRoles.Guest:
         if (enrollment?.status === EnrollmentStatus.Pending)
           navigate(routes.WAITING_FOR_APPROVE);
+        if (enrollment?.status === EnrollmentStatus.WaitingForPayment)
+          navigate(routes.PAYMENT);
         else navigate(routes.GUEST);
         break;
       case UserRoles.SchoolAdmin:
