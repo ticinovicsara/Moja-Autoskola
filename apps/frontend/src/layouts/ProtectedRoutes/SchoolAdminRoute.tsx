@@ -1,6 +1,6 @@
 import { routes } from "@/constants";
-import { UserRoles } from "@/enums";
 import { useAuth } from "@/hooks";
+import { UserRoles } from "@/types";
 import toast from "react-hot-toast";
 import { Navigate, Outlet } from "react-router";
 

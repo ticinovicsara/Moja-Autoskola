@@ -1,9 +1,9 @@
 import { useLocation } from "react-router-dom";
 import c from "./pending.module.css";
-import { EnrollmentStatus } from "@/enums";
 import { useSchoolEnrollments } from "@/api";
 import { ArrowBack } from "@/components";
 import { PendingCandidateCard } from "@/components/PendingCandidateCard/PendingCandidateCard";
+import { EnrollmentStatus } from "@/types/EnrollmentStatus";
 
 export const PendingListPage = () => {
   const location = useLocation();

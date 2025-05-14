@@ -1,4 +1,5 @@
-import { EnrollmentStatus, UserRoles } from "@/enums";
+import { EnrollmentStatus } from "./EnrollmentStatus";
+import { UserRoles } from "./user";
 
 export type EnrollmentRequest = {
   requestId: string;

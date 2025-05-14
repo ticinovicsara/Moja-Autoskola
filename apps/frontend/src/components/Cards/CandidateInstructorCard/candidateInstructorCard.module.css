@@ -1,0 +1,27 @@
+.candidate-instructor-card {
+  background-color: #b1cf86;
+  width: 100%;
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-title {
+  padding: 1em;
+  font-weight: bold;
+  text-align: center;
+  background-color: #6c8c3e;
+  border-radius: 1em;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  gap: 10px;
+}
+
+.instructor-name,
+.instructor-name {
+  font-weight: bold;
+}

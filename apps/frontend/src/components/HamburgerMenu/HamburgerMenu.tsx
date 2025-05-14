@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { routes } from "@/constants";
 import { useAuth } from "@/hooks";
 import toast from "react-hot-toast";
-import { UserRoles } from "@/enums";
+import { UserRoles } from "@/types";
 
 interface HamburgerMenuProps {
   toggleMenu: () => void;
@@ -54,7 +54,7 @@ const HamburgerMenu: FC<HamburgerMenuProps> = ({ toggleMenu }) => {
                 <Link to={routes.HOME} onClick={toggleMenu}>
                   Rezerviraj termin
                 </Link>
-                <Link to={routes.HOME} onClick={toggleMenu}>
+                <Link to={routes.CANDIDATE_PROGRESS} onClick={toggleMenu}>
                   Tvoj napredak
                 </Link>
               </>

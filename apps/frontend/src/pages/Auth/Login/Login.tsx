@@ -6,7 +6,7 @@ import { routes } from "@/constants";
 import { isValidEmail } from "@/utils/validateEmail";
 import { useAuth } from "@/hooks";
 import toast from "react-hot-toast";
-import { loginService } from "@/api/auth";
+import { loginService } from "@/api";
 import { validatePassword } from "@/utils/validatePassword";
 
 export const Login = () => {

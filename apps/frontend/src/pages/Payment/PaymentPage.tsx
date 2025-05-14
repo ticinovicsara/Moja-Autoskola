@@ -13,10 +13,10 @@ import {
 import useUpdateEnrollmentRequest from "@/api/enrollment/useUpdateEnrollmentRequest";
 import { useCandidateEnrollment } from "@/api";
 import { useAuth } from "@/hooks";
-import { EnrollmentStatus } from "@/enums";
 import { EnrollmentPatchRequest } from "@/types/enrollmentPatchRequest";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@/constants";
+import { EnrollmentStatus } from "@/types/EnrollmentStatus";
 
 export const PaymentPage = () => {
   const { user } = useAuth();

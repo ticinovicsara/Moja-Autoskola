@@ -9,10 +9,10 @@ import {
   getFormattedTime,
   getMonthAbbreviation,
 } from "@/utils";
+import { ConfirmationPopup } from "../ConfirmationPopup/ConfirmationPopup";
+import { Arrow2 } from "@/assets/svgs";
 import { usePostDrivingSession } from "@/api";
 import { useAuth } from "@/hooks";
-import { Arrow } from "@/assets/images";
-import { ConfirmationPopup } from "../ConfirmationPopup/ConfirmationPopup";
 
 interface InstructorSlotProps {
   slot: InstructorSlotType;
@@ -49,7 +49,7 @@ const InstructorSlot: FC<InstructorSlotProps> = ({ slot }) => {
           {getFormattedTime(slot.startTime)} - {getFormattedTime(slot.endTime)}
         </p>{" "}
       </div>
-      <img src={Arrow} alt="arrow" onClick={toggleConfirmPopup} />
+      <img src={Arrow2} alt="arrow" onClick={toggleConfirmPopup} />
       {isConfirmPopupOpen && (
         <ConfirmationPopup
           prompt="Jesi li siguran da želiš ovaj termin?"

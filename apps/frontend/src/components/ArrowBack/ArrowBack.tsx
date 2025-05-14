@@ -1,12 +1,13 @@
-import { Arrow } from "@/assets/images";
+import { ArrowBack as ArrowBackIcon } from "@/assets/svgs";
 import c from "./arrowback.module.css";
 import { useNavigate } from "react-router-dom";
+
 export const ArrowBack = () => {
   const navigate = useNavigate();
 
   return (
     <div className={c.arrowWrapper} onClick={() => navigate(-1)}>
-      <img src={Arrow} alt="arrow" />
+      <img src={ArrowBackIcon} alt="arrow" />
     </div>
   );
 };

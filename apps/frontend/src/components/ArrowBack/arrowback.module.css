@@ -1,8 +1,8 @@
 .arrowWrapper {
-    width: 24px;
-    height: 24px;
+  width: 24px;
+  height: 30px;
 }
 
 .arrowWrapper img {
-    color: var(--asphalt-border);
+  color: var(--asphalt-border);
 }

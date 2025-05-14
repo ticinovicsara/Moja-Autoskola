@@ -4,8 +4,8 @@ import { EnrollmentRequest } from "@/types/enrollment";
 import { useState } from "react";
 import { ConfirmationPopup } from "../ConfirmationPopup/ConfirmationPopup";
 import { EnrollmentPatchRequest } from "@/types/enrollmentPatchRequest";
-import { EnrollmentStatus } from "@/enums";
 import useUpdateEnrollmentRequest from "@/api/enrollment/useUpdateEnrollmentRequest";
+import { EnrollmentStatus } from "@/types/EnrollmentStatus";
 
 type PendingCandidateCardProps = {
   enrollment: EnrollmentRequest;

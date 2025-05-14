@@ -1,4 +1,4 @@
-import { EnrollmentStatus } from "@/enums";
+import { EnrollmentStatus } from "./EnrollmentStatus";
 
 export type EnrollmentPatchRequest = {
   id: string;

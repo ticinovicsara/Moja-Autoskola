@@ -1,10 +1,10 @@
 import { useCandidateEnrollment } from "@/api";
 import { routes } from "@/constants";
-import { EnrollmentStatus } from "@/enums";
 import { useAuth } from "@/hooks";
 import toast from "react-hot-toast";
 import { Outlet, useNavigate } from "react-router";
 import { useEffect } from "react";
+import { EnrollmentStatus } from "@/types/EnrollmentStatus";
 
 export const WaitingForApprove = () => {
   const { user, isLoading: userLoading } = useAuth();

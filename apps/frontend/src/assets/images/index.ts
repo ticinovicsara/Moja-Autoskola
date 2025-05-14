@@ -1,3 +1,4 @@
-import Arrow from "./Arrow.png";
+import CalendarIcon from "./calendar.png";
+import LogoHorizontal from "./logo-tipografija-horizontalno.png";
 
-export { Arrow };
+export { CalendarIcon, LogoHorizontal };
