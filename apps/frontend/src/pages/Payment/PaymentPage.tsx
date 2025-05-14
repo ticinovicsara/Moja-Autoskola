@@ -17,6 +17,7 @@ import { EnrollmentPatchRequest } from "@/types/enrollmentPatchRequest";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@/constants";
 import { EnrollmentStatus } from "@/types/EnrollmentStatus";
+import toast from "react-hot-toast";
 
 export const PaymentPage = () => {
   const { user } = useAuth();
@@ -66,9 +67,7 @@ export const PaymentPage = () => {
   };
 
   const handlePayment = () => {
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
 
     setShowProcessingPopup(true);
 
@@ -83,7 +82,8 @@ export const PaymentPage = () => {
         };
         updateEnrollmentRequest(updatedEnrollmentReq);
         setShowSuccessPopup(false);
-        navigate(routes.CANDIDATE_DASHBOARD);
+        toast.success("Molimo ponovno se prijavite kako bi nastavili.");
+        navigate(routes.LOGIN);
       }, 2000);
     }, 2000);
   };

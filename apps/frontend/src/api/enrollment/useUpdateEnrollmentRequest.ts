@@ -10,7 +10,7 @@ const useUpdateEnrollmentRequest = () => {
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation<
-    any,
+    { token?: string },
     AxiosError,
     EnrollmentPatchRequest
   >({
@@ -19,11 +19,13 @@ const useUpdateEnrollmentRequest = () => {
     },
     onSuccess: () => {
       toast.success("Zahtjev uspješno prihvaćen");
+
       queryClient.invalidateQueries({
         queryKey: ["school-enrollments", EnrollmentStatus.Pending],
       });
     },
     onError: (error) => {
+      console.log(mutate);
       toast.error(error.message);
     },
   });
