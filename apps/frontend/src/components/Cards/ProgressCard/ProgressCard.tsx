@@ -1,31 +1,30 @@
 import styles from "./progressCard.module.css";
 import CardComponent from "../CardComponent/CardComponent";
-import { ArrowBack } from "@/components/ArrowBack/ArrowBack";
+import ProgressBar from "./ProgressBar/ProgressBar";
+import { Arrow2 } from "@/assets/svgs";
+import { routes } from "@/constants";
 
 interface ProgressCardProps {
   title: string;
   progress: number;
+  total?: number;
 }
 
 export const ProgressCard: React.FC<ProgressCardProps> = ({
   title,
   progress,
+  total,
 }) => {
   return (
-    <CardComponent className={styles["progress-card"]}>
+    <CardComponent
+      className={styles["progress-card"]}
+      linkTo={routes.CANDIDATE_PROGRESS}
+    >
       <div className={styles["title"]}>
         <div>{title}</div>
-        <ArrowBack rotate />
+        <img src={Arrow2} />
       </div>
-      <div className={styles["progress-container"]}>
-        <div className={styles["progress-bar"]}>
-          <div
-            className={styles["progress-fill"]}
-            style={{ width: `${progress}%` }}
-          ></div>
-          <div className={styles["progress-percentage"]}>{progress}%</div>
-        </div>
-      </div>
+      <ProgressBar progress={progress} total={total} />{" "}
     </CardComponent>
   );
 };

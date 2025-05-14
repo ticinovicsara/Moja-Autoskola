@@ -17,6 +17,7 @@ import {
   BlogPage,
   InstructorCandidateListPage,
   GuestPage,
+  CandidateProgressPage,
 } from "@/pages";
 import { AuthPage } from "@/pages/Auth";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -52,18 +53,12 @@ const AppRouter = () => {
             path={routes.CANDIDATE_CALENDAR}
             element={<CandidateCalendarPage />}
           />
+          <Route
+            path={routes.CANDIDATE_PROGRESS}
+            element={<CandidateProgressPage />}
+          />
         </Route>
 
-        <Route element={<InstructorLayout />}>
-          <Route
-            path={routes.INSTRUCTOR_CANDIDATE_LIST}
-            element={<InstructorCandidateListPage />}
-          />
-          <Route
-            path={routes.CANDIDATE_CALENDAR}
-            element={<CandidateCalendarPage />}
-          />
-        </Route>
         <Route element={<InstructorLayout />}>
           <Route
             path={routes.INSTRUCTOR_DASHBOARD}
