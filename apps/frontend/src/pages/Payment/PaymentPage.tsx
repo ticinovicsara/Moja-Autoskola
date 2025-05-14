@@ -1,16 +1,62 @@
 import { InputField, LogoAndText, PaymentPopup } from "@/components";
 import c from "./payment.module.css";
 import { useState } from "react";
+import {
+  validateCardNumber,
+  validateOwner,
+  validateExpireDate,
+  validateCVV,
+  formatCardNumberInput,
+  formatExpireDateInput,
+  formatCVVInput,
+} from "@/utils";
 
 export const PaymentPage = () => {
-  const [cardNum, setCardNum] = useState<string>("");
-  const [owner, setOwner] = useState<string>("");
-  const [expireDate, setExpireDate] = useState<string>("");
-  const [CVV, setCVV] = useState<string>("");
+  const [cardNum, setCardNum] = useState("");
+  const [owner, setOwner] = useState("");
+  const [expireDate, setExpireDate] = useState("");
+  const [CVV, setCVV] = useState("");
+
+  const [errors, setErrors] = useState({
+    cardNum: "",
+    owner: "",
+    expireDate: "",
+    CVV: "",
+  });
+
   const [showProcessingPopup, setShowProcessingPopup] = useState(false);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
+  const formatCardNum = (value: string) => {
+    setCardNum(formatCardNumberInput(value));
+  };
+
+  const formatExpireDate = (value: string) => {
+    setExpireDate(formatExpireDateInput(value));
+  };
+
+  const formatCVV = (value: string) => {
+    setCVV(formatCVVInput(value));
+  };
+
+  const validateForm = () => {
+    const newErrors = {
+      cardNum: validateCardNumber(cardNum),
+      owner: validateOwner(owner),
+      expireDate: validateExpireDate(expireDate),
+      CVV: validateCVV(CVV),
+    };
+
+    setErrors(newErrors);
+
+    return !Object.values(newErrors).some((error) => error !== "");
+  };
+
   const handlePayment = () => {
+    if (!validateForm()) {
+      return;
+    }
+
     setShowProcessingPopup(true);
 
     setTimeout(() => {
@@ -19,7 +65,7 @@ export const PaymentPage = () => {
 
       setTimeout(() => {
         setShowSuccessPopup(false);
-      }, 3000);
+      }, 2000);
     }, 2000);
   };
 
@@ -42,6 +88,7 @@ Molimo te da ne zatvaraš stranicu dok proces traje!"
 Molimo te da ne zatvaraš stranicu dok proces traje!"
         />
       )}
+
       <div className={`${c.paymentContainer} container`}>
         <LogoAndText />
         <div className={c.cardInfo}>
@@ -49,20 +96,23 @@ Molimo te da ne zatvaraš stranicu dok proces traje!"
             placeholder="Broj kartice: XXXX XXXX XXXX XXXX"
             type="text"
             value={cardNum}
-            onChange={setCardNum}
+            onChange={formatCardNum}
+            error={errors.cardNum}
           />
           <div className={c.detailsWrapper}>
             <InputField
-              placeholder="Vrijedi do (08/26)"
+              placeholder="Vrijedi do (MM/GG)"
               type="text"
               value={expireDate}
-              onChange={setExpireDate}
+              onChange={formatExpireDate}
+              error={errors.expireDate}
             />
             <InputField
               placeholder="CVV"
               type="text"
               value={CVV}
-              onChange={setCVV}
+              onChange={formatCVV}
+              error={errors.CVV}
             />
           </div>
           <InputField
@@ -70,6 +120,7 @@ Molimo te da ne zatvaraš stranicu dok proces traje!"
             type="text"
             value={owner}
             onChange={setOwner}
+            error={errors.owner}
           />
         </div>
         <button className="authBtn" onClick={handlePayment}>
