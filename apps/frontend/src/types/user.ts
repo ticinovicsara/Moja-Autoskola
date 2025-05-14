@@ -1,4 +1,10 @@
-import { UserRoles } from "@/enums";
+export enum UserRoles {
+  Admin = "Admin",
+  SchoolAdmin = "SchoolAdmin",
+  Instructor = "Instructor",
+  Candidate = "Candidate",
+  Guest = "Guest",
+}
 
 type CreateUserFormData = {
   firstName: string;

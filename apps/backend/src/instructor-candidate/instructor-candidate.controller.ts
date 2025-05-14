@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, Delete, Param, Get } from '@nestjs/common';
 import { InstructorCandidateService } from './instructor-candidate.service';
 import { AssignInstructorCandidateDto } from './dto/assign-instructor.dto';
 import { RemoveInstructorCandidateDto } from './dto/remove-instructor-candidate.dto';
@@ -10,6 +10,14 @@ export class InstructorCandidateController {
   constructor(
     private readonly instructorCandidateService: InstructorCandidateService,
   ) {}
+
+  @Auth(UserRole.Candidate)
+  @Get(':id')
+  async getInstructorFromCandidate(@Param('id') candidateId: string) {
+    return this.instructorCandidateService.getInstructorFromCandidate(
+      candidateId,
+    );
+  }
 
   @Auth(UserRole.SchoolAdmin)
   @Post()

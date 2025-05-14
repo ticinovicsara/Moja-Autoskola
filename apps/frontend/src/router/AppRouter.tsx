@@ -4,16 +4,21 @@ import {
   CandidateLayout,
   GuestRoute,
   PublicLayout,
+  InstructorLayout,
 } from "@/layouts";
 import {
   HomePage,
   CandidateDashboardPage,
+  InstructorDashboardPage,
+  Login,
+  Register,
+  InstructorCalendarPage,
   CandidateCalendarPage,
   BlogPage,
+  InstructorCandidateListPage,
   GuestPage,
 } from "@/pages";
-import { AuthPage, Login, Register } from "@/pages/Auth";
-import InstructorCandidateListPage from "@/pages/InstructorCandidateListPage/InstructorCandidateListPage";
+import { AuthPage } from "@/pages/Auth";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const AppRouter = () => {
@@ -49,7 +54,7 @@ const AppRouter = () => {
           />
         </Route>
 
-        <Route element={<CandidateLayout />}>
+        <Route element={<InstructorLayout />}>
           <Route
             path={routes.INSTRUCTOR_CANDIDATE_LIST}
             element={<InstructorCandidateListPage />}
@@ -57,6 +62,20 @@ const AppRouter = () => {
           <Route
             path={routes.CANDIDATE_CALENDAR}
             element={<CandidateCalendarPage />}
+          />
+        </Route>
+        <Route element={<InstructorLayout />}>
+          <Route
+            path={routes.INSTRUCTOR_DASHBOARD}
+            element={<InstructorDashboardPage />}
+          />
+          <Route
+            path={routes.INSTRUCTOR_CANDIDATE_LIST}
+            element={<InstructorCandidateListPage />}
+          />
+          <Route
+            path={routes.INSTRUCTOR_CALENDAR}
+            element={<InstructorCalendarPage />}
           />
         </Route>
       </Routes>

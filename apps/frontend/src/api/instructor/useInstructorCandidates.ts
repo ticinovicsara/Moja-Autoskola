@@ -8,7 +8,7 @@ const useInstructorCandidates = (instructorId: string) => {
   const { data, isLoading, error } = useQuery<User[], AxiosError>({
     queryKey: ["instructor-candidates", instructorId],
     queryFn: () =>
-      getData<User[]>(`${API_ENDPOINTS.INSTRUCTOR_CANDIDATES}/${instructorId}`),
+      getData<User[]>(`${API_ENDPOINTS.INSTRUCTOR.CANDIDATES}/${instructorId}`),
     enabled: !!instructorId,
   });
 

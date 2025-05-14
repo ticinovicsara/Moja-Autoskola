@@ -21,6 +21,7 @@
     "react-calendar": "^5.1.0",
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.5.2",
+    "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.0",
     "swiper": "^11.2.6"
   },
@@ -36,6 +37,6 @@
     "globals": "^16.0.0",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.26.1",
-    "vite": "^6.3.1"
+    "vite": "^6.3.5"
   }
 }

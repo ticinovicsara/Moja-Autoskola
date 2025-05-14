@@ -1,23 +1,32 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { API_ENDPOINTS } from "@/constants";
 import { getData } from "@/utils/fetchUtils";
-import { Session } from "@/types";
+import { API_ENDPOINTS } from "@/constants";
+import { Session, UserRoles } from "@/types";
+import { useAuth } from "@/hooks";
 
-const useCandidateSessions = (candidateId: string) => {
-    const { data, isLoading, error } = useQuery<Session[], AxiosError>({
-        queryKey: ["sessions", candidateId],
-        queryFn: () =>
-            getData(API_ENDPOINTS.SESSION.CANDIDATE + "/" + candidateId),
-    });
+const useUserSessions = (userId: string) => {
+  const { user } = useAuth();
+  const role = user?.role;
 
-    const sessions: Session[] | undefined = data?.map((session: Session) => ({
-        ...session,
-        startTime: new Date(session.startTime),
-        endTime: new Date(session.endTime),
-    }));
+  const endpoint =
+    role === UserRoles.Instructor
+      ? `${API_ENDPOINTS.SESSION.INSTRUCTOR}/${userId}`
+      : `${API_ENDPOINTS.SESSION.CANDIDATE}/${userId}`;
 
-    return { sessions: sessions || [], isLoading, error };
+  const { data, isLoading, error } = useQuery<Session[], AxiosError>({
+    queryKey: ["sessions", role, userId],
+    queryFn: () => getData(endpoint),
+    enabled: !!userId,
+  });
+
+  const sessions: Session[] | undefined = data?.map((session: Session) => ({
+    ...session,
+    startTime: new Date(session.startTime),
+    endTime: new Date(session.endTime),
+  }));
+
+  return { sessions: sessions || [], isLoading, error };
 };
 
-export default useCandidateSessions;
+export default useUserSessions;
