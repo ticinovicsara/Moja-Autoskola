@@ -20,4 +20,9 @@ export class CandidateController {
   ) {
     return this.candidateService.getCandidatesWithoutInstructor(schooladminId);
   }
+
+  @Get('by-school/:schoolId')
+  async getCandidatesBySchool(@Param('schoolId') schoolId: string) {
+    return this.candidateService.getCandidatesBySchool(schoolId);
+  }
 }

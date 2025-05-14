@@ -21,12 +21,17 @@ export const API_ENDPOINTS = {
 
   CANDIDATE: {
     INSTRUCTOR: "/candidate/instructor",
+    BY_SCHOOL: "/candidate/by-school",
     PROGRESS: "/user/progress",
   },
 
   SCHOOL: {
     ALL: "/school",
+    BY_USER: "/school/by-user",
   },
-
-  GET_INSTRUCTOR_CANDIDATE: "/instructor-candidate",
+  ENROLLMENT: {
+    SCHOOL: "/enrollment/school",
+    CRUD: "/enrollment",
+    CANDIDATE: "/enrollment/candidate",
+  },
 };

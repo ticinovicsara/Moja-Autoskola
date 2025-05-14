@@ -13,7 +13,7 @@ export const GuestRoute = () => {
 
   if (!user) {
     toast.error("Morate se prijaviti da bi nastavili");
-    return <Navigate to={routes.LOGIN} />;
+    return <Navigate to={routes.AUTH} />;
   }
 
   if (user.role !== UserRoles.Guest) {

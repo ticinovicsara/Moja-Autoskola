@@ -13,4 +13,12 @@ async function postData<Req = any, Res = any>(
   return response.data;
 }
 
-export { getData, postData };
+async function patchData<Req = any, Res = any>(
+  url: string,
+  data: Req
+): Promise<Res> {
+  const response = await api.patch<Res>(url, data);
+  return response.data;
+}
+
+export { getData, postData, patchData };

@@ -2,12 +2,37 @@ import { School } from "@/types/school";
 import c from "./schoolCard.module.css";
 import Star from "@/assets/svgs/star.svg";
 import { useState } from "react";
+import { ConfirmationPopup } from "../ConfirmationPopup/ConfirmationPopup";
+import useSendEnrollmentRequest from "@/api/enrollment/useSendEnrollmentRequest";
+import { useAuth } from "@/hooks";
+import { EnrollmentPostRequest } from "@/types/enrollmentPostRequest";
+
 type SchoolCardProps = {
   school: School;
 };
 
 export const SchoolCard = ({ school }: SchoolCardProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState<boolean>(false);
+
+  const { user } = useAuth();
+  const { sendEnrollmentRequest } = useSendEnrollmentRequest();
+
+  const toggleConfirmPopup = () => {
+    setIsConfirmPopupOpen((prev) => !prev);
+  };
+
+  const handleConfirm = () => {
+    if (!user) {
+      return;
+    }
+    const enrollmentReq: EnrollmentPostRequest = {
+      candidateId: user.id,
+      schoolId: school.id,
+    };
+    sendEnrollmentRequest(enrollmentReq);
+    toggleConfirmPopup();
+  };
 
   const toggleDetails = () => {
     setIsOpen((prev) => !prev);
@@ -53,8 +78,20 @@ export const SchoolCard = ({ school }: SchoolCardProps) => {
               {school.name}
             </a>
           </div>
-          <button className={`authBtn ${c.sendReqBtn}`}>Pošalji zahtjev</button>
+          <button
+            className={`authBtn ${c.sendReqBtn}`}
+            onClick={toggleConfirmPopup}
+          >
+            Pošalji zahtjev
+          </button>
         </div>
+      )}
+      {isConfirmPopupOpen && (
+        <ConfirmationPopup
+          prompt="Jesi li siguran da želiš poslati zahtjev za upis u ovu autoškolu?"
+          handleConfirm={handleConfirm}
+          togglePopup={toggleConfirmPopup}
+        />
       )}
     </div>
   );

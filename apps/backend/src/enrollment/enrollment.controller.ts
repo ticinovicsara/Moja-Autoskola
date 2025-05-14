@@ -24,7 +24,7 @@ export class EnrollmentController {
     return this.enrollmentService.getEnrollmentRequests(status);
   }
 
-  @Auth(UserRole.Candidate)
+  @Auth(UserRole.Candidate, UserRole.Guest)
   @Get('candidate/:id')
   async getCandidateEnrollmentRequests(@Param('id') candidateId: string) {
     return this.enrollmentService.getCandidateEnrollmentRequests(candidateId);
@@ -32,17 +32,23 @@ export class EnrollmentController {
 
   @Auth(UserRole.SchoolAdmin)
   @Get('school/:id')
-  async getSchoolEnrollmentRequests(@Param('id') schoolId: string) {
-    return this.enrollmentService.getSchoolEnrollmentRequests(schoolId);
+  async getSchoolEnrollmentRequestsByStatus(
+    @Param('id') id: string,
+    @Query('status') status?: EnrollmentStatus,
+  ) {
+    return this.enrollmentService.getSchoolEnrollmentRequestsByStatus(
+      id,
+      status?.trim() as EnrollmentStatus,
+    );
   }
 
-  @Auth(UserRole.SchoolAdmin)
+  @Auth(UserRole.SchoolAdmin, UserRole.Guest)
   @Post()
   async requestEnrollment(@Body() body: RequestEnrollmentDto) {
     return this.enrollmentService.requestEnrollment(body);
   }
 
-  @Auth(UserRole.SchoolAdmin)
+  @Auth(UserRole.SchoolAdmin, UserRole.Candidate, UserRole.Guest)
   @Patch()
   async updateEnrollmentStatus(@Body() body: UpdateRequestDto) {
     return this.enrollmentService.updateEnrollmentStatus(body);

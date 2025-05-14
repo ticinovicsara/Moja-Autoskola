@@ -30,12 +30,12 @@ const CandidateCalendarPage = () => {
   };
 
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} container`}>
       {isLoading ? (
         <p>Učitavanje...</p>
       ) : (
         <>
-          <div className={`${styles.calendarHeader} container`}>
+          <div className={`${styles.calendarHeader}`}>
             <ArrowBack />
             <h2>KALENDAR</h2>
           </div>

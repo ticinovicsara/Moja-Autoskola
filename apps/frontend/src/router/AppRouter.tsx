@@ -4,11 +4,12 @@ import {
   CandidateLayout,
   GuestRoute,
   PublicLayout,
+  SchoolAdminRoute,
+  WaitingForApprove,
   InstructorLayout,
 } from "@/layouts";
 import {
   HomePage,
-  CandidateDashboardPage,
   InstructorDashboardPage,
   Login,
   Register,
@@ -17,6 +18,11 @@ import {
   BlogPage,
   InstructorCandidateListPage,
   GuestPage,
+  WaitingForApprovePage,
+  SchoolAdminDashboard,
+  PendingListPage,
+  PaymentPage,
+  CandidateDashboardPage,
   CandidateProgressPage,
 } from "@/pages";
 import { AuthPage } from "@/pages/Auth";
@@ -33,14 +39,18 @@ const AppRouter = () => {
         </Route>
 
         <Route element={<PublicLayout />}>
-          <Route path={routes.HOME} element={<HomePage />} />
-        </Route>
-        <Route element={<PublicLayout />}>
           <Route path={`${routes.BLOG}/:id`} element={<BlogPage />} />
           <Route path={routes.AUTH} element={<AuthPage />} />
         </Route>
 
         <Route element={<CandidateLayout />}>
+          <Route path={routes.PAYMENT} element={<PaymentPage />} />
+          <Route element={<WaitingForApprove />}>
+            <Route
+              path={routes.WAITING_FOR_APPROVE}
+              element={<WaitingForApprovePage />}
+            />
+          </Route>
           <Route element={<GuestRoute />}>
             <Route path={routes.GUEST} element={<GuestPage />} />
           </Route>
@@ -54,6 +64,13 @@ const AppRouter = () => {
             path={routes.CANDIDATE_CALENDAR}
             element={<CandidateCalendarPage />}
           />
+          <Route element={<SchoolAdminRoute />}>
+            <Route
+              path={routes.SCHOOL_ADMIN_DASHBOARD}
+              element={<SchoolAdminDashboard />}
+            />
+            <Route path={routes.PENDING_LIST} element={<PendingListPage />} />
+          </Route>
           <Route
             path={routes.CANDIDATE_PROGRESS}
             element={<CandidateProgressPage />}
@@ -76,7 +93,7 @@ const AppRouter = () => {
         </Route>
 
         <Route
-          path={routes.SCHOOLADMIN_CANDIDATE_LIST_FOR_ASSIGN}
+          path={routes.SCHOOL_ADMIN_ASSIGN_INSTRUCTOR}
           element={<SchoolAdminAssignInstructorPage />}
         />
       </Routes>

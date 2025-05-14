@@ -10,7 +10,6 @@ const useSchool = () => {
     queryFn: () => getData(API_ENDPOINTS.SCHOOL.ALL),
   });
 
-  console.log(data);
   return { schools: data || [], isLoading, error };
 };
 

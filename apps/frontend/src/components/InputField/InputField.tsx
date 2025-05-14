@@ -24,18 +24,19 @@ export const InputField = ({
   return (
     <>
       {label && <label className={c.label}> {label}</label>}
+      <div className={c.inputDiv}>
+        <input
+          type={type}
+          className={`${c.input} ${error ? c.inputError : ""}`}
+          placeholder={placeholder}
+          onChange={(e) => onChange(e.target.value)}
+          value={value}
+          required={required}
+          pattern={pattern}
+        />
 
-      <input
-        type={type}
-        className={c.input}
-        placeholder={placeholder}
-        onChange={(e) => onChange(e.target.value)}
-        value={value}
-        required={required}
-        pattern={pattern}
-      />
-
-      {error && <p className={c.error}>{error}</p>}
+        {error && <p className={c.error}>{error}</p>}
+      </div>
     </>
   );
 };

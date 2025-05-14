@@ -6,9 +6,14 @@ export { default as InstructorDashboardPage } from "./Instructor/InstructorDashb
 export { default as InstructorCandidateListPage } from "./InstructorCandidateListPage/InstructorCandidateListPage";
 export { default as InstructorCalendarPage } from "./Instructor/InstructorCalendarPage";
 
-export { default as CandidateCalendarPage } from "./CandidateCalendarPage/CandidateCalendarPage";
 export * from "./Blog/BlogPage";
 export * from "./Guest/GuestPage";
+export * from "./InstructorCandidateListPage/InstructorCandidateListPage";
+export * from "./WaitingForApprove/WaitingForApprovePage";
+export * from "./SchoolAdminDashboard/SchoolAdminDashboard";
+export * from "./SchoolAdminPendingList/PendingListPage";
+export * from "./Payment/PaymentPage";
 
 export { default as CandidateProgressPage } from "./CandidateProgressPage/CandidateProgressPage";
 export { default as CandidateDashboardPage } from "./CandidateDashboard/CandidateDashboardPage";
+export { default as CandidateCalendarPage } from "./CandidateCalendarPage/CandidateCalendarPage";
