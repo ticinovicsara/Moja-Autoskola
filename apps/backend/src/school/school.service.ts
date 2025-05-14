@@ -3,6 +3,7 @@ import { CreateSchoolDto } from './dto/create-school.dto';
 import { UpdateSchoolDto } from './dto/update-school.dto';
 import { PrismaService } from '@/prisma/prisma.service';
 import { School } from './entities/school.entity';
+import { UserRole } from '@prisma/client';
 
 @Injectable()
 export class SchoolService {
@@ -56,6 +57,24 @@ export class SchoolService {
     });
     if (!userSchool) throw new NotFoundException("The user isn't in a school");
     return School.fromPrisma(userSchool.school);
+  }
+
+  async getAllCandidates(adminId: string) {
+    const school = await this.getUsersSchool(adminId);
+
+    const candidates = await this.prisma.schoolUser.findMany({
+      where: {
+        schoolId: school.id,
+        user: {
+          role: UserRole.Candidate,
+        },
+      },
+      include: {
+        user: true,
+      },
+    });
+
+    return candidates.map((c) => c.user);
   }
 
   async update(id: string, updateSchoolDto: UpdateSchoolDto) {

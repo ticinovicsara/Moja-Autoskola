@@ -73,6 +73,22 @@ export class UserService {
     return user;
   }
 
+  async getAllCandidates(schoolId: string) {
+    const candidates = await this.prisma.schoolUser.findMany({
+      where: {
+        schoolId,
+        user: {
+          role: UserRole.Candidate,
+        },
+      },
+      include: {
+        user: true,
+      },
+    });
+
+    return candidates.map((c) => c.user);
+  }
+
   async getCandidateProgress(id: string) {
     const user = await this.getById(id);
 

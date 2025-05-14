@@ -22,6 +22,7 @@ export const API_ENDPOINTS = {
   },
   SCHOOL: {
     ALL: "/school",
+    CANDIDATES: "/school/candidates",
   },
 
   GET_INSTRUCTOR_CANDIDATE: "/instructor-candidate",

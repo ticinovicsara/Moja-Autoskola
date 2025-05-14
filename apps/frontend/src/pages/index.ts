@@ -11,3 +11,4 @@ export * from "./Blog/BlogPage";
 export * from "./Guest/GuestPage";
 export * from "./InstructorCandidateListPage/InstructorCandidateListPage";
 export { default as CandidateDashboardPage } from "./CandidateDashboard/CandidateDashboardPage";
+export { default as SchoolAdminDashboardPage } from "./SchoolAdminDashboardPage/SchoolAdminPage";

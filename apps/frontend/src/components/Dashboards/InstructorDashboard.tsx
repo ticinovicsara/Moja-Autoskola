@@ -10,6 +10,9 @@ export const InstructorDashboard = () => {
   const { user } = useAuth();
   const userId = user?.id || "";
 
+  console.log("ID:", userId);
+  console.log("TOKEN: ", localStorage.getItem("token"));
+
   const { loading, activity, startTime } = useNextSession(userId);
 
   const scheduleContent = useMemo(() => {
@@ -40,7 +43,6 @@ export const InstructorDashboard = () => {
           <ArrowCard
             title="REZERVIRAJ TERMIN VOŽNJE"
             className={`${styles["arrow-card"]} ${styles["card-red"]}`}
-            linkTo=""
           />
           <ArrowCard
             title="POGLEDAJ LISTU KANDIDATA"

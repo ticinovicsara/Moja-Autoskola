@@ -5,12 +5,17 @@ import { ArrowBack } from "@/components/ArrowBack/ArrowBack";
 interface ProgressCardProps {
   title: string;
   progress: number;
+  total?: number;
 }
 
 export const ProgressCard: React.FC<ProgressCardProps> = ({
   title,
   progress,
+  total,
 }) => {
+  const displayText = total ? `${progress} / ${total}` : `${progress}%`;
+  const barWidth = total ? `${(progress / total) * 100}%` : `${progress}%`;
+
   return (
     <CardComponent className={styles["progress-card"]}>
       <div className={styles["title"]}>
@@ -21,9 +26,9 @@ export const ProgressCard: React.FC<ProgressCardProps> = ({
         <div className={styles["progress-bar"]}>
           <div
             className={styles["progress-fill"]}
-            style={{ width: `${progress}%` }}
+            style={{ width: barWidth }}
           ></div>
-          <div className={styles["progress-percentage"]}>{progress}%</div>
+          <div className={styles["progress-percentage"]}>{displayText}</div>
         </div>
       </div>
     </CardComponent>

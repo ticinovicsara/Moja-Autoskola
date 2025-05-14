@@ -12,6 +12,8 @@ const routes = {
   INSTRUCTOR_DASHBOARD: "/instructor/dashboard",
   INSTRUCTOR_CANDIDATE_LIST: "/instructor/candidate-list",
   INSTRUCTOR_CALENDAR: "/instructor/calendar",
+
+  SCHOOLADMIN_DASHBOARD: "/school-admin/dashboard",
 };
 
 export { routes };
