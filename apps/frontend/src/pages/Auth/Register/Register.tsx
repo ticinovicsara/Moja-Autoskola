@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import c from "./register.module.css";
 import { InputField } from "@/components";
 import { isValidEmail } from "@/utils/validateEmail";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { routes } from "@/constants";
 import { validatePassword } from "@/utils/validatePassword";
 import { isValidCroatianPhoneNumber } from "@/utils/formatPhoneNumber";
@@ -235,7 +235,6 @@ export const Register = () => {
           {step === 4 ? "ZAVRŠI" : "DALJE"}
         </button>
       </div>
-      <Toaster />
     </div>
   );
 };

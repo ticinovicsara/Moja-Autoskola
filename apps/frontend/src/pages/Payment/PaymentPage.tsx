@@ -7,20 +7,41 @@ export const PaymentPage = () => {
   const [owner, setOwner] = useState<string>("");
   const [expireDate, setExpireDate] = useState<string>("");
   const [CVV, setCVV] = useState<string>("");
+  const [showProcessingPopup, setShowProcessingPopup] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+
+  const handlePayment = () => {
+    setShowProcessingPopup(true);
+
+    setTimeout(() => {
+      setShowProcessingPopup(false);
+      setShowSuccessPopup(true);
+
+      setTimeout(() => {
+        setShowSuccessPopup(false);
+      }, 3000);
+    }, 2000);
+  };
+
   return (
     <>
-      <PaymentPopup
-        action="Plaćanje je u tijeku"
-        actionColor="#84cdee"
-        description="Proces može potrajati neko vrijeme...
+      {showProcessingPopup && (
+        <PaymentPopup
+          action="Plaćanje je u tijeku"
+          actionColor="#84cdee"
+          description="Proces može potrajati neko vrijeme...
 Molimo te da ne zatvaraš stranicu dok proces traje!"
-      />
-      <PaymentPopup
-        action="PLAĆANJE JE USPJELO"
-        actionColor="#b1cf86"
-        description="Registriramo te kao kandidata...
+        />
+      )}
+
+      {showSuccessPopup && (
+        <PaymentPopup
+          action="PLAĆANJE JE USPJELO"
+          actionColor="#b1cf86"
+          description="Registriramo te kao kandidata...
 Molimo te da ne zatvaraš stranicu dok proces traje!"
-      />
+        />
+      )}
       <div className={`${c.paymentContainer} container`}>
         <LogoAndText />
         <div className={c.cardInfo}>
@@ -51,7 +72,9 @@ Molimo te da ne zatvaraš stranicu dok proces traje!"
             onChange={setOwner}
           />
         </div>
-        <button className="authBtn">Plati</button>
+        <button className="authBtn" onClick={handlePayment}>
+          Plati
+        </button>
       </div>
     </>
   );
