@@ -31,6 +31,12 @@ export class UserController {
   }
 
   @Auth(UserRole.SchoolAdmin)
+  @Get('candidates/:id')
+  findAllCandidatesForSchool(@Param('id') adminId: string) {
+    return this.userService.findAllCandidatesForSchool(adminId);
+  }
+
+  @Auth(UserRole.SchoolAdmin)
   @Get(':email')
   findOne(@Param('email') email: string) {
     return this.userService.getByEmail(email);

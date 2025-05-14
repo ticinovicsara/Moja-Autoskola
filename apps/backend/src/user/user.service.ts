@@ -73,6 +73,32 @@ export class UserService {
     return user;
   }
 
+  async findAllCandidatesForSchool(adminId: string) {
+    const admin = await this.prisma.user.findUnique({
+      where: { id: adminId },
+      include: { schoolUser: true },
+    });
+
+    if (!admin || !admin.schoolUser) {
+      throw new NotFoundException('Admin or admin school not found');
+    }
+
+    if (admin.role !== UserRole.SchoolAdmin) {
+      throw new ConflictException('User is not a school admin');
+    }
+
+    const candidates = await this.prisma.user.findMany({
+      where: {
+        role: UserRole.Candidate,
+        schoolUser: {
+          schoolId: admin.schoolUser.schoolId,
+        },
+      },
+    });
+
+    return candidates.map((u) => UserResponseDto.fromPrisma(u));
+  }
+
   async getCandidateProgress(id: string) {
     const user = await this.getById(id);
 

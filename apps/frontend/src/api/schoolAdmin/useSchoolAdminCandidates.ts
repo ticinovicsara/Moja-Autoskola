@@ -4,7 +4,7 @@ import { User } from "@/types";
 import { getData } from "@/utils";
 import { API_ENDPOINTS } from "@/constants";
 
-const useInstructorCandidates = (instructorId: string) => {
+const useSchoolAdminCandidates = (instructorId: string) => {
   const { data, isLoading, error } = useQuery<User[], AxiosError>({
     queryKey: ["instructor-candidates", instructorId],
     queryFn: () =>
@@ -19,4 +19,4 @@ const useInstructorCandidates = (instructorId: string) => {
   };
 };
 
-export { useInstructorCandidates };
+export { useSchoolAdminCandidates };

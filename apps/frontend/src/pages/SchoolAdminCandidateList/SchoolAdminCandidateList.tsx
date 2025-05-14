@@ -6,19 +6,17 @@ import CandidateList from "@/components/CandidateList/CandidateList";
 import { useAuth } from "@/hooks";
 import { useInstructorCandidates } from "@/api";
 
-const InstructorCandidateListPage = () => {
+const SchoolAdminCandidateListPage = () => {
   const { user } = useAuth();
-  const instructorId = user?.id;
+  const adminId = user?.id;
 
   const { candidates, isLoading, error } = useInstructorCandidates(
-    instructorId || ""
+    adminId || ""
   );
-
-  console.log("TOKEN_ ", localStorage.getItem("token"));
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  if (!instructorId) return <p>Učitavanje korisnika...</p>;
+  if (!adminId) return <p>Učitavanje korisnika...</p>;
   if (isLoading) return <p>Učitavanje...</p>;
   if (error) return <p>Došlo je do greške.</p>;
 
@@ -53,4 +51,4 @@ const InstructorCandidateListPage = () => {
   );
 };
 
-export default InstructorCandidateListPage;
+export default SchoolAdminCandidateListPage;
