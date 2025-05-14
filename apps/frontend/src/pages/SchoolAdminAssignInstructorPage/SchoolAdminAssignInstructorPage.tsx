@@ -1,22 +1,19 @@
 import { useState } from "react";
 import styles from "../InstructorCandidateListPage/instructorCandidateList.module.css";
-import {
-  ArrowBack,
-  Navbar,
-  InputFieldWithFilter,
-  ChooseInstructorMenu,
-} from "@/components";
+import { ArrowBack, Navbar } from "@/components";
+import { InputFieldWithFilter } from "@/components";
 import CandidateList from "@/components/CandidateList/CandidateList";
-import { useAuth } from "@/hooks";
+import { useAssignInstructor, useAuth } from "@/hooks";
 import { User } from "@/types";
+import ChooseInstructorMenu from "@/components/ChooseInstructorMenu/ChooseInstructorMenu";
 
-const mockCandidates = [
+const mockCandidates: User[] = [
   { id: "1", firstName: "Iva", lastName: "Ivić", phone: "0911111111" },
   { id: "2", firstName: "Marko", lastName: "Marić", phone: "0922222222" },
   { id: "3", firstName: "Ana", lastName: "Anić", phone: "0933333333" },
 ];
 
-const mockInstructors = [
+const mockInstructors: User[] = [
   { id: "a", firstName: "Petar", lastName: "Petrović", phone: "0944444444" },
   { id: "b", firstName: "Lana", lastName: "Lanić", phone: "0955555555" },
   { id: "c", firstName: "Karlo", lastName: "Karlić", phone: "0966666666" },
@@ -24,13 +21,13 @@ const mockInstructors = [
 
 const SchoolAdminAssignInstructorPage = () => {
   const { user } = useAuth();
-  const adminId = user?.id;
-
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCandidate, setSelectedCandidate] = useState<User | null>(null);
 
-  if (!adminId) return <p>Učitavanje korisnika...</p>;
+  const { assign, isLoading, error, success } = useAssignInstructor();
+
+  if (!user) return <p>Učitavanje korisnika...</p>;
 
   const filteredCandidates = searchTerm
     ? mockCandidates.filter((candidate) => {
@@ -40,20 +37,21 @@ const SchoolAdminAssignInstructorPage = () => {
       })
     : mockCandidates;
 
-  const toggleModal = (candidate: User) => {
+  const openInstructorModal = (candidate: User) => {
     setSelectedCandidate(candidate);
     setIsModalOpen(true);
   };
 
-  const handleInstructorSelect = (instructor: User) => {
-    console.log(
-      `Kandidat ${selectedCandidate?.firstName} ${selectedCandidate?.lastName} dodijeljen instruktoru ${instructor.firstName} ${instructor.lastName}`
-    );
-    setIsModalOpen(false);
+  const handleInstructorSelect = async (instructor: User) => {
+    if (!selectedCandidate) return;
+    await assign(selectedCandidate.id, instructor.id);
+    if (!error) {
+      setIsModalOpen(false);
+    }
   };
 
   return (
-    <div className={styles["container"]}>
+    <div className={styles.container}>
       <Navbar />
       <div className={styles["navigation-container"]}>
         <ArrowBack />
@@ -66,12 +64,16 @@ const SchoolAdminAssignInstructorPage = () => {
       />
 
       {filteredCandidates.length > 0 ? (
-        <CandidateList candidates={filteredCandidates} onClick={toggleModal} />
+        <CandidateList
+          candidates={filteredCandidates}
+          onClick={openInstructorModal}
+        />
       ) : (
-        <p className={styles["message"]}>
+        <p className={styles.message}>
           Nema kandidata koji odgovaraju pretrazi.
         </p>
       )}
+
       {isModalOpen && selectedCandidate && (
         <ChooseInstructorMenu
           toggleChooseInstructorMenu={() => setIsModalOpen(false)}
@@ -79,6 +81,12 @@ const SchoolAdminAssignInstructorPage = () => {
           instructors={mockInstructors}
           onSelectInstructor={handleInstructorSelect}
         />
+      )}
+
+      {isLoading && <p>Dodjeljivanje u tijeku...</p>}
+      {error && <p className={styles.error}>{error}</p>}
+      {success && (
+        <p className={styles.success}>Instruktor uspješno dodijeljen.</p>
       )}
     </div>
   );
