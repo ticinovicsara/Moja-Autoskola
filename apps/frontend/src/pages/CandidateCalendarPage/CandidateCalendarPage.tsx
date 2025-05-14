@@ -6,12 +6,12 @@ import {
 } from "@/components";
 import styles from "./CandidateCalendarPage.module.css";
 import { Plus } from "@/assets/svgs";
-import { useCandidateSessions } from "@/api";
 import { getIdFromToken, getUpcomingMonday } from "@/utils";
 import { useState } from "react";
+import useUserSessions from "@/api/session/useSession";
 
 const CandidateCalendarPage = () => {
-  const { sessions, isLoading, error } = useCandidateSessions(
+  const { sessions, isLoading, error } = useUserSessions(
     getIdFromToken() ?? ""
   );
   const [isChooseSessionMenuOpen, setIsChooseSessionMenuOpen] = useState(false);

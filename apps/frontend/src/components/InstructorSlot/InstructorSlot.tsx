@@ -9,7 +9,7 @@ import {
   getFormattedTime,
   getMonthAbbreviation,
 } from "@/utils";
-import { Cross } from "@/assets/svgs";
+import { Arrow2, Cross } from "@/assets/svgs";
 import { usePostDrivingSession } from "@/api";
 import { useAuth } from "@/hooks";
 import { ArrowBack } from "@/assets/svgs";
@@ -49,7 +49,7 @@ const InstructorSlot: FC<InstructorSlotProps> = ({ slot }) => {
           {getFormattedTime(slot.startTime)} - {getFormattedTime(slot.endTime)}
         </p>{" "}
       </div>
-      <img src={ArrowBack} alt="arrow" onClick={toggleConfirmPopup} />
+      <img src={Arrow2} alt="arrow" onClick={toggleConfirmPopup} />
       {isConfirmPopupOpen && (
         <div className={styles.confirmPopupContainer}>
           <div className={`${styles.confirmPopup} container`}>

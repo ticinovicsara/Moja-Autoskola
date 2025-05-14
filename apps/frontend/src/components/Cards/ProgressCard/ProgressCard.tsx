@@ -18,7 +18,7 @@ export const ProgressCard: React.FC<ProgressCardProps> = ({
     <CardComponent className={styles["progress-card"]}>
       <div className={styles["title"]}>
         <div>{title}</div>
-        <ArrowBack rotate />
+        <ArrowBack />
       </div>
       <ProgressBar progress={progress} total={total ?? 100} />{" "}
     </CardComponent>

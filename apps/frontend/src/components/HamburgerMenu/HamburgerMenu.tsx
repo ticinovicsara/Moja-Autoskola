@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { routes } from "@/constants";
 import { useAuth } from "@/hooks";
 import toast from "react-hot-toast";
-import { UserRoles } from "@/enums";
+import { UserRoles } from "@/types";
 
 interface HamburgerMenuProps {
   toggleMenu: () => void;

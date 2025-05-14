@@ -10,7 +10,9 @@ const routes = {
   CANDIDATE_CALENDAR: "/candidate/calendar",
   CANDIDATE_PROGRESS: "/candidate/progress",
 
+  INSTRUCTOR_DASHBOARD: "/instructor/dashboard",
   INSTRUCTOR_CANDIDATE_LIST: "/instructor/candidate-list",
+  INSTRUCTOR_CALENDAR: "/instructor/calendar",
 };
 
 export { routes };

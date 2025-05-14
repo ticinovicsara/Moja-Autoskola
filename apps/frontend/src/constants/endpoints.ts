@@ -4,6 +4,10 @@ export const API_ENDPOINTS = {
     REGISTER: "/auth/register",
   },
 
+  USER: {
+    PROGRESS: "/user/progress",
+  },
+
   SESSION: {
     CANDIDATE: "/session/candidate",
     INSTRUCTOR: "/session/instructor",
@@ -23,4 +27,6 @@ export const API_ENDPOINTS = {
   SCHOOL: {
     ALL: "/school",
   },
+
+  GET_INSTRUCTOR_CANDIDATE: "/instructor-candidate",
 };
