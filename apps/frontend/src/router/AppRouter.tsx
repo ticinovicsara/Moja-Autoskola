@@ -4,6 +4,7 @@ import {
   CandidateLayout,
   GuestRoute,
   PublicLayout,
+  SchoolAdminRoute,
   WaitingForApprove,
 } from "@/layouts";
 import {
@@ -13,6 +14,7 @@ import {
   BlogPage,
   GuestPage,
   WaitingForApprovePage,
+  SchoolAdminDashboard,
 } from "@/pages";
 import { AuthPage, Login, Register } from "@/pages/Auth";
 import InstructorCandidateListPage from "@/pages/InstructorCandidateListPage/InstructorCandidateListPage";
@@ -52,6 +54,12 @@ const AppRouter = () => {
             path={routes.CANDIDATE_CALENDAR}
             element={<CandidateCalendarPage />}
           />
+          <Route element={<SchoolAdminRoute />}>
+            <Route
+              path={routes.SCHOOL_ADMIN_DASHBOARD}
+              element={<SchoolAdminDashboard />}
+            />
+          </Route>
         </Route>
 
         <Route element={<CandidateLayout />}>

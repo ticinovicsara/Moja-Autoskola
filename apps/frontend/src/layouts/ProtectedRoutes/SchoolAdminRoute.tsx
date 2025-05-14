@@ -4,7 +4,7 @@ import { useAuth } from "@/hooks";
 import toast from "react-hot-toast";
 import { Navigate, Outlet } from "react-router";
 
-export const GuestRoute = () => {
+export const SchoolAdminRoute = () => {
   const { user, isLoading } = useAuth();
 
   if (isLoading) {
@@ -16,8 +16,8 @@ export const GuestRoute = () => {
     return <Navigate to={routes.AUTH} />;
   }
 
-  if (user.role !== UserRoles.Guest) {
-    toast.error("Samo novi korisnici mogu pristupiti ovoj stranici");
+  if (user.role !== UserRoles.SchoolAdmin) {
+    toast.error("Samo admini škola mogu pristupiti ovoj stranici");
     return <Navigate to={routes.HOME} />;
   }
 

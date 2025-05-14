@@ -5,6 +5,8 @@ const routes = {
   REGISTER: "/register",
   BLOG: "/blog",
 
+  SCHOOL_ADMIN_DASHBOARD: "/school-admin/dashboard",
+
   CANDIDATE_DASHBOARD: "/candidate/dashboard",
   CANDIDATE_CALENDAR: "/candidate/calendar",
   GUEST: "/guest",

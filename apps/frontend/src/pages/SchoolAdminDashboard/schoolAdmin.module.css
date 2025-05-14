@@ -1,0 +1,75 @@
+.adminDashboard {
+  padding-top: 65px;
+  font-weight: 700;
+}
+
+.candidateNum {
+  background-color: var(--blue);
+  border-radius: 20px;
+}
+
+.candidateNum p {
+  padding: 20px 24px 20px 24px;
+}
+
+.candidateBar {
+  width: 100%;
+  border-radius: 20px;
+  border: 1px solid var(--darker-blue);
+  position: relative;
+  padding: 24px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  font-size: 24px;
+}
+
+.progressBar {
+  position: absolute;
+  height: 100%;
+  width: 60%;
+  top: 0;
+  left: 0;
+  border-radius: 20px;
+  z-index: -20;
+  background-color: var(--darker-blue);
+}
+
+.cards {
+  padding-top: 85px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.assign {
+  background-color: var(--red);
+}
+
+.approve {
+  background-color: var(--green);
+}
+
+.assign,
+.approve {
+  width: 60%;
+  border-radius: 20px;
+
+  padding: 36px 24px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.assign p,
+.approve p {
+  max-width: 80px;
+}
+
+@media (min-width: 768px) {
+  .assign p,
+  .approve p {
+    max-width: none;
+  }
+}

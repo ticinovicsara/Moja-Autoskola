@@ -20,7 +20,7 @@ export const WaitingForApprove = () => {
 
     if (!user) {
       toast.error("Morate se prijaviti da bi nastavili");
-      navigate(routes.LOGIN);
+      navigate(routes.AUTH);
       return;
     }
 
