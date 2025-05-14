@@ -12,7 +12,7 @@ import {
 import { Cross } from "@/assets/svgs";
 import { usePostDrivingSession } from "@/api";
 import { useAuth } from "@/hooks";
-import { Arrow } from "@/assets/images";
+import { Arrow } from "@/assets/svgs";
 
 interface InstructorSlotProps {
   slot: InstructorSlotType;

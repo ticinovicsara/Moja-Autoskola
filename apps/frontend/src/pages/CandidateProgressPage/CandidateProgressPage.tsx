@@ -9,8 +9,6 @@ const CandidateProgressPage = () => {
   const [isVisible, setIsVisible] = useState(true);
   const { data, loading, error } = useCandidateProgressData(user?.id ?? "");
 
-  console.log("DATA: ", data);
-
   const closePage = () => {
     setIsVisible(false);
   };
