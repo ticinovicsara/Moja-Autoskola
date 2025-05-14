@@ -16,11 +16,13 @@ export const useAssignInstructor = () => {
     try {
       await assignInstructorToCandidate(candidateId, instructorId);
       setSuccess(true);
-    } catch (err) {
+    } catch (err: any) {
       console.error("Greška pri dodjeljivanju instruktora:", err);
-      setError(
-        (err as any)?.response?.data?.message || "Greška prilikom dodjele."
-      );
+      const message =
+        err?.response?.data?.message ||
+        err?.message ||
+        "Greška prilikom dodjeljivanja instruktora.";
+      setError(message);
     } finally {
       setIsLoading(false);
     }

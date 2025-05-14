@@ -64,18 +64,6 @@ const SchoolAdminAssignInstructorPage = () => {
 
   const handleConfirmAssignment = useCallback(async () => {
     if (!selectedCandidate || !selectedInstructor) return;
-
-    // Provjeri da li je instruktor već dodijeljen nekom kandidatu
-    const isInstructorAlreadyAssigned = candidates.some(
-      (candidate) => candidate.assignedInstructorId === selectedInstructor.id
-    );
-
-    if (isInstructorAlreadyAssigned) {
-      toast.error("Instruktor je već dodijeljen drugom kandidatu.");
-      setIsPopupOpen(false);
-      return;
-    }
-
     await assign(selectedCandidate.id, selectedInstructor.id);
     setIsPopupOpen(false);
   }, [selectedCandidate, selectedInstructor, assign, candidates]);
