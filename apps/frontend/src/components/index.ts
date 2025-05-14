@@ -13,6 +13,7 @@ export { default as SessionList } from "./SessionList/SessionList";
 export { default as SessionCard } from "./SessionCard/SessionCard";
 export { default as ChooseSessionMenu } from "./ChooseSessionMenu/ChooseSessionMenu";
 export { default as InstructorSlot } from "./InstructorSlot/InstructorSlot";
+export { default as AddSlotMenu } from "./AddSlotMenu/AddSlotMenu";
 export * from "./Landing/Hero/HeroSection";
 export * from "./Landing/AllOnOnePlace/AllOnOneSection";
 export * from "./Landing/ScheduleRide/ScheduleRideSection";
