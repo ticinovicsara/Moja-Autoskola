@@ -3,9 +3,11 @@ import c from "./schoolAdmin.module.css";
 import Arrow from "@/assets/svgs/Arrow2.svg";
 import { useCandidatesBySchoolId } from "@/api";
 import useSchoolByUserId from "@/api/school/useSchoolByUserId";
+import { useNavigate } from "react-router-dom";
+import { routes } from "@/constants";
 export const SchoolAdminDashboard = () => {
   const { user } = useAuth();
-
+  const navigate = useNavigate();
   const { school, isLoading: loadingSchool } = useSchoolByUserId(
     user?.id || ""
   );
@@ -27,7 +29,9 @@ export const SchoolAdminDashboard = () => {
   const numCandidates = candidates?.length || 0;
   const percentFull = Math.min((numCandidates / MAX_CANDIDATES) * 100, 100);
 
-  const handleOpenRequests = () => {};
+  const handleOpenRequests = () => {
+    navigate(routes.PENDING_LIST, { state: { schoolId } });
+  };
   return (
     <div className={`${c.adminDashboard} container`}>
       <div className={c.greeting}>

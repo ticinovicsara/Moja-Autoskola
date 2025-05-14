@@ -55,11 +55,17 @@ export class EnrollmentService {
     return EnrollmentRequestEntity.fromPrisma(request);
   }
 
-  async getSchoolEnrollmentRequests(schoolId: string) {
+  async getSchoolEnrollmentRequestsByStatus(
+    schoolId: string,
+    status?: EnrollmentStatus,
+  ) {
     await this.schoolService.getById(schoolId);
 
     const requests = await this.prisma.enrollmentRequest.findMany({
-      where: { schoolId },
+      where: {
+        schoolId,
+        ...(status && { status }),
+      },
       include: {
         school: true,
         candidate: true,
@@ -76,7 +82,6 @@ export class EnrollmentService {
       EnrollmentRequestEntity.fromPrisma(request),
     );
   }
-
   async requestEnrollment(body: RequestEnrollmentDto) {
     const { candidateId, schoolId } = body;
 

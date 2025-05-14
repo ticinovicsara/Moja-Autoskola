@@ -21,7 +21,6 @@ export const HeroSection = () => {
         navigate(routes.CANDIDATE_DASHBOARD);
         break;
       case UserRoles.Guest:
-        console.log(enrollment?.status);
         if (enrollment?.status === EnrollmentStatus.Pending)
           navigate(routes.WAITING_FOR_APPROVE);
         else navigate(routes.GUEST);

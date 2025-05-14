@@ -8,7 +8,6 @@ const useSchoolByUserId = (userId: string) => {
     queryFn: () => getData(`${API_ENDPOINTS.SCHOOL.BY_USER}/${userId}`),
     enabled: !!userId,
   });
-  console.log(data);
 
   return {
     school: data,

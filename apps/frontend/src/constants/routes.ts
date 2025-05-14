@@ -6,6 +6,7 @@ const routes = {
   BLOG: "/blog",
 
   SCHOOL_ADMIN_DASHBOARD: "/school-admin/dashboard",
+  PENDING_LIST: "/school-admin/pending-list",
 
   CANDIDATE_DASHBOARD: "/candidate/dashboard",
   CANDIDATE_CALENDAR: "/candidate/calendar",

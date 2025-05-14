@@ -15,6 +15,7 @@ import {
   GuestPage,
   WaitingForApprovePage,
   SchoolAdminDashboard,
+  PendingListPage,
 } from "@/pages";
 import { AuthPage, Login, Register } from "@/pages/Auth";
 import InstructorCandidateListPage from "@/pages/InstructorCandidateListPage/InstructorCandidateListPage";
@@ -59,6 +60,7 @@ const AppRouter = () => {
               path={routes.SCHOOL_ADMIN_DASHBOARD}
               element={<SchoolAdminDashboard />}
             />
+            <Route path={routes.PENDING_LIST} element={<PendingListPage />} />
           </Route>
         </Route>
 

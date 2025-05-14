@@ -32,8 +32,14 @@ export class EnrollmentController {
 
   @Auth(UserRole.SchoolAdmin)
   @Get('school/:id')
-  async getSchoolEnrollmentRequests(@Param('id') schoolId: string) {
-    return this.enrollmentService.getSchoolEnrollmentRequests(schoolId);
+  async getSchoolEnrollmentRequestsByStatus(
+    @Param('id') id: string,
+    @Query('status') status?: EnrollmentStatus,
+  ) {
+    return this.enrollmentService.getSchoolEnrollmentRequestsByStatus(
+      id,
+      status?.trim() as EnrollmentStatus,
+    );
   }
 
   @Auth(UserRole.SchoolAdmin, UserRole.Guest)

@@ -5,7 +5,6 @@ import { API_ENDPOINTS } from "@/constants";
 import { User } from "@/types";
 
 const useCandidatesBySchoolId = (schooldID: string) => {
-  console.log(schooldID);
   const { data, isLoading, error } = useQuery<User[], AxiosError>({
     queryKey: ["candidates-school", schooldID],
     queryFn: () =>
@@ -14,7 +13,6 @@ const useCandidatesBySchoolId = (schooldID: string) => {
     refetchOnMount: true,
   });
 
-  console.log(data);
   return {
     candidates: data || [],
     isLoading,

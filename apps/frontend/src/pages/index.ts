@@ -6,3 +6,4 @@ export * from "./Guest/GuestPage";
 export * from "./InstructorCandidateListPage/InstructorCandidateListPage";
 export * from "./WaitingForApprove/WaitingForApprovePage";
 export * from "./SchoolAdminDashboard/SchoolAdminDashboard";
+export * from "./SchoolAdminPendingList/PendingListPage";
