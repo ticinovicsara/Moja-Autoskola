@@ -12,4 +12,10 @@ export class CandidateController {
   findCandidatesInstructor(@Param('candidateId') candidateId: string) {
     return this.candidateService.getCandidatesInstructor(candidateId);
   }
+
+  @Auth(UserRole.SchoolAdmin, UserRole.Admin)
+  @Get('by-school/:schoolId')
+  async getCandidatesBySchool(@Param('schoolId') schoolId: string) {
+    return this.candidateService.getCandidatesBySchool(schoolId);
+  }
 }

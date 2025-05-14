@@ -29,6 +29,11 @@ export class SchoolController {
   findAll() {
     return this.schoolService.getAll();
   }
+  @Auth(UserRole.SchoolAdmin)
+  @Get('by-user/:userId')
+  async getSchoolByUser(@Param('userId') userId: string) {
+    return this.schoolService.getUsersSchool(userId);
+  }
 
   @Auth(UserRole.Admin)
   @Get(':id')

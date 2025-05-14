@@ -233,7 +233,7 @@ async function main() {
     data: {
       candidateId: candidate1.id,
       schoolId: school.id,
-      status: EnrollmentStatus.Pending,
+      status: EnrollmentStatus.Approved,
     },
   });
 }

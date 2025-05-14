@@ -14,9 +14,11 @@ export const API_ENDPOINTS = {
   },
   CANDIDATE: {
     INSTRUCTOR: "/candidate/instructor",
+    BY_SCHOOL: "/candidate/by-school",
   },
   SCHOOL: {
     ALL: "/school",
+    BY_USER: "/school/by-user",
   },
   ENROLLMENT: {
     CREATE: "/enrollment",

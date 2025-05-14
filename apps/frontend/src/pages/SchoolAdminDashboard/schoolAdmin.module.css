@@ -23,12 +23,12 @@
   align-items: center;
   justify-content: end;
   font-size: 24px;
+  overflow: hidden;
 }
 
 .progressBar {
   position: absolute;
   height: 100%;
-  width: 60%;
   top: 0;
   left: 0;
   border-radius: 20px;
