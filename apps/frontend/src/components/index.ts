@@ -22,3 +22,4 @@ export * from "./CandidateCard/CandidateCard";
 export * from "./CandidateList/CandidateList";
 export * from "./InputFieldWithFilter/InputFieldWithFiler";
 export * from "./ConfirmationPopup/ConfirmationPopup";
+export * from "./PaymentPopup/PaymentPopup";

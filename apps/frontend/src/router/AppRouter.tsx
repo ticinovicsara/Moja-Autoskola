@@ -16,6 +16,7 @@ import {
   WaitingForApprovePage,
   SchoolAdminDashboard,
   PendingListPage,
+  PaymentPage,
 } from "@/pages";
 import { AuthPage, Login, Register } from "@/pages/Auth";
 import InstructorCandidateListPage from "@/pages/InstructorCandidateListPage/InstructorCandidateListPage";
@@ -36,6 +37,7 @@ const AppRouter = () => {
         </Route>
 
         <Route element={<CandidateLayout />}>
+          <Route path={routes.PAYMENT} element={<PaymentPage />} />
           <Route element={<WaitingForApprove />}>
             <Route
               path={routes.WAITING_FOR_APPROVE}

@@ -1,0 +1,21 @@
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  opacity: 0.5;
+  padding: 128px 0 64px 0;
+}
+
+.detailsWrapper {
+  display: flex;
+  gap: 16px;
+}
+
+.paymentContainer {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.paymentContainer button {
+  margin: 0 auto;
+}

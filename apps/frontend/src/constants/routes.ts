@@ -12,6 +12,7 @@ const routes = {
   CANDIDATE_CALENDAR: "/candidate/calendar",
   GUEST: "/guest",
   WAITING_FOR_APPROVE: "/waiting",
+  PAYMENT: "/payment",
 
   INSTRUCTOR_CANDIDATE_LIST: "/instructor/candidate-list",
 };

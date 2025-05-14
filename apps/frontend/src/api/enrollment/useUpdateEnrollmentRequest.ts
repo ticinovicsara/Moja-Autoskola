@@ -15,11 +15,10 @@ const useUpdateEnrollmentRequest = () => {
     EnrollmentPatchRequest
   >({
     mutationFn: (updatedEnrollment) => {
-      console.log("Updated enrollment payload:", updatedEnrollment);
       return patchData(`${API_ENDPOINTS.ENROLLMENT.CRUD}`, updatedEnrollment);
     },
     onSuccess: () => {
-      toast.success("Prijava ažurirana");
+      toast.success("Zahtjev uspješno prihvaćen");
       queryClient.invalidateQueries({
         queryKey: ["school-enrollments", EnrollmentStatus.Pending],
       });
