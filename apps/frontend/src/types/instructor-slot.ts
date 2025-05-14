@@ -5,4 +5,11 @@ type InstructorSlot = {
     endTime: Date;
 };
 
-export type { InstructorSlot };
+type AddInstructorSlotReq = {
+    id: string;
+    instructorId: string;
+    startTime: Date;
+    endTime: Date;
+};
+
+export type { InstructorSlot, AddInstructorSlotReq };
