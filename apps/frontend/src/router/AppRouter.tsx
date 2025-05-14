@@ -69,6 +69,10 @@ const AppRouter = () => {
               path={routes.SCHOOL_ADMIN_DASHBOARD}
               element={<SchoolAdminDashboard />}
             />
+            <Route
+              path={routes.SCHOOL_ADMIN_ASSIGN_INSTRUCTOR}
+              element={<SchoolAdminAssignInstructorPage />}
+            />
             <Route path={routes.PENDING_LIST} element={<PendingListPage />} />
           </Route>
           <Route
@@ -91,11 +95,6 @@ const AppRouter = () => {
             element={<InstructorCalendarPage />}
           />
         </Route>
-
-        <Route
-          path={routes.SCHOOL_ADMIN_ASSIGN_INSTRUCTOR}
-          element={<SchoolAdminAssignInstructorPage />}
-        />
       </Routes>
     </BrowserRouter>
   );
