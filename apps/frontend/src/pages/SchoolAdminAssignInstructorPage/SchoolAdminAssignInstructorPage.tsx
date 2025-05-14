@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./instructorCandidateList.module.css";
+import styles from "../InstructorCandidateListPage/instructorCandidateList.module.css";
 import { ArrowBack } from "@/components";
 import { InputFieldWithFilter } from "@/components";
 import CandidateList from "@/components/CandidateList/CandidateList";

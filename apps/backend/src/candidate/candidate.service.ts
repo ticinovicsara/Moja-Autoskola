@@ -2,6 +2,7 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { UserResponseDto } from '@/user/dto/user-response.dto';
 import { UserService } from '@/user/user.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { UserRole } from '@prisma/client';
 
 @Injectable()
 export class CandidateService {
@@ -26,5 +27,16 @@ export class CandidateService {
     }
 
     return UserResponseDto.fromPrisma(candidateInstructor.instructor);
+  }
+
+  async getCandidatesWithoutInstructor(schooladminId: string) {
+    return this.prisma.user.findMany({
+      where: {
+        role: UserRole.Candidate,
+        instructorCandidate: {
+          none: {},
+        },
+      },
+    });
   }
 }
