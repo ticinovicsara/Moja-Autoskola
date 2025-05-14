@@ -41,6 +41,7 @@ export class CandidateService {
       },
     });
   }
+
   async getCandidatesBySchool(schoolId: string) {
     await this.schoolService.getById(schoolId);
 

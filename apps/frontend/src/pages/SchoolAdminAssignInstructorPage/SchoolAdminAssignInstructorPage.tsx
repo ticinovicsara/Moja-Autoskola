@@ -1,81 +1,16 @@
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import styles from "../InstructorCandidateListPage/instructorCandidateList.module.css";
 import s from "./schoolAdminList.module.css";
 import { ArrowBack, ConfirmationPopup } from "@/components";
-import { InputFieldWithFilter } from "@/components";
-import CandidateList from "@/components/CandidateList/CandidateList";
 import { useAssignInstructor, useAuth } from "@/hooks";
-import { User, UserRoles } from "@/types";
+import { User } from "@/types";
 import ChooseInstructorMenu from "@/components/ChooseInstructorMenu/ChooseInstructorMenu";
-
-const mockCandidates: User[] = [
-  {
-    id: "1",
-    firstName: "Iva",
-    lastName: "Ivić",
-    phoneNumber: "0911111111",
-    email: "iva@example.com",
-    dateOfBirth: new Date("1990-01-01"),
-    oib: "1234567890123",
-    role: UserRoles.Candidate,
-  },
-  {
-    id: "2",
-    firstName: "Marko",
-    lastName: "Marić",
-    phoneNumber: "0922222222",
-    email: "marko@example.com",
-    dateOfBirth: new Date("1990-01-01"),
-    oib: "9876543210987",
-    role: UserRoles.Candidate,
-  },
-  {
-    id: "3",
-    firstName: "Ana",
-    lastName: "Anić",
-    phoneNumber: "0933333333",
-    email: "ana@example.com",
-    dateOfBirth: new Date("1990-01-01"),
-    oib: "5678901234567",
-    role: UserRoles.Candidate,
-  },
-];
-
-const mockInstructors: User[] = [
-  {
-    id: "a",
-    firstName: "Petar",
-    lastName: "Petrović",
-    phoneNumber: "0944444444",
-    email: "petar@example.com",
-    dateOfBirth: new Date("1990-01-01"),
-    oib: "5555555555555",
-    role: UserRoles.Instructor,
-  },
-  {
-    id: "b",
-    firstName: "Lana",
-    lastName: "Lanić",
-    phoneNumber: "0955555555",
-    email: "lana@example.com",
-    dateOfBirth: new Date("1990-01-01"),
-    oib: "6666666666666",
-    role: UserRoles.Instructor,
-  },
-  {
-    id: "c",
-    firstName: "Karlo",
-    lastName: "Karlić",
-    phoneNumber: "0966666666",
-    email: "karlo@example.com",
-    dateOfBirth: new Date("1990-01-01"),
-    oib: "7777777777777",
-    role: UserRoles.Instructor,
-  },
-];
+import { useCandidatesBySchoolId, useInstructorsBySchoolId } from "@/api";
+import useSchoolByUserId from "@/api/school/useSchoolByUserId";
+import toast from "react-hot-toast";
+import CandidateSearch from "@/components/CandidateSearch/CandidateSearch";
 
 const SchoolAdminAssignInstructorPage = () => {
-  const { user } = useAuth();
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -84,43 +19,93 @@ const SchoolAdminAssignInstructorPage = () => {
     null
   );
 
-  const { assign, isLoading, error, success } = useAssignInstructor();
+  const { user } = useAuth();
 
-  if (!user) return <p>Učitavanje korisnika...</p>;
+  const { school, isLoading: isLoadingSchool } = useSchoolByUserId(
+    user?.id || ""
+  );
 
-  const filteredCandidates = searchTerm
-    ? mockCandidates.filter((candidate) => {
-        const fullName =
-          `${candidate.firstName} ${candidate.lastName}`.toLowerCase();
-        return fullName.includes(searchTerm.toLowerCase());
-      })
-    : mockCandidates;
+  const schoolId = school?.id || "";
 
-  const openInstructorModal = (candidate: User) => {
+  const { candidates, isLoading: isLoadingCandidates } =
+    useCandidatesBySchoolId(schoolId);
+
+  const { instructors, isLoading: isLoadingInstructors } =
+    useInstructorsBySchoolId(schoolId);
+
+  const {
+    assign,
+    isLoading: isAssignLoading,
+    error,
+    success,
+  } = useAssignInstructor();
+
+  const filteredCandidates = useMemo(() => {
+    if (!searchTerm) return candidates;
+    return candidates.filter((candidate) => {
+      const fullName =
+        `${candidate.firstName} ${candidate.lastName}`.toLowerCase();
+      return fullName.includes(searchTerm.toLowerCase());
+    });
+  }, [candidates, searchTerm]);
+
+  const isLoading =
+    isLoadingSchool || isLoadingCandidates || isLoadingInstructors || !user;
+
+  const openInstructorModal = useCallback((candidate: User) => {
     setSelectedCandidate(candidate);
     setIsModalOpen(true);
-  };
+  }, []);
 
-  const handleInstructorSelect = (instructor: User) => {
+  const handleInstructorSelect = useCallback((instructor: User) => {
     setSelectedInstructor(instructor);
     setIsPopupOpen(true);
-  };
+  }, []);
 
-  const handleConfirmAssignment = async () => {
+  const handleConfirmAssignment = useCallback(async () => {
     if (!selectedCandidate || !selectedInstructor) return;
+
+    // Provjeri da li je instruktor već dodijeljen nekom kandidatu
+    const isInstructorAlreadyAssigned = candidates.some(
+      (candidate) => candidate.assignedInstructorId === selectedInstructor.id
+    );
+
+    if (isInstructorAlreadyAssigned) {
+      toast.error("Instruktor je već dodijeljen drugom kandidatu.");
+      setIsPopupOpen(false);
+      return;
+    }
+
     await assign(selectedCandidate.id, selectedInstructor.id);
     setIsPopupOpen(false);
-    if (!error) {
+  }, [selectedCandidate, selectedInstructor, assign, candidates]);
+
+  const closePopup = useCallback(() => {
+    setIsPopupOpen(false);
+  }, []);
+
+  const handleSearchChange = useCallback((value: any) => {
+    setSearchTerm(value);
+  }, []);
+
+  const toggleChooseInstructorMenu = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
+
+  useEffect(() => {
+    if (success) {
+      toast.success("Instruktor uspješno dodijeljen!");
       setIsModalOpen(false);
     }
-  };
 
-  const closePopup = () => {
-    setIsPopupOpen(false);
-  };
+    if (error) {
+      toast.error(error || "Instruktor je već dodijeljen kandidatu!.");
+    }
+  }, [success, error]);
 
-  if (!selectedCandidate || !selectedInstructor)
-    return <div>Nešto je pošlo po zlu</div>;
+  if (isLoading) {
+    return <p>Učitavanje podataka...</p>;
+  }
 
   return (
     <div className={s.container}>
@@ -129,40 +114,26 @@ const SchoolAdminAssignInstructorPage = () => {
         <h1 className={styles["page-title"]}>LISTA KANDIDATA</h1>
       </div>
 
-      <InputFieldWithFilter
+      <CandidateSearch
         searchTerm={searchTerm}
-        onSearchChange={setSearchTerm}
+        onSearchChange={handleSearchChange}
+        candidates={filteredCandidates}
+        onCandidateSelect={openInstructorModal}
       />
-
-      {filteredCandidates.length > 0 ? (
-        <CandidateList
-          candidates={filteredCandidates}
-          onClick={openInstructorModal}
-        />
-      ) : (
-        <p className={styles.message}>
-          Nema kandidata koji odgovaraju pretrazi.
-        </p>
-      )}
 
       {isModalOpen && selectedCandidate && (
         <ChooseInstructorMenu
-          toggleChooseInstructorMenu={() => setIsModalOpen(false)}
-          candidate={selectedCandidate}
-          instructors={mockInstructors}
+          toggleChooseInstructorMenu={toggleChooseInstructorMenu}
+          instructors={instructors}
           onSelectInstructor={handleInstructorSelect}
         />
       )}
 
-      {isLoading && <p>Dodjeljivanje u tijeku...</p>}
-      {error && <p className={styles.error}>{error}</p>}
-      {success && (
-        <p className={styles.success}>Instruktor uspješno dodijeljen.</p>
-      )}
+      {isAssignLoading && <p>Dodjeljivanje u tijeku...</p>}
 
       {isPopupOpen && selectedInstructor && (
         <ConfirmationPopup
-          prompt={`Dodijeli instruktora  ${selectedInstructor.firstName} ${selectedInstructor.lastName} kandidatu ${selectedCandidate.firstName} ${selectedCandidate.lastName}?`}
+          prompt={`Dodijeli instruktora ${selectedInstructor.firstName} ${selectedInstructor.lastName} kandidatu ${selectedCandidate?.firstName} ${selectedCandidate?.lastName}?`}
           handleConfirm={handleConfirmAssignment}
           togglePopup={closePopup}
         />

@@ -4,20 +4,20 @@ import { getData } from "@/utils";
 import { API_ENDPOINTS } from "@/constants";
 import { User } from "@/types";
 
-const useCandidatesBySchoolId = (schooldId: string) => {
+const useInstructorsBySchoolId = (schooldID: string) => {
   const { data, isLoading, error } = useQuery<User[], AxiosError>({
-    queryKey: ["candidates-school", schooldId],
+    queryKey: ["instructors-school", schooldID],
     queryFn: () =>
-      getData<User[]>(`${API_ENDPOINTS.CANDIDATE.BY_SCHOOL}/${schooldId}`),
-    enabled: !!schooldId,
+      getData<User[]>(`${API_ENDPOINTS.INSTRUCTOR.BY_SCHOOL}/${schooldID}`),
+    enabled: !!schooldID,
     refetchOnMount: true,
   });
 
   return {
-    candidates: data || [],
+    instructors: data || [],
     isLoading,
     error,
   };
 };
 
-export { useCandidatesBySchoolId };
+export { useInstructorsBySchoolId };

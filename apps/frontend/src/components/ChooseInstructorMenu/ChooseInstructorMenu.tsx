@@ -4,23 +4,19 @@ import { Cross } from "@/assets/svgs";
 import CandidateCard from "../CandidateCard/CandidateCard";
 import { User } from "@/types";
 import { InputFieldWithFilter } from "../InputFieldWithFilter/InputFieldWithFiler";
-import { useAssignInstructor } from "@/hooks";
 
 interface ChooseInstructorMenuProps {
   toggleChooseInstructorMenu: () => void;
-  candidate: User;
   instructors: User[];
   onSelectInstructor: (instructor: User) => void;
 }
 
 const ChooseInstructorMenu: FC<ChooseInstructorMenuProps> = ({
   toggleChooseInstructorMenu,
-  candidate,
   instructors,
   onSelectInstructor,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const { assign, isLoading, error, success } = useAssignInstructor();
 
   const filteredInstructors = instructors.filter((instructor) => {
     const fullName =

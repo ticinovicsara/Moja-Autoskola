@@ -31,3 +31,4 @@ export * from "./CandidateCard/CandidateCard";
 export { default as ChooseInstructorMenu } from "./ChooseInstructorMenu/ChooseInstructorMenu";
 export * from "./ConfirmationPopup/ConfirmationPopup";
 export * from "./PaymentPopup/PaymentPopup";
+export * from "./CandidateSearch/CandidateSearch";

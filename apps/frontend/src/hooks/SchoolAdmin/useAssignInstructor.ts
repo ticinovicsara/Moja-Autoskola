@@ -11,12 +11,16 @@ export const useAssignInstructor = () => {
     setError(null);
     setSuccess(false);
 
+    console.log("IDS:", candidateId, instructorId);
+
     try {
       await assignInstructorToCandidate(candidateId, instructorId);
       setSuccess(true);
     } catch (err) {
       console.error("Greška pri dodjeljivanju instruktora:", err);
-      setError("Došlo je do greške. Pokušajte ponovo.");
+      setError(
+        (err as any)?.response?.data?.message || "Greška prilikom dodjele."
+      );
     } finally {
       setIsLoading(false);
     }
