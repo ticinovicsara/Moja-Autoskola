@@ -35,6 +35,7 @@ const ChooseInstructorMenu: FC<ChooseInstructorMenuProps> = ({
         <InputFieldWithFilter
           searchTerm={searchTerm}
           onSearchChange={setSearchTerm}
+          searchTitle="Pretraži instruktore"
         />
 
         <div className={styles.slotList}>

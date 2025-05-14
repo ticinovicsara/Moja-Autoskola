@@ -28,6 +28,7 @@ const CandidateSearch = ({
       <InputFieldWithFilter
         searchTerm={searchTerm}
         onSearchChange={onSearchChange}
+        searchTitle="Pretraži kandidate"
       />
       {filteredCandidates.length > 0 ? (
         <CandidateList
