@@ -40,7 +40,6 @@ export const InstructorDashboard = () => {
           <ArrowCard
             title="REZERVIRAJ TERMIN VOŽNJE"
             className={`${styles["arrow-card"]} ${styles["card-red"]}`}
-            linkTo=""
           />
           <ArrowCard
             title="POGLEDAJ LISTU KANDIDATA"

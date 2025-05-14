@@ -3,14 +3,17 @@ import styles from "./candidateProgress.module.css";
 import ProgressBar from "@/components/Cards/ProgressCard/ProgressBar/ProgressBar";
 import { useState } from "react";
 import { useAuth, useCandidateProgressData } from "@/hooks";
+import { useNavigate } from "react-router-dom";
 
 const CandidateProgressPage = () => {
   const { user } = useAuth();
   const [isVisible, setIsVisible] = useState(true);
   const { data, loading, error } = useCandidateProgressData(user?.id ?? "");
 
+  const navigate = useNavigate();
   const closePage = () => {
     setIsVisible(false);
+    navigate(-1);
   };
 
   if (!isVisible) {

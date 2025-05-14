@@ -5,7 +5,7 @@ import { SessionType, UserRoles } from "@/types";
 import { useAuth } from "@/hooks";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import styles from "./scheduleCard.module.css";
-import { ArrowBack } from "@/components/ArrowBack/ArrowBack";
+import { Arrow2 } from "@/assets/svgs";
 
 interface ScheduleCardProps {
   activity: string;
@@ -42,7 +42,7 @@ export const ScheduleCard: React.FC<ScheduleCardProps> = ({
       <div className={styles["schedule-content"]}>
         <div className={styles["schedule-title"]}>
           <div>Sljedeće na redu u kalendaru</div>
-          <ArrowBack rotate />
+          <img src={Arrow2} />
         </div>
         <div className={styles["schedule-body"]}>
           <div className={styles["schedule-activity"]}>

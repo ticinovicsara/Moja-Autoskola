@@ -12,7 +12,6 @@ import {
 import { Arrow2, Cross } from "@/assets/svgs";
 import { usePostDrivingSession } from "@/api";
 import { useAuth } from "@/hooks";
-import { ArrowBack } from "@/assets/svgs";
 
 interface InstructorSlotProps {
   slot: InstructorSlotType;

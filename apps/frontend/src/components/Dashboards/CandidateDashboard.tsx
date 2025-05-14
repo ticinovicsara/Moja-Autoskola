@@ -8,12 +8,13 @@ import {
 } from "../Cards";
 import {
   useAuth,
-  useCandidateProgress,
+  useCandidateProgressData,
   useGetInstructor,
   useNextSession,
 } from "@/hooks";
 import { formatSessionTime } from "@/utils/sessionsUtil";
 import ChooseSessionMenu from "../ChooseSessionMenu/ChooseSessionMenu";
+import { calculateProgress } from "@/utils";
 
 export const CandidateDashboard = () => {
   const { user } = useAuth();
@@ -21,10 +22,10 @@ export const CandidateDashboard = () => {
   const [isChooseSessionMenuOpen, setIsChooseSessionMenuOpen] = useState(false);
 
   const {
-    progress,
+    data,
     loading: loadingProgress,
     error: progressError,
-  } = useCandidateProgress(userId);
+  } = useCandidateProgressData(userId);
 
   const { activity, startTime } = useNextSession(userId);
   const instructor = useGetInstructor(userId);
@@ -43,30 +44,33 @@ export const CandidateDashboard = () => {
     };
   }, [instructor, userId]);
 
-  const progressMessage = loadingProgress
-    ? "Učitavanje napretka..."
-    : progressError
-      ? typeof progressError === "string"
+  const progressMessage = useMemo(() => {
+    if (loadingProgress) return "Učitavanje napretka...";
+    if (progressError)
+      return typeof progressError === "string"
         ? progressError
         : progressError instanceof Error
           ? progressError.message
-          : String(progressError)
-      : "";
+          : String(progressError);
+    return "";
+  }, [loadingProgress, progressError]);
 
-  let scheduleContent = "Nema zakazanih aktivnosti";
+  const progress = useMemo(() => {
+    if (!data) return 0;
+    const { passedLessons, passedTests } = data;
+    return calculateProgress(passedLessons, passedTests);
+  }, [data]);
 
-  if (activity) {
+  const scheduleContent = useMemo(() => {
     switch (activity) {
       case "Theory":
-        scheduleContent = "Teorija";
-        break;
+        return "Teorija";
       case "Driving":
-        scheduleContent = "Vožnja";
-        break;
+        return "Vožnja";
       default:
-        scheduleContent = scheduleContent;
+        return "Nema zakazanih aktivnosti";
     }
-  }
+  }, [activity]);
 
   const scheduleTime = useMemo(() => {
     return startTime

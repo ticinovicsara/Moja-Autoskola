@@ -2,7 +2,7 @@ import styles from "./progressBar.module.css";
 
 type ProgressBarProps = {
   progress: number;
-  total: number;
+  total?: number;
   colorClass?: string;
   barClass?: string;
   borderColorClass?: string;
