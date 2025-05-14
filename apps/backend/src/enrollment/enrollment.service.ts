@@ -72,12 +72,6 @@ export class EnrollmentService {
       },
     });
 
-    if (!requests.length) {
-      throw new NotFoundException(
-        'No enrollment requests found for this school.',
-      );
-    }
-
     return requests.map((request) =>
       EnrollmentRequestEntity.fromPrisma(request),
     );

@@ -6,7 +6,7 @@ import { EnrollmentRequest } from "@/types/enrollment";
 import { EnrollmentStatus } from "@/enums";
 
 const useSchoolEnrollments = (schoolId: string, status?: EnrollmentStatus) => {
-  const queryKey = ["school-enrollments", schoolId, status];
+  const queryKey = ["school-enrollments", status];
 
   const queryFn = () => {
     const url =
@@ -21,7 +21,7 @@ const useSchoolEnrollments = (schoolId: string, status?: EnrollmentStatus) => {
     queryKey,
     queryFn,
     enabled: !!schoolId,
-    refetchOnMount: true,
+    refetchOnMount: false,
   });
 
   return {

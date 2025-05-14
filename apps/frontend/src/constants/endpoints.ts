@@ -22,7 +22,7 @@ export const API_ENDPOINTS = {
   },
   ENROLLMENT: {
     SCHOOL: "/enrollment/school",
-    CREATE: "/enrollment",
+    CRUD: "/enrollment",
     CANDIDATE: "/enrollment/candidate",
   },
   INSTRUCTOR_CANDIDATES: "/instructor/candidates",

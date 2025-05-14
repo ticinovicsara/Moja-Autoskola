@@ -1,0 +1,35 @@
+import { API_ENDPOINTS } from "@/constants";
+import { EnrollmentStatus } from "@/enums";
+import { EnrollmentPatchRequest } from "@/types/enrollmentPatchRequest";
+import { patchData } from "@/utils";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+import toast from "react-hot-toast";
+
+const useUpdateEnrollmentRequest = () => {
+  const queryClient = useQueryClient();
+
+  const { mutate, isPending } = useMutation<
+    any,
+    AxiosError,
+    EnrollmentPatchRequest
+  >({
+    mutationFn: (updatedEnrollment) => {
+      console.log("Updated enrollment payload:", updatedEnrollment);
+      return patchData(`${API_ENDPOINTS.ENROLLMENT.CRUD}`, updatedEnrollment);
+    },
+    onSuccess: () => {
+      toast.success("Prijava ažurirana");
+      queryClient.invalidateQueries({
+        queryKey: ["school-enrollments", EnrollmentStatus.Pending],
+      });
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  return { updateEnrollmentRequest: mutate, isPending };
+};
+
+export default useUpdateEnrollmentRequest;

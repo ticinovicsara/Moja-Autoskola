@@ -16,7 +16,7 @@ const useSendEnrollmentRequest = () => {
     EnrollmentPostRequest
   >({
     mutationFn: (newEnrollment: EnrollmentPostRequest) =>
-      postData(API_ENDPOINTS.ENROLLMENT.CREATE, newEnrollment),
+      postData(API_ENDPOINTS.ENROLLMENT.CRUD, newEnrollment),
     onSuccess: () => {
       toast.success("Prijava uspješno poslana");
       queryClient.invalidateQueries({
