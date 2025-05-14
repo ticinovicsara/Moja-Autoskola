@@ -12,7 +12,7 @@ import {
 import { Cross } from "@/assets/svgs";
 import { usePostDrivingSession } from "@/api";
 import { useAuth } from "@/hooks";
-import { Arrow } from "@/assets/svgs";
+import { ArrowBack } from "@/assets/svgs";
 
 interface InstructorSlotProps {
   slot: InstructorSlotType;
@@ -49,7 +49,7 @@ const InstructorSlot: FC<InstructorSlotProps> = ({ slot }) => {
           {getFormattedTime(slot.startTime)} - {getFormattedTime(slot.endTime)}
         </p>{" "}
       </div>
-      <img src={Arrow} alt="arrow" onClick={toggleConfirmPopup} />
+      <img src={ArrowBack} alt="arrow" onClick={toggleConfirmPopup} />
       {isConfirmPopupOpen && (
         <div className={styles.confirmPopupContainer}>
           <div className={`${styles.confirmPopup} container`}>

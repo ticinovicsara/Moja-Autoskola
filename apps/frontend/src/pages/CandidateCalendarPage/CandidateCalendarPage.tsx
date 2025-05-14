@@ -1,8 +1,8 @@
 import {
-    ArrowBack,
-    Calendar,
-    ChooseSessionMenu,
-    SessionList,
+  ArrowBack,
+  Calendar,
+  ChooseSessionMenu,
+  SessionList,
 } from "@/components";
 import styles from "./CandidateCalendarPage.module.css";
 import { Plus } from "@/assets/svgs";
@@ -11,65 +11,58 @@ import { getIdFromToken, getUpcomingMonday } from "@/utils";
 import { useState } from "react";
 
 const CandidateCalendarPage = () => {
-    const { sessions, isLoading, error } = useCandidateSessions(
-        getIdFromToken() ?? ""
-    );
-    const [isChooseSessionMenuOpen, setIsChooseSessionMenuOpen] =
-        useState(false);
+  const { sessions, isLoading, error } = useCandidateSessions(
+    getIdFromToken() ?? ""
+  );
+  const [isChooseSessionMenuOpen, setIsChooseSessionMenuOpen] = useState(false);
 
-    const upcomingSessions = sessions
-        ?.filter((session) => {
-            const now = new Date();
-            const monday = getUpcomingMonday(now);
+  const upcomingSessions = sessions
+    ?.filter((session) => {
+      const now = new Date();
+      const monday = getUpcomingMonday(now);
 
-            return session.startTime >= now && session.startTime <= monday;
-        })
-        ?.sort((a, b) => a.startTime.getTime() - b.startTime.getTime());
+      return session.startTime >= now && session.startTime <= monday;
+    })
+    ?.sort((a, b) => a.startTime.getTime() - b.startTime.getTime());
 
-    const toggleChooseSessionMenu = () => {
-        setIsChooseSessionMenuOpen((prev) => !prev);
-    };
+  const toggleChooseSessionMenu = () => {
+    setIsChooseSessionMenuOpen((prev) => !prev);
+  };
 
-    return (
-        <div className={styles.page}>
-            {isLoading ? (
-                <p>Učitavanje...</p>
+  return (
+    <div className={styles.page}>
+      {isLoading ? (
+        <p>Učitavanje...</p>
+      ) : (
+        <>
+          <div className={`${styles.calendarHeader} container`}>
+            <ArrowBack />
+            <h2>KALENDAR</h2>
+          </div>
+          <Calendar sessions={sessions} />{" "}
+          <div className={`${styles.upcomingContainer} container`}>
+            <div className={styles.upcomingHeader}>
+              <h3>Nadolazeći termini ovaj tjedan</h3>
+              <img src={Plus} alt="plus" onClick={toggleChooseSessionMenu} />
+            </div>
+            {upcomingSessions.length > 0 ? (
+              <SessionList sessions={upcomingSessions} />
             ) : (
-                <>
-                    <div className={`${styles.calendarHeader} container`}>
-                        <ArrowBack />
-                        <h2>KALENDAR</h2>
-                    </div>
-                    <Calendar sessions={sessions} />{" "}
-                    <div className={`${styles.upcomingContainer} container`}>
-                        <div className={styles.upcomingHeader}>
-                            <h3>Nadolazeći termini ovaj tjedan</h3>
-                            <img
-                                src={Plus}
-                                alt="plus"
-                                onClick={toggleChooseSessionMenu}
-                            />
-                        </div>
-                        {upcomingSessions.length > 0 ? (
-                            <SessionList sessions={upcomingSessions} />
-                        ) : (
-                            <p>Nemaš nadolazećih termina ovaj tjedan!</p>
-                        )}
-                    </div>
-                </>
+              <p>Nemaš nadolazećih termina ovaj tjedan!</p>
             )}
-            {error && (
-                <p className="errorMessage">
-                    <p>Došlo je do pogreške prilikom učitavanja sesija.</p>
-                </p>
-            )}
-            {isChooseSessionMenuOpen && (
-                <ChooseSessionMenu
-                    toggleChooseSessionMenu={toggleChooseSessionMenu}
-                />
-            )}
-        </div>
-    );
+          </div>
+        </>
+      )}
+      {error && (
+        <p className="errorMessage">
+          <p>Došlo je do pogreške prilikom učitavanja sesija.</p>
+        </p>
+      )}
+      {isChooseSessionMenuOpen && (
+        <ChooseSessionMenu toggleChooseSessionMenu={toggleChooseSessionMenu} />
+      )}
+    </div>
+  );
 };
 
 export default CandidateCalendarPage;
