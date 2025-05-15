@@ -61,14 +61,4 @@ export const menuItems: MenuItem[] = [
     to: routes.PENDING_LIST,
     roles: [UserRoles.Admin, UserRoles.SchoolAdmin],
   },
-  {
-    label: "Postavke profila",
-    to: routes.HOME, //treba dodat profile settings page
-    roles: [
-      UserRoles.Candidate,
-      UserRoles.Instructor,
-      UserRoles.Admin,
-      UserRoles.SchoolAdmin,
-    ],
-  },
 ];
