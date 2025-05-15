@@ -1,10 +1,9 @@
 import { useState } from "react";
 import styles from "./instructorCandidateList.module.css";
 import { ArrowBack } from "@/components";
-import { InputFieldWithFilter } from "@/components";
-import CandidateList from "@/components/CandidateList/CandidateList";
 import { useAuth } from "@/hooks";
 import { useInstructorCandidates } from "@/api";
+import CandidateSearch from "@/components/CandidateSearch/CandidateSearch";
 
 const InstructorCandidateListPage = () => {
   const { user } = useAuth();
@@ -35,18 +34,12 @@ const InstructorCandidateListPage = () => {
         <h1 className={styles["page-title"]}>LISTA KANDIDATA</h1>
       </div>
 
-      <InputFieldWithFilter
+      <CandidateSearch
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
+        candidates={filteredCandidates}
+        returnMessage="Nema kandidata koji odgovaraju pretrazi"
       />
-
-      {filteredCandidates.length > 0 ? (
-        <CandidateList candidates={filteredCandidates} />
-      ) : (
-        <p className={styles["message"]}>
-          Nema kandidata koji odgovaraju pretrazi.
-        </p>
-      )}
     </div>
   );
 };

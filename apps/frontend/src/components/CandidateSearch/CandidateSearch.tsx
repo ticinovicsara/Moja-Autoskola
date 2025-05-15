@@ -6,7 +6,8 @@ interface CandidateSearchProps {
   searchTerm: string;
   onSearchChange: (value: string) => void;
   candidates: User[];
-  onCandidateSelect: (candidate: User) => void;
+  onCandidateSelect?: (candidate: User) => void;
+  returnMessage: string;
 }
 
 const CandidateSearch = ({
@@ -14,6 +15,7 @@ const CandidateSearch = ({
   onSearchChange,
   candidates,
   onCandidateSelect,
+  returnMessage,
 }: CandidateSearchProps) => {
   const filteredCandidates = searchTerm
     ? candidates.filter((candidate) => {
@@ -36,7 +38,7 @@ const CandidateSearch = ({
           onClick={onCandidateSelect}
         />
       ) : (
-        <p>Nema kandidata koji odgovaraju pretrazi.</p>
+        <p style={{ marginLeft: "2em" }}>{returnMessage}</p>
       )}
     </div>
   );

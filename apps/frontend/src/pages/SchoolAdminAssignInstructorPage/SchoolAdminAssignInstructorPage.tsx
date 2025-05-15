@@ -30,9 +30,6 @@ const SchoolAdminAssignInstructorPage = () => {
 
   const schoolId = school?.id || "";
 
-  console.log("SCHOOLD:", schoolId);
-  console.log("TOKEN: ", localStorage.getItem("token"));
-
   const { candidates, isLoading: isLoadingCandidates } =
     useCandidatesWithoutInstructor(schoolId);
 
@@ -113,6 +110,7 @@ const SchoolAdminAssignInstructorPage = () => {
         onSearchChange={handleSearchChange}
         candidates={filteredCandidates}
         onCandidateSelect={openInstructorModal}
+        returnMessage="Svi kandidati imaju svog instruktora!"
       />
 
       {isModalOpen && selectedCandidate && (
