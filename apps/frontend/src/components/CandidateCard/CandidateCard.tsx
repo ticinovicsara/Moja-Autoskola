@@ -1,24 +1,24 @@
-import styles from "./candidateCard.module.css";
+import styles from "./CandidateCard.module.css";
 import { Profile } from "@/assets/svgs";
 
 interface Props {
-  firstName: string;
-  lastName: string;
+    firstName: string;
+    lastName: string;
 }
 
 const CandidateCard = ({ firstName, lastName }: Props) => {
-  const fullName = `${firstName} ${lastName}`;
-  return (
-    <div className={styles["candidate-card"]}>
-      <img
-        src={Profile}
-        alt={fullName}
-        className={styles["candidate-avatar"]}
-      />
+    const fullName = `${firstName} ${lastName}`;
+    return (
+        <div className={styles["candidate-card"]}>
+            <img
+                src={Profile}
+                alt={fullName}
+                className={styles["candidate-avatar"]}
+            />
 
-      <div className={styles["candidate-name"]}>{fullName}</div>
-    </div>
-  );
+            <div className={styles["candidate-name"]}>{fullName}</div>
+        </div>
+    );
 };
 
 export default CandidateCard;

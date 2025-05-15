@@ -1,5 +1,5 @@
 import { getDayFromDate, getFormattedTime, getMonthFromDate } from "@/utils";
-import styles from "./confirmation.module.css";
+import styles from "./Confirmation.module.css";
 import { Cross } from "@/assets/svgs";
 
 type ConfirmationProps = {

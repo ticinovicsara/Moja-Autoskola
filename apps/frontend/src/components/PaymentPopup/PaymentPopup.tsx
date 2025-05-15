@@ -1,22 +1,22 @@
-import c from "./paymentPopup.module.css";
+import c from "./PaymentPopup.module.css";
 
 type PaymentPageProps = {
-  action: string;
-  description: string;
-  actionColor: string;
+    action: string;
+    description: string;
+    actionColor: string;
 };
 
 export const PaymentPopup = ({
-  action,
-  actionColor,
-  description,
+    action,
+    actionColor,
+    description,
 }: PaymentPageProps) => {
-  return (
-    <div className={c.popup}>
-      <p className={c.action} style={{ color: actionColor }}>
-        {action}
-      </p>
-      <p className={c.description}>{description}</p>
-    </div>
-  );
+    return (
+        <div className={c.popup}>
+            <p className={c.action} style={{ color: actionColor }}>
+                {action}
+            </p>
+            <p className={c.description}>{description}</p>
+        </div>
+    );
 };
