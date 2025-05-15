@@ -15,6 +15,7 @@ import {
 import { formatSessionTime } from "@/utils/sessionsUtil";
 import ChooseSessionMenu from "../ChooseSessionMenu/ChooseSessionMenu";
 import { calculateProgress } from "@/utils";
+import c from "./dashboard.module.css";
 
 export const CandidateDashboard = () => {
   const { user } = useAuth();
@@ -31,7 +32,7 @@ export const CandidateDashboard = () => {
   const { instructor } = useGetInstructor(userId);
 
   const instructorInfo = useMemo(() => {
-    if (!instructor) {
+    if (!instructor || !instructor.firstName) {
       return {
         name: "",
         phone: "Još nemaš instruktora!",
@@ -83,7 +84,7 @@ export const CandidateDashboard = () => {
   };
 
   return (
-    <>
+    <div className={`container ${c.dashWrapp}`}>
       <DashboardLayout
         top={
           progressMessage ? (
@@ -93,13 +94,7 @@ export const CandidateDashboard = () => {
           )
         }
         middle={
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "1em",
-            }}
-          >
+          <div className={c.gridWrapp}>
             <ArrowCard
               title="ODABERI TERMIN VOŽNJE"
               onClick={toggleChooseSessionMenu}
@@ -117,6 +112,6 @@ export const CandidateDashboard = () => {
       {isChooseSessionMenuOpen && (
         <ChooseSessionMenu toggleChooseSessionMenu={toggleChooseSessionMenu} />
       )}
-    </>
+    </div>
   );
 };

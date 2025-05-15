@@ -8,7 +8,7 @@ export const GreetingComponent: React.FC = () => {
   const name = user?.firstName;
 
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} container `}>
       <p className={styles.greetingText}>Pozdrav,</p>
       <h2 className={styles.name}>{name?.toUpperCase()}</h2>
     </div>

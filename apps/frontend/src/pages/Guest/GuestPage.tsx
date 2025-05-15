@@ -31,6 +31,7 @@ export const GuestPage = () => {
 
   return (
     <div className={`${c.guestWrapper} container`}>
+      <h2>Pronađi odgovarajuću autoškolu</h2>
       <FilterSchools
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}

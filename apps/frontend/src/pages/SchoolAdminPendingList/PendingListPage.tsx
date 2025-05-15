@@ -26,9 +26,11 @@ export const PendingListPage = () => {
       {enrollments.length === 0 ? (
         <h4>Nema zahtjeva za upis</h4>
       ) : (
-        enrollments.map((e) => (
-          <PendingCandidateCard key={e.requestId} enrollment={e} />
-        ))
+        <div>
+          {enrollments.map((e) => (
+            <PendingCandidateCard key={e.requestId} enrollment={e} />
+          ))}
+        </div>
       )}
     </div>
   );

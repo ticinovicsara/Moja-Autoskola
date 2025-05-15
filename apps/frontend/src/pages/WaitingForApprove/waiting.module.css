@@ -7,6 +7,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   height: calc(100vh - 102px);
+  padding-top: 102px;
 }
 
 .feedback {

@@ -1,6 +1,6 @@
 .search-container {
-  padding: 20px;
   position: relative;
+  margin-bottom: 32px;
 }
 
 .search-box {
@@ -11,8 +11,8 @@
 
 .search-icon {
   position: absolute;
-  left: 2em;
-  top: 38%;
+  left: 1em;
+  top: 30%;
   pointer-events: none;
   color: #888;
   font-size: 16px;
