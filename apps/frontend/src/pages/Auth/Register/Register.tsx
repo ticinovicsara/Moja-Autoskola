@@ -101,6 +101,7 @@ export const Register = () => {
         if (data.access_token) {
           login(data.access_token);
           navigate(routes.HOME);
+          toast.success("Uspješna registracija!");
         }
       } catch (error: any) {
         console.error("Error while registering: ", error);

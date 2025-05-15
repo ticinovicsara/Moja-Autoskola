@@ -100,10 +100,10 @@ const SchoolAdminAssignInstructorPage = () => {
   }
 
   return (
-    <div className={s.container}>
+    <div className={`${s.container} container`}>
       <div className={styles["navigation-container"]}>
         <ArrowBack />
-        <h1 className={styles["page-title"]}>LISTA KANDIDATA</h1>
+        <h2 className={styles["page-title"]}>LISTA KANDIDATA</h2>
       </div>
 
       <CandidateSearch

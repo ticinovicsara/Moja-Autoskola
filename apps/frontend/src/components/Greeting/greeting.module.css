@@ -1,7 +1,6 @@
 .wrapper {
-  margin: 0.5em;
-  margin-top: 2em;
-  padding: 5%;
+  padding-top: 147px;
+  padding-bottom: 52px;
   color: var(--asphalt-border);
   font-family: "Chillax", sans-serif;
 }

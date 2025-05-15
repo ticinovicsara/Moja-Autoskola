@@ -30,13 +30,7 @@ export const InstructorDashboard = () => {
   return (
     <DashboardLayout
       middle={
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "1em",
-          }}
-        >
+        <div className="gridDash">
           <ArrowCard
             title="REZERVIRAJ TERMIN VOŽNJE"
             className={`${styles["arrow-card"]} ${styles["card-red"]}`}

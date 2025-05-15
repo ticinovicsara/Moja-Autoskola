@@ -13,7 +13,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   bottom,
 }) => {
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} container`}>
       <div className={styles.top}>{top}</div>
       <div className={styles.middle}>{middle}</div>
       <div className={styles.bottom}>{bottom}</div>

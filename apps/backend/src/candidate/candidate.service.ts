@@ -24,11 +24,9 @@ export class CandidateService {
       },
     );
 
-    if (!candidateInstructor) {
-      throw new NotFoundException("The candidate doesn't have an instructor");
-    }
-
-    return UserResponseDto.fromPrisma(candidateInstructor.instructor);
+    return candidateInstructor
+      ? UserResponseDto.fromPrisma(candidateInstructor.instructor)
+      : null;
   }
 
   async getCandidatesWithoutInstructor(schoolId: string) {

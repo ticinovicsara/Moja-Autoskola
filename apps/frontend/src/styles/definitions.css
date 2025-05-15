@@ -10,7 +10,6 @@ body {
   font-family: "Satoshi", sans-serif;
 }
 
-/* ovo je za svaki layout ovako za mobile verziju  */
 .container {
   margin: 0 auto;
   max-width: 1200px;
@@ -27,6 +26,12 @@ h5,
 h6 {
   font-family: "Chillax", sans-serif;
   color: var(--asphalt-border);
+}
+
+.gridDash {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
 }
 
 button {

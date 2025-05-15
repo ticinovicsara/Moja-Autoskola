@@ -7,7 +7,7 @@ interface CandidateSearchProps {
   onSearchChange: (value: string) => void;
   candidates: User[];
   onCandidateSelect?: (candidate: User) => void;
-  returnMessage: string;
+  returnMessage?: string;
 }
 
 const CandidateSearch = ({
