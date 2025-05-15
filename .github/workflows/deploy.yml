@@ -64,7 +64,7 @@ jobs:
                   username: ${{ secrets.SSH_USER }}
                   key: ${{ secrets.SSH_PRIVATE_KEY }}
                   script: |
-                      sudo docker pull ghcr.io/ticinovicsara/moja-autoskola:latest
+                      sudo docker pull ghcr.io/ticinovicsara/moja-autoskola:main
                       sudo docker stop moja-autoskola || true
                       sudo docker rm moja-autoskola || true
-                      sudo docker run -d -p 3000:3000 --env-file .env --restart always --name moja-autoskola ghcr.io/ticinovicsara/moja-autoskola:latest
+                      sudo docker run -d -p 3000:3000 --env-file .env --restart always --name moja-autoskola ghcr.io/ticinovicsara/moja-autoskola:main
