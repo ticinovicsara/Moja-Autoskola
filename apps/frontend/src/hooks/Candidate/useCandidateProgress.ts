@@ -6,6 +6,7 @@ export const useCandidateProgressData = (candidateId: string) => {
     queryKey: ["candidateProgress", candidateId],
     queryFn: () => getCandidateProgress(candidateId),
     enabled: !!candidateId,
+    staleTime: 0,
   });
 
   return {

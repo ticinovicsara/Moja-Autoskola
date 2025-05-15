@@ -1,9 +1,9 @@
 import { Cross } from "@/assets/svgs";
 import styles from "./candidateProgress.module.css";
 import ProgressBar from "@/components/Cards/ProgressCard/ProgressBar/ProgressBar";
-import { useState } from "react";
 import { useAuth, useCandidateProgressData } from "@/hooks";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const CandidateProgressPage = () => {
   const { user } = useAuth();
@@ -49,7 +49,7 @@ const CandidateProgressPage = () => {
         />
         <h3 className={styles["list-title"]}>Vožnja</h3>
         <ProgressBar
-          progress={passedLessons.firstAid}
+          progress={passedLessons.driving}
           total={35}
           colorClass={styles["blue-fill"]}
           barClass={styles["blue-bar"]}
