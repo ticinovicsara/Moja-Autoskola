@@ -2,9 +2,9 @@ export { default as HomePage } from "./HomePage/HomePage";
 export * from "./Auth/Login/Login";
 export * from "./Auth/Register/Register";
 
-export { default as InstructorDashboardPage } from "./Instructor/InstructorDashboardPage";
+export { default as InstructorDashboardPage } from "./InstructorDashboardPage/InstructorDashboardPage";
 export { default as InstructorCandidateListPage } from "./InstructorCandidateListPage/InstructorCandidateListPage";
-export { default as InstructorCalendarPage } from "./Instructor/InstructorCalendarPage";
+export { default as InstructorCalendarPage } from "./InstructorCalendarPage/InstructorCalendarPage";
 
 export * from "./Blog/BlogPage";
 export * from "./Guest/GuestPage";

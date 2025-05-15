@@ -18,6 +18,24 @@ function getMonthAbbreviation(month: number): string {
     return months[month];
 }
 
+function getMonthFromDate(date: Date): string {
+    const months = [
+        "Siječanj",
+        "Veljača",
+        "Ožujak",
+        "Travanj",
+        "Svibanj",
+        "Lipanj",
+        "Srpanj",
+        "Kolovoz",
+        "Rujan",
+        "Listopad",
+        "Studeni",
+        "Prosinac",
+    ];
+    return months[date.getMonth()];
+}
+
 function getSessionType(type: SessionType): string {
     switch (type) {
         case "Theory":
@@ -72,6 +90,7 @@ function getDayFromDate(date: Date): string {
 
 export {
     getMonthAbbreviation,
+    getMonthFromDate,
     getSessionType,
     getSessionFormat,
     getFormattedTime,

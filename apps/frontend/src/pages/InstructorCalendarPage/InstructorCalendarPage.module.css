@@ -1,0 +1,43 @@
+.page {
+    margin-top: 28px;
+}
+
+.calendarHeader {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.calendarHeader > h2 {
+    font-weight: 600;
+}
+
+.upcomingContainer {
+    border: var(--asphalt-border) 1px solid;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom: none;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.upcomingContainer > p {
+    font-family: "Satoshi", sans-serif;
+    font-weight: 400;
+}
+
+.upcomingHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.upcomingHeader > h3 {
+    font-family: "Satoshi", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+}

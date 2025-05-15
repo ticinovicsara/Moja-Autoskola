@@ -6,27 +6,27 @@ import { Session, UserRoles } from "@/types";
 import { useAuth } from "@/hooks";
 
 const useUserSessions = (userId: string) => {
-  const { user } = useAuth();
-  const role = user?.role;
+    const { user } = useAuth();
 
-  const endpoint =
-    role === UserRoles.Instructor
-      ? `${API_ENDPOINTS.SESSION.INSTRUCTOR}/${userId}`
-      : `${API_ENDPOINTS.SESSION.CANDIDATE}/${userId}`;
+    const role = user?.role;
+    const endpoint =
+        role === UserRoles.Instructor
+            ? `${API_ENDPOINTS.SESSION.INSTRUCTOR}/${userId}`
+            : `${API_ENDPOINTS.SESSION.CANDIDATE}/${userId}`;
 
-  const { data, isLoading, error } = useQuery<Session[], AxiosError>({
-    queryKey: ["sessions", role, userId],
-    queryFn: () => getData(endpoint),
-    enabled: !!userId,
-  });
+    const { data, isLoading, error } = useQuery<Session[], AxiosError>({
+        queryKey: ["sessions", role, userId],
+        queryFn: () => getData(endpoint),
+        enabled: !!userId && !!user,
+    });
 
-  const sessions: Session[] | undefined = data?.map((session: Session) => ({
-    ...session,
-    startTime: new Date(session.startTime),
-    endTime: new Date(session.endTime),
-  }));
+    const sessions: Session[] | undefined = data?.map((session: Session) => ({
+        ...session,
+        startTime: new Date(session.startTime),
+        endTime: new Date(session.endTime),
+    }));
 
-  return { sessions: sessions || [], isLoading, error };
+    return { sessions: sessions || [], isLoading, error };
 };
 
 export default useUserSessions;

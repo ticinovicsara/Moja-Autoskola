@@ -19,7 +19,7 @@ export class InstructorController {
     return this.instructorService.getInstructorsBySchool(schoolId);
   }
 
-  @Auth(UserRole.Candidate)
+  @Auth(UserRole.Candidate, UserRole.Instructor)
   @Get('slot/:instructorId')
   async getInstructorSlots(@Param('instructorId') instructorId: string) {
     return this.instructorService.getInstructorSlots(instructorId);

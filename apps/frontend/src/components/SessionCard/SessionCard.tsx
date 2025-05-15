@@ -1,4 +1,4 @@
-import { Session } from "@/types";
+import { InstructorSlot, Session } from "@/types";
 import { FC } from "react";
 import styles from "./SessionCard.module.css";
 import {
@@ -9,11 +9,15 @@ import {
 } from "@/utils";
 
 interface SessionCardProps {
-    session: Session;
+    session: Session | InstructorSlot;
 }
 
 const SessionCard: FC<SessionCardProps> = ({ session }) => {
     function getSessionTypeClass() {
+        if (!("type" in session)) {
+            return styles.instructorSlot;
+        }
+
         switch (session.type) {
             case "Theory":
                 return styles.theory;
@@ -34,8 +38,15 @@ const SessionCard: FC<SessionCardProps> = ({ session }) => {
             </div>
             <div className={styles.sessionInfo}>
                 <p>
-                    {getSessionFormat(session.format)},{" "}
-                    <span>{getSessionType(session.type)}</span>
+                    {"format" in session
+                        ? getSessionFormat(session.format)
+                        : "Slobodan termin"}
+                    {"type" in session && (
+                        <>
+                            {", "}
+                            <span>{getSessionType(session.type)}</span>
+                        </>
+                    )}
                 </p>
                 <p>
                     {getFormattedTime(session.startTime)} -{" "}
