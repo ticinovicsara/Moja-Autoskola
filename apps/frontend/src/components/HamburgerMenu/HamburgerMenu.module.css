@@ -63,14 +63,6 @@
   font-family: "Chillax", sans-serif;
 }
 
-.links {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  font-weight: 400;
-  padding: 16px;
-}
-
 .logout {
   font-weight: 700;
   color: var(--darker-red);

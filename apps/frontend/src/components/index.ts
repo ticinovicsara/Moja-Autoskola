@@ -29,3 +29,4 @@ export { default as ChooseInstructorMenu } from "./ChooseInstructorMenu/ChooseIn
 export * from "./ConfirmationPopup/ConfirmationPopup";
 export * from "./PaymentPopup/PaymentPopup";
 export * from "./CandidateSearch/CandidateSearch";
+export * from "./MenuLinks/MenuLinks";

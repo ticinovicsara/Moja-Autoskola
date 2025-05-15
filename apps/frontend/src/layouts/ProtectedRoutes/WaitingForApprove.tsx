@@ -3,12 +3,14 @@ import { routes } from "@/constants";
 import { useAuth } from "@/hooks";
 import toast from "react-hot-toast";
 import { Outlet, useNavigate } from "react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { EnrollmentStatus } from "@/types/EnrollmentStatus";
 import { UserRoles } from "@/types";
 
 export const WaitingForApprove = () => {
   const { user, isLoading: userLoading } = useAuth();
+  const navigate = useNavigate();
+
   const userId = user?.id ?? "";
   const isGuest = user?.role === UserRoles.Guest;
 
@@ -17,7 +19,7 @@ export const WaitingForApprove = () => {
     isGuest
   );
 
-  const navigate = useNavigate();
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     if (userLoading || enrollmentLoading) return;
@@ -28,18 +30,16 @@ export const WaitingForApprove = () => {
       return;
     }
 
-    if (enrollment === undefined || enrollment === null || !enrollment) {
-      return;
-    }
-
-    if (enrollment.status !== EnrollmentStatus.Pending) {
+    if (!enrollment || enrollment.status !== EnrollmentStatus.Pending) {
       toast.error("Pristup dozvoljen samo korisnicima koji čekaju odobrenje");
       navigate(routes.HOME);
       return;
     }
+
+    setChecked(true);
   }, [userLoading, enrollmentLoading, user, enrollment, navigate]);
 
-  if (userLoading || enrollmentLoading) {
+  if (userLoading || enrollmentLoading || !checked) {
     return <div className="loader">Loading...</div>;
   }
 
