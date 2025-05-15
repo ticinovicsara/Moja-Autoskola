@@ -4,14 +4,14 @@ import { getData } from "@/utils";
 import { API_ENDPOINTS } from "@/constants";
 import { EnrollmentRequest } from "@/types/enrollment";
 
-const useCandidateEnrollment = (userId: string) => {
+const useCandidateEnrollment = (userId: string, isGuest: boolean) => {
   const { data, isLoading, error } = useQuery<EnrollmentRequest, AxiosError>({
-    queryKey: ["waiting-page", userId],
+    queryKey: ["enrollment"],
     queryFn: () =>
       getData<EnrollmentRequest>(
         `${API_ENDPOINTS.ENROLLMENT.CANDIDATE}/${userId}`
       ),
-    enabled: !!userId,
+    enabled: !!userId && isGuest,
     refetchOnMount: true,
   });
   return {

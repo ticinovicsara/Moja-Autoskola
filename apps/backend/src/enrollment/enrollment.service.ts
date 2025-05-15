@@ -46,13 +46,7 @@ export class EnrollmentService {
       },
     });
 
-    if (!request) {
-      throw new NotFoundException(
-        'No enrollment request found for this candidate.',
-      );
-    }
-
-    return EnrollmentRequestEntity.fromPrisma(request);
+    return request ? EnrollmentRequestEntity.fromPrisma(request) : null;
   }
 
   async getSchoolEnrollmentRequestsByStatus(

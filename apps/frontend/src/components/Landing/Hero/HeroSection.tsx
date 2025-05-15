@@ -9,7 +9,9 @@ import { EnrollmentStatus } from "@/types/EnrollmentStatus";
 export const HeroSection = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const { enrollment } = useCandidateEnrollment(user?.id || "");
+
+  const isGuest = user?.role === UserRoles.Guest;
+  const { enrollment } = useCandidateEnrollment(user?.id || "", isGuest);
 
   const handleStart = () => {
     if (!user) {

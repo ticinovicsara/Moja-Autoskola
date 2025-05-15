@@ -20,7 +20,7 @@ const useSendEnrollmentRequest = () => {
     onSuccess: () => {
       toast.success("Prijava uspješno poslana");
       queryClient.invalidateQueries({
-        queryKey: ["waiting-page"],
+        queryKey: ["enrollment"],
       });
       navigate(routes.WAITING_FOR_APPROVE);
     },
