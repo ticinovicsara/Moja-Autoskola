@@ -9,8 +9,8 @@ import FAQSection from "@/components/Landing/FAQ/FaqSection";
 const HomePage = () => {
   return (
     <>
+      <HeroSection />
       <div className="container">
-        <HeroSection />
         <AllOnOneSection />
         <ScheduleRideSection />
         <BlogSection />
