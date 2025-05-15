@@ -10,12 +10,13 @@ export class InstructorController {
 
   @Auth(UserRole.Instructor)
   @Get('candidates/:id')
-  async getCandidates(@Param('id') instructorId: string) {
-    return this.instructorService.getCandidatesForInstructor(instructorId);
+  async getInstructorCandidates(@Param('id') instructorId: string) {
+    return this.instructorService.getInstructorCandidates(instructorId);
   }
 
-  @Get('by-school/:schoolId')
-  async getInstructorsBySchool(@Param('schoolId') schoolId: string) {
+  @Auth(UserRole.SchoolAdmin)
+  @Get('school/:id')
+  async getInstructorsBySchool(@Param('id') schoolId: string) {
     return this.instructorService.getInstructorsBySchool(schoolId);
   }
 

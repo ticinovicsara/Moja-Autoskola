@@ -6,7 +6,6 @@ import {
   Patch,
   Param,
   Delete,
-  UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -24,22 +23,10 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  @Auth(UserRole.Admin)
-  @Get()
-  findAll() {
-    return this.userService.getAll();
-  }
-
-  @Auth(UserRole.SchoolAdmin)
+  @Auth(UserRole.Instructor, UserRole.SchoolAdmin)
   @Get(':email')
   findOne(@Param('email') email: string) {
     return this.userService.getByEmail(email);
-  }
-
-  @Auth(UserRole.Candidate)
-  @Get('progress/:id')
-  findCandidateProgress(@Param('id') id: string) {
-    return this.userService.getCandidateProgress(id);
   }
 
   @Auth(UserRole.Candidate)

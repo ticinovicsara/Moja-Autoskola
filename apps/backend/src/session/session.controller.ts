@@ -18,7 +18,7 @@ import { CreateDrivingSessionDto } from './dto/create-driving-session.dto';
 export class SessionController {
   constructor(private readonly sessionService: SessionService) {}
 
-  @Auth(UserRole.Instructor)
+  @Auth(UserRole.Instructor, UserRole.SchoolAdmin)
   @Post()
   create(@Body() createSessionDto: CreateSessionDto) {
     return this.sessionService.create(createSessionDto);
@@ -30,12 +30,6 @@ export class SessionController {
     @Body() createDrivingSessionDto: CreateDrivingSessionDto,
   ) {
     return this.sessionService.createDrivingSession(createDrivingSessionDto);
-  }
-
-  @Auth(UserRole.Admin)
-  @Get()
-  findAll() {
-    return this.sessionService.getAll();
   }
 
   @Auth(UserRole.Instructor)
@@ -56,13 +50,13 @@ export class SessionController {
     return this.sessionService.getInstructorSessions(id);
   }
 
-  @Auth(UserRole.Instructor)
+  @Auth(UserRole.Instructor, UserRole.SchoolAdmin)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateSessionDto: UpdateSessionDto) {
     return this.sessionService.update(id, updateSessionDto);
   }
 
-  @Auth(UserRole.Instructor)
+  @Auth(UserRole.Instructor, UserRole.SchoolAdmin)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.sessionService.remove(id);

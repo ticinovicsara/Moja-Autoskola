@@ -8,6 +8,12 @@ export class CandidateController {
   constructor(private readonly candidateService: CandidateService) {}
 
   @Auth(UserRole.Candidate)
+  @Get('progress/:id')
+  findCandidateProgress(@Param('id') id: string) {
+    return this.candidateService.getCandidateProgress(id);
+  }
+
+  @Auth(UserRole.Candidate)
   @Get('instructor/:candidateId')
   findCandidatesInstructor(@Param('candidateId') candidateId: string) {
     return this.candidateService.getCandidatesInstructor(candidateId);

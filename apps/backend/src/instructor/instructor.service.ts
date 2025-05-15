@@ -15,7 +15,7 @@ export class InstructorService {
     private readonly schoolService: SchoolService,
   ) {}
 
-  async getCandidatesForInstructor(instructorId: string) {
+  async getInstructorCandidates(instructorId: string) {
     await this.userService.getById(instructorId);
 
     const pairs = await this.prisma.candidateInstructor.findMany({

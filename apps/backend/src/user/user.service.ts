@@ -8,10 +8,6 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from '@/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { UserResponseDto } from './dto/user-response.dto';
-import { CandidateProgressDto } from './dto/candidate-progress.dto';
-import { SessionFormat, UserRole } from '@prisma/client';
-import { Session } from '../session/entities/session.entity';
-import { TestResult } from '../test-result/entities/test-result.entity';
 
 @Injectable()
 export class UserService {
@@ -44,11 +40,6 @@ export class UserService {
     return UserResponseDto.fromPrisma(newUser);
   }
 
-  async getAll() {
-    const users = await this.prisma.user.findMany();
-    return users.map((u) => UserResponseDto.fromPrisma(u));
-  }
-
   async getById(id: string) {
     const user = await this.prisma.user.findUnique({
       where: { id },
@@ -71,75 +62,6 @@ export class UserService {
     });
     if (!user) throw new NotFoundException("The user doesn't exist");
     return user;
-  }
-
-  async getCandidateProgress(id: string) {
-    const user = await this.getById(id);
-
-    if (user.role !== UserRole.Candidate)
-      throw new ConflictException('The user is not a candidate');
-
-    const prismaTestResults = await this.prisma.testResult.findMany({
-      where: { candidateId: id, passed: true },
-    });
-
-    const prismaPassedLessons = await this.prisma.sessionCandidate.findMany({
-      where: {
-        candidateId: id,
-        session: { format: SessionFormat.Lesson, endTime: { lt: new Date() } },
-      },
-      include: { session: true },
-    });
-
-    const testResults = prismaTestResults
-      .map((result) => TestResult.fromPrisma(result))
-      .filter((result): result is TestResult => result !== null);
-
-    const passedLessons = prismaPassedLessons
-      .map((lesson) => Session.fromPrisma(lesson.session))
-      .filter((session): session is Session => session !== null);
-
-    const passedTestsDto = {
-      theory: 0,
-      driving: 0,
-      firstAid: 0,
-    };
-
-    for (const test of testResults) {
-      switch (test.type) {
-        case 'Theory':
-          passedTestsDto.theory++;
-          break;
-        case 'Driving':
-          passedTestsDto.driving++;
-          break;
-        case 'FirstAid':
-          passedTestsDto.firstAid++;
-          break;
-      }
-    }
-
-    const passedLessionsDto = {
-      theory: 0,
-      driving: 0,
-      firstAid: 0,
-    };
-
-    for (const lesson of passedLessons) {
-      switch (lesson.type) {
-        case 'Theory':
-          passedLessionsDto.theory++;
-          break;
-        case 'Driving':
-          passedLessionsDto.driving++;
-          break;
-        case 'FirstAid':
-          passedLessionsDto.firstAid++;
-          break;
-      }
-    }
-
-    return new CandidateProgressDto(passedTestsDto, passedLessionsDto);
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {

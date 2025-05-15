@@ -11,14 +11,6 @@ export class InstructorCandidateController {
     private readonly instructorCandidateService: InstructorCandidateService,
   ) {}
 
-  @Auth(UserRole.Candidate)
-  @Get(':id')
-  async getInstructorFromCandidate(@Param('id') candidateId: string) {
-    return this.instructorCandidateService.getInstructorFromCandidate(
-      candidateId,
-    );
-  }
-
   @Auth(UserRole.SchoolAdmin)
   @Post()
   async assignInstructor(@Body() body: AssignInstructorCandidateDto) {

@@ -17,16 +17,10 @@ import { UserRole } from '@prisma/client';
 export class TestResultController {
   constructor(private readonly testResultService: TestResultService) {}
 
-  @Auth(UserRole.Instructor)
+  @Auth(UserRole.Instructor, UserRole.SchoolAdmin)
   @Post()
   create(@Body() createTestResultDto: CreateTestResultDto) {
     return this.testResultService.create(createTestResultDto);
-  }
-
-  @Auth(UserRole.Admin)
-  @Get()
-  findAll() {
-    return this.testResultService.getAll();
   }
 
   @Auth(UserRole.Candidate)

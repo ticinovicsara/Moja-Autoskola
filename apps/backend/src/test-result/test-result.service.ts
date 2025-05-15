@@ -28,11 +28,6 @@ export class TestResultService {
     return TestResult.fromPrisma(newTestResult);
   }
 
-  async getAll() {
-    const testResults = await this.prisma.testResult.findMany();
-    return testResults.map((u) => TestResult.fromPrisma(u));
-  }
-
   async getById(id: string) {
     const testResult = await this.prisma.testResult.findUnique({
       where: { id },
