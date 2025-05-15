@@ -1,0 +1,8 @@
+.rowCards {
+  padding-top: 85px;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  width: 100%;
+  margin-bottom: 1em;
+}

@@ -10,7 +10,7 @@ import {
 } from "@/layouts";
 import {
   HomePage,
-  InstructorDashboardPage,
+  InstructorDashboard,
   Login,
   Register,
   InstructorCalendarPage,
@@ -84,7 +84,7 @@ const AppRouter = () => {
         <Route element={<InstructorLayout />}>
           <Route
             path={routes.INSTRUCTOR_DASHBOARD}
-            element={<InstructorDashboardPage />}
+            element={<InstructorDashboard />}
           />
           <Route
             path={routes.INSTRUCTOR_CANDIDATE_LIST}
