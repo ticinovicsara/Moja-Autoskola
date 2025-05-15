@@ -23,16 +23,12 @@ const SchoolAdminAssignInstructorPage = () => {
   );
 
   const { user } = useAuth();
-
   const { school, isLoading: isLoadingSchool } = useSchoolByUserId(
     user?.id || ""
   );
-
   const schoolId = school?.id || "";
-
   const { candidates, isLoading: isLoadingCandidates } =
     useCandidatesWithoutInstructor(schoolId);
-
   const { instructors, isLoading: isLoadingInstructors } =
     useInstructorsBySchoolId(schoolId);
 
@@ -41,11 +37,12 @@ const SchoolAdminAssignInstructorPage = () => {
     isLoading: isAssignLoading,
     error,
     success,
-  } = useAssignInstructor();
+    refetchCandidates,
+  } = useAssignInstructor(schoolId);
 
   const filteredCandidates = useMemo(() => {
     if (!searchTerm) return candidates;
-    return candidates.filter((candidate) => {
+    return candidates.filter((candidate: User) => {
       const fullName =
         `${candidate.firstName} ${candidate.lastName}`.toLowerCase();
       return fullName.includes(searchTerm.toLowerCase());
@@ -67,18 +64,19 @@ const SchoolAdminAssignInstructorPage = () => {
 
   const handleConfirmAssignment = useCallback(async () => {
     if (!selectedCandidate || !selectedInstructor) return;
+
     await assign(selectedCandidate.id, selectedInstructor.id);
     setIsPopupOpen(false);
+    setIsModalOpen(false);
+    await refetchCandidates();
   }, [selectedCandidate, selectedInstructor, assign, candidates]);
 
   const closePopup = useCallback(() => {
     setIsPopupOpen(false);
   }, []);
-
   const handleSearchChange = useCallback((value: any) => {
     setSearchTerm(value);
   }, []);
-
   const toggleChooseInstructorMenu = useCallback(() => {
     setIsModalOpen(false);
   }, []);

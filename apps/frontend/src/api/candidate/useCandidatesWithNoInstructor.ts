@@ -13,8 +13,6 @@ const useCandidatesWithoutInstructor = (schoolId: string) => {
     refetchOnMount: true,
   });
 
-  console.log("NOINST:", data);
-
   return {
     candidates: data || [],
     isLoading,

@@ -1,23 +1,25 @@
 import { assignInstructorToCandidate } from "@/api";
 import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
-export const useAssignInstructor = () => {
+export const useAssignInstructor = (schoolId: string) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const queryClient = useQueryClient();
 
   const assign = async (candidateId: string, instructorId: string) => {
     setIsLoading(true);
     setError(null);
     setSuccess(false);
 
-    console.log("IDS:", candidateId, instructorId);
-
     try {
       await assignInstructorToCandidate(candidateId, instructorId);
       setSuccess(true);
+      await queryClient.invalidateQueries({
+        queryKey: ["candidates-no-instructor", schoolId],
+      });
     } catch (err: any) {
-      console.error("Greška pri dodjeljivanju instruktora:", err);
       const message =
         err?.response?.data?.message ||
         err?.message ||
@@ -28,10 +30,17 @@ export const useAssignInstructor = () => {
     }
   };
 
+  const refetchCandidates = () => {
+    queryClient.invalidateQueries({
+      queryKey: ["candidates-no-instructor", schoolId],
+    });
+  };
+
   return {
     assign,
     isLoading,
     error,
     success,
+    refetchCandidates,
   };
 };
