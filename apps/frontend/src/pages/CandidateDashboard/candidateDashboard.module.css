@@ -1,12 +1,25 @@
-.candidate-instructor-card {
-  background-color: #b1cf86;
+.allCards {
+  padding-top: 85px;
+}
+
+.rowCards {
+  padding-top: 1em;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
   width: 100%;
+  margin-bottom: 1em;
+}
+
+.candidateInstructorCard {
+  background-color: #b1cf86;
+  width: 65%;
   border-radius: 1em;
   display: flex;
   flex-direction: column;
 }
 
-.content-title {
+.contentTitle {
   padding: 1em;
   font-weight: bold;
   text-align: center;
@@ -14,14 +27,14 @@
   border-radius: 1em;
 }
 
-.card-content {
+.cardContent {
   display: flex;
   flex-direction: column;
   padding: 1em;
   gap: 10px;
 }
 
-.instructor-name,
-.instructor-name {
+.instructorName,
+.instructorPhone {
   font-weight: bold;
 }
