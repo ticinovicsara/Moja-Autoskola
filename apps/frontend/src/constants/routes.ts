@@ -7,6 +7,7 @@ const routes = {
   GUEST: "/guest",
 
   SCHOOL_ADMIN_DASHBOARD: "/school-admin/dashboard",
+  SCHOOL_ADMIN_ASSIGN_INSTRUCTOR: "/school-admin/assign-instructor",
   PENDING_LIST: "/school-admin/pending-list",
 
   CANDIDATE_DASHBOARD: "/candidate/dashboard",

@@ -14,6 +14,11 @@ export class InstructorController {
     return this.instructorService.getCandidatesForInstructor(instructorId);
   }
 
+  @Get('by-school/:schoolId')
+  async getInstructorsBySchool(@Param('schoolId') schoolId: string) {
+    return this.instructorService.getInstructorsBySchool(schoolId);
+  }
+
   @Auth(UserRole.Candidate)
   @Get('slot/:instructorId')
   async getInstructorSlots(@Param('instructorId') instructorId: string) {

@@ -26,5 +26,8 @@ export * from "./FilterSchools/FilterSchools";
 export * from "./CandidateCard/CandidateCard";
 export * from "./CandidateList/CandidateList";
 export * from "./InputFieldWithFilter/InputFieldWithFiler";
+export * from "./CandidateCard/CandidateCard";
+export { default as ChooseInstructorMenu } from "./ChooseInstructorMenu/ChooseInstructorMenu";
 export * from "./ConfirmationPopup/ConfirmationPopup";
 export * from "./PaymentPopup/PaymentPopup";
+export * from "./CandidateSearch/CandidateSearch";

@@ -4,17 +4,19 @@ import styles from "./candidatesList.module.css";
 
 interface Props {
   candidates: User[];
+  onClick?: (candidate: User) => void;
 }
 
-const CandidateList = ({ candidates }: Props) => {
+const CandidateList = ({ candidates, onClick }: Props) => {
   return (
     <div className={styles["candidates-list"]}>
       {candidates.map((candidate) => (
-        <CandidateCard
-          key={candidate.id}
-          firstName={candidate.firstName}
-          lastName={candidate.lastName}
-        />
+        <div key={candidate.id} onClick={() => onClick && onClick(candidate)}>
+          <CandidateCard
+            firstName={candidate.firstName}
+            lastName={candidate.lastName}
+          />
+        </div>
       ))}
     </div>
   );

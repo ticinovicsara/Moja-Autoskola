@@ -1,0 +1,9 @@
+.container {
+  width: 100%;
+  margin: 0 auto;
+  background-color: var(--background-color);
+  font-family: "Satoshi", sans-serif;
+  position: relative;
+  padding: 1em;
+  margin-top: 1em;
+}

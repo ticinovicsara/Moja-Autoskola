@@ -47,7 +47,6 @@ export class InstructorCandidateService {
     const { candidateId, instructorId } = body;
 
     await this.userService.getById(candidateId);
-
     await this.userService.getById(instructorId);
 
     const existingRelation = await this.prisma.candidateInstructor.findUnique({
@@ -62,6 +61,19 @@ export class InstructorCandidateService {
     if (existingRelation) {
       throw new ConflictException(
         'Instructor already assigned to this candidate.',
+      );
+    }
+
+    const candidateAlreadyAssigned =
+      await this.prisma.candidateInstructor.findFirst({
+        where: {
+          candidateId,
+        },
+      });
+
+    if (candidateAlreadyAssigned) {
+      throw new ConflictException(
+        'Candidate is already assigned to another instructor.',
       );
     }
 

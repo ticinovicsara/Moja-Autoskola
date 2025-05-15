@@ -10,7 +10,7 @@ import {
   getMonthAbbreviation,
 } from "@/utils";
 import { ConfirmationPopup } from "../ConfirmationPopup/ConfirmationPopup";
-import { Arrow2 } from "@/assets/svgs";
+import { ArrowBack } from "@/assets/svgs";
 import { usePostDrivingSession } from "@/api";
 import { useAuth } from "@/hooks";
 
@@ -49,7 +49,7 @@ const InstructorSlot: FC<InstructorSlotProps> = ({ slot }) => {
           {getFormattedTime(slot.startTime)} - {getFormattedTime(slot.endTime)}
         </p>{" "}
       </div>
-      <img src={Arrow2} alt="arrow" onClick={toggleConfirmPopup} />
+      <img src={ArrowBack} alt="arrow" onClick={toggleConfirmPopup} />
       {isConfirmPopupOpen && (
         <ConfirmationPopup
           prompt="Jesi li siguran da želiš ovaj termin?"
