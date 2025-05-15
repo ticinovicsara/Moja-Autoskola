@@ -14,11 +14,9 @@ export class CandidateController {
   }
 
   @Auth(UserRole.SchoolAdmin, UserRole.Admin)
-  @Get('no-instructor')
-  findCandidatesWithoutInstructor(
-    @Param('schooladminId') schooladminId: string,
-  ) {
-    return this.candidateService.getCandidatesWithoutInstructor(schooladminId);
+  @Get('no-instructor/:schoolId')
+  findCandidatesWithoutInstructor(@Param('schoolId') schoolId: string) {
+    return this.candidateService.getCandidatesWithoutInstructor(schoolId);
   }
 
   @Get('by-school/:schoolId')

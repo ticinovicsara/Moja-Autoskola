@@ -31,15 +31,25 @@ export class CandidateService {
     return UserResponseDto.fromPrisma(candidateInstructor.instructor);
   }
 
-  async getCandidatesWithoutInstructor(schooladminId: string) {
-    return this.prisma.user.findMany({
+  async getCandidatesWithoutInstructor(schoolId: string) {
+    await this.schoolService.getById(schoolId);
+
+    const candidates = await this.prisma.user.findMany({
       where: {
         role: UserRole.Candidate,
         instructorCandidate: {
           none: {},
         },
+        enrollmentRequests: {
+          some: {
+            schoolId,
+            status: EnrollmentStatus.Approved,
+          },
+        },
       },
     });
+
+    return candidates.map((c) => UserResponseDto.fromPrisma(c));
   }
 
   async getCandidatesBySchool(schoolId: string) {

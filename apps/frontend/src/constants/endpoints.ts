@@ -24,6 +24,7 @@ export const API_ENDPOINTS = {
     INSTRUCTOR: "/candidate/instructor",
     BY_SCHOOL: "/candidate/by-school",
     PROGRESS: "/user/progress",
+    NO_INSTRUCTOR: "/candidate/no-instructor",
   },
 
   SCHOOL: {

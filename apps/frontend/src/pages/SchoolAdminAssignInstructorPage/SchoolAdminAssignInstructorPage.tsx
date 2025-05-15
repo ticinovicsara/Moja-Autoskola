@@ -5,7 +5,10 @@ import { ArrowBack, ConfirmationPopup } from "@/components";
 import { useAssignInstructor, useAuth } from "@/hooks";
 import { User } from "@/types";
 import ChooseInstructorMenu from "@/components/ChooseInstructorMenu/ChooseInstructorMenu";
-import { useCandidatesBySchoolId, useInstructorsBySchoolId } from "@/api";
+import {
+  useCandidatesWithoutInstructor,
+  useInstructorsBySchoolId,
+} from "@/api";
 import useSchoolByUserId from "@/api/school/useSchoolByUserId";
 import toast from "react-hot-toast";
 import CandidateSearch from "@/components/CandidateSearch/CandidateSearch";
@@ -27,8 +30,11 @@ const SchoolAdminAssignInstructorPage = () => {
 
   const schoolId = school?.id || "";
 
+  console.log("SCHOOLD:", schoolId);
+  console.log("TOKEN: ", localStorage.getItem("token"));
+
   const { candidates, isLoading: isLoadingCandidates } =
-    useCandidatesBySchoolId(schoolId);
+    useCandidatesWithoutInstructor(schoolId);
 
   const { instructors, isLoading: isLoadingInstructors } =
     useInstructorsBySchoolId(schoolId);
