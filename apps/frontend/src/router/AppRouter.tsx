@@ -25,6 +25,7 @@ import {
   PaymentPage,
   CandidateDashboardPage,
   CandidateProgressPage,
+  NotFoundPage,
 } from "@/pages";
 import { AuthPage } from "@/pages/Auth";
 import SchoolAdminAssignInstructorPage from "@/pages/SchoolAdminAssignInstructorPage/SchoolAdminAssignInstructorPage";
@@ -85,21 +86,23 @@ const AppRouter = () => {
             />
             <Route path={routes.PENDING_LIST} element={<PendingListPage />} />
           </Route>
-        </Route>
 
-        <Route element={<InstructorRoute />}>
-          <Route
-            path={routes.INSTRUCTOR_DASHBOARD}
-            element={<InstructorDashboardPage />}
-          />
-          <Route
-            path={routes.INSTRUCTOR_CANDIDATE_LIST}
-            element={<InstructorCandidateListPage />}
-          />
-          <Route
-            path={routes.INSTRUCTOR_CALENDAR}
-            element={<InstructorCalendarPage />}
-          />
+          <Route element={<InstructorRoute />}>
+            <Route
+              path={routes.INSTRUCTOR_DASHBOARD}
+              element={<InstructorDashboardPage />}
+            />
+            <Route
+              path={routes.INSTRUCTOR_CANDIDATE_LIST}
+              element={<InstructorCandidateListPage />}
+            />
+            <Route
+              path={routes.INSTRUCTOR_CALENDAR}
+              element={<InstructorCalendarPage />}
+            />
+          </Route>
+
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

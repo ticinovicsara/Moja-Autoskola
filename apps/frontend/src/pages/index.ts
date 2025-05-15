@@ -17,3 +17,5 @@ export * from "./Payment/PaymentPage";
 export { default as CandidateProgressPage } from "./CandidateProgressPage/CandidateProgressPage";
 export { default as CandidateDashboardPage } from "./CandidateDashboard/CandidateDashboardPage";
 export { default as CandidateCalendarPage } from "./CandidateCalendarPage/CandidateCalendarPage";
+
+export * from "./NotFoundPage/NotFoundPage";
