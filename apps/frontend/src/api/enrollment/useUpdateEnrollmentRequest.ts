@@ -1,6 +1,6 @@
 import { API_ENDPOINTS } from "@/constants";
 import { EnrollmentPatchRequest } from "@/types/enrollmentPatchRequest";
-import { EnrollmentStatus } from "@/types/EnrollmentStatus";
+import { EnrollmentStatus } from "@/types/enrollmentStatus";
 import { patchData } from "@/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";

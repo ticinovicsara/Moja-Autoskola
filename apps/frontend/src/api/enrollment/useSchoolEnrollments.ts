@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 import { getData } from "@/utils";
 import { API_ENDPOINTS } from "@/constants";
 import { EnrollmentRequest } from "@/types/enrollment";
-import { EnrollmentStatus } from "@/types/EnrollmentStatus";
+import { EnrollmentStatus } from "@/types/enrollmentStatus";
 
 const useSchoolEnrollments = (schoolId: string, status?: EnrollmentStatus) => {
     const url =

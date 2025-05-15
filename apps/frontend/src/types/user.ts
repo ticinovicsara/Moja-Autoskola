@@ -6,7 +6,7 @@ export enum UserRoles {
     Guest = "Guest",
 }
 
-type CreateUserFormData = {
+export type CreateUserFormData = {
     firstName: string;
     lastName: string;
     email: string;
@@ -16,7 +16,7 @@ type CreateUserFormData = {
     phoneNumber: string;
 };
 
-type User = {
+export type User = {
     id: string;
     firstName: string;
     lastName: string;
@@ -26,5 +26,3 @@ type User = {
     oib: string;
     role: UserRoles;
 };
-
-export type { CreateUserFormData, User };

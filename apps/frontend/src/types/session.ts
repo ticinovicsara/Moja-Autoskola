@@ -1,4 +1,4 @@
-type Session = {
+export type Session = {
     id: string;
     schoolId: string;
     instructorId: string | null;
@@ -8,13 +8,19 @@ type Session = {
     endTime: Date;
 };
 
-type SessionType = "Theory" | "FirstAid" | "Driving";
-type SessionFormat = "Lesson" | "Test";
+export enum SessionType {
+    Theory = "Theory",
+    FirstAid = "FirstAid",
+    Driving = "Driving",
+}
 
-type DrivingSessionReq = {
+export enum SessionFormat {
+    Lesson = "Lesson",
+    Test = "Test",
+}
+
+export type DrivingSessionReq = {
     instructorSlotId: string;
     instructorId: string;
     candidateId: string;
 };
-
-export type { Session, SessionType, SessionFormat, DrivingSessionReq };

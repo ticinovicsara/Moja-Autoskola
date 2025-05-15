@@ -5,7 +5,7 @@ import { routes } from "@/constants";
 import { useCandidateEnrollment } from "@/api";
 import { LogoAndText } from "@/components/LogoAndText/LogoAndText";
 import { UserRoles } from "@/types";
-import { EnrollmentStatus } from "@/types/EnrollmentStatus";
+import { EnrollmentStatus } from "@/types/enrollmentStatus";
 export const HeroSection = () => {
     const { user } = useAuth();
     const navigate = useNavigate();

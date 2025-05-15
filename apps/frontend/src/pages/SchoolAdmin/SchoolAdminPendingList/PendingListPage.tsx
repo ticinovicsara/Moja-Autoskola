@@ -3,7 +3,7 @@ import c from "./pending.module.css";
 import { useSchoolEnrollments } from "@/api";
 import { ArrowBack } from "@/components";
 import { PendingCandidateCard } from "@/components/Cards/PendingCandidateCard/PendingCandidateCard";
-import { EnrollmentStatus } from "@/types/EnrollmentStatus";
+import { EnrollmentStatus } from "@/types/enrollmentStatus";
 
 export const PendingListPage = () => {
     const location = useLocation();
