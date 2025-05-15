@@ -10,10 +10,14 @@ export interface Instructor {
 }
 
 export const useGetInstructor = (candidateId: string) => {
-  const { data, isLoading, error } = useQuery<Instructor, AxiosError>({
+  const {
+    data: instructor,
+    isLoading,
+    error,
+  } = useQuery<Instructor, AxiosError>({
     queryKey: ["instructor", candidateId],
     queryFn: () =>
-      getData(`${API_ENDPOINTS.GET_INSTRUCTOR_CANDIDATE}/${candidateId}`),
+      getData(`${API_ENDPOINTS.CANDIDATE.INSTRUCTOR}/${candidateId}`),
     enabled: !!candidateId,
 
     select: (result): Instructor => ({
@@ -23,5 +27,5 @@ export const useGetInstructor = (candidateId: string) => {
     }),
   });
 
-  return { ...data, loading: isLoading, error };
+  return { instructor, loading: isLoading, error };
 };

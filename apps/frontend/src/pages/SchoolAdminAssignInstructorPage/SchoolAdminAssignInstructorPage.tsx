@@ -27,6 +27,9 @@ const SchoolAdminAssignInstructorPage = () => {
     user?.id || ""
   );
   const schoolId = school?.id || "";
+
+  console.log("SCHOOLID: ", schoolId);
+
   const { candidates, isLoading: isLoadingCandidates } =
     useCandidatesWithoutInstructor(schoolId);
   const { instructors, isLoading: isLoadingInstructors } =
