@@ -1,1 +1,1 @@
-export * from "./assignInstructorToCandiate";
+export * from "./useAssignInstructor";
