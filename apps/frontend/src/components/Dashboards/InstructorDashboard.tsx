@@ -5,12 +5,10 @@ import { useMemo } from "react";
 import { useAuth, useNextSession } from "@/hooks";
 import { formatSessionTime } from "@/utils";
 import styles from "../Cards/ArrowCard/arrowCard.module.css";
-import { useNavigate } from "react-router-dom";
 
 export const InstructorDashboard = () => {
     const { user } = useAuth();
     const userId = user?.id || "";
-    const navigate = useNavigate();
 
     const { loading, activity, startTime } = useNextSession(userId);
 
@@ -36,7 +34,7 @@ export const InstructorDashboard = () => {
                     <ArrowCard
                         title="KREIRAJ TERMIN VOŽNJE"
                         className={`${styles["arrow-card"]} ${styles["card-red"]}`}
-                        onClick={() => navigate(routes.INSTRUCTOR_CALENDAR)}
+                        linkTo={routes.INSTRUCTOR_CALENDAR}
                     />
                     <ArrowCard
                         title="POGLEDAJ LISTU KANDIDATA"
