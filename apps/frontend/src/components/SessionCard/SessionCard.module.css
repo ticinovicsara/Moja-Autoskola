@@ -46,3 +46,7 @@
 .driving {
     background-color: var(--red) !important;
 }
+
+.instructorSlot {
+    background-color: var(--light-blue) !important;
+}

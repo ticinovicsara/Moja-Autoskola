@@ -4,22 +4,43 @@ import { Plus } from "@/assets/svgs";
 import { getIdFromToken, getUpcomingMonday } from "@/utils";
 import { useState } from "react";
 import useUserSessions from "@/api/session/useSession";
+import useInstructorSlot from "@/api/instructor/useInstructorSlot";
+import { InstructorSlot, Session } from "@/types";
 
 const CandidateCalendarPage = () => {
-    const { sessions, isLoading, error } = useUserSessions(
-        getIdFromToken() ?? ""
-    );
-
+    const {
+        sessions,
+        isLoading: areSessionsLoading,
+        error: sessionsError,
+    } = useUserSessions(getIdFromToken() ?? "");
+    const {
+        slots,
+        isLoading: areSlotsLoading,
+        error: slotsError,
+    } = useInstructorSlot();
     const [isAddSlotMenuOpen, setIsAddSlotMenuOpen] = useState(false);
 
-    const upcomingSessions = sessions
-        ?.filter((session) => {
+    const upcomingSessions: (InstructorSlot | Session)[] =
+        getUpcomingSessions();
+
+    function getUpcomingSessions() {
+        const upcomingSessions = sessions?.filter((session) => {
             const now = new Date();
             const monday = getUpcomingMonday(now);
 
             return session.startTime >= now && session.startTime <= monday;
-        })
-        ?.sort((a, b) => a.startTime.getTime() - b.startTime.getTime());
+        });
+        const upcomingSlots = slots?.filter((session) => {
+            const now = new Date();
+            const monday = getUpcomingMonday(now);
+
+            return session.startTime >= now && session.startTime <= monday;
+        });
+
+        return [...upcomingSessions, ...upcomingSlots].sort((a, b) => {
+            return a.startTime.getTime() - b.startTime.getTime();
+        });
+    }
 
     const toggleAddSlotMenu = () => {
         setIsAddSlotMenuOpen((prev) => !prev);
@@ -27,7 +48,7 @@ const CandidateCalendarPage = () => {
 
     return (
         <div className={styles.page}>
-            {isLoading ? (
+            {areSessionsLoading || areSlotsLoading ? (
                 <p>Učitavanje...</p>
             ) : (
                 <>
@@ -35,7 +56,7 @@ const CandidateCalendarPage = () => {
                         <ArrowBack />
                         <h2>KALENDAR</h2>
                     </div>
-                    <Calendar sessions={sessions} />{" "}
+                    <Calendar sessions={[...sessions, ...slots]} />{" "}
                     <div className={`${styles.upcomingContainer} container`}>
                         <div className={styles.upcomingHeader}>
                             <h3>Nadolazeći termini ovaj tjedan</h3>
@@ -53,7 +74,7 @@ const CandidateCalendarPage = () => {
                     </div>
                 </>
             )}
-            {error && (
+            {(sessionsError || slotsError) && (
                 <p className="errorMessage">
                     <p>Došlo je do pogreške prilikom učitavanja sesija.</p>
                 </p>

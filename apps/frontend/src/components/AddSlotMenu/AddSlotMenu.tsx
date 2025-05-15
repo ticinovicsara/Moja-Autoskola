@@ -20,7 +20,7 @@ const AddSlotMenu: FC<AddSlotMenuProps> = ({ toggleAddSlotMenu }) => {
     const { addInstructorSlot } = usePostInstructorSlot();
     const [formData, setFormData] = useState<SlotForm>({
         date: new Date(),
-        time: "",
+        time: "12:00",
     });
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -59,24 +59,25 @@ const AddSlotMenu: FC<AddSlotMenuProps> = ({ toggleAddSlotMenu }) => {
                 <div className={styles.header}>
                     <h2>Kreiraj termin</h2>
                     <img src={Cross} alt="cross" onClick={toggleAddSlotMenu} />
-                </div>
+                </div>{" "}
                 <form onSubmit={handleSubmit}>
-                    {" "}
-                    <InputField
-                        type="date"
-                        label="Odaberi datum"
-                        value={formData.date.toISOString().split("T")[0]}
-                        onChange={setDate}
-                        placeholder="Odaberi datum"
-                    />
-                    <InputField
-                        type="time"
-                        label="Vrijeme termina"
-                        value={formData.time}
-                        onChange={setTime}
-                        placeholder="Vrijeme termina"
-                    />
-                    <button type="submit">KREIRAJ</button>
+                    <div>
+                        <InputField
+                            type="date"
+                            value={formData.date.toISOString().split("T")[0]}
+                            onChange={setDate}
+                            placeholder="Odaberi datum"
+                        />
+                        <InputField
+                            type="time"
+                            value={formData.time}
+                            onChange={setTime}
+                            placeholder="Vrijeme termina"
+                        />
+                    </div>
+                    <button type="submit" className="authBtn">
+                        KREIRAJ
+                    </button>
                 </form>
             </div>
         </div>
