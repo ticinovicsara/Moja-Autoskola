@@ -6,29 +6,26 @@ import { EnrollmentRequest } from "@/types/enrollment";
 import { EnrollmentStatus } from "@/types/EnrollmentStatus";
 
 const useSchoolEnrollments = (schoolId: string, status?: EnrollmentStatus) => {
-  const queryKey = ["school-enrollments", status];
-
-  const queryFn = () => {
     const url =
-      status !== undefined
-        ? `${API_ENDPOINTS.ENROLLMENT.SCHOOL}/${schoolId}?status=${status}`
-        : `${API_ENDPOINTS.ENROLLMENT.SCHOOL}/${schoolId}`;
+        status !== undefined
+            ? `${API_ENDPOINTS.ENROLLMENT.SCHOOL}/${schoolId}?status=${status}`
+            : `${API_ENDPOINTS.ENROLLMENT.SCHOOL}/${schoolId}`;
 
-    return getData<EnrollmentRequest[]>(url);
-  };
+    const { data, isLoading, error } = useQuery<
+        EnrollmentRequest[],
+        AxiosError
+    >({
+        queryKey: ["enrollment", status],
+        queryFn: () => getData<EnrollmentRequest[]>(url),
+        enabled: !!schoolId,
+        refetchOnMount: false,
+    });
 
-  const { data, isLoading, error } = useQuery<EnrollmentRequest[], AxiosError>({
-    queryKey,
-    queryFn,
-    enabled: !!schoolId,
-    refetchOnMount: false,
-  });
-
-  return {
-    enrollments: data || [],
-    isLoading,
-    error,
-  };
+    return {
+        enrollments: data || [],
+        isLoading,
+        error,
+    };
 };
 
 export { useSchoolEnrollments };

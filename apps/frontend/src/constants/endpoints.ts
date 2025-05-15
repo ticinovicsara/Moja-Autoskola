@@ -23,6 +23,10 @@ export const API_ENDPOINTS = {
         NO_INSTRUCTOR: "/candidate/no-instructor",
     },
 
+    INSTRUCTOR_CANDIDATE: {
+        CRUD: "/instructor-candidate",
+    },
+
     SCHOOL: {
         CRUD: "/school",
         BY_USER: "/school/user",

@@ -6,7 +6,7 @@ import { AxiosError } from "axios";
 
 const useSchool = () => {
     const { data, isLoading, error } = useQuery<School[], AxiosError>({
-        queryKey: ["schools"],
+        queryKey: ["school"],
         queryFn: () => getData(API_ENDPOINTS.SCHOOL.CRUD),
     });
 

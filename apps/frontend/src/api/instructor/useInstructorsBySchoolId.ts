@@ -5,19 +5,21 @@ import { API_ENDPOINTS } from "@/constants";
 import { User } from "@/types";
 
 const useInstructorsBySchoolId = (schooldID: string) => {
-  const { data, isLoading, error } = useQuery<User[], AxiosError>({
-    queryKey: ["instructors-school", schooldID],
-    queryFn: () =>
-      getData<User[]>(`${API_ENDPOINTS.INSTRUCTOR.BY_SCHOOL}/${schooldID}`),
-    enabled: !!schooldID,
-    refetchOnMount: true,
-  });
+    const { data, isLoading, error } = useQuery<User[], AxiosError>({
+        queryKey: ["school", schooldID],
+        queryFn: () =>
+            getData<User[]>(
+                `${API_ENDPOINTS.INSTRUCTOR.BY_SCHOOL}/${schooldID}`
+            ),
+        enabled: !!schooldID,
+        refetchOnMount: true,
+    });
 
-  return {
-    instructors: data || [],
-    isLoading,
-    error,
-  };
+    return {
+        instructors: data || [],
+        isLoading,
+        error,
+    };
 };
 
 export { useInstructorsBySchoolId };

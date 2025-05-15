@@ -7,29 +7,27 @@ import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 
 const useUpdateEnrollmentRequest = () => {
-  const queryClient = useQueryClient();
+    const queryClient = useQueryClient();
 
-  const { mutate, isPending } = useMutation<
-    { token?: string },
-    AxiosError,
-    EnrollmentPatchRequest
-  >({
-    mutationFn: (updatedEnrollment) => {
-      return patchData(`${API_ENDPOINTS.ENROLLMENT.CRUD}`, updatedEnrollment);
-    },
-    onSuccess: () => {
-      toast.success("Zahtjev uspješno prihvaćen");
+    const { mutate, isPending } = useMutation<
+        any,
+        AxiosError,
+        EnrollmentPatchRequest
+    >({
+        mutationFn: (updatedEnrollment) =>
+            patchData(`${API_ENDPOINTS.ENROLLMENT.CRUD}`, updatedEnrollment),
+        onSuccess: () => {
+            toast.success("Zahtjev uspješno prihvaćen");
+            queryClient.invalidateQueries({
+                queryKey: ["enrollment", EnrollmentStatus.Pending],
+            });
+        },
+        onError: (error) => {
+            toast.error(error.message);
+        },
+    });
 
-      queryClient.invalidateQueries({
-        queryKey: ["school-enrollments", EnrollmentStatus.Pending],
-      });
-    },
-    onError: (error) => {
-      toast.error(error.message);
-    },
-  });
-
-  return { updateEnrollmentRequest: mutate, isPending };
+    return { updateEnrollmentRequest: mutate, isPending };
 };
 
 export default useUpdateEnrollmentRequest;
