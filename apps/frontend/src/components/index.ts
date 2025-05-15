@@ -16,7 +16,6 @@ export { default as InstructorSlot } from "./InstructorSlot/InstructorSlot";
 export { default as AddSlotMenu } from "./AddSlotMenu/AddSlotMenu";
 export * from "./Landing/Hero/HeroSection";
 export * from "./Landing/AllOnOnePlace/AllOnOneSection";
-export * from "./Landing/ScheduleRide/ScheduleRideSection";
 export * from "./Landing/Blog/BlogSection";
 export * from "./SectionWrapper/SectionWrapper";
 export * from "./Landing/Blog/BlogSlider/BlogSlider";

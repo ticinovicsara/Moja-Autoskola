@@ -44,10 +44,17 @@ export const HeroSection = () => {
 
   return (
     <div className={c.hero}>
-      <LogoAndText />
-      <button className={"authBtn"} onClick={handleStart}>
-        ZAPOČNI
-      </button>
+      <div className={c.heroWrapper}>
+        <div className={c.elipsse}>
+          <LogoAndText />
+
+          <div className="container">
+            <button className={`${c.startBtn} authBtn `} onClick={handleStart}>
+              ZAPOČNI
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
