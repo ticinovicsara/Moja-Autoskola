@@ -7,8 +7,18 @@ import Filter from "./filter.svg";
 import Search from "./search-normal.svg";
 import Arrow2 from "./Arrow2.svg";
 import ArrowBack from "./arrowBack.svg";
+import Calendar from "./calendar.svg";
+import Chat from "./chat.svg";
+import Todo from "./todo.svg";
+import RedBook from "./redBook.svg";
+import CheckMark from "./checkmark.svg";
 
 export {
+  Calendar,
+  Chat,
+  Todo,
+  RedBook,
+  CheckMark,
   Hamburger,
   Logo,
   ArrowBack,

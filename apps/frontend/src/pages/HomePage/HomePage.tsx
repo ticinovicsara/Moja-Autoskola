@@ -1,9 +1,5 @@
-import {
-  AllOnOneSection,
-  BlogSection,
-  HeroSection,
-  ScheduleRideSection,
-} from "@/components";
+import { AllOnOneSection, BlogSection, HeroSection } from "@/components";
+import FooterComponent from "@/components/Footer/FooterComponent";
 import FAQSection from "@/components/Landing/FAQ/FaqSection";
 
 const HomePage = () => {
@@ -12,10 +8,10 @@ const HomePage = () => {
       <HeroSection />
       <div className="container">
         <AllOnOneSection />
-        <ScheduleRideSection />
         <BlogSection />
         <FAQSection />
       </div>
+      <FooterComponent />
     </>
   );
 };

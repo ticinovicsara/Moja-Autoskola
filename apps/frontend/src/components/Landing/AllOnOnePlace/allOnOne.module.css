@@ -1,5 +1,43 @@
-.header {
-  text-transform: uppercase;
-  text-align: center;
-  font-size: 24px;
+.carouselWrapper {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  width: 200%;
+  position: relative;
+  left: 0;
+  transition: none;
+}
+
+.slider.animate {
+  transition: left 0.5s ease-in-out;
+  left: -100%;
+}
+
+.cardWrapper {
+  width: 50%;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.enter {
+  animation: shake 0.4s ease-in-out;
+}
+
+.exit {
+  animation: fadeOutDown 0.5s ease-in;
+}
+
+@keyframes fadeOutDown {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
 }
