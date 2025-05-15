@@ -14,7 +14,7 @@ export class CandidateController {
   }
 
   @Auth(UserRole.SchoolAdmin, UserRole.Admin)
-  @Get('by-school/:schoolId')
+  @Get('school/:schoolId')
   async getCandidatesBySchool(@Param('schoolId') schoolId: string) {
     return this.candidateService.getCandidatesBySchool(schoolId);
   }

@@ -49,7 +49,7 @@ export class EnrollmentService {
     return request ? EnrollmentRequestEntity.fromPrisma(request) : null;
   }
 
-  async getSchoolEnrollmentRequestsByStatus(
+  async getSchoolEnrollmentRequests(
     schoolId: string,
     status?: EnrollmentStatus,
   ) {

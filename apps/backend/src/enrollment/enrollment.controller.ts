@@ -32,11 +32,11 @@ export class EnrollmentController {
 
   @Auth(UserRole.SchoolAdmin)
   @Get('school/:id')
-  async getSchoolEnrollmentRequestsByStatus(
+  async getSchoolEnrollmentRequests(
     @Param('id') id: string,
     @Query('status') status?: EnrollmentStatus,
   ) {
-    return this.enrollmentService.getSchoolEnrollmentRequestsByStatus(
+    return this.enrollmentService.getSchoolEnrollmentRequests(
       id,
       status?.trim() as EnrollmentStatus,
     );
