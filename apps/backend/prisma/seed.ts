@@ -305,6 +305,22 @@ async function main() {
     data: {
       candidateId: candidate1.id,
       schoolId: school.id,
+      status: EnrollmentStatus.Approved,
+    },
+  });
+
+  await prisma.enrollmentRequest.create({
+    data: {
+      candidateId: candidate2.id,
+      schoolId: school.id,
+      status: EnrollmentStatus.Approved,
+    },
+  });
+
+  await prisma.enrollmentRequest.create({
+    data: {
+      candidateId: candidate3.id,
+      schoolId: school.id,
       status: EnrollmentStatus.Pending,
     },
   });

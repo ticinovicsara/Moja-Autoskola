@@ -9,9 +9,17 @@
 }
 
 .error {
-  color: red;
+  color: var(--darker-red);
+}
+
+.inputError {
+  border: 1px solid var(--darker-red);
 }
 
 .label {
   margin-bottom: 5px;
+}
+
+.inputDiv {
+  width: 100%;
 }

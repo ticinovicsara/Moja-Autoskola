@@ -38,7 +38,7 @@ export class EnrollmentService {
   async getCandidateEnrollmentRequests(candidateId: string) {
     await this.userService.getById(candidateId);
 
-    const requests = await this.prisma.enrollmentRequest.findMany({
+    const request = await this.prisma.enrollmentRequest.findFirst({
       where: { candidateId },
       include: {
         school: true,
@@ -46,44 +46,45 @@ export class EnrollmentService {
       },
     });
 
-    if (!requests.length) {
-      throw new NotFoundException(
-        'No enrollment requests found for this candidate.',
-      );
-    }
-
-    return requests.map((request) =>
-      EnrollmentRequestEntity.fromPrisma(request),
-    );
+    return request ? EnrollmentRequestEntity.fromPrisma(request) : null;
   }
 
-  async getSchoolEnrollmentRequests(schoolId: string) {
+  async getSchoolEnrollmentRequests(
+    schoolId: string,
+    status?: EnrollmentStatus,
+  ) {
     await this.schoolService.getById(schoolId);
 
     const requests = await this.prisma.enrollmentRequest.findMany({
-      where: { schoolId },
+      where: {
+        schoolId,
+        ...(status && { status }),
+      },
       include: {
         school: true,
         candidate: true,
       },
     });
 
-    if (!requests.length) {
-      throw new NotFoundException(
-        'No enrollment requests found for this school.',
-      );
-    }
-
     return requests.map((request) =>
       EnrollmentRequestEntity.fromPrisma(request),
     );
   }
-
   async requestEnrollment(body: RequestEnrollmentDto) {
     const { candidateId, schoolId } = body;
 
     await this.userService.getById(candidateId);
     await this.schoolService.getById(schoolId);
+
+    const userEnrollment = await this.prisma.enrollmentRequest.findFirst({
+      where: {
+        candidateId: candidateId,
+      },
+    });
+
+    if (userEnrollment) {
+      throw new ConflictException('User already has enrollment request.');
+    }
 
     const existing = await this.prisma.enrollmentRequest.findUnique({
       where: {
@@ -103,6 +104,10 @@ export class EnrollmentService {
         candidateId,
         schoolId,
         status: EnrollmentStatus.Pending,
+      },
+      include: {
+        candidate: true,
+        school: true,
       },
     });
 

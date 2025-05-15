@@ -3,6 +3,7 @@ export * from "./decodeUser";
 export * from "./validateEmail";
 export * from "./validatePassword";
 export * from "./fetchUtils";
+export * from "./paymentUtils";
 export * from "./sessionsUtil";
 export * from "./calculateProgress";
 export * from "./formatPhoneNumber";
