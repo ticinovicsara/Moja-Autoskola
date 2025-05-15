@@ -90,7 +90,7 @@ const AppRouter = () => {
           <Route element={<InstructorRoute />}>
             <Route
               path={routes.INSTRUCTOR_DASHBOARD}
-              element={<InstructorDashboardPage />}
+              element={<InstructorDashboard />}
             />
             <Route
               path={routes.INSTRUCTOR_CANDIDATE_LIST}
