@@ -84,7 +84,7 @@ export const CandidateDashboard = () => {
   };
 
   return (
-    <div className={`container ${c.dashWrapp}`}>
+    <div className={`${c.dashWrapp}`}>
       <DashboardLayout
         top={
           progressMessage ? (
