@@ -1,0 +1,8 @@
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  font-weight: 400;
+  padding: 16px;
+  font-size: medium;
+}
