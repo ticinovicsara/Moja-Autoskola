@@ -5,6 +5,7 @@ import { InputField } from "@/components";
 import usePostInstructorSlot from "@/api/instructor/usePostInstructorSlot";
 import { AddInstructorSlotReq } from "@/types";
 import { useAuth } from "@/hooks";
+import { getDayFromDate, getMonthFromDate } from "@/utils";
 
 interface AddSlotMenuProps {
     toggleAddSlotMenu: () => void;
@@ -22,8 +23,13 @@ const AddSlotMenu: FC<AddSlotMenuProps> = ({ toggleAddSlotMenu }) => {
         date: new Date(),
         time: "12:00",
     });
-    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
+    const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
+
+    function toggleConfirmPopup() {
+        setIsConfirmPopupOpen((prev) => !prev);
+    }
+
+    function handleSubmit() {
         const startTime = new Date(formData.date);
         const [hours, minutes] = formData.time.split(":").map(Number);
         startTime.setHours(hours, minutes, 0, 0);
@@ -36,6 +42,7 @@ const AddSlotMenu: FC<AddSlotMenuProps> = ({ toggleAddSlotMenu }) => {
             endTime,
         };
         addInstructorSlot(newSlot);
+        toggleConfirmPopup();
     }
 
     function setDate(date: string) {
@@ -53,6 +60,15 @@ const AddSlotMenu: FC<AddSlotMenuProps> = ({ toggleAddSlotMenu }) => {
         }));
     }
 
+    function getEndTimeString(time: string): string {
+        const [hours, minutes] = time.split(":").map(Number);
+        const date = new Date();
+        date.setHours(hours, minutes + 45, 0, 0);
+        const endHours = date.getHours().toString().padStart(2, "0");
+        const endMinutes = date.getMinutes().toString().padStart(2, "0");
+        return `${endHours}:${endMinutes}`;
+    }
+
     return (
         <div className={styles.menuContainer}>
             <div className={`${styles.menu} container`}>
@@ -60,7 +76,7 @@ const AddSlotMenu: FC<AddSlotMenuProps> = ({ toggleAddSlotMenu }) => {
                     <h2>Kreiraj termin</h2>
                     <img src={Cross} alt="cross" onClick={toggleAddSlotMenu} />
                 </div>{" "}
-                <form onSubmit={handleSubmit}>
+                <div className={styles.newSlotForm}>
                     <div>
                         <InputField
                             type="date"
@@ -75,10 +91,40 @@ const AddSlotMenu: FC<AddSlotMenuProps> = ({ toggleAddSlotMenu }) => {
                             placeholder="Vrijeme termina"
                         />
                     </div>
-                    <button type="submit" className="authBtn">
+                    <button className="authBtn" onClick={toggleConfirmPopup}>
                         KREIRAJ
                     </button>
-                </form>
+                </div>
+                {isConfirmPopupOpen && (
+                    <div className={styles.confirmPopupContainer}>
+                        <div className={`${styles.confirmPopup} container`}>
+                            <img
+                                src={Cross}
+                                alt="cross"
+                                onClick={toggleConfirmPopup}
+                            />
+                            <p>
+                                <span>
+                                    {formData.date.getDate()}.{" "}
+                                    {getMonthFromDate(formData.date)},{" "}
+                                </span>
+                                {getDayFromDate(formData.date)}
+                                <br />
+                                {formData.time} -{" "}
+                                {getEndTimeString(formData.time)}
+                                <br />
+                                <br />
+                            </p>
+                            <p>
+                                Jesi li siguran da želiš kreirati ovaj termin?
+                            </p>
+                            <div className={styles.options}>
+                                <button onClick={handleSubmit}>Da</button>
+                                <button onClick={toggleConfirmPopup}>Ne</button>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
