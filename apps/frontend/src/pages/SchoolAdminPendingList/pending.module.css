@@ -11,3 +11,9 @@
   gap: 8px;
   padding-top: 132px;
 }
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

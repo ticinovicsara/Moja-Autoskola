@@ -28,7 +28,7 @@ const InstructorCandidateListPage = () => {
     : candidates;
 
   return (
-    <div className={styles["container"]}>
+    <div className={`container ${styles.wrapper}`}>
       <div className={styles["navigation-container"]}>
         <ArrowBack />
         <h1 className={styles["page-title"]}>LISTA KANDIDATA</h1>
