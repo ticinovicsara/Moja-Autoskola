@@ -7,3 +7,4 @@ export * from "./paymentUtils";
 export * from "./sessionsUtil";
 export * from "./calculateProgress";
 export * from "./formatPhoneNumber";
+export * from "./scrollToTop";
