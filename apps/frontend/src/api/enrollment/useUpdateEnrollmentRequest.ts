@@ -25,7 +25,6 @@ const useUpdateEnrollmentRequest = () => {
       });
     },
     onError: (error) => {
-      console.log(mutate);
       toast.error(error.message);
     },
   });
