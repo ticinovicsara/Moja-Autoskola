@@ -14,6 +14,7 @@ const useCandidateEnrollment = (userId: string, isGuest: boolean) => {
     enabled: !!userId && isGuest,
     refetchOnMount: true,
   });
+
   return {
     enrollment: data,
     isLoading,

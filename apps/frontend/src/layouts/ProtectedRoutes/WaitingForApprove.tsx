@@ -16,12 +16,15 @@ export const WaitingForApprove = () => {
     userId,
     isGuest
   );
+
   const navigate = useNavigate();
 
+  if (userLoading || enrollmentLoading) {
+    return <div className="loader">Loading...</div>;
+  }
+
   useEffect(() => {
-    if (userLoading || enrollmentLoading) {
-      return;
-    }
+    if (userLoading || enrollmentLoading) return;
 
     if (!user) {
       toast.error("Morate se prijaviti da bi nastavili");
@@ -29,16 +32,16 @@ export const WaitingForApprove = () => {
       return;
     }
 
-    if (!enrollment || enrollment.status !== EnrollmentStatus.Pending) {
+    if (enrollment === undefined || enrollment === null || !enrollment) {
+      return;
+    }
+
+    if (enrollment.status !== EnrollmentStatus.Pending) {
       toast.error("Pristup dozvoljen samo korisnicima koji čekaju odobrenje");
       navigate(routes.HOME);
       return;
     }
   }, [userLoading, enrollmentLoading, user, enrollment, navigate]);
-
-  if (userLoading || enrollmentLoading) {
-    return <div className="loader">Loading...</div>;
-  }
 
   return <Outlet />;
 };
