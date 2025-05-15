@@ -12,6 +12,8 @@ import { EnrollmentModule } from './enrollment/enrollment.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { InstructorModule } from './instructor/instructor.module';
 import { CandidateModule } from './candidate/candidate.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -25,6 +27,9 @@ import { CandidateModule } from './candidate/candidate.module';
     EnrollmentModule,
     InstructorModule,
     CandidateModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '..', '..', 'frontend', 'dist'),
+    }),
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
