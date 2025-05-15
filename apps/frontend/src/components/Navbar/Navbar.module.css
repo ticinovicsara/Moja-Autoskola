@@ -11,6 +11,8 @@
   background-color: var(--background-color);
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
+  border-bottom: 1px solid var(--asphalt-border);
+  max-width: none;
 }
 
 .navbar img {
