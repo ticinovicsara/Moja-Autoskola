@@ -19,10 +19,6 @@ export const WaitingForApprove = () => {
 
   const navigate = useNavigate();
 
-  if (userLoading || enrollmentLoading) {
-    return <div className="loader">Loading...</div>;
-  }
-
   useEffect(() => {
     if (userLoading || enrollmentLoading) return;
 
@@ -42,6 +38,10 @@ export const WaitingForApprove = () => {
       return;
     }
   }, [userLoading, enrollmentLoading, user, enrollment, navigate]);
+
+  if (userLoading || enrollmentLoading) {
+    return <div className="loader">Loading...</div>;
+  }
 
   return <Outlet />;
 };
