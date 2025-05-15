@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { routes } from "@/constants";
 import { EnrollmentStatus } from "@/types/EnrollmentStatus";
 import toast from "react-hot-toast";
+import { UserRoles } from "@/types";
 
 export const PaymentPage = () => {
   const { user } = useAuth();
@@ -29,7 +30,8 @@ export const PaymentPage = () => {
   const [CVV, setCVV] = useState("");
 
   const { updateEnrollmentRequest } = useUpdateEnrollmentRequest();
-  const { enrollment } = useCandidateEnrollment(user?.id || "");
+  const isGuest = user?.role === UserRoles.Guest;
+  const { enrollment } = useCandidateEnrollment(user?.id || "", isGuest);
 
   const [errors, setErrors] = useState({
     cardNum: "",
