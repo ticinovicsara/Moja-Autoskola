@@ -6,7 +6,8 @@ import {
   PublicLayout,
   SchoolAdminRoute,
   WaitingForApprove,
-  InstructorLayout,
+  CandidateRoute,
+  InstructorRoute,
 } from "@/layouts";
 import {
   HomePage,
@@ -24,6 +25,7 @@ import {
   PaymentPage,
   CandidateDashboardPage,
   CandidateProgressPage,
+  NotFoundPage,
 } from "@/pages";
 import { AuthPage } from "@/pages/Auth";
 import SchoolAdminAssignInstructorPage from "@/pages/SchoolAdminAssignInstructorPage/SchoolAdminAssignInstructorPage";
@@ -44,26 +46,35 @@ const AppRouter = () => {
         </Route>
 
         <Route element={<CandidateLayout />}>
-          <Route path={routes.PAYMENT} element={<PaymentPage />} />
+          <Route path={routes.HOME} element={<HomePage />} />
+
+          <Route element={<GuestRoute />}>
+            <Route path={routes.PAYMENT} element={<PaymentPage />} />
+
+            <Route path={routes.GUEST} element={<GuestPage />} />
+          </Route>
           <Route element={<WaitingForApprove />}>
             <Route
               path={routes.WAITING_FOR_APPROVE}
               element={<WaitingForApprovePage />}
             />
           </Route>
-          <Route element={<GuestRoute />}>
-            <Route path={routes.GUEST} element={<GuestPage />} />
-          </Route>
-          <Route path={routes.HOME} element={<HomePage />} />
 
-          <Route
-            path={routes.CANDIDATE_DASHBOARD}
-            element={<CandidateDashboardPage />}
-          />
-          <Route
-            path={routes.CANDIDATE_CALENDAR}
-            element={<CandidateCalendarPage />}
-          />
+          <Route element={<CandidateRoute />}>
+            <Route
+              path={routes.CANDIDATE_DASHBOARD}
+              element={<CandidateDashboardPage />}
+            />
+            <Route
+              path={routes.CANDIDATE_CALENDAR}
+              element={<CandidateCalendarPage />}
+            />
+            <Route
+              path={routes.CANDIDATE_PROGRESS}
+              element={<CandidateProgressPage />}
+            />
+          </Route>
+
           <Route element={<SchoolAdminRoute />}>
             <Route
               path={routes.SCHOOL_ADMIN_DASHBOARD}
@@ -75,25 +86,23 @@ const AppRouter = () => {
             />
             <Route path={routes.PENDING_LIST} element={<PendingListPage />} />
           </Route>
-          <Route
-            path={routes.CANDIDATE_PROGRESS}
-            element={<CandidateProgressPage />}
-          />
-        </Route>
 
-        <Route element={<InstructorLayout />}>
-          <Route
-            path={routes.INSTRUCTOR_DASHBOARD}
-            element={<InstructorDashboardPage />}
-          />
-          <Route
-            path={routes.INSTRUCTOR_CANDIDATE_LIST}
-            element={<InstructorCandidateListPage />}
-          />
-          <Route
-            path={routes.INSTRUCTOR_CALENDAR}
-            element={<InstructorCalendarPage />}
-          />
+          <Route element={<InstructorRoute />}>
+            <Route
+              path={routes.INSTRUCTOR_DASHBOARD}
+              element={<InstructorDashboardPage />}
+            />
+            <Route
+              path={routes.INSTRUCTOR_CANDIDATE_LIST}
+              element={<InstructorCandidateListPage />}
+            />
+            <Route
+              path={routes.INSTRUCTOR_CALENDAR}
+              element={<InstructorCalendarPage />}
+            />
+          </Route>
+
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

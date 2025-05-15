@@ -5,7 +5,7 @@ import { useAuth } from "@/hooks";
 import { UserRoles } from "@/types";
 import toast from "react-hot-toast";
 
-export const SchoolAdminRoute = () => {
+export const InstructorRoute = () => {
   const { user, isLoading } = useAuth();
   const [redirectTo, setRedirectTo] = useState<string | null>(null);
 
@@ -14,8 +14,8 @@ export const SchoolAdminRoute = () => {
       if (!user) {
         toast.error("Morate se prijaviti da bi nastavili");
         setRedirectTo(routes.AUTH);
-      } else if (user.role !== UserRoles.SchoolAdmin) {
-        toast.error("Samo admini škola mogu pristupiti ovoj stranici");
+      } else if (user.role !== UserRoles.Instructor) {
+        toast.error("Samo instruktori škola mogu pristupiti ovoj stranici");
         setRedirectTo(routes.HOME);
       }
     }
