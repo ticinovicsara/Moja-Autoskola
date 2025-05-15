@@ -5,12 +5,12 @@ import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 const useSchool = () => {
-  const { data, isLoading, error } = useQuery<School[], AxiosError>({
-    queryKey: ["schools"],
-    queryFn: () => getData(API_ENDPOINTS.SCHOOL.ALL),
-  });
+    const { data, isLoading, error } = useQuery<School[], AxiosError>({
+        queryKey: ["schools"],
+        queryFn: () => getData(API_ENDPOINTS.SCHOOL.CRUD),
+    });
 
-  return { schools: data || [], isLoading, error };
+    return { schools: data || [], isLoading, error };
 };
 
 export default useSchool;
