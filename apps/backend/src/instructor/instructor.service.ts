@@ -4,12 +4,15 @@ import { AddInstructorSlotDto } from './dto/add-instructor-slot.dto';
 import { UserResponseDto } from '@/user/dto/user-response.dto';
 import { UserService } from '@/user/user.service';
 import { InstructorSlot } from './entities/instructor-slot.entity';
+import { SchoolService } from '@/school/school.service';
+import { UserRole } from '@prisma/client';
 
 @Injectable()
 export class InstructorService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly userService: UserService,
+    private readonly schoolService: SchoolService,
   ) {}
 
   async getCandidatesForInstructor(instructorId: string) {
@@ -23,6 +26,24 @@ export class InstructorService {
     });
 
     return pairs.map((p) => UserResponseDto.fromPrisma(p.candidate));
+  }
+
+  async getInstructorsBySchool(schoolId: string) {
+    await this.schoolService.getById(schoolId);
+
+    const instructors = await this.prisma.schoolUser.findMany({
+      where: {
+        schoolId,
+        user: {
+          role: UserRole.Instructor,
+        },
+      },
+      include: {
+        user: true,
+      },
+    });
+
+    return instructors.map((c) => UserResponseDto.fromPrisma(c.user));
   }
 
   async getInstructorSlots(instructorId: string) {

@@ -28,10 +28,10 @@ export const CandidateDashboard = () => {
   } = useCandidateProgressData(userId);
 
   const { activity, startTime } = useNextSession(userId);
-  const instructor = useGetInstructor(userId);
+  const { instructor } = useGetInstructor(userId);
 
   const instructorInfo = useMemo(() => {
-    if (!instructor || !instructor.firstName) {
+    if (!instructor) {
       return {
         name: "",
         phone: "Još nemaš instruktora!",

@@ -5,6 +5,7 @@ import { useCandidatesBySchoolId } from "@/api";
 import useSchoolByUserId from "@/api/school/useSchoolByUserId";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@/constants";
+
 export const SchoolAdminDashboard = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ export const SchoolAdminDashboard = () => {
   const handleOpenRequests = () => {
     navigate(routes.PENDING_LIST, { state: { schoolId } });
   };
+
   return (
     <div className={`${c.adminDashboard} container`}>
       <div className={c.greeting}>
@@ -52,7 +54,10 @@ export const SchoolAdminDashboard = () => {
           </div>
         </div>
 
-        <div className={c.assign}>
+        <div
+          className={c.assign}
+          onClick={() => navigate(routes.SCHOOL_ADMIN_ASSIGN_INSTRUCTOR)}
+        >
           <p>DODIJELI INSTRUKTORA KANDIDATU</p>
           <img src={Arrow} alt="arrow" />
         </div>

@@ -17,12 +17,14 @@ export const API_ENDPOINTS = {
   INSTRUCTOR: {
     SLOT: "/instructor/slot",
     CANDIDATES: "/instructor/candidates",
+    BY_SCHOOL: "instructor/by-school",
   },
 
   CANDIDATE: {
     INSTRUCTOR: "/candidate/instructor",
     BY_SCHOOL: "/candidate/school",
     PROGRESS: "/user/progress",
+    NO_INSTRUCTOR: "/candidate/no-instructor",
   },
 
   SCHOOL: {
@@ -34,7 +36,4 @@ export const API_ENDPOINTS = {
     CRUD: "/enrollment",
     CANDIDATE: "/enrollment/candidate",
   },
-  INSTRUCTOR_CANDIDATES: "/instructor/candidates",
-
-  GET_INSTRUCTOR_CANDIDATE: "/instructor-candidate",
 };

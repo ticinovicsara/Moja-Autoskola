@@ -26,6 +26,7 @@ import {
   CandidateProgressPage,
 } from "@/pages";
 import { AuthPage } from "@/pages/Auth";
+import SchoolAdminAssignInstructorPage from "@/pages/SchoolAdminAssignInstructorPage/SchoolAdminAssignInstructorPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const AppRouter = () => {
@@ -67,6 +68,10 @@ const AppRouter = () => {
             <Route
               path={routes.SCHOOL_ADMIN_DASHBOARD}
               element={<SchoolAdminDashboard />}
+            />
+            <Route
+              path={routes.SCHOOL_ADMIN_ASSIGN_INSTRUCTOR}
+              element={<SchoolAdminAssignInstructorPage />}
             />
             <Route path={routes.PENDING_LIST} element={<PendingListPage />} />
           </Route>
