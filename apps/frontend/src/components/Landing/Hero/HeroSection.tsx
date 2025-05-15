@@ -9,7 +9,9 @@ import { EnrollmentStatus } from "@/types/EnrollmentStatus";
 export const HeroSection = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const { enrollment } = useCandidateEnrollment(user?.id || "");
+
+  const isGuest = user?.role === UserRoles.Guest;
+  const { enrollment } = useCandidateEnrollment(user?.id || "", isGuest);
 
   const handleStart = () => {
     if (!user) {
@@ -42,10 +44,17 @@ export const HeroSection = () => {
 
   return (
     <div className={c.hero}>
-      <LogoAndText />
-      <button className={"authBtn"} onClick={handleStart}>
-        ZAPOČNI
-      </button>
+      <div className={c.heroWrapper}>
+        <div className={c.elipsse}>
+          <LogoAndText />
+
+          <div className="container">
+            <button className={`${c.startBtn} authBtn `} onClick={handleStart}>
+              ZAPOČNI
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

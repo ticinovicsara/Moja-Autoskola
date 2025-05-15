@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const useSchoolByUserId = (userId: string) => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ["school-by-user", userId],
+    queryKey: ["school", userId],
     queryFn: () => getData(`${API_ENDPOINTS.SCHOOL.BY_USER}/${userId}`),
     enabled: !!userId,
   });

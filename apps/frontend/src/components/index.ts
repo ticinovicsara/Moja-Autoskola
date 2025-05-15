@@ -15,7 +15,6 @@ export { default as ChooseSessionMenu } from "./ChooseSessionMenu/ChooseSessionM
 export { default as InstructorSlot } from "./InstructorSlot/InstructorSlot";
 export * from "./Landing/Hero/HeroSection";
 export * from "./Landing/AllOnOnePlace/AllOnOneSection";
-export * from "./Landing/ScheduleRide/ScheduleRideSection";
 export * from "./Landing/Blog/BlogSection";
 export * from "./SectionWrapper/SectionWrapper";
 export * from "./Landing/Blog/BlogSlider/BlogSlider";

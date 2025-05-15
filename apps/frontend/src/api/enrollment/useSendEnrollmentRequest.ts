@@ -19,9 +19,8 @@ const useSendEnrollmentRequest = () => {
       postData(API_ENDPOINTS.ENROLLMENT.CRUD, newEnrollment),
     onSuccess: () => {
       toast.success("Prijava uspješno poslana");
-      queryClient.invalidateQueries({
-        queryKey: ["waiting-page"],
-      });
+      queryClient.invalidateQueries({ queryKey: ["enrollment"] });
+
       navigate(routes.WAITING_FOR_APPROVE);
     },
     onError: (error) => {

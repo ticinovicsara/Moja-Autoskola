@@ -5,18 +5,22 @@ import toast from "react-hot-toast";
 import { Outlet, useNavigate } from "react-router";
 import { useEffect } from "react";
 import { EnrollmentStatus } from "@/types/EnrollmentStatus";
+import { UserRoles } from "@/types";
 
 export const WaitingForApprove = () => {
   const { user, isLoading: userLoading } = useAuth();
   const userId = user?.id ?? "";
-  const { enrollment, isLoading: enrollmentLoading } =
-    useCandidateEnrollment(userId);
+  const isGuest = user?.role === UserRoles.Guest;
+
+  const { enrollment, isLoading: enrollmentLoading } = useCandidateEnrollment(
+    userId,
+    isGuest
+  );
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userLoading || enrollmentLoading) {
-      return;
-    }
+    if (userLoading || enrollmentLoading) return;
 
     if (!user) {
       toast.error("Morate se prijaviti da bi nastavili");
@@ -24,7 +28,11 @@ export const WaitingForApprove = () => {
       return;
     }
 
-    if (!enrollment || enrollment.status !== EnrollmentStatus.Pending) {
+    if (enrollment === undefined || enrollment === null || !enrollment) {
+      return;
+    }
+
+    if (enrollment.status !== EnrollmentStatus.Pending) {
       toast.error("Pristup dozvoljen samo korisnicima koji čekaju odobrenje");
       navigate(routes.HOME);
       return;
