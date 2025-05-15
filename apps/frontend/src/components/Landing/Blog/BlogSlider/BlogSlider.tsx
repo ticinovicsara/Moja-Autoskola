@@ -5,12 +5,14 @@ import { Navigation, Pagination } from "swiper/modules";
 import { blogs, routes } from "@/constants";
 import arrow from "@/assets/svgs/arrow-right.svg";
 import { useNavigate } from "react-router-dom";
+import { scrollToTop } from "@/utils";
 
 export default function BlogSlider() {
   const navigate = useNavigate();
 
   const handleOpenBlog = (id: string) => {
     navigate(`${routes.BLOG}/${id}`);
+    scrollToTop();
   };
   return (
     <div className="sliderContainer">

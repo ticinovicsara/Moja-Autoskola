@@ -1,21 +1,17 @@
-import {
-  AllOnOneSection,
-  BlogSection,
-  HeroSection,
-  ScheduleRideSection,
-} from "@/components";
+import { AllOnOneSection, BlogSection, HeroSection } from "@/components";
+import FooterComponent from "@/components/Footer/FooterComponent";
 import FAQSection from "@/components/Landing/FAQ/FaqSection";
 
 const HomePage = () => {
   return (
     <>
+      <HeroSection />
       <div className="container">
-        <HeroSection />
         <AllOnOneSection />
-        <ScheduleRideSection />
         <BlogSection />
         <FAQSection />
       </div>
+      <FooterComponent />
     </>
   );
 };
