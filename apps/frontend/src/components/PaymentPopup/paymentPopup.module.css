@@ -1,0 +1,17 @@
+.popup {
+  position: absolute;
+  background-color: white;
+  padding: 42px 24px;
+  top: 100px;
+  min-width: 324px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  z-index: 100;
+  text-align: center;
+}
+
+.action {
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}

@@ -1,0 +1,12 @@
+.titleAndArrow {
+  margin-block: 32px;
+  gap: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.pendingList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

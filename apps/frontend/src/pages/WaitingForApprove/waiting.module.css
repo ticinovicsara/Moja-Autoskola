@@ -1,0 +1,17 @@
+.green {
+  color: var(--green-dark);
+}
+
+.waitingContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: calc(100vh - 102px);
+}
+
+.feedback {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

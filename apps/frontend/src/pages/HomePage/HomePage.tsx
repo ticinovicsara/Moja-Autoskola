@@ -5,7 +5,6 @@ import {
   ScheduleRideSection,
 } from "@/components";
 import FAQSection from "@/components/Landing/FAQ/FaqSection";
-import { Toaster } from "react-hot-toast";
 
 const HomePage = () => {
   return (
@@ -17,7 +16,6 @@ const HomePage = () => {
         <BlogSection />
         <FAQSection />
       </div>
-      <Toaster />
     </>
   );
 };
