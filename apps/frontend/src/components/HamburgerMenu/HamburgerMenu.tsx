@@ -3,7 +3,7 @@ import styles from "./HamburgerMenu.module.css";
 import { FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { routes } from "@/constants";
-import { useAuth } from "@/hooks";
+import { useAuth, useSchoolId } from "@/hooks";
 import toast from "react-hot-toast";
 import MenuLinks from "../MenuLinks/MenuLinks";
 
@@ -14,6 +14,8 @@ interface HamburgerMenuProps {
 const HamburgerMenu: FC<HamburgerMenuProps> = ({ toggleMenu }) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+
+  const schoolId = useSchoolId();
 
   const handleLogout = () => {
     toggleMenu();
